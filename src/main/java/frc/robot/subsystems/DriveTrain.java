@@ -8,41 +8,41 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
- 
+import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
 
-  private TalonFX frontL; 
-  private TalonFX frontR; 
-  private TalonFX backL; 
+  private TalonFX frontR;
+  private TalonFX frontL;
   private TalonFX backR;
+  private TalonFX backL;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    frontL = new TalonFX(0);
-    frontR = new TalonFX(1);
-    backL = new TalonFX(2);
-    backR = new TalonFX(3);
-
-    backL.follow(frontL);
+    frontR = new TalonFX(Constants.frontRightID);
+    frontL = new TalonFX(Constants.frontLeftID);
+    backR = new TalonFX(Constants.backRightID);
+    backL = new TalonFX(Constants.backLeftID);
+    
     backR.follow(frontR);
+    backL.follow(frontL);
 
     frontL.setInverted(true);
     backL.setInverted(true);
   }
 
-  public void tankDrive(double leftSpeed, double rightSpeed) {
-    frontL.set(ControlMode.PercentOutput, leftSpeed);
-    frontR.set(ControlMode.PercentOutput, rightSpeed);
+  public void arcadeDrive(double x, double y) {
+    frontL.set(ControlMode.PercentOutput, y-x);
+    frontR.set(ControlMode.PercentOutput, y+x);
+  }
+
+  public void stop(){
+    frontL.set(ControlMode.PercentOutput, 0.0);
+    frontR.set(ControlMode.PercentOutput, 0.0);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  }
-
-  public void stop() {
-    frontL.set(ControlMode.PercentOutput, 0.0);
-    frontR.set(ControlMode.PercentOutput, 0.0);
   }
 }
