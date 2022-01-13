@@ -36,7 +36,7 @@ jobs:
     name: Linter
 
     runs-on: ubuntu-latest
-    container: wpilib/roborio-cross-ubuntu:2022-18.04
+    container: gradle:jdk11
 
     steps:
       - uses: actions/checkout@v2
