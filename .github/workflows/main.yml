@@ -32,3 +32,12 @@ jobs:
     # Runs a single command using the runners shell
     - name: Compile and run tests on robot code
       run: ./gradlew build
+  lint:
+    name: Linter
+    runs-on: ubuntu-latest
+    container: gradle:jdk11
+    steps:
+      - uses: actions/checkout@v2
+      - run:
+          ./gradlew downloadAll
+          ./gradlew check
