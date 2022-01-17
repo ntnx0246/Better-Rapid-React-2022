@@ -28,41 +28,32 @@ public class LogitechGamingPad extends GenericHID {
 	 */
   private Joystick gamepad;
 
+	// Constants
+  private static final int LEFT_ANALOG_BUTTON = 9;
+  private static final int RIGHT_ANALOG_BUTTON = 10;
+  private static final int LEFT_TRIGGER = 2;
+  private static final int RIGHT_TRIGGER = 3;
+  private static final int A_BUTTON = 1;
+  private static final int B_BUTTON = 2;
+  private static final int X_BUTTON = 3;
+  private static final int Y_BUTTON = 4;
+  private static final int BACK_BUTTON = 7;
+  private static final int START_BUTTON = 8;
 	/**
-	 * Construct an instance of a Logitch Gaming Pad. The Logitech Gaming Pad index
+	 * construct an instance of a Logitch Gaming Pad. The Logitech Gaming Pad index
 	 * is the usb port on the driver station.
 	 *
 	 * @param port The port on the driver station that the gamepad is plugged
 	 *        into.
 	 */
 	
-  public LogitechGamingPad(int port) {
+  public LogitechGamingPad(int usbPort) {
     super(0);
-    gamepad = new Joystick(port);
+    gamepad = new Joystick(usbPort);
   }
 
 	// The following methods are get methods specific to the Logitech Gaming Pad.
 	// Use these methods to get button values.
-
-	/**
-	 * Get the X value of the left analog.
-	 * 
-	 * @return The left X value.
-	 */
-
-  public double getLeftAnalogX() {
-    return getLeftAnalogX();
-  }
-
-	/**
-	 * Get the Y value of the left analog.
-	 * 
-	 * @return The left Y value.
-	 */
-
-  public double getLeftAnalogY() {
-    return getLeftAnalogY();
-  }
 
 	/**
 	 * Read the state of the left analog button.
@@ -72,31 +63,7 @@ public class LogitechGamingPad extends GenericHID {
 	 */
 
   public boolean getLeftAnalogButton() {
-    return gamepad.getRawButton(9);
-  }
-
-	/**
-	 * Read the state of the left bumper.
-	 * The bumpers are the two upper buttons of the four on the
-	 * top of the gamepad. They are either pressed or released.
-	 * 
-	 * @return The state of the bumper.
-	 */
-
-  public boolean getLeftBumper() {
-    return getLeftBumper();
-  }
-
-	/**
-	 * Read the state of the left trigger.
-	 * The triggers are the two lower buttons of the four on
-	 * the top of the gamepad. How much they are pressed can vary.
-	 * 
-	 * @return The state of the trigger.
-	 */
-
-  public boolean getLeftTrigger() {
-    return getLeftTrigger();
+    return gamepad.getRawButton(LEFT_ANALOG_BUTTON);
   }
 
 	/**
@@ -111,7 +78,7 @@ public class LogitechGamingPad extends GenericHID {
 	 */
 
   public double getLeftTriggerValue() {
-    return gamepad.getRawAxis(2);
+    return gamepad.getRawAxis(LEFT_TRIGGER);
   }
 
 	/**
@@ -120,19 +87,6 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The right X value.
 	 */
 
-  public double getRightAnalogX() {
-    return getRightAnalogX();
-  }
-
-	/**
-	 * Get the Y value of the right analog.
-	 * 
-	 * @return The right Y value.
-	 */
-  public double getRightAnalogY() {
-    return getRightAnalogY();
-  }
-
 	/**
 	 * Read the state of the right analog button.
 	 * This is the button part of the analog.
@@ -140,29 +94,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
   public boolean getRightAnalogButton() {
-    return gamepad.getRawButton(10);
-  }
-
-	/**
-	 * Read the state of the right bumper.
-	 * The bumpers are the two upper buttons of the four on the
-	 * top of the gamepad. They are either pressed or released.
-	 * 
-	 * @return The state of the bumper.
-	 */
-  public boolean getRightBumper() {
-    return getRightBumper();
-  }	
-
-	/**
-	 * Read the state of the right trigger.
-	 * The triggers are the two lower buttons of the four on
-	 * the top of the gamepad. How much they are pressed can vary.
-	 * 
-	 * @return The state of the trigger.
-	 */
-  public boolean getRightTrigger() {
-    return getRightTrigger();
+    return gamepad.getRawButton(RIGHT_ANALOG_BUTTON);
   }
 
 	/**
@@ -176,7 +108,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The value of the right trigger.
 	 */
   public double getRightTriggerValue() {
-    return gamepad.getRawAxis(3);
+    return gamepad.getRawAxis(RIGHT_TRIGGER);
   }
 
 	/**
@@ -185,7 +117,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
   public boolean getAButton() {
-    return gamepad.getRawButton(1);
+    return gamepad.getRawButton(A_BUTTON);
   }
 
 	/**
@@ -194,7 +126,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
   public boolean getBButton() {
-    return gamepad.getRawButton(2);
+    return gamepad.getRawButton(B_BUTTON);
   }
 
 	/**
@@ -203,7 +135,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
   public boolean getXButton() {
-    return gamepad.getRawButton(3);
+    return gamepad.getRawButton(X_BUTTON);
   }
 
 	/**
@@ -212,7 +144,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
   public boolean getYButton() {
-    return gamepad.getRawButton(4);
+    return gamepad.getRawButton(Y_BUTTON);
   }
 
 	/**
@@ -221,7 +153,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
   public boolean getBackButton() {
-    return gamepad.getRawButton(7);
+    return gamepad.getRawButton(BACK_BUTTON);
   }
 
 	/**
@@ -230,7 +162,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
   public boolean getStartButton() {
-    return gamepad.getRawButton(8);
+    return gamepad.getRawButton(START_BUTTON);
   }
 
 	/**
@@ -382,38 +314,6 @@ public class LogitechGamingPad extends GenericHID {
   }
 
 	/**
-	 * Read the state of the trigger of a specific side.
-	 * 
-	 * Because the trigger is read as an axis and returns a value
-	 * [0, 1] instead of [-1, 1], this method will return true
-	 * even if the trigger is only slightly pressed.
-	 * 
-	 * @param hand The left or right trigger(side).
-	 * @return The state of the trigger.
-	 */
-
-	// public boolean getTrigger(Hand hand) {
-	// 	if (hand == Hand.kLeft)
-	// 		return gamepad.getRawAxis(2) > 0;
-	// 	else
-	// 		return gamepad.getRawAxis(3) > 0;
-	// }
-
-	/**
-	 * Read the state of the bumper of a specific side.
-	 * 
-	 * @param hand The left or right bumper(side).
-	 * @return The state of the bumper.
-	 */
-
-	// public boolean getBumper(Hand hand) {
-	// 	if (hand == Hand.kLeft)
-	// 		return gamepad.getRawButton(5);
-	// 	else
-	// 		return gamepad.getRawButton(6);
-	// }
-
-	/**
 	 * Get the button value (starting at button 1).
 	 *
 	 * The appropriate button is returned as a boolean value.
@@ -436,17 +336,7 @@ public class LogitechGamingPad extends GenericHID {
   public int getPOV(int pov) {
     return gamepad.getPOV(pov);
   }
-	/**
-	 * This is not supported for the Logitech Gaming Pad. This method is only here to
-	 * complete the GenericHID interface.
-	 *
-	 * @param hand This parameter is ignored and is only
-	 *        here to complete the GenericHID interface.
-	 * @return The value of the axis (always 0).   
-	 */
-	// public double getZ(Hand hand) {
-	// 	return 0;
-	// }
+
 	/**
 	 * This is not supported for the Logitech Gaming Pad. This method is only here to
 	 * complete the GenericHID interface.
@@ -468,48 +358,4 @@ public class LogitechGamingPad extends GenericHID {
   public double getThrottle() {
     return 0;
   }
-
-	/**
-
-	 * This is not supported for the Logitech Gaming Pad. This method is only here to
-	 * complete the GenericHID interface.
-	 *
-	 * @param hand This parameter is ignored and is only
-	 *        here to complete the GenericHID interface.
-	 * @return The state of the top (always false).
-	 */
-
-	// public boolean getTop(Hand hand) {
-	// 	return false;
-	// }
-
-  @Override
-  public int getPOVCount() {
-    return 0;
-  }
-    
-  @Override
-  public HIDType getType() {
-    return null;
-  }
-
-  @Override
-  public String getName() {
-    return null;
-  }
-
-	// @Override
-	// public void setOutput(int outputNumber, boolean value) {
-		
-	// }
-
-	// @Override
-	// public void setOutputs(int value) {
-		
-	// }
-	// @Override
-	// public void setRumble(RumbleType type, double value) {
-
-	// }
-
 }
