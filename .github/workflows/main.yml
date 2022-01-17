@@ -44,5 +44,5 @@ jobs:
         run: chmod +x gradlew
 
       - run:
-          ./gradlew downloadAll
+          ./gradlew assemble 
           ./gradlew check
