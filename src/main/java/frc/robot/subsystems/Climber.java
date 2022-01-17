@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
+
+  private String lol;
   /** Creates a new Climber. */
   public Climber() {}
 

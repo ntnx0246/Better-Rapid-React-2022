@@ -26,7 +26,7 @@ public class LogitechGamingPad extends GenericHID {
 	/**
 	 * The Joystick class is utilized for simplicity.
 	 */
-	private Joystick gamepad;
+  private Joystick gamepad;
 
 	/**
 	 * Construct an instance of a Logitch Gaming Pad. The Logitech Gaming Pad index
@@ -35,12 +35,11 @@ public class LogitechGamingPad extends GenericHID {
 	 * @param port The port on the driver station that the gamepad is plugged
 	 *        into.
 	 */
-
-	public LogitechGamingPad(int port)
-	{
-		super(0);
-		gamepad = new Joystick(port);
-	}
+	
+  public LogitechGamingPad(int port) {
+    super(0);
+    gamepad = new Joystick(port);
+  }
 
 	// The following methods are get methods specific to the Logitech Gaming Pad.
 	// Use these methods to get button values.
@@ -50,10 +49,10 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * @return The left X value.
 	 */
-	public double getLeftAnalogX()
-	{
-		return getLeftAnalogX();
-	}
+
+  public double getLeftAnalogX() {
+    return getLeftAnalogX();
+  }
 
 	/**
 	 * Get the Y value of the left analog.
@@ -61,10 +60,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The left Y value.
 	 */
 
-	public double getLeftAnalogY()
-	{
-		return getLeftAnalogY();
-	}
+  public double getLeftAnalogY() {
+    return getLeftAnalogY();
+  }
 
 	/**
 	 * Read the state of the left analog button.
@@ -73,10 +71,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
 
-	public boolean getLeftAnalogButton()
-	{
-		return gamepad.getRawButton(9);
-	}
+  public boolean getLeftAnalogButton() {
+    return gamepad.getRawButton(9);
+  }
 
 	/**
 	 * Read the state of the left bumper.
@@ -86,10 +83,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the bumper.
 	 */
 
-	public boolean getLeftBumper()
-	{
-		return getLeftBumper();
-	}
+  public boolean getLeftBumper() {
+    return getLeftBumper();
+  }
 
 	/**
 	 * Read the state of the left trigger.
@@ -99,10 +95,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the trigger.
 	 */
 
-	public boolean getLeftTrigger()
-	{
-		return getLeftTrigger();
-	}
+  public boolean getLeftTrigger() {
+    return getLeftTrigger();
+  }
 
 	/**
 	 * Get the value of the left trigger. The trigger returns a double [0, 1]
@@ -115,30 +110,28 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The value of the left trigger.
 	 */
 
-	public double getLeftTriggerValue()
-	{
-		return gamepad.getRawAxis(2);
-	}
+  public double getLeftTriggerValue() {
+    return gamepad.getRawAxis(2);
+  }
 
 	/**
 	 * Get the X value of the right analog.
 	 * 
 	 * @return The right X value.
 	 */
-	public double getRightAnalogX()
-	{
-		return getRightAnalogX();
-	}
+
+  public double getRightAnalogX() {
+    return getRightAnalogX();
+  }
 
 	/**
 	 * Get the Y value of the right analog.
 	 * 
 	 * @return The right Y value.
 	 */
-	public double getRightAnalogY()
-	{
-		return getRightAnalogY();
-	}
+  public double getRightAnalogY() {
+    return getRightAnalogY();
+  }
 
 	/**
 	 * Read the state of the right analog button.
@@ -146,10 +139,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getRightAnalogButton()
-	{
-		return gamepad.getRawButton(10);
-	}
+  public boolean getRightAnalogButton() {
+    return gamepad.getRawButton(10);
+  }
 
 	/**
 	 * Read the state of the right bumper.
@@ -158,11 +150,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * @return The state of the bumper.
 	 */
-
-	public boolean getRightBumper()
-	{
-		return getRightBumper();
-	}	
+  public boolean getRightBumper() {
+    return getRightBumper();
+  }	
 
 	/**
 	 * Read the state of the right trigger.
@@ -171,10 +161,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * @return The state of the trigger.
 	 */
-	public boolean getRightTrigger()
-	{
-		return getRightTrigger();
-	}
+  public boolean getRightTrigger() {
+    return getRightTrigger();
+  }
 
 	/**
 	 * Get the value of the right trigger. The trigger returns a double [0, 1]
@@ -186,70 +175,63 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * @return The value of the right trigger.
 	 */
-	public double getRightTriggerValue()
-	{
-		return gamepad.getRawAxis(3);
-	}
+  public double getRightTriggerValue() {
+    return gamepad.getRawAxis(3);
+  }
 
 	/**
 	 * Read the state of the 'A' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getAButton()
-	{
-		return gamepad.getRawButton(1);
-	}
+  public boolean getAButton() {
+    return gamepad.getRawButton(1);
+  }
 
 	/**
 	 * Read the state of the 'B' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getBButton()
-	{
-		return gamepad.getRawButton(2);
-	}
+  public boolean getBButton() {
+    return gamepad.getRawButton(2);
+  }
 
 	/**
 	 * Read the state of the 'X' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getXButton()
-	{
-		return gamepad.getRawButton(3);
-	}
+  public boolean getXButton() {
+    return gamepad.getRawButton(3);
+  }
 
 	/**
 	 * Read the state of the 'Y' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getYButton()
-	{
-		return gamepad.getRawButton(4);
-	}
+  public boolean getYButton() {
+    return gamepad.getRawButton(4);
+  }
 
 	/**
 	 * Read the state of the 'BACK' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getBackButton()
-	{
-		return gamepad.getRawButton(7);
-	}
+  public boolean getBackButton() {
+    return gamepad.getRawButton(7);
+  }
 
 	/**
 	 * Read the state of the 'START' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getStartButton()
-	{
-		return gamepad.getRawButton(8);
-	}
+  public boolean getStartButton() {
+    return gamepad.getRawButton(8);
+  }
 
 	/**
 	 * Check the state of the D-pad. The {@code index} is a value [0, 7] that corresponds
@@ -261,13 +243,12 @@ public class LogitechGamingPad extends GenericHID {
 	 * @param index The value to correspond to a D-pad combination.
 	 * @return If the specified combination is pressed.
 	 */
-	public boolean checkDPad(int index)
-	{
-		if (0 <= index && index <= 7)
-			return (index * 45) == gamepad.getPOV();
-		else
-			return false;
-	}
+  public boolean checkDPad(int index) {
+    if (0 <= index && index <= 7)
+      return (index * 45) == gamepad.getPOV();
+    else
+      return false;
+  }
 
 	/**
 	 * Check the state of the D-pad. The method compares the angle measurement
@@ -286,12 +267,11 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return If the angle is the same as the D-pad.
 	 */
 
-	public boolean checkDPad(double angle, boolean inDegrees)
-	{
-		if (!inDegrees)
-			angle = Math.toDegrees(angle);
-		return (int)angle == gamepad.getPOV(); 
-	}
+  public boolean checkDPad(double angle, boolean inDegrees) {
+    if (!inDegrees)
+      angle = Math.toDegrees(angle);
+    return (int)angle == gamepad.getPOV(); 
+  }
 
 	/**
 	 * Get the state of the D-pad. The method will return an index that is a value
@@ -305,14 +285,13 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return An indexed representation of the D-pad combination. 
 	 */
 
-	public int getDPad()
-	{
-		int pov = gamepad.getPOV();
-		if (pov == -1)
-			return pov;
-		else
-			return pov/45;
-	}
+  public int getDPad() {
+    int pov = gamepad.getPOV();
+    if (pov == -1)
+      return pov;
+    else
+      return pov/45;
+  }
 
 	/**
 	 * Get the state of the D-pad. The value is returned in degrees or radians
@@ -326,14 +305,12 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The D-pad's angle in either degrees or radians.
 	 */
 
-	public double getDPad(boolean inDegrees)
-	{
-		if (inDegrees)
-			return gamepad.getPOV();
-		else
-			return Math.toRadians(gamepad.getPOV());
-
-	}
+  public double getDPad(boolean inDegrees) {
+    if (inDegrees)
+      return gamepad.getPOV();
+    else
+      return Math.toRadians(gamepad.getPOV());
+  }
 
 	/**
 	 * Get if any of the buttons on the D-pad is pressed. Any combination of
@@ -343,10 +320,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the D-pad.
 	 */
 
-	public boolean dPadIsPressed()
-	{
-		return gamepad.getPOV() != -1;
-	}
+  public boolean dPadIsPressed() {
+    return gamepad.getPOV() != -1;
+  }
 
 	/**
 	 * Sets the rumble output for the Logitech Gaming Pad. The method will
@@ -357,11 +333,10 @@ public class LogitechGamingPad extends GenericHID {
 	 * @param amount The normalized value (0 to 1) to set the rumble to.
 	 */
 
-	public void setRumble(float amount)
-	{
-		gamepad.setRumble(RumbleType.kLeftRumble, amount);
-		gamepad.setRumble(RumbleType.kRightRumble, amount);
-	}
+  public void setRumble(float amount) {
+    gamepad.setRumble(RumbleType.kLeftRumble, amount);
+    gamepad.setRumble(RumbleType.kRightRumble, amount);
+  }
 
 	// The following methods are generic methods required by the abstract class.
 
@@ -402,9 +377,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The value of the axis.
 	 */
 
-	public double getRawAxis(int which) {
-		return gamepad.getRawAxis(which);
-	}
+  public double getRawAxis(int which) {
+    return gamepad.getRawAxis(which);
+  }
 
 	/**
 	 * Read the state of the trigger of a specific side.
@@ -447,9 +422,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
 
-	public boolean getRawButton(int button) {
-		return gamepad.getRawButton(button);
-	}
+  public boolean getRawButton(int button) {
+    return gamepad.getRawButton(button);
+  }
 
 	/**
 	 * Get the state of a POV on the gamepad.
@@ -458,11 +433,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return the angle of the POV in degrees, or -1 if the POV is not pressed.
 	 */
 
-	public int getPOV(int pov) {
-
-		return gamepad.getPOV(pov);
-
-	}
+  public int getPOV(int pov) {
+    return gamepad.getPOV(pov);
+  }
 	/**
 	 * This is not supported for the Logitech Gaming Pad. This method is only here to
 	 * complete the GenericHID interface.
@@ -481,9 +454,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The twist value of the gamepad (always 0).
 	 */
 
-	public double getTwist() {
-		return 0;
-	}
+  public double getTwist() {
+    return 0;
+  }
 
 	/**
 	 * This is not supported for the Logitech Gaming Pad. This method is only here to
@@ -492,9 +465,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The throttle value of the gamepad (always 0).
 	 */
 
-	public double getThrottle() {
-		return 0;
-	}
+  public double getThrottle() {
+    return 0;
+  }
 
 	/**
 
@@ -510,32 +483,33 @@ public class LogitechGamingPad extends GenericHID {
 	// 	return false;
 	// }
 
-	@Override
-	public int getPOVCount() {
-		return 0;
-    }
+  @Override
+  public int getPOVCount() {
+    return 0;
+  }
     
-	@Override
-	public HIDType getType() {
-		return null;
-	}
-	@Override
-	public String getName() {
-		return null;
-	}
-	@Override
+  @Override
+  public HIDType getType() {
+    return null;
+  }
 
-	public void setOutput(int outputNumber, boolean value) {
+  @Override
+  public String getName() {
+    return null;
+  }
+
+	// @Override
+	// public void setOutput(int outputNumber, boolean value) {
 		
-	}
+	// }
 
-	@Override
-	public void setOutputs(int value) {
+	// @Override
+	// public void setOutputs(int value) {
 		
-	}
-	@Override
-	public void setRumble(RumbleType type, double value) {
+	// }
+	// @Override
+	// public void setRumble(RumbleType type, double value) {
 
-	}
+	// }
 
 }
