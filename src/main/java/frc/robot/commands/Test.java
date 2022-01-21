@@ -4,32 +4,39 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.LogitechGamingPad;
 import frc.robot.subsystems.DriveTrain;
 
-public class ArcadeDrive extends CommandBase {
+public class Test extends CommandBase {
+  /** Creates a new Test. */
+  //Timer timer;
   DriveTrain driveTrain;
-  LogitechGamingPad drivePad;
-  /** Creates a new ArcadeDrive. */
-  public ArcadeDrive(DriveTrain driveTrain, LogitechGamingPad drivePad) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  double goal;
+  double error;
+  public Test(DriveTrain driveTrain) {
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
-    this.drivePad = drivePad;
+    goal = 95000;
+    //timer = new Timer();
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    //timer.reset();
+    driveTrain.resetEncoders();
+    //timer.start();
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.arcadeDrive((drivePad.getRightAnalogX()*Constants.REGULAR_MODE), (drivePad.getLeftAnalogY()*Constants.REGULAR_MODE));
+    error = goal-driveTrain.getLeftEncoderCount();
+    driveTrain.arcadeDrive(0, (-error/goal)*.4);
+    System.out.println(driveTrain.getLeftEncoderCount());
   }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +48,8 @@ public class ArcadeDrive extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    //return timer.get() > 1;
     return false;
+    //return driveTrain.getLeftEncoderCount() > goal;
   }
 }

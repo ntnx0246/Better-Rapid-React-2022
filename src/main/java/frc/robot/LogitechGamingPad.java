@@ -52,7 +52,7 @@ public class LogitechGamingPad extends GenericHID {
 	 */
 	public double getLeftAnalogX()
 	{
-		return getLeftAnalogX();
+		return gamepad.getRawAxis(0);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class LogitechGamingPad extends GenericHID {
 
 	public double getLeftAnalogY()
 	{
-		return getLeftAnalogY();
+		return gamepad.getRawAxis(1);
 	}
 
 	/**
@@ -86,10 +86,10 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the bumper.
 	 */
 
-	public boolean getLeftBumper()
-	{
-		return getLeftBumper();
-	}
+	// public boolean getLeftBumper()
+	// {
+	// 	return gamepad
+	// }
 
 	/**
 	 * Read the state of the left trigger.
@@ -99,10 +99,10 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the trigger.
 	 */
 
-	public boolean getLeftTrigger()
-	{
-		return getLeftTrigger();
-	}
+	// public boolean getLeftTrigger()
+	// {
+	// 	return getLeftTrigger();
+	// }
 
 	/**
 	 * Get the value of the left trigger. The trigger returns a double [0, 1]
@@ -127,7 +127,7 @@ public class LogitechGamingPad extends GenericHID {
 	 */
 	public double getRightAnalogX()
 	{
-		return getRightAnalogX();
+		return gamepad.getRawAxis(4);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class LogitechGamingPad extends GenericHID {
 	 */
 	public double getRightAnalogY()
 	{
-		return getRightAnalogY();
+		return gamepad.getRawAxis(5);
 	}
 
 	/**

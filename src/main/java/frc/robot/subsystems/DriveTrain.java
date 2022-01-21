@@ -5,6 +5,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
+import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,14 +22,13 @@ public class DriveTrain extends SubsystemBase {
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    frontR = new TalonFX(Constants.frontRightID);
-    frontL = new TalonFX(Constants.frontLeftID);
-    backR = new TalonFX(Constants.backRightID);
-    backL = new TalonFX(Constants.backLeftID);
+    frontR = new TalonFX(Constants.FRONT_RIGHT_ID);
+    frontL = new TalonFX(Constants.FRONT_LEFT_ID);
+    backR = new TalonFX(Constants.BACK_RIGHT_ID);
+    backL = new TalonFX(Constants.BACK_LEFT_ID);
     
-    backR.follow(frontR);
     backL.follow(frontL);
-
+    backR.follow(frontR);
     frontL.setInverted(true);
     backL.setInverted(true);
   }
@@ -36,13 +38,46 @@ public class DriveTrain extends SubsystemBase {
     frontR.set(ControlMode.PercentOutput, y+x);
   }
 
+  //for testing purposes
+  public void tankDrive(double left, double right) {
+    frontL.set(ControlMode.PercentOutput, left);
+    frontR.set(ControlMode.PercentOutput, right);
+  }
+
   public void stop(){
     frontL.set(ControlMode.PercentOutput, 0.0);
     frontR.set(ControlMode.PercentOutput, 0.0);
   }
 
+  public double getLeftEncoderCount() {
+    return frontL.getSensorCollection().getIntegratedSensorPosition();
+  }
+
+  public void resetEncoders() {
+    frontL.getSensorCollection().setIntegratedSensorPosition(0, 0);
+    frontR.getSensorCollection().setIntegratedSensorPosition(0, 0);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    frontL.configPeakOutputForward(1);
+    frontL.configPeakOutputReverse(1);
+  }
+
+  public void setPosition(double pos) {
+    frontL.set(ControlMode.MotionMagic, pos);
+  }
+
+  public void setLeftPID(int slotID, double p, double i, double d){
+    frontL.config_kP(slotID, p);
+    frontL.config_kI(slotID, i);
+    frontL.config_kD(slotID, d);
+  }
+
+  public void setRightPID(int slotID, double p, double i, double d){
+    frontR.config_kP(slotID, p);
+    frontR.config_kI(slotID, i);
+    frontR.config_kD(slotID, d);
   }
 }

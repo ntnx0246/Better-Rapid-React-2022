@@ -4,22 +4,16 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.LogitechGamingPad;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Shooter;
 
-public class ArcadeDrive extends CommandBase {
-  DriveTrain driveTrain;
-  LogitechGamingPad drivePad;
-  /** Creates a new ArcadeDrive. */
-  public ArcadeDrive(DriveTrain driveTrain, LogitechGamingPad drivePad) {
+public class Shoot extends CommandBase {
+  /** Creates a new Shoot. */
+  Shooter shooter;
+  public Shoot(Shooter shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveTrain);
-    this.driveTrain = driveTrain;
-    this.drivePad = drivePad;
+    addRequirements(shooter);
+    this.shooter = shooter;
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +23,13 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.arcadeDrive((drivePad.getRightAnalogX()*Constants.REGULAR_MODE), (drivePad.getLeftAnalogY()*Constants.REGULAR_MODE));
+    shooter.shoot(-1);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.stop();
+    shooter.shoot(0);
   }
 
   // Returns true when the command should end.

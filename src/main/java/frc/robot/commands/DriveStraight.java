@@ -4,35 +4,41 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.LogitechGamingPad;
 import frc.robot.subsystems.DriveTrain;
 
-public class ArcadeDrive extends CommandBase {
-  DriveTrain driveTrain;
-  LogitechGamingPad drivePad;
-  /** Creates a new ArcadeDrive. */
-  public ArcadeDrive(DriveTrain driveTrain, LogitechGamingPad drivePad) {
+public class DriveStraight extends CommandBase {
+  /** Creates a new DriveStraight. */
+  DriveTrain driveTrain; 
+  private double goal; // put goal in as a constant 
+
+  public DriveStraight(DriveTrain driveTrain, double goal ) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
-    this.drivePad = drivePad;
+    this.goal = goal; 
+
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    driveTrain.resetEncoders();
+    driveTrain.setLeftPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD); //make into constants
+    driveTrain.setRightPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD);
+    driveTrain.setPosition(goal);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.arcadeDrive((drivePad.getRightAnalogX()*Constants.REGULAR_MODE), (drivePad.getLeftAnalogY()*Constants.REGULAR_MODE));
+
+   
   }
 
   // Called once the command ends or is interrupted.
+  
   @Override
   public void end(boolean interrupted) {
     driveTrain.stop();

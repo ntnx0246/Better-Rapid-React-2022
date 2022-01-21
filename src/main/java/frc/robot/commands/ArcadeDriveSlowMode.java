@@ -4,18 +4,16 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.LogitechGamingPad;
 import frc.robot.subsystems.DriveTrain;
 
-public class ArcadeDrive extends CommandBase {
+public class ArcadeDriveSlowMode extends CommandBase {
+  /** Creates a new ArcadeDriveSlowMode. */
   DriveTrain driveTrain;
   LogitechGamingPad drivePad;
-  /** Creates a new ArcadeDrive. */
-  public ArcadeDrive(DriveTrain driveTrain, LogitechGamingPad drivePad) {
+  public ArcadeDriveSlowMode( DriveTrain driveTrain, LogitechGamingPad drivePad) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
@@ -29,7 +27,7 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.arcadeDrive((drivePad.getRightAnalogX()*Constants.REGULAR_MODE), (drivePad.getLeftAnalogY()*Constants.REGULAR_MODE));
+    driveTrain.arcadeDrive((drivePad.getRightAnalogX()*Constants.SLOW_MODE), (drivePad.getLeftAnalogY()*Constants.SLOW_MODE));
   }
 
   // Called once the command ends or is interrupted.
