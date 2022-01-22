@@ -4,11 +4,27 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
-  public Intake() {}
+
+   CANSparkMax motorController1; 
+   CANSparkMax motorController2; 
+
+  public Intake() {
+    motorController1 = new CANSparkMax(0, MotorType.kBrushless);
+    motorController2 = new CANSparkMax(1, MotorType.kBrushless);
+  }
+
+  public void intakeBalls(double speed){
+    motorController1.set(speed);
+    motorController2.set(-speed);
+  }
 
   @Override
   public void periodic() {
