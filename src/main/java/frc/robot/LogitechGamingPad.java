@@ -34,8 +34,8 @@ public class LogitechGamingPad extends GenericHID {
   private static final int RIGHT_ANALOG_X_AXIS = 4;
   private static final int RIGHT_ANALOG_Y_AXIS = 5;
 	
-  private static final int LEFT_ANALOG_BUTTON = 9;
-  private static final int RIGHT_ANALOG_BUTTON = 10;
+  private static final int LEFT_BUMPER = 9;
+  private static final int RIGHT_BUMPER = 10;
   private static final int LEFT_TRIGGER_BUTTON = 2;
   private static final int RIGHT_TRIGGER_BUTTON = 3;
   private static final int A_BUTTON = 1;
@@ -67,8 +67,8 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
 
-  public boolean getLeftAnalogButton() {
-    return gamepad.getRawButton(LEFT_ANALOG_BUTTON);
+  public boolean getLeftBumper() {
+    return gamepad.getRawButton(LEFT_BUMPER);
   }
 
 	/**
@@ -127,8 +127,8 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * @return The state of the button.
 	 */
-  public boolean getRightAnalogButton() {
-    return gamepad.getRawButton(RIGHT_ANALOG_BUTTON);
+  public boolean getRightBumper() {
+    return gamepad.getRawButton(RIGHT_BUMPER);
   }
 
 	/**
