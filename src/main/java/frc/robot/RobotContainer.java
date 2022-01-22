@@ -28,8 +28,9 @@ public class RobotContainer {
 
   DriveTrain driveTrain;
   Shooter shooter;
+  Intake intake;
 
-  ArcadeDrive arcadeDrive;
+  ArcadeDrive arcadeDrive; 
 
   JoystickButton driveA;
   JoystickButton driveB;
