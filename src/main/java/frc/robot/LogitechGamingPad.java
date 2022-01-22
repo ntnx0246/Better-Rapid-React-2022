@@ -152,7 +152,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * This method can be used for precise control over a subsystem.
 	 * 
-	 * @return The value of the left joystick along the x axis. 
+	 * @return The value of the right joystick along the x axis. 
 	 */
 
   public double getRightAnalogXAxis() {
@@ -166,7 +166,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * This method can be used for precise control over a subsystem.
 	 * 
-	 * @return The value of the left joystick along the y axis. 
+	 * @return The value of the right joystick along the y axis. 
 	 */
 
   public double getRightAnalogYAxis() {
