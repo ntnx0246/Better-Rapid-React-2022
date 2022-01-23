@@ -29,10 +29,15 @@ public class LogitechGamingPad extends GenericHID {
   private Joystick gamepad;
 
 	// Constants
+  private static final int LEFT_ANALOG_X_AXIS = 0;
+  private static final int LEFT_ANALOG_Y_AXIS = 1;
+  private static final int RIGHT_ANALOG_X_AXIS = 4;
+  private static final int RIGHT_ANALOG_Y_AXIS = 5;
+	
   private static final int LEFT_ANALOG_BUTTON = 9;
   private static final int RIGHT_ANALOG_BUTTON = 10;
-  private static final int LEFT_TRIGGER = 2;
-  private static final int RIGHT_TRIGGER = 3;
+  private static final int LEFT_TRIGGER_BUTTON = 2;
+  private static final int RIGHT_TRIGGER_BUTTON = 3;
   private static final int A_BUTTON = 1;
   private static final int B_BUTTON = 2;
   private static final int X_BUTTON = 3;
@@ -78,7 +83,36 @@ public class LogitechGamingPad extends GenericHID {
 	 */
 
   public double getLeftTriggerValue() {
-    return gamepad.getRawAxis(LEFT_TRIGGER);
+    return gamepad.getRawAxis(LEFT_TRIGGER_BUTTON);
+  }
+
+	
+	/**
+	 * Get the value of the left joystick along the x axis. The trigger returns a double [-1, 1]
+	 * depending on how far the joystick is moved. 0 is nothing when untouched 
+	 * and 1/-1 is the joystick moved all the way left or right respectively. 
+	 * 
+	 * This method can be used for precise control over a subsystem.
+	 * 
+	 * @return The value of the left joystick along the x axis. 
+	 */
+
+  public double getLeftAnalogXAxis() {
+    return gamepad.getRawAxis(LEFT_ANALOG_X_AXIS);
+  }
+
+	/**
+	 * Get the value of the left joystick along the y axis. The trigger returns a double [-1, 1]
+	 * depending on how far the joystick is moved. 0 is nothing when untouched 
+	 * and 1/-1 is the joystick moved all the way up or down respectively. 
+	 * 
+	 * This method can be used for precise control over a subsystem.
+	 * 
+	 * @return The value of the left joystick along the y axis. 
+	 */
+
+  public double getLeftAnalogYAxis() {
+    return gamepad.getRawAxis(LEFT_ANALOG_Y_AXIS);
   }
 
 	/**
@@ -108,8 +142,37 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The value of the right trigger.
 	 */
   public double getRightTriggerValue() {
-    return gamepad.getRawAxis(RIGHT_TRIGGER);
+    return gamepad.getRawAxis(RIGHT_TRIGGER_BUTTON);
   }
+
+	/**
+	 * Get the value of the right joystick along the x axis. The trigger returns a double [-1, 1]
+	 * depending on how far the joystick is moved. 0 is nothing when untouched 
+	 * and 1/-1 is the joystick moved all the way left or right respectively. 
+	 * 
+	 * This method can be used for precise control over a subsystem.
+	 * 
+	 * @return The value of the left joystick along the x axis. 
+	 */
+
+  public double getRightAnalogXAxis() {
+    return gamepad.getRawAxis(RIGHT_ANALOG_X_AXIS);
+  }
+
+	/**
+	 * Get the value of the right joystick along the y axis. The trigger returns a double [-1, 1]
+	 * depending on how far the joystick is moved. 0 is nothing when untouched 
+	 * and 1/-1 is the joystick moved all the way up or down respectively. 
+	 * 
+	 * This method can be used for precise control over a subsystem.
+	 * 
+	 * @return The value of the left joystick along the y axis. 
+	 */
+
+  public double getRightAnalogYAxis() {
+    return gamepad.getRawAxis(RIGHT_ANALOG_Y_AXIS);
+  }
+
 
 	/**
 	 * Read the state of the 'A' button.
