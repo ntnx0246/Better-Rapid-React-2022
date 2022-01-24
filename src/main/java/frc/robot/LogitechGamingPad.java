@@ -115,11 +115,6 @@ public class LogitechGamingPad extends GenericHID {
     return gamepad.getRawAxis(LEFT_ANALOG_Y_AXIS);
   }
 
-	/**
-	 * Get the X value of the right analog.
-	 * 
-	 * @return The right X value.
-	 */
 
 	/**
 	 * Read the state of the right analog button.
@@ -141,6 +136,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * @return The value of the right trigger.
 	 */
+
   public double getRightTriggerValue() {
     return gamepad.getRawAxis(RIGHT_TRIGGER_BUTTON);
   }
@@ -332,38 +328,6 @@ public class LogitechGamingPad extends GenericHID {
     gamepad.setRumble(RumbleType.kLeftRumble, amount);
     gamepad.setRumble(RumbleType.kRightRumble, amount);
   }
-
-	// The following methods are generic methods required by the abstract class.
-
-	// The above methods should be used to get the gamepad inputs. 
-
-	/**
-	 * Get the value of the x-axis of a specific analog.
-	 * 
-	 * @param hand The left or right analog.
-	 * @return The value of the axis.
-	 */
-
-	// public double getX(Hand hand) {
-	// 	if (hand == Hand.kLeft)
-	// 		return gamepad.getRawAxis(0);
-	// 	else
-	// 		return gamepad.getRawAxis(4);
-	// }
-
-	/**
-	 * Get the value of the y-axis of a specific analog.
-	 * 
-	 * @param hand The left or right analog.
-	 * @return The value of the axis.
-	 */
-
-	// public double getY(Hand hand) {
-	// 	if (hand == Hand.kLeft)
-	// 		return gamepad.getRawAxis(1);
-	// 	else
-	// 		return gamepad.getRawAxis(5);
-	// }
 
 	/**
 	 * Get the value of the axis.
