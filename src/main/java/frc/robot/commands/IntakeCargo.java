@@ -20,7 +20,8 @@ public class IntakeCargo extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.intakeBalls(1);
+    intake.intakeTopMotor(1);
+    intake.intakeBottomMotor(-1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -30,7 +31,7 @@ public class IntakeCargo extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.intakeBalls(0); 
+    intake.stop(); 
   }
 
   // Returns true when the command should end.

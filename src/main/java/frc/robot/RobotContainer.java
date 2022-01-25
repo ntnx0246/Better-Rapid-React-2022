@@ -26,8 +26,6 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   LogitechGamingPad drivePad;
 
-  DriveTrain driveTrain;
-  Shooter shooter;
   Intake intake;
 
 
@@ -44,8 +42,6 @@ public class RobotContainer {
     
     drivePad = new LogitechGamingPad(0);
 
-    driveTrain = new DriveTrain();
-    shooter = new Shooter();
     intake = new Intake();
 
 
