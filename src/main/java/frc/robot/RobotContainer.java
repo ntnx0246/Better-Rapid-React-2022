@@ -57,7 +57,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     driveX = new JoystickButton(drivePad, 3);
-    driveX.whileHeld(new IntakeCargo(intake));
+    driveX.whileHeld(new IntakeCargo(intake, true));
 
   }
 

@@ -4,27 +4,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.LogitechGamingPad;
 import frc.robot.subsystems.Intake;
 
 public class IntakeCargo extends CommandBase {
   /** Creates a new IntakeCargo. */
-  Intake intake; 
+  private final Intake intake; 
+  public boolean isIntaking;
 
-  public IntakeCargo(Intake intake) {
+  public IntakeCargo(Intake intake,boolean isIntaking) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
     this.intake = intake;
+    this.isIntaking = isIntaking;
   }
 
   // Called when the command is initially scheduled.
   @Override
+  
   public void initialize() {
-    intake.intakeTopMotor(1);
-    intake.intakeBottomMotor(-1);
+    if (isIntaking){
+      intake.intakeTopMotor(1);
+      intake.intakeBottomMotor(-1);
+    } else {
+      intake.intakeTopMotor(1);
+      intake.intakeBottomMotor(1);
+    }
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+  // Called every time the scheduler runs while the command is scheduled
   @Override
   public void execute() {}
 
