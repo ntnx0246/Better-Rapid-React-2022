@@ -24,27 +24,16 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  LogitechGamingPad drivePad;
+  private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
 
-  Intake intake;
-
-
-  JoystickButton driveA;
-  JoystickButton driveB;
-  JoystickButton driveX;
-  JoystickButton driveLeftBumper; 
-  JoystickButton driveRightBumper; 
+  private final Intake intake = new Intake();
+  private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
+  private final JoystickButton rightBumper = new JoystickButton(drivePad, 10); 
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
-    
-    drivePad = new LogitechGamingPad(0);
-
-    intake = new Intake();
-
-
     configureButtonBindings();
   }
 
@@ -55,10 +44,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
-    driveX = new JoystickButton(drivePad, 3);
-    driveX.whileHeld(new IntakeCargo(intake, true));
-
+    buttonX.whenPressed(new IntakeCargo(intake, false));
+    rightBumper.whileHeld(new IntakeCargo(intake, true));
   }
 
   /**

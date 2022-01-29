@@ -24,10 +24,10 @@ public class IntakeCargo extends CommandBase {
   public void initialize() {
     if (isIntaking){
       intake.intakeTopMotor(1);
-      intake.intakeBottomMotor(-1);
+      intake.intakeBottomMotor(1);
     } else {
       intake.intakeTopMotor(1);
-      intake.intakeBottomMotor(1);
+      intake.intakeBottomMotor(-1);
     }
   }
 
