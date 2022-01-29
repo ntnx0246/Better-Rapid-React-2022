@@ -15,6 +15,11 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCargo;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.Shoot;
+import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,13 +30,18 @@ import frc.robot.subsystems.Intake;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
+  private final Shooter shooter = new Shooter();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
 
   private final Intake intake = new Intake();
   private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
   private final JoystickButton rightBumper = new JoystickButton(drivePad, 10); 
+
+
+  private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
+  private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
+  private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -49,6 +59,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     buttonX.whenPressed(new IntakeCargo(intake, false));
     rightBumper.whileHeld(new IntakeCargo(intake, true));
+    leftBumper.whenPressed(new Shoot(shooter));
   }
 
   /**

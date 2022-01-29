@@ -26,45 +26,39 @@ public class LogitechGamingPad extends GenericHID {
 	/**
 	 * The Joystick class is utilized for simplicity.
 	 */
-	private Joystick gamepad;
+  private Joystick gamepad;
 
+	// Constants
+  private static final int LEFT_ANALOG_X_AXIS = 0;
+  private static final int LEFT_ANALOG_Y_AXIS = 1;
+  private static final int RIGHT_ANALOG_X_AXIS = 4;
+  private static final int RIGHT_ANALOG_Y_AXIS = 5;
+	
+  private static final int LEFT_BUMPER = 9;
+  private static final int RIGHT_BUMPER = 10;
+  private static final int LEFT_TRIGGER_BUTTON = 2;
+  private static final int RIGHT_TRIGGER_BUTTON = 3;
+  private static final int A_BUTTON = 1;
+  private static final int B_BUTTON = 2;
+  private static final int X_BUTTON = 3;
+  private static final int Y_BUTTON = 4;
+  private static final int BACK_BUTTON = 7;
+  private static final int START_BUTTON = 8;
 	/**
-	 * Construct an instance of a Logitch Gaming Pad. The Logitech Gaming Pad index
+	 * construct an instance of a Logitch Gaming Pad. The Logitech Gaming Pad index
 	 * is the usb port on the driver station.
 	 *
 	 * @param port The port on the driver station that the gamepad is plugged
 	 *        into.
 	 */
-
-	public LogitechGamingPad(int port)
-	{
-		super(0);
-		gamepad = new Joystick(port);
-	}
+	
+  public LogitechGamingPad(int usbPort) {
+    super(0);
+    gamepad = new Joystick(usbPort);
+  }
 
 	// The following methods are get methods specific to the Logitech Gaming Pad.
 	// Use these methods to get button values.
-
-	/**
-	 * Get the X value of the left analog.
-	 * 
-	 * @return The left X value.
-	 */
-	public double getLeftAnalogX()
-	{
-		return getLeftAnalogX();
-	}
-
-	/**
-	 * Get the Y value of the left analog.
-	 * 
-	 * @return The left Y value.
-	 */
-
-	public double getLeftAnalogY()
-	{
-		return getLeftAnalogY();
-	}
 
 	/**
 	 * Read the state of the left analog button.
@@ -73,36 +67,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
 
-	public boolean getLeftAnalogButton()
-	{
-		return gamepad.getRawButton(9);
-	}
-
-	/**
-	 * Read the state of the left bumper.
-	 * The bumpers are the two upper buttons of the four on the
-	 * top of the gamepad. They are either pressed or released.
-	 * 
-	 * @return The state of the bumper.
-	 */
-
-	public boolean getLeftBumper()
-	{
-		return getLeftBumper();
-	}
-
-	/**
-	 * Read the state of the left trigger.
-	 * The triggers are the two lower buttons of the four on
-	 * the top of the gamepad. How much they are pressed can vary.
-	 * 
-	 * @return The state of the trigger.
-	 */
-
-	public boolean getLeftTrigger()
-	{
-		return getLeftTrigger();
-	}
+  public boolean getLeftBumper() {
+    return gamepad.getRawButton(LEFT_BUMPER);
+  }
 
 	/**
 	 * Get the value of the left trigger. The trigger returns a double [0, 1]
@@ -115,30 +82,39 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The value of the left trigger.
 	 */
 
-	public double getLeftTriggerValue()
-	{
-		return gamepad.getRawAxis(2);
-	}
+  public double getLeftTriggerValue() {
+    return gamepad.getRawAxis(LEFT_TRIGGER_BUTTON);
+  }
+
+	
+	/**
+	 * Get the value of the left joystick along the x axis. The trigger returns a double [-1, 1]
+	 * depending on how far the joystick is moved. 0 is nothing when untouched 
+	 * and 1/-1 is the joystick moved all the way left or right respectively. 
+	 * 
+	 * This method can be used for precise control over a subsystem.
+	 * 
+	 * @return The value of the left joystick along the x axis. 
+	 */
+
+  public double getLeftAnalogXAxis() {
+    return gamepad.getRawAxis(LEFT_ANALOG_X_AXIS);
+  }
 
 	/**
-	 * Get the X value of the right analog.
+	 * Get the value of the left joystick along the y axis. The trigger returns a double [-1, 1]
+	 * depending on how far the joystick is moved. 0 is nothing when untouched 
+	 * and 1/-1 is the joystick moved all the way up or down respectively. 
 	 * 
-	 * @return The right X value.
+	 * This method can be used for precise control over a subsystem.
+	 * 
+	 * @return The value of the left joystick along the y axis. 
 	 */
-	public double getRightAnalogX()
-	{
-		return getRightAnalogX();
-	}
 
-	/**
-	 * Get the Y value of the right analog.
-	 * 
-	 * @return The right Y value.
-	 */
-	public double getRightAnalogY()
-	{
-		return getRightAnalogY();
-	}
+  public double getLeftAnalogYAxis() {
+    return gamepad.getRawAxis(LEFT_ANALOG_Y_AXIS);
+  }
+
 
 	/**
 	 * Read the state of the right analog button.
@@ -146,35 +122,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getRightAnalogButton()
-	{
-		return gamepad.getRawButton(10);
-	}
-
-	/**
-	 * Read the state of the right bumper.
-	 * The bumpers are the two upper buttons of the four on the
-	 * top of the gamepad. They are either pressed or released.
-	 * 
-	 * @return The state of the bumper.
-	 */
-
-	public boolean getRightBumper()
-	{
-		return getRightBumper();
-	}	
-
-	/**
-	 * Read the state of the right trigger.
-	 * The triggers are the two lower buttons of the four on
-	 * the top of the gamepad. How much they are pressed can vary.
-	 * 
-	 * @return The state of the trigger.
-	 */
-	public boolean getRightTrigger()
-	{
-		return getRightTrigger();
-	}
+  public boolean getRightBumper() {
+    return gamepad.getRawButton(RIGHT_BUMPER);
+  }
 
 	/**
 	 * Get the value of the right trigger. The trigger returns a double [0, 1]
@@ -186,70 +136,93 @@ public class LogitechGamingPad extends GenericHID {
 	 * 
 	 * @return The value of the right trigger.
 	 */
-	public double getRightTriggerValue()
-	{
-		return gamepad.getRawAxis(3);
-	}
+
+  public double getRightTriggerValue() {
+    return gamepad.getRawAxis(RIGHT_TRIGGER_BUTTON);
+  }
+
+	/**
+	 * Get the value of the right joystick along the x axis. The trigger returns a double [-1, 1]
+	 * depending on how far the joystick is moved. 0 is nothing when untouched 
+	 * and 1/-1 is the joystick moved all the way left or right respectively. 
+	 * 
+	 * This method can be used for precise control over a subsystem.
+	 * 
+	 * @return The value of the right joystick along the x axis. 
+	 */
+
+  public double getRightAnalogXAxis() {
+    return gamepad.getRawAxis(RIGHT_ANALOG_X_AXIS);
+  }
+
+	/**
+	 * Get the value of the right joystick along the y axis. The trigger returns a double [-1, 1]
+	 * depending on how far the joystick is moved. 0 is nothing when untouched 
+	 * and 1/-1 is the joystick moved all the way up or down respectively. 
+	 * 
+	 * This method can be used for precise control over a subsystem.
+	 * 
+	 * @return The value of the right joystick along the y axis. 
+	 */
+
+  public double getRightAnalogYAxis() {
+    return gamepad.getRawAxis(RIGHT_ANALOG_Y_AXIS);
+  }
+
 
 	/**
 	 * Read the state of the 'A' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getAButton()
-	{
-		return gamepad.getRawButton(1);
-	}
+  public boolean getAButton() {
+    return gamepad.getRawButton(A_BUTTON);
+  }
 
 	/**
 	 * Read the state of the 'B' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getBButton()
-	{
-		return gamepad.getRawButton(2);
-	}
+  public boolean getBButton() {
+    return gamepad.getRawButton(B_BUTTON);
+  }
 
 	/**
 	 * Read the state of the 'X' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getXButton()
-	{
-		return gamepad.getRawButton(3);
-	}
+  public boolean getXButton() {
+    return gamepad.getRawButton(X_BUTTON);
+  }
 
 	/**
 	 * Read the state of the 'Y' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getYButton()
-	{
-		return gamepad.getRawButton(4);
-	}
+  public boolean getYButton() {
+    return gamepad.getRawButton(Y_BUTTON);
+  }
 
 	/**
 	 * Read the state of the 'BACK' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getBackButton()
-	{
-		return gamepad.getRawButton(7);
-	}
+  public boolean getBackButton() {
+    return gamepad.getRawButton(BACK_BUTTON);
+  }
 
 	/**
 	 * Read the state of the 'START' button.
 	 * 
 	 * @return The state of the button.
 	 */
-	public boolean getStartButton()
-	{
-		return gamepad.getRawButton(8);
-	}
+  public boolean getStartButton() {
+    return gamepad.getRawButton(START_BUTTON);
+  }
 
 	/**
 	 * Check the state of the D-pad. The {@code index} is a value [0, 7] that corresponds
@@ -261,13 +234,12 @@ public class LogitechGamingPad extends GenericHID {
 	 * @param index The value to correspond to a D-pad combination.
 	 * @return If the specified combination is pressed.
 	 */
-	public boolean checkDPad(int index)
-	{
-		if (0 <= index && index <= 7)
-			return (index * 45) == gamepad.getPOV();
-		else
-			return false;
-	}
+  public boolean checkDPad(int index) {
+    if (0 <= index && index <= 7)
+      return (index * 45) == gamepad.getPOV();
+    else
+      return false;
+  }
 
 	/**
 	 * Check the state of the D-pad. The method compares the angle measurement
@@ -286,12 +258,11 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return If the angle is the same as the D-pad.
 	 */
 
-	public boolean checkDPad(double angle, boolean inDegrees)
-	{
-		if (!inDegrees)
-			angle = Math.toDegrees(angle);
-		return (int)angle == gamepad.getPOV(); 
-	}
+  public boolean checkDPad(double angle, boolean inDegrees) {
+    if (!inDegrees)
+      angle = Math.toDegrees(angle);
+    return (int)angle == gamepad.getPOV(); 
+  }
 
 	/**
 	 * Get the state of the D-pad. The method will return an index that is a value
@@ -305,14 +276,13 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return An indexed representation of the D-pad combination. 
 	 */
 
-	public int getDPad()
-	{
-		int pov = gamepad.getPOV();
-		if (pov == -1)
-			return pov;
-		else
-			return pov/45;
-	}
+  public int getDPad() {
+    int pov = gamepad.getPOV();
+    if (pov == -1)
+      return pov;
+    else
+      return pov/45;
+  }
 
 	/**
 	 * Get the state of the D-pad. The value is returned in degrees or radians
@@ -326,14 +296,12 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The D-pad's angle in either degrees or radians.
 	 */
 
-	public double getDPad(boolean inDegrees)
-	{
-		if (inDegrees)
-			return gamepad.getPOV();
-		else
-			return Math.toRadians(gamepad.getPOV());
-
-	}
+  public double getDPad(boolean inDegrees) {
+    if (inDegrees)
+      return gamepad.getPOV();
+    else
+      return Math.toRadians(gamepad.getPOV());
+  }
 
 	/**
 	 * Get if any of the buttons on the D-pad is pressed. Any combination of
@@ -343,10 +311,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the D-pad.
 	 */
 
-	public boolean dPadIsPressed()
-	{
-		return gamepad.getPOV() != -1;
-	}
+  public boolean dPadIsPressed() {
+    return gamepad.getPOV() != -1;
+  }
 
 	/**
 	 * Sets the rumble output for the Logitech Gaming Pad. The method will
@@ -357,43 +324,10 @@ public class LogitechGamingPad extends GenericHID {
 	 * @param amount The normalized value (0 to 1) to set the rumble to.
 	 */
 
-	public void setRumble(float amount)
-	{
-		gamepad.setRumble(RumbleType.kLeftRumble, amount);
-		gamepad.setRumble(RumbleType.kRightRumble, amount);
-	}
-
-	// The following methods are generic methods required by the abstract class.
-
-	// The above methods should be used to get the gamepad inputs. 
-
-	/**
-	 * Get the value of the x-axis of a specific analog.
-	 * 
-	 * @param hand The left or right analog.
-	 * @return The value of the axis.
-	 */
-
-	// public double getX(Hand hand) {
-	// 	if (hand == Hand.kLeft)
-	// 		return gamepad.getRawAxis(0);
-	// 	else
-	// 		return gamepad.getRawAxis(4);
-	// }
-
-	/**
-	 * Get the value of the y-axis of a specific analog.
-	 * 
-	 * @param hand The left or right analog.
-	 * @return The value of the axis.
-	 */
-
-	// public double getY(Hand hand) {
-	// 	if (hand == Hand.kLeft)
-	// 		return gamepad.getRawAxis(1);
-	// 	else
-	// 		return gamepad.getRawAxis(5);
-	// }
+  public void setRumble(float amount) {
+    gamepad.setRumble(RumbleType.kLeftRumble, amount);
+    gamepad.setRumble(RumbleType.kRightRumble, amount);
+  }
 
 	/**
 	 * Get the value of the axis.
@@ -402,41 +336,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The value of the axis.
 	 */
 
-	public double getRawAxis(int which) {
-		return gamepad.getRawAxis(which);
-	}
-
-	/**
-	 * Read the state of the trigger of a specific side.
-	 * 
-	 * Because the trigger is read as an axis and returns a value
-	 * [0, 1] instead of [-1, 1], this method will return true
-	 * even if the trigger is only slightly pressed.
-	 * 
-	 * @param hand The left or right trigger(side).
-	 * @return The state of the trigger.
-	 */
-
-	// public boolean getTrigger(Hand hand) {
-	// 	if (hand == Hand.kLeft)
-	// 		return gamepad.getRawAxis(2) > 0;
-	// 	else
-	// 		return gamepad.getRawAxis(3) > 0;
-	// }
-
-	/**
-	 * Read the state of the bumper of a specific side.
-	 * 
-	 * @param hand The left or right bumper(side).
-	 * @return The state of the bumper.
-	 */
-
-	// public boolean getBumper(Hand hand) {
-	// 	if (hand == Hand.kLeft)
-	// 		return gamepad.getRawButton(5);
-	// 	else
-	// 		return gamepad.getRawButton(6);
-	// }
+  public double getRawAxis(int which) {
+    return gamepad.getRawAxis(which);
+  }
 
 	/**
 	 * Get the button value (starting at button 1).
@@ -447,9 +349,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The state of the button.
 	 */
 
-	public boolean getRawButton(int button) {
-		return gamepad.getRawButton(button);
-	}
+  public boolean getRawButton(int button) {
+    return gamepad.getRawButton(button);
+  }
 
 	/**
 	 * Get the state of a POV on the gamepad.
@@ -458,22 +360,10 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return the angle of the POV in degrees, or -1 if the POV is not pressed.
 	 */
 
-	public int getPOV(int pov) {
+  public int getPOV(int pov) {
+    return gamepad.getPOV(pov);
+  }
 
-		return gamepad.getPOV(pov);
-
-	}
-	/**
-	 * This is not supported for the Logitech Gaming Pad. This method is only here to
-	 * complete the GenericHID interface.
-	 *
-	 * @param hand This parameter is ignored and is only
-	 *        here to complete the GenericHID interface.
-	 * @return The value of the axis (always 0).   
-	 */
-	// public double getZ(Hand hand) {
-	// 	return 0;
-	// }
 	/**
 	 * This is not supported for the Logitech Gaming Pad. This method is only here to
 	 * complete the GenericHID interface.
@@ -481,9 +371,9 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The twist value of the gamepad (always 0).
 	 */
 
-	public double getTwist() {
-		return 0;
-	}
+  public double getTwist() {
+    return 0;
+  }
 
 	/**
 	 * This is not supported for the Logitech Gaming Pad. This method is only here to
@@ -492,50 +382,7 @@ public class LogitechGamingPad extends GenericHID {
 	 * @return The throttle value of the gamepad (always 0).
 	 */
 
-	public double getThrottle() {
-		return 0;
-	}
-
-	/**
-
-	 * This is not supported for the Logitech Gaming Pad. This method is only here to
-	 * complete the GenericHID interface.
-	 *
-	 * @param hand This parameter is ignored and is only
-	 *        here to complete the GenericHID interface.
-	 * @return The state of the top (always false).
-	 */
-
-	// public boolean getTop(Hand hand) {
-	// 	return false;
-	// }
-
-	@Override
-	public int getPOVCount() {
-		return 0;
-    }
-    
-	@Override
-	public HIDType getType() {
-		return null;
-	}
-	@Override
-	public String getName() {
-		return null;
-	}
-	@Override
-
-	public void setOutput(int outputNumber, boolean value) {
-		
-	}
-
-	@Override
-	public void setOutputs(int value) {
-		
-	}
-	@Override
-	public void setRumble(RumbleType type, double value) {
-
-	}
-
+  public double getThrottle() {
+    return 0;
+  }
 }
