@@ -13,9 +13,8 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
-
-   private CANSparkMax topMotor; 
-   private CANSparkMax bottomMotor; 
+  private CANSparkMax topMotor; 
+  private CANSparkMax bottomMotor; 
 
   public Intake() {
     topMotor = new CANSparkMax(Constants.TOP_SPARK, MotorType.kBrushless);

@@ -13,6 +13,6 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static final int TOP_SPARK = 4;
-    public static final int BOTTOM_SPARK = 5;
+  public static final int TOP_SPARK = 4;
+  public static final int BOTTOM_SPARK = 5;
 }
