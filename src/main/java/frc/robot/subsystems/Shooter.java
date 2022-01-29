@@ -25,12 +25,12 @@ public class Shooter extends SubsystemBase {
     left.set(speed);
     right.set(speed);
   }
-
+//one starts shooter motor, second one that pushes game piece into the shooter, turns of a few seconds after both are shooted.
   public void stop() {
     left.stopMotor();
     right.stopMotor();
   }
-  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
