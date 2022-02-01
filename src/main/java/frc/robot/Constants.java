@@ -16,6 +16,10 @@ public final class Constants {
 
   public static final int TOP_SPARK = 4;
   public static final int BOTTOM_SPARK = 5;
+  
   public static final int SHOOTER_LEFT_ID = 6;
   public static final int SHOOTER_RIGHT_ID = 7;
+
+  public static final int CLIMBER_LEFT_ID = 8; 
+  public static final int CLIMBER_RIGHT_ID = 9; 
 }
