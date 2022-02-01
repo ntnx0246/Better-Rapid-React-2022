@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.simulation.PS4ControllerSim;
@@ -22,40 +23,18 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
+  private final DriveTrain driveTrain = new DriveTrain();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  LogitechGamingPad drivePad;
-
-  DriveTrain driveTrain;
-  Shooter shooter;
-  Intake intake;
-
-  ArcadeDrive arcadeDrive; 
-
-  JoystickButton driveA;
-  JoystickButton driveB;
-  JoystickButton driveLeftBumper; 
-  JoystickButton driveRightBumper; 
-  
-  Test test;
-
+  private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
+  private final JoystickButton buttonA = new JoystickButton(drivePad, 1);
+  private final JoystickButton buttonB = new JoystickButton(drivePad, 2);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
-    
-    drivePad = new LogitechGamingPad(0);
 
-    driveTrain = new DriveTrain();
-    shooter = new Shooter();
-
-    arcadeDrive = new ArcadeDrive(driveTrain, drivePad);
-    test = new Test(driveTrain);
-
-    driveTrain.setDefaultCommand(arcadeDrive);
+    driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, drivePad));
     configureButtonBindings();
-
-    
   }
 
   /**
@@ -65,17 +44,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    driveA = new JoystickButton(drivePad, 1);
-    driveA.whenPressed(new Test(driveTrain));
-
-    driveB = new JoystickButton(drivePad, 2);
-    driveB.whileHeld(new Shoot(shooter));
-
-    driveLeftBumper = new JoystickButton(drivePad, 5);
-    driveLeftBumper.whenPressed(new ArcadeDrive(driveTrain, drivePad));
-
-    driveRightBumper = new JoystickButton(drivePad, 6);
-    driveRightBumper.whenPressed(new ArcadeDriveSlowMode(driveTrain, drivePad));
+    buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
+    buttonB.whenPressed(new ArcadeDriveSlowMode(driveTrain, drivePad));
   }
 
   /**
