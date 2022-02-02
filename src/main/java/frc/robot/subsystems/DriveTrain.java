@@ -60,6 +60,10 @@ public class DriveTrain extends SubsystemBase {
     return frontL.getSensorCollection().getIntegratedSensorPosition();
   }
 
+  public double getRightEncoderCount() {
+    return frontR.getSensorCollection().getIntegratedSensorPosition();
+  }
+
   public void resetEncoders() {
     frontL.getSensorCollection().setIntegratedSensorPosition(0, 0);
     frontR.getSensorCollection().setIntegratedSensorPosition(0, 0);

@@ -10,7 +10,7 @@ import frc.robot.subsystems.DriveTrain;
 
 public class DriveStraight extends CommandBase {
   /** Creates a new DriveStraight. */
-  DriveTrain driveTrain; 
+  private final DriveTrain driveTrain; 
   private double goal; // put goal in as a constant 
 
   public DriveStraight(DriveTrain driveTrain, double goal ) {
@@ -18,7 +18,6 @@ public class DriveStraight extends CommandBase {
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     this.goal = goal; 
-
   }
 
   // Called when the command is initially scheduled.
@@ -33,8 +32,7 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-   
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -47,6 +45,9 @@ public class DriveStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    double left = driveTrain.getLeftEncoderCount();
+    double right = driveTrain.getRightEncoderCount();
+
+    return (left >= goal-1000) && (right >= goal-1000) && (right <= goal+1000) && (left <= goal+1000);
   }
 }
