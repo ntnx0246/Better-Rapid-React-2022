@@ -31,6 +31,13 @@ public class DriveTrain extends SubsystemBase {
     backR.follow(frontR);
     frontL.setInverted(true);
     backL.setInverted(true);
+    frontR.setInverted(false);
+    backR.setInverted(false);
+
+    frontL.configPeakOutputForward(1);
+    frontL.configPeakOutputReverse(-1);
+    frontR.configPeakOutputForward(1);
+    frontR.configPeakOutputReverse(-1);
   }
 
   public void arcadeDrive(double x, double y) {
@@ -61,8 +68,7 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    frontL.configPeakOutputForward(1);
-    frontL.configPeakOutputReverse(1);
+    
   }
 
   public void setPosition(double pos) {
