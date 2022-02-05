@@ -36,8 +36,8 @@ public class RobotContainer {
 
   private final Intake intake = new Intake();
   private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
-  private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
-  private final JoystickButton rightBumper = new JoystickButton(drivePad, 10); 
+  private final JoystickButton leftBumper = new JoystickButton(drivePad, 5);
+  private final JoystickButton rightBumper = new JoystickButton(drivePad, 6); 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -52,9 +52,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonX.whenPressed(new IntakeCargo(intake, false));
+    buttonX.whileHeld(new IntakeCargo(intake, false));
     rightBumper.whileHeld(new IntakeCargo(intake, true));
-    leftBumper.whenPressed(new Shoot(shooter));
+    leftBumper.whileHeld(new Shoot(shooter));
   }
 
   /**

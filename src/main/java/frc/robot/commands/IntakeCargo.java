@@ -4,6 +4,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
 public class IntakeCargo extends CommandBase {
@@ -23,11 +24,11 @@ public class IntakeCargo extends CommandBase {
   
   public void initialize() {
     if (isIntaking){
-      intake.intakeTopMotor(1);
-      intake.intakeBottomMotor(1);
+      intake.intakeTopMotor(Constants.INTAKE_SPEED);
+      intake.intakeBottomMotor(Constants.INTAKE_SPEED);
     } else {
-      intake.intakeTopMotor(1);
-      intake.intakeBottomMotor(-1);
+      intake.intakeTopMotor(Constants.INTAKE_SPEED * -1);
+      intake.intakeBottomMotor(Constants.INTAKE_SPEED);
     }
   }
 

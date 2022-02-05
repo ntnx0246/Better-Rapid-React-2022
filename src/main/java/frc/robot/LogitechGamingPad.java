@@ -34,8 +34,8 @@ public class LogitechGamingPad extends GenericHID {
   private static final int RIGHT_ANALOG_X_AXIS = 4;
   private static final int RIGHT_ANALOG_Y_AXIS = 5;
 	
-  private static final int LEFT_BUMPER = 9;
-  private static final int RIGHT_BUMPER = 10;
+  private static final int LEFT_BUMPER = 5;
+  private static final int RIGHT_BUMPER = 6;
   private static final int LEFT_TRIGGER_BUTTON = 2;
   private static final int RIGHT_TRIGGER_BUTTON = 3;
   private static final int A_BUTTON = 1;
