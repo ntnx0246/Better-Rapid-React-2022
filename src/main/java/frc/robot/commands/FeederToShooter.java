@@ -19,5 +19,7 @@ public class FeederToShooter extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new Shoot(shooter), new IntakeCargo(intake, false));
 
+    
+
   }
 }

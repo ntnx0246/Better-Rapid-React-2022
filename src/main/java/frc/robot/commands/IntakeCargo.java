@@ -21,6 +21,7 @@ public class IntakeCargo extends CommandBase {
     this.intake = intake;
     this.isIntaking = isIntaking;
     this.timer = new Timer(); 
+    // timer.delay(1.0);
   }
 
   // Called when the command is initially scheduled.

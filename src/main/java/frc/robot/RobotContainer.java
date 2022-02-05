@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.simulation.PS4ControllerSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.FeederToShooter;
 import frc.robot.commands.IntakeCargo;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
@@ -52,9 +53,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonX.whileHeld(new IntakeCargo(intake, false));
     rightBumper.whileHeld(new IntakeCargo(intake, true));
-    leftBumper.whileHeld(new Shoot(shooter));
+    leftBumper.whileHeld(new FeederToShooter(intake, shooter));
   }
 
   /**
