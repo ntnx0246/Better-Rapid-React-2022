@@ -20,6 +20,7 @@ public class Shoot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("shoot");
     shooter.setSpeed(Constants.SHOOTER_SPEED);
   }
 

@@ -3,6 +3,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
@@ -11,30 +12,41 @@ public class IntakeCargo extends CommandBase {
   /** Creates a new IntakeCargo. */
   private final Intake intake; 
   public boolean isIntaking;
+  public Timer timer;
+
 
   public IntakeCargo(Intake intake,boolean isIntaking) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
     this.intake = intake;
     this.isIntaking = isIntaking;
+    this.timer = new Timer(); 
   }
 
   // Called when the command is initially scheduled.
   @Override
   
   public void initialize() {
-    if (isIntaking){
+    timer.reset();
+
+    if (isIntaking == true) {
       intake.intakeTopMotor(Constants.INTAKE_SPEED);
       intake.intakeBottomMotor(Constants.INTAKE_SPEED);
     } else {
-      intake.intakeTopMotor(Constants.INTAKE_SPEED * -1);
-      intake.intakeBottomMotor(Constants.INTAKE_SPEED);
+      timer.start();
     }
+
   }
 
   // Called every time the scheduler runs while the command is scheduled
   @Override
-  public void execute() {}
+  public void execute() {
+    if (isIntaking == false && timer.get() > 1) {
+      intake.intakeTopMotor(Constants.INTAKE_SPEED*-1);
+      intake.intakeBottomMotor(Constants.INTAKE_SPEED);
+    }
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
