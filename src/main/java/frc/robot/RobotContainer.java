@@ -36,13 +36,8 @@ public class RobotContainer {
 
   private final Intake intake = new Intake();
   private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
-  private final JoystickButton rightBumper = new JoystickButton(drivePad, 10); 
-
-
-  private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
   private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
-  private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
-
+  private final JoystickButton rightBumper = new JoystickButton(drivePad, 10); 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
