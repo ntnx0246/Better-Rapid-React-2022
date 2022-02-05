@@ -11,8 +11,11 @@ import edu.wpi.first.wpilibj.simulation.PS4ControllerSim;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ClimbDown;
+import frc.robot.commands.ClimbUp;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCargo;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.Shoot;
@@ -33,15 +36,19 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
+  private final Climber climber = new Climber();
 
-  private final Intake intake = new Intake();
-  private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
-  private final JoystickButton rightBumper = new JoystickButton(drivePad, 10); 
+  // private final Intake intake = new Intake();
+  // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
+  // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10); 
+  // private final JoystickButton startButton = new JoystickButton(drivePad, 8); 
+  private final JoystickButton buttonY = new JoystickButton(drivePad, 4);
+  private final JoystickButton buttonA = new JoystickButton(drivePad, 1);
 
 
-  private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
-  private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
-  private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
+  // private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
+  // private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
+  // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -57,9 +64,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonX.whenPressed(new IntakeCargo(intake, false));
-    rightBumper.whileHeld(new IntakeCargo(intake, true));
-    leftBumper.whenPressed(new Shoot(shooter));
+    // buttonX.whenPressed(new IntakeCargo(intake, false));
+    // rightBumper.whileHeld(new IntakeCargo(intake, true));
+    // leftBumper.whenPressed(new Shoot(shooter));
+
+    buttonY.whileHeld(new ClimbUp(climber));
+    buttonA.whileHeld(new ClimbDown(climber));
+
+    
+
   }
 
   /**
