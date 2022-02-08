@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.simulation.PS4ControllerSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ArcadeDriveSlowMode;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.ExampleCommand;
@@ -47,6 +48,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
   private final Climber climber = new Climber();
+  private final DriveTrain driveTrain = new DriveTrain();
 
   // private final Intake intake = new Intake();
   // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
@@ -59,7 +61,6 @@ public class RobotContainer {
   // private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
   // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
 
-  private final DriveTrain driveTrain = new DriveTrain();
   private final JoystickButton buttonB = new JoystickButton(drivePad, 2);
 
   /**
@@ -89,7 +90,7 @@ public class RobotContainer {
     buttonA.whileHeld(new ClimbDown(climber));
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
-    // buttonB.whenPressed(new ArcadeDriveSlowMode(driveTrain, drivePad));
+    buttonB.whenPressed(new ArcadeDriveSlowMode(driveTrain, drivePad));
   }
 
   /**

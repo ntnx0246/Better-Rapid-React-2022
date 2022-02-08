@@ -27,7 +27,7 @@ public class ArcadeDriveSlowMode extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.arcadeDrive((drivePad.getRightAnalogX()*Constants.SLOW_MODE), (drivePad.getLeftAnalogY()*Constants.SLOW_MODE));
+    driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis()*Constants.SLOW_MODE), (drivePad.getLeftAnalogYAxis()*Constants.SLOW_MODE));
   }
 
   // Called once the command ends or is interrupted.
