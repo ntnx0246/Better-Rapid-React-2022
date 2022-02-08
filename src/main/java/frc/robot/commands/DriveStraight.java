@@ -11,7 +11,8 @@ import frc.robot.subsystems.DriveTrain;
 public class DriveStraight extends CommandBase {
   /** Creates a new DriveStraight. */
   private final DriveTrain driveTrain; 
-  private double goal; // put goal in as a constant 
+  private double goal; // put goal in as a constant
+  int count = 0; 
 
   public DriveStraight(DriveTrain driveTrain, double goal ) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -32,7 +33,15 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    double leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
+    double rightError = Math.abs(goal - driveTrain.getRightEncoderCount());
+
+    if((leftError <= Constants.kThreshold) && (rightError <= Constants.kThreshold)) {
+      count++;
+    }
+    else {
+      count = 0;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -45,9 +54,6 @@ public class DriveStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double left = driveTrain.getLeftEncoderCount();
-    double right = driveTrain.getRightEncoderCount();
-
-    return (left >= goal-1000) && (right >= goal-1000) && (right <= goal+1000) && (left <= goal+1000);
+    return count>=10;
   }
 }
