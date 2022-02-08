@@ -38,6 +38,11 @@ public class DriveTrain extends SubsystemBase {
     frontL.configPeakOutputReverse(-1);
     frontR.configPeakOutputForward(1);
     frontR.configPeakOutputReverse(-1);
+
+    frontL.configMotionCruiseVelocity(Constants.CRUISE_VELOCITY);
+    frontL.configMotionAcceleration(Constants.ACCELERATION);
+    frontR.configMotionCruiseVelocity(Constants.CRUISE_VELOCITY);
+    frontR.configMotionAcceleration(Constants.ACCELERATION);
   }
 
   public void arcadeDrive(double x, double y) {
@@ -76,6 +81,7 @@ public class DriveTrain extends SubsystemBase {
 
   public void setPosition(double pos) {
     frontL.set(ControlMode.MotionMagic, pos);
+    frontR.set(ControlMode.MotionMagic, pos);
   }
 
   public void setLeftPID(int slotID, double p, double i, double d){

@@ -14,7 +14,7 @@ public class DriveStraight extends CommandBase {
   private double goal; // put goal in as a constant
   int count = 0; 
 
-  public DriveStraight(DriveTrain driveTrain, double goal ) {
+  public DriveStraight(DriveTrain driveTrain, double goal) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
@@ -27,14 +27,14 @@ public class DriveStraight extends CommandBase {
     driveTrain.resetEncoders();
     driveTrain.setLeftPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD); //make into constants
     driveTrain.setRightPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD);
-    driveTrain.setPosition(goal);
+    driveTrain.setPosition(-goal);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
-    double rightError = Math.abs(goal - driveTrain.getRightEncoderCount());
+    double rightError = Math.abs(goal + driveTrain.getRightEncoderCount());
 
     if((leftError <= Constants.kThreshold) && (rightError <= Constants.kThreshold)) {
       count++;
@@ -49,11 +49,13 @@ public class DriveStraight extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveTrain.stop();
+    System.out.println("end");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return count>=10;
+    
   }
 }

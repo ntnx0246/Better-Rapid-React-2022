@@ -35,10 +35,12 @@ public final class Constants {
   public static final double REGULAR_MODE = 0.5;
 
   public static final int SLOT_ID = 0;
-  public static final double kP = 0;
+  public static final double kP = 0.1;
   public static final double kI = 0;
   public static final double kD = 0;
 
+  public static final int CRUISE_VELOCITY = 7000;
+  public static final int ACCELERATION = 3500;
   public static final int kThreshold = 1000;
 
   // might need to add a driveStraightP vs turnAngleP

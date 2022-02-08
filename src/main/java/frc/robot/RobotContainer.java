@@ -15,6 +15,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeDriveSlowMode;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
+import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCargo;
 import frc.robot.subsystems.Climber;
@@ -100,6 +101,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return new DriveStraight(driveTrain, 200000);
   }
 }
