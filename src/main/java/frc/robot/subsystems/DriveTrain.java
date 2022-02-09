@@ -69,6 +69,13 @@ public class DriveTrain extends SubsystemBase {
     return frontR.getSensorCollection().getIntegratedSensorPosition();
   }
 
+  private double getNativeUnitsFromInches (double inches) {
+    return inches*Constants.MOTOR_TO_WHEEL_REVOLUTION/(Math.PI*Constants.DRIVE_WHEEL_DIAMETER_INCHES)*Constants.SENSOR_UNITS_PER_ROTATION;
+  
+  private double getInchesFromNativeUnits (double native_units) {
+    return native_units/Constants.MOTOR_TO_WHEEL_REVOLUTION*(Math.PI/Constants.DRIVE_WHEEL_DIAMETER_INCHES)/Constants.SENSOR_UNITS_PER_ROTATION;
+  }
+
   public void resetEncoders() {
     frontL.getSensorCollection().setIntegratedSensorPosition(0, 0);
     frontR.getSensorCollection().setIntegratedSensorPosition(0, 0);

@@ -24,6 +24,10 @@ public final class Constants {
   public static final int SHOOTER_LEFT_ID = 6;
   public static final int SHOOTER_RIGHT_ID = 7;
 
+  public static final double MOTOR_TO_WHEEL_REVOLUTION = 10.71;
+  public static final int SENSOR_UNITS_PER_ROTATION = 2048;
+  public static final int DRIVE_WHEEL_DIAMETER_INCHES = 6;
+
   public static final int CLIMBER_LEFT_ID = 4;
   public static final int CLIMBER_RIGHT_ID = 5;
   public static final int FRONT_LEFT_ID = 3;
