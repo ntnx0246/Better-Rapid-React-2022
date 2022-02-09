@@ -91,7 +91,7 @@ public class RobotContainer {
     buttonA.whileHeld(new ClimbDown(climber));
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
-    buttonB.whenPressed(new ArcadeDriveSlowMode(driveTrain, drivePad));
+    buttonB.whenPressed(new ArcadeDrive(driveTrain, drivePad));
   }
 
   /**

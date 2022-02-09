@@ -36,10 +36,9 @@ public class DriveStraight extends CommandBase {
     double leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
     double rightError = Math.abs(goal + driveTrain.getRightEncoderCount());
 
-    if((leftError <= Constants.kThreshold) && (rightError <= Constants.kThreshold)) {
+    if((leftError <= Constants.ERROR_THRESHOLD) && (rightError <= Constants.ERROR_THRESHOLD)) {
       count++;
-    }
-    else {
+    } else {
       count = 0;
     }
   }

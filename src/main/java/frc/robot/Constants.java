@@ -41,7 +41,7 @@ public final class Constants {
 
   public static final int CRUISE_VELOCITY = 7000;
   public static final int ACCELERATION = 3500;
-  public static final int kThreshold = 1000;
+  public static final int ERROR_THRESHOLD = 1000;
 
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
