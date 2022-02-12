@@ -45,8 +45,9 @@ public class IntakeCargo extends CommandBase {
     if (isIntaking == false && timer.get() > 1) {
       intake.intakeTopMotor(Constants.INTAKE_SPEED*-1);
       intake.intakeBottomMotor(Constants.INTAKE_SPEED);
+      System.out.println("intake execute if");
     }
-
+    
   }
 
   // Called once the command ends or is interrupted.
