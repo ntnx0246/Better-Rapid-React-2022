@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
-
+  private boolean slowModeOn;
   private TalonFX frontR;
   private TalonFX frontL;
   private TalonFX backR;
@@ -26,7 +26,8 @@ public class DriveTrain extends SubsystemBase {
     frontL = new TalonFX(Constants.FRONT_LEFT_ID);
     backR = new TalonFX(Constants.BACK_RIGHT_ID);
     backL = new TalonFX(Constants.BACK_LEFT_ID);
-    
+    slowModeOn = false;
+
     backL.follow(frontL);
     backR.follow(frontR);
     frontL.setInverted(true);
@@ -50,6 +51,13 @@ public class DriveTrain extends SubsystemBase {
     frontR.set(ControlMode.PercentOutput, y+x);
   }
 
+  public boolean getSlowMode(){
+    return slowModeOn;
+  }
+
+  public void setSlowMode(boolean slowMode){
+    slowModeOn = slowMode;
+  }
   //for testing purposes
   public void tankDrive(double left, double right) {
     frontL.set(ControlMode.PercentOutput, left);

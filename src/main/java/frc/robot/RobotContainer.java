@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.simulation.PS4ControllerSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.ArcadeDriveSlowMode;
+import frc.robot.commands.ChangeDriveMode;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveStraight;
@@ -91,7 +91,7 @@ public class RobotContainer {
     buttonA.whileHeld(new ClimbDown(climber));
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
-    buttonB.whenPressed(new ArcadeDriveSlowMode(driveTrain, drivePad));
+    buttonB.whenPressed(new ChangeDriveMode(driveTrain));
   }
 
   /**

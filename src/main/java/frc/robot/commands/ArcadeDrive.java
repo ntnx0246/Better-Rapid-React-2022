@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.LogitechGamingPad;
@@ -24,12 +25,21 @@ public class ArcadeDrive extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis()*Constants.REGULAR_MODE), (drivePad.getLeftAnalogYAxis()*Constants.REGULAR_MODE));
+    if (driveTrain.getSlowMode()) {
+      driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis()*Constants.SLOW_MODE), (drivePad.getLeftAnalogYAxis()*Constants.SLOW_MODE));
+      SmartDashboard.putBoolean("Slow Mode: ", true);
+    } else {
+      driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis()*Constants.REGULAR_MODE), (drivePad.getLeftAnalogYAxis()*Constants.REGULAR_MODE));
+      SmartDashboard.putBoolean("Slow Mode: ", false);
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
