@@ -24,11 +24,24 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     left = new CANSparkMax(Constants.SHOOTER_LEFT_ID, MotorType.kBrushless);
     right = new CANSparkMax(Constants.SHOOTER_RIGHT_ID, MotorType.kBrushless);
+   
     leftPIDController = left.getPIDController();
     rightPIDController = right.getPIDController();
+   
     right.setInverted(true);
+
     leftEncoder = left.getEncoder();
     rightEncoder = right.getEncoder();
+
+    leftPIDController.setP(Constants.SHOOTER_P);
+    leftPIDController.setI(Constants.SHOOTER_I);
+    leftPIDController.setD(Constants.SHOOTER_D);
+    leftPIDController.setFF(Constants.SHOOTER_F);
+
+    rightPIDController.setP(Constants.SHOOTER_P);
+    rightPIDController.setI(Constants.SHOOTER_I);
+    rightPIDController.setD(Constants.SHOOTER_D);
+    rightPIDController.setFF(Constants.SHOOTER_F);
   }
 
   public void setSpeed(double speed) {
