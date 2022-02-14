@@ -21,7 +21,9 @@ import frc.robot.commands.IntakeCargo;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.NavX;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -50,6 +52,7 @@ public class RobotContainer {
   private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
   private final Climber climber = new Climber();
   private final DriveTrain driveTrain = new DriveTrain();
+  private final NavX navX = new NavX();
 
   // private final Intake intake = new Intake();
   // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
@@ -102,5 +105,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return new DriveStraight(driveTrain, 200000);
+    //return new TurnToAngle(driveTrain, navX, 90);
   }
 }
