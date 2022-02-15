@@ -30,7 +30,7 @@ public final class Constants {
 
   public static final int CLIMBER_LEFT_ID = 4;
   public static final int CLIMBER_RIGHT_ID = 5;
-  
+
   public static final int FRONT_LEFT_ID = 3;
   public static final int FRONT_RIGHT_ID = 1;
   public static final int BACK_LEFT_ID = 2;
@@ -43,13 +43,13 @@ public final class Constants {
   public static final double REGULAR_MODE = 0.5;
 
   public static final int SLOT_ID = 0;
-  public static final double kP = 0.1;
+  public static final double kP = 0.15;
   public static final double kI = 0;
   public static final double kD = 0;
 
-  public static final int CRUISE_VELOCITY = 7000;
+  public static final int CRUISE_VELOCITY = 7000; //max is around 21500
   public static final int ACCELERATION = 3500;
-  public static final int ERROR_THRESHOLD = 1000;
+  public static final int ERROR_THRESHOLD = 500;
 
   public static final double ERROR_ANGLE_TOLERANCE = 5;
 

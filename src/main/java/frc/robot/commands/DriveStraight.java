@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
@@ -18,7 +19,7 @@ public class DriveStraight extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
-    this.goal = goal; 
+    this.goal = driveTrain.getNativeUnitsFromInches(-goal); 
   }
 
   // Called when the command is initially scheduled.
@@ -27,22 +28,16 @@ public class DriveStraight extends CommandBase {
     driveTrain.resetEncoders();
     driveTrain.setLeftPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD); //make into constants
     driveTrain.setRightPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD);
-    driveTrain.setPosition(-goal);
+    driveTrain.setPosition(goal);
+    Timer.delay(.1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftError;
-    double rightError;
-    if (goal > 0) {
-      leftError = Math.abs(goal + driveTrain.getLeftEncoderCount());
-      rightError = Math.abs(goal - driveTrain.getRightEncoderCount());
-    }
-    else {
-      leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
-      rightError = Math.abs(goal + driveTrain.getRightEncoderCount());
-    }
+    double leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
+    double rightError = Math.abs(goal + driveTrain.getRightEncoderCount());
+    
 
     if((leftError <= Constants.ERROR_THRESHOLD) && (rightError <= Constants.ERROR_THRESHOLD)) {
       count++;
@@ -57,6 +52,7 @@ public class DriveStraight extends CommandBase {
   public void end(boolean interrupted) {
     driveTrain.stop();
     driveTrain.printEncoders();
+    driveTrain.printInches();
     System.out.println("end");
   }
 

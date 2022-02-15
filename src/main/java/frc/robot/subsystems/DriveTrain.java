@@ -77,12 +77,12 @@ public class DriveTrain extends SubsystemBase {
     return frontR.getSensorCollection().getIntegratedSensorPosition();
   }
 
-  private double getNativeUnitsFromInches(double inches) {
+  public double getNativeUnitsFromInches(double inches) {
     return inches*Constants.MOTOR_TO_WHEEL_REVOLUTION/(Math.PI*Constants.DRIVE_WHEEL_DIAMETER_INCHES)*Constants.SENSOR_UNITS_PER_ROTATION;
   }
   
-  private double getInchesFromNativeUnits(double native_units) {
-    return native_units/Constants.MOTOR_TO_WHEEL_REVOLUTION*(Math.PI/Constants.DRIVE_WHEEL_DIAMETER_INCHES)/Constants.SENSOR_UNITS_PER_ROTATION;
+  public double getInchesFromNativeUnits(double native_units) {
+    return native_units/Constants.MOTOR_TO_WHEEL_REVOLUTION*(Math.PI*Constants.DRIVE_WHEEL_DIAMETER_INCHES)/Constants.SENSOR_UNITS_PER_ROTATION;
   }
 
   public void resetEncoders() {
@@ -93,6 +93,11 @@ public class DriveTrain extends SubsystemBase {
   public void printEncoders() {
     System.out.println("Left: " + getLeftEncoderCount());
     System.out.println("Right: " + getRightEncoderCount());
+  }
+
+  public void printInches() {
+    System.out.println("Left Inches: " + getInchesFromNativeUnits(getLeftEncoderCount()));
+    System.out.println("Right Inches: " + getInchesFromNativeUnits(getRightEncoderCount()));
   }
 
   @Override

@@ -104,7 +104,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new DriveStraight(driveTrain, 140000);
+    return new DriveStraight(driveTrain, 60); //in inches
     //return new TurnToAngle(driveTrain, navX, 90);
   }
 }
