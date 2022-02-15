@@ -33,8 +33,16 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
-    double rightError = Math.abs(goal + driveTrain.getRightEncoderCount());
+    double leftError;
+    double rightError;
+    if (goal > 0) {
+      leftError = Math.abs(goal + driveTrain.getLeftEncoderCount());
+      rightError = Math.abs(goal - driveTrain.getRightEncoderCount());
+    }
+    else {
+      leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
+      rightError = Math.abs(goal + driveTrain.getRightEncoderCount());
+    }
 
     if((leftError <= Constants.ERROR_THRESHOLD) && (rightError <= Constants.ERROR_THRESHOLD)) {
       count++;
@@ -48,6 +56,7 @@ public class DriveStraight extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveTrain.stop();
+    driveTrain.printEncoders();
     System.out.println("end");
   }
 
