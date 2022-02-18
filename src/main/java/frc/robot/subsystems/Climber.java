@@ -32,6 +32,14 @@ public class Climber extends SubsystemBase {
     rightMotor.set(ControlMode.PercentOutput, speed);
   }
 
+  public void climbLeft(double speed){
+    leftMotor.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void climbRight(double speed){
+    rightMotor.set(ControlMode.PercentOutput, speed);
+  }
+
   public void setPosition(double encoder){
     leftMotor.set(ControlMode.Position, encoder);
     rightMotor.set(ControlMode.Position, encoder);
@@ -45,6 +53,15 @@ public class Climber extends SubsystemBase {
   public void stop(){
     leftMotor.set(ControlMode.PercentOutput, 0.0);
     rightMotor.set(ControlMode.PercentOutput, 0.0);
+  }
+
+  // check for stall of the motors
+  public double getVelocityLeft(){
+    return leftMotor.getSelectedSensorVelocity();
+  }
+
+  public double getVelocityRight(){
+    return rightMotor.getSelectedSensorVelocity();
   }
 
   @Override

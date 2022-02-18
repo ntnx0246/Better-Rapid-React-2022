@@ -53,6 +53,8 @@ public final class Constants {
 
   public static final double ERROR_ANGLE_TOLERANCE = 5;
 
+  public static final double CALIBRATION_SPEED = -0.1;
+
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
 

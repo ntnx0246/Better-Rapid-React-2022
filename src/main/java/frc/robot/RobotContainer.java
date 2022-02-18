@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.simulation.PS4ControllerSim;
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
@@ -54,6 +55,11 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
   private final NavX navX = new NavX();
 
+
+  public SendableChooser<String> chooser;
+  private final String test = "test";
+  private final String competition = "competition";
+
   // private final Intake intake = new Intake();
   // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
   // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
@@ -75,6 +81,14 @@ public class RobotContainer {
 
     driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, drivePad));
     configureButtonBindings();
+    //SmartDashboard.putData("idk", new ChangeDriveMode(driveTrain));
+
+
+    chooser = new SendableChooser<String>();
+    chooser.setDefaultOption("Test", test);
+    chooser.addOption("Competition", competition);
+
+    SmartDashboard.putData("Climber Speed", chooser);
   }
 
   /**
@@ -104,6 +118,9 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
+    if(chooser.getSelected().equals(test)){
+      
+    }
     return new DriveStraight(driveTrain, 60); //in inches
     //return new TurnToAngle(driveTrain, navX, 90);
   }
