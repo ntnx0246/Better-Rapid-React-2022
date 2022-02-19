@@ -54,6 +54,14 @@ public final class Constants {
   public static final double ERROR_ANGLE_TOLERANCE = 5;
   public static final double AUTO_CLIMB_TOLERANCE = 50;
 
+  public static final double CALIBRATION_SPEED = -0.1;
+
+  public static final double CLIMBER_P = 0;
+  public static final double CLIMBER_I = 0;
+  public static final double CLIMBER_D = 0;
+  public static final double CLIMBER_F = 0;
+  public static final int CLIMBER_SLOT_ID = 0;
+
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
 
