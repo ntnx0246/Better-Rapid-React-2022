@@ -18,7 +18,7 @@ public class AutoClimb extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climber);
     this.climber = climber;
-    this.goal= goal;
+    this.goal = goal;
     count = 0;
   }
 
@@ -28,7 +28,7 @@ public class AutoClimb extends CommandBase {
     climber.resetEncoders();
     climber.setPosition(goal);
     // check encoder for each side
-    //get current 
+    // get current
     // when current stall the velocity goes down and current goes up
   }
 
@@ -38,8 +38,7 @@ public class AutoClimb extends CommandBase {
     double error = Math.abs(goal - climber.getLeftEncoderCount());
     if (error <= Constants.AUTO_CLIMB_TOLERANCE) {
       count++;
-    }
-    else {
+    } else {
       count = 0;
     }
   }
@@ -53,7 +52,7 @@ public class AutoClimb extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //return false;
+    // return false;
     return count >= 10;
   }
 }

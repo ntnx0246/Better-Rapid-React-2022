@@ -24,10 +24,10 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     left = new CANSparkMax(Constants.SHOOTER_LEFT_ID, MotorType.kBrushless);
     right = new CANSparkMax(Constants.SHOOTER_RIGHT_ID, MotorType.kBrushless);
-   
+
     leftPIDController = left.getPIDController();
     rightPIDController = right.getPIDController();
-   
+
     right.setInverted(true);
 
     leftEncoder = left.getEncoder();
@@ -48,23 +48,24 @@ public class Shooter extends SubsystemBase {
     left.set(speed);
     right.set(speed);
   }
-  
-   //set velocity
-   public void setVelocity(double velocity){
+
+  // set velocity
+  public void setVelocity(double velocity) {
     leftPIDController.setReference(velocity, CANSparkMax.ControlType.kVelocity);
     rightPIDController.setReference(velocity, CANSparkMax.ControlType.kVelocity);
   }
 
-  //get velocity
-  public double getLeftVelocity(){
+  // get velocity
+  public double getLeftVelocity() {
     return leftEncoder.getVelocity();
   }
 
-  public double getRightVelocity(){
+  public double getRightVelocity() {
     return rightEncoder.getVelocity();
   }
 
-  //one starts shooter motor, second one that pushes game piece into the shooter, turns of a few seconds after both are shooted.
+  // one starts shooter motor, second one that pushes game piece into the shooter,
+  // turns of a few seconds after both are shooted.
   public void stop() {
     left.stopMotor();
     right.stopMotor();
