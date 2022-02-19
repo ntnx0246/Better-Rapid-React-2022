@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.simulation.PS4ControllerSim;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.CargoManipulation;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.FeederToShooter;
 import frc.robot.commands.IntakeCargo;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
@@ -36,8 +38,8 @@ public class RobotContainer {
 
   private final Intake intake = new Intake();
   private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
-  private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
-  private final JoystickButton rightBumper = new JoystickButton(drivePad, 10); 
+  private final JoystickButton leftBumper = new JoystickButton(drivePad, 5);
+  private final JoystickButton rightBumper = new JoystickButton(drivePad, 6); 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -52,9 +54,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonX.whenPressed(new IntakeCargo(intake, false));
     rightBumper.whileHeld(new IntakeCargo(intake, true));
-    leftBumper.whenPressed(new Shoot(shooter));
+    //leftBumper.whileHeld(new FeederToShooter(intake, shooter));
+     leftBumper.whileHeld(new CargoManipulation(intake, shooter, false));
   }
 
   /**

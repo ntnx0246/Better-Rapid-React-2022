@@ -5,6 +5,8 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,18 +16,55 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
   private CANSparkMax left;
   private CANSparkMax right;
+  private SparkMaxPIDController leftPIDController;
+  private SparkMaxPIDController rightPIDController;
+  private RelativeEncoder leftEncoder;
+  private RelativeEncoder rightEncoder;
 
   public Shooter() {
     left = new CANSparkMax(Constants.SHOOTER_LEFT_ID, MotorType.kBrushless);
     right = new CANSparkMax(Constants.SHOOTER_RIGHT_ID, MotorType.kBrushless);
+   
+    leftPIDController = left.getPIDController();
+    rightPIDController = right.getPIDController();
+   
     right.setInverted(true);
+
+    leftEncoder = left.getEncoder();
+    rightEncoder = right.getEncoder();
+
+    leftPIDController.setP(Constants.SHOOTER_P);
+    leftPIDController.setI(Constants.SHOOTER_I);
+    leftPIDController.setD(Constants.SHOOTER_D);
+    leftPIDController.setFF(Constants.SHOOTER_F);
+
+    rightPIDController.setP(Constants.SHOOTER_P);
+    rightPIDController.setI(Constants.SHOOTER_I);
+    rightPIDController.setD(Constants.SHOOTER_D);
+    rightPIDController.setFF(Constants.SHOOTER_F);
   }
 
   public void setSpeed(double speed) {
     left.set(speed);
     right.set(speed);
   }
-//one starts shooter motor, second one that pushes game piece into the shooter, turns of a few seconds after both are shooted.
+  
+   //set velocity
+   public void setVelocity(double velocity){
+    leftPIDController.setReference(velocity, CANSparkMax.ControlType.kVelocity);
+    rightPIDController.setReference(velocity, CANSparkMax.ControlType.kVelocity);
+  }
+
+  //get velocity
+  public double getLeftVelocity(){
+    return leftEncoder.getVelocity();
+  }
+
+  public double getRightVelocity(){
+    return rightEncoder.getVelocity();
+  }
+
+  //one starts shooter motor, second one that pushes game piece into the shooter, turns of a few seconds after both are shooted.
   public void stop() {
     left.stopMotor();
     right.stopMotor();
@@ -34,5 +73,7 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    System.out.println("Left: " + getLeftVelocity());
+    System.out.println("Right: " + getRightVelocity());
   }
 }
