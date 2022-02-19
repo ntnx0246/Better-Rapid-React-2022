@@ -31,8 +31,8 @@ public class IntakeCargo extends CommandBase {
     timer.reset();
 
     if (isIntaking == true) {
-      intake.intakeTopMotor(Constants.INTAKE_tSPEED);
-      intake.intakeBottomMotor(Constants.INTAKE_bSPEED);
+      intake.intakeTopMotor(Constants.INTAKE_TOP_SPEED);
+      intake.intakeBottomMotor(Constants.INTAKE_BOTTOM_SPEED);
     } else {
       timer.start();
     }
