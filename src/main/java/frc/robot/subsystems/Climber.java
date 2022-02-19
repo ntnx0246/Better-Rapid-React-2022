@@ -17,7 +17,7 @@ public class Climber extends SubsystemBase {
   public TalonFX rightMotor; 
 
   /** Creates a new Climber. */
-  public Climber() {
+  public Climber() {;
     leftMotor = new TalonFX(Constants.CLIMBER_LEFT_ID);
     rightMotor = new TalonFX(Constants.CLIMBER_RIGHT_ID);
 
@@ -25,6 +25,15 @@ public class Climber extends SubsystemBase {
 
     leftMotor.setNeutralMode(NeutralMode.Brake);
     rightMotor.setNeutralMode(NeutralMode.Brake);
+    
+    leftMotor.config_kP(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_P);
+    leftMotor.config_kI(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_I);
+    leftMotor.config_kD(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_D);
+    leftMotor.config_kF(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_F);
+    rightMotor.config_kP(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_P);
+    rightMotor.config_kI(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_I);
+    rightMotor.config_kD(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_D);
+    rightMotor.config_kF(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_F);
   }
 
   public void climb(double speed){
