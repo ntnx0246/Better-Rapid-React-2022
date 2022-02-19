@@ -47,7 +47,7 @@ public final class Constants {
   public static final int BACK_LEFT_ID = 2;
   public static final int BACK_RIGHT_ID = 0;
 
-  public static final double CLIMBER_UP_SPEED = 0.1;
+  public static final double CLIMBER_UP_SPEED = 0.3;
   public static final double CLIMBER_DOWN_SPEED = -0.5;
 
   public static final double SLOW_MODE = 0.1;
