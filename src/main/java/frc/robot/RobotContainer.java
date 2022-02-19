@@ -47,25 +47,28 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final Shooter shooter = new Shooter();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+
   private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
-  private final Climber climber = new Climber();
+  private final LogitechGamingPad opPad = new LogitechGamingPad(1);
+
   private final DriveTrain driveTrain = new DriveTrain();
+  private final Shooter shooter = new Shooter();
+  private final Climber climber = new Climber();
   private final NavX navX = new NavX();
 
   // private final Intake intake = new Intake();
   // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
   // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
   // private final JoystickButton startButton = new JoystickButton(drivePad, 8);
-  private final JoystickButton buttonY = new JoystickButton(drivePad, 4);
-  private final JoystickButton buttonA = new JoystickButton(drivePad, 1);
+  private final JoystickButton opY = new JoystickButton(opPad, 4);
+  private final JoystickButton opA = new JoystickButton(opPad, 1);
 
   // private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
   // private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
   // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
 
-  private final JoystickButton buttonB = new JoystickButton(drivePad, 2);
+  private final JoystickButton driveB = new JoystickButton(drivePad, 2);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -90,12 +93,14 @@ public class RobotContainer {
     // rightBumper.whileHeld(new IntakeCargo(intake, true));
     // leftBumper.whenPressed(new Shoot(shooter));
 
-    buttonY.whileHeld(new ClimbUp(climber));
-    buttonA.whileHeld(new ClimbDown(climber));
+    opY.whileHeld(new ClimbUp(climber));
+    opA.whileHeld(new ClimbDown(climber));
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
-    buttonB.whenPressed(new ChangeDriveMode(driveTrain));
+    driveB.whenPressed(new ChangeDriveMode(driveTrain));
   }
+
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
