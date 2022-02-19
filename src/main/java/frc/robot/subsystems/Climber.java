@@ -50,6 +50,19 @@ public class Climber extends SubsystemBase {
     rightMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
   }
 
+  public double getLeftEncoderCount() {
+    return leftMotor.getSensorCollection().getIntegratedSensorPosition();
+  }
+
+  public double getRightEncoderCount() {
+    return rightMotor.getSensorCollection().getIntegratedSensorPosition();
+  }
+
+  public void printEncoders() {
+    System.out.println("Left: " + getLeftEncoderCount());
+    System.out.println("Right: " + getRightEncoderCount());
+  }
+  
   public void stop(){
     leftMotor.set(ControlMode.PercentOutput, 0.0);
     rightMotor.set(ControlMode.PercentOutput, 0.0);
