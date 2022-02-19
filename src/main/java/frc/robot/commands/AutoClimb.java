@@ -6,50 +6,53 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Climber;
 
-public class Shoot extends CommandBase {
-  /** Creates a new Shoot. */
-  private final Shooter shooter;
+public class AutoClimb extends CommandBase {
+  /** Creates a new AutoClimb. */
+  private Climber climber;
+  private double goal;
+  private int count;
 
-  public Shoot(Shooter shooter) {
+  public AutoClimb(Climber climber, double goal) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
-    this.shooter = shooter;
+    addRequirements(climber);
+    this.climber = climber;
+    this.goal = goal;
+    count = 0;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("shoot");
-    shooter.setSpeed(Constants.SHOOTER_SPEED);
-    //shooter.setVelocity(Constants.SHOOTER_VELOCITY);
-    
+    climber.resetEncoders();
+    climber.setPosition(goal);
+    // check encoder for each side
+    // get current
+    // when current stall the velocity goes down and current goes up
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*
-    if (checks if error < tolerance){
-      count ++
+    double error = Math.abs(goal - climber.getLeftEncoderCount());
+    if (error <= Constants.AUTO_CLIMB_TOLERANCE) {
+      count++;
+    } else {
+      count = 0;
     }
-
-    somewhere- check if count>10
-
-    intake.IntakeCargo(intake, false)
-    */
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.stop();
+    climber.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    // return false;
+    return count >= 10;
   }
 }

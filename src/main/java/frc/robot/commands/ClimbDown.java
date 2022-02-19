@@ -4,47 +4,39 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Climber;
 
-public class Shoot extends CommandBase {
-  /** Creates a new Shoot. */
-  private final Shooter shooter;
-
-  public Shoot(Shooter shooter) {
+public class ClimbDown extends CommandBase {
+  /** Creates a new ClimbDown. */
+  
+  private final Climber climber;
+  
+  public ClimbDown(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
-    this.shooter = shooter;
+    addRequirements(climber); 
+    this.climber = climber;  
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("shoot");
-    shooter.setSpeed(Constants.SHOOTER_SPEED);
-    //shooter.setVelocity(Constants.SHOOTER_VELOCITY);
+    climber.climb(Constants.CLIMBER_DOWN_SPEED);
+    SmartDashboard.putNumber("climber Speed", 10);
     
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    /*
-    if (checks if error < tolerance){
-      count ++
-    }
-
-    somewhere- check if count>10
-
-    intake.IntakeCargo(intake, false)
-    */
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.stop();
+    climber.stop();
   }
 
   // Returns true when the command should end.

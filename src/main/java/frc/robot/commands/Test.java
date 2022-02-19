@@ -4,52 +4,52 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.DriveTrain;
 
-public class Shoot extends CommandBase {
-  /** Creates a new Shoot. */
-  private final Shooter shooter;
-
-  public Shoot(Shooter shooter) {
+public class Test extends CommandBase {
+  /** Creates a new Test. */
+  //Timer timer;
+  DriveTrain driveTrain;
+  double goal;
+  double error;
+  public Test(DriveTrain driveTrain) {
+    addRequirements(driveTrain);
+    this.driveTrain = driveTrain;
+    goal = 95000;
+    //timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
-    this.shooter = shooter;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("shoot");
-    shooter.setSpeed(Constants.SHOOTER_SPEED);
-    //shooter.setVelocity(Constants.SHOOTER_VELOCITY);
-    
+    //timer.reset();
+    driveTrain.resetEncoders();
+    //timer.start();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*
-    if (checks if error < tolerance){
-      count ++
-    }
-
-    somewhere- check if count>10
-
-    intake.IntakeCargo(intake, false)
-    */
+    error = goal-driveTrain.getLeftEncoderCount();
+    driveTrain.arcadeDrive(0, (-error/goal)*.4);
+    System.out.println(driveTrain.getLeftEncoderCount());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.stop();
+    driveTrain.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    //return timer.get() > 1;
     return false;
+    //return driveTrain.getLeftEncoderCount() > goal;
   }
 }
