@@ -59,12 +59,20 @@ public class Climber extends SubsystemBase {
     rightMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
   }
 
-  public double getLeftEncoderCount() {
+  public double getLeftEncoderCount(){
     return leftMotor.getSensorCollection().getIntegratedSensorPosition();
   }
 
-  public double getRightEncoderCount() {
+  public double getRightEncoderCount(){
     return rightMotor.getSensorCollection().getIntegratedSensorPosition();
+  }
+
+  public double getCurrentLeft(){
+    return leftMotor.getStatorCurrent();
+  }
+
+  public double getCurrentRight(){
+    return rightMotor.getStatorCurrent();
   }
 
   public void printEncoders() {
