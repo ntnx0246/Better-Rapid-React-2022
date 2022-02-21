@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.CargoManipulation;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.Calibration;
 import frc.robot.commands.ChangeDriveMode;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
@@ -62,12 +63,14 @@ public class RobotContainer {
   // private final JoystickButton startButton = new JoystickButton(drivePad, 8);
   private final JoystickButton opY = new JoystickButton(opPad, 4);
   private final JoystickButton opA = new JoystickButton(opPad, 1);
+  
 
   // private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
   // private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
   // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
 
   private final JoystickButton driveB = new JoystickButton(drivePad, 2);
+  private final JoystickButton driveA = new JoystickButton(drivePad, 1);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -102,11 +105,14 @@ public class RobotContainer {
     // rightBumper.whileHeld(new IntakeCargo(intake, true));
     // leftBumper.whenPressed(new Shoot(shooter));
 
-    opY.whileHeld(new ClimbUp(climber));
-    opA.whileHeld(new ClimbDown(climber));
+    //driveA.whileHeld(new ClimbUp(climber)); //opY
+    opA.whileHeld(new ClimbDown(climber)); //opA
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
-    driveB.whenPressed(new ChangeDriveMode(driveTrain));
+    //driveB.whenPressed(new ChangeDriveMode(driveTrain));
+    driveB.whileHeld(new ClimbUp(climber));
+    //driveA.whenPressed(new Calibration(climber));
+    driveA.whileHeld(new ClimbDown(climber));
   }
 
   /**
@@ -121,5 +127,9 @@ public class RobotContainer {
     // }
     return new DriveStraight(driveTrain, 60); // in inches
     // return new TurnToAngle(driveTrain, navX, 90);
+  }
+
+  public Command calibrationClimber() {
+    return new Calibration(climber);
   }
 }

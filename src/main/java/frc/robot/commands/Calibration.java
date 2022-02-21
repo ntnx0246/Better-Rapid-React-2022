@@ -35,12 +35,13 @@ public class Calibration extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.print("executing stuff");
     if(timer.get()>0.1){
-      if(climber.getVelocityLeft()<=0){
+      if(climber.getCurrentLeft()>=28.5){
         leftDone = true;
         climber.climbLeft(0);
       }
-      if(climber.getVelocityRight()<=0){
+      if(climber.getCurrentRight()>=28.5){
         rightDone = true;
         climber.climbRight(0);
       }
@@ -58,8 +59,8 @@ public class Calibration extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-  //  return rightDone && leftDone;
-    return false;
+    return rightDone && leftDone;
+    //return false;
   }
 
 

@@ -94,9 +94,13 @@ public class Climber extends SubsystemBase {
   public double getVelocityRight() {
     return rightMotor.getSelectedSensorVelocity();
   }
+  // limit the encoder for climber when going up, don't let the numbers get to high
+  //right has to get to 210000 (currently - L: -202964 R: 204334)
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    //System.out.println(rightMotor.getStatorCurrent());
+    printEncoders();
   }
 }

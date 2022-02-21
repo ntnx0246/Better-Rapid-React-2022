@@ -21,7 +21,7 @@ public final class Constants {
   public static final int INTAKE_TOP_SPARK = 8;
   public static final int INTAKE_BOTTOM_SPARK = 9;
   public static final double INTAKE_SPEED = 0.4;
-  public static final double INTAKE_TOP_SPEED = 1;
+  public static final double INTAKE_TOP_SPEED = 0.6;
   public static final double INTAKE_BOTTOM_SPEED = 0.25;
 
   public static final int SHOOTER_LEFT_ID = 6;
@@ -48,10 +48,10 @@ public final class Constants {
   public static final int BACK_RIGHT_ID = 0;
 
   public static final double CLIMBER_UP_SPEED = 0.3;
-  public static final double CLIMBER_DOWN_SPEED = -0.5;
+  public static final double CLIMBER_DOWN_SPEED = -0.3;
 
   public static final double SLOW_MODE = 0.1;
-  public static final double REGULAR_MODE = 0.5;
+  public static final double REGULAR_MODE = 0.4;
 
   //drivetrain PID
   public static final int SLOT_ID = 0;
