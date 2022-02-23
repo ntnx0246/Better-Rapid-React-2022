@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
@@ -13,20 +14,27 @@ public class CargoManipulation extends CommandBase {
   private final Intake intake; 
   private Shooter shooter;
   public boolean isIntaking;
+  public boolean isAuto;
+  private Timer timer;
 
 
-  public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking) {
+  public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake, shooter);
     this.intake = intake;
     this.shooter = shooter;
     this.isIntaking = isIntaking;
+    timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   
   public void initialize() {
+    if (isAuto) {
+      timer.reset();
+      timer.start();
+    }
 
     if (isIntaking == true) {
       intake.intakeTopMotor(Constants.INTAKE_TOP_SPEED);
@@ -34,7 +42,6 @@ public class CargoManipulation extends CommandBase {
     } else {
       shooter.setVelocity(Constants.SHOOTER_VELOCITY);
     }
-
   }
 
   // Called every time the scheduler runs while the command is scheduled
@@ -58,6 +65,10 @@ public class CargoManipulation extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (isAuto && timer.get() > 5) {
+      timer.stop();
+      return true; 
+    }
     return false;
   }
 }

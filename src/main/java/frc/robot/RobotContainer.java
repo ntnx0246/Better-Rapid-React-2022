@@ -19,6 +19,7 @@ import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCargo;
+import frc.robot.commands.OneBallAuto;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -72,6 +73,8 @@ public class RobotContainer {
   private final JoystickButton driveB = new JoystickButton(drivePad, 2);
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
 
+  private final OneBallAuto oneBallAuto = new OneBallAuto(intake, shooter, driveTrain);
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -100,7 +103,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     rightBumper.whileHeld(new IntakeCargo(intake, true));
     // leftBumper.whileHeld(new FeederToShooter(intake, shooter));
-    leftBumper.whileHeld(new CargoManipulation(intake, shooter, false));
+    leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
     // buttonX.whenPressed(new IntakeCargo(intake, false));
     // rightBumper.whileHeld(new IntakeCargo(intake, true));
     // leftBumper.whenPressed(new Shoot(shooter));
@@ -122,11 +125,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    // if (chooser.getSelected().equals(test)) {
-
-    // }
-    return new DriveStraight(driveTrain, 60); // in inches
-    // return new TurnToAngle(driveTrain, navX, 90);
+    return oneBallAuto;
   }
 
   public Command calibrationClimber() {

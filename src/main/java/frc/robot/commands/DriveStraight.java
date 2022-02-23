@@ -22,7 +22,10 @@ public class DriveStraight extends CommandBase {
     this.goal = driveTrain.getNativeUnitsFromInches(-goal); 
   }
 
-  // Called when the command is initially scheduled.
+  public DriveStraight(int i, String string, double d) {
+}
+
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {
     driveTrain.resetEncoders();

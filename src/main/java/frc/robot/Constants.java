@@ -58,6 +58,8 @@ public final class Constants {
   public static final double kP = 0.15;
   public static final double kI = 0;
   public static final double kD = 0;
+  
+  public static final double ONEBALLAUTO_GOAL = -120;
 
   public static final int CRUISE_VELOCITY = 7000; //max is around 21500
   public static final int ACCELERATION = 3500;
