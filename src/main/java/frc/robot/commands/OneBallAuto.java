@@ -24,6 +24,9 @@ public class OneBallAuto extends SequentialCommandGroup {
   public OneBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    this.intake = intake;
+    this.shooter = shooter;
+    this.driveTrain = driveTrain;
     addCommands(new CargoManipulation(intake, shooter, false, true), new DriveStraight(driveTrain, Constants.ONEBALLAUTO_GOAL));
   }
 }
