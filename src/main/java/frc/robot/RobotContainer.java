@@ -129,7 +129,7 @@ public class RobotContainer {
     // return new TurnToAngle(driveTrain, navX, 90);
   }
 
-  public Command calibrationClimber() {
+  public Command getTestCommand() {
     return new Calibration(climber);
   }
 }

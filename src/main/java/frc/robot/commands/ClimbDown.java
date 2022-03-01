@@ -27,6 +27,7 @@ public class ClimbDown extends CommandBase {
   public void initialize() {
     climber.climb(Constants.CLIMBER_DOWN_SPEED);
     SmartDashboard.putNumber("climber Speed", 10);
+
     if (climber.getRightEncoderCount() > 50000) {
       goal = 25000;
       
@@ -34,17 +35,19 @@ public class ClimbDown extends CommandBase {
     else {
       goal = 1000; 
     }
+    climber.setPosition(goal);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (climber.getRightEncoderCount() < goal) {
-      climber.stop();
-    }
-    else {
-      climber.printEncoders();
-    }
+    // if (climber.getRightEncoderCount() < goal) {
+    //   climber.stop();
+    // }
+    // else {
+    //   climber.printEncoders();
+    // }
+    
   }
 
   // Called once the command ends or is interrupted.
