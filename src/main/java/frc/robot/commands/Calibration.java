@@ -37,11 +37,11 @@ public class Calibration extends CommandBase {
   public void execute() {
     System.out.print("executing stuff");
     if(timer.get()>0.1){
-      if(climber.getCurrentLeft()>=28.5){
+      if(climber.getCurrentLeft()>=27.5){
         leftDone = true;
         climber.climbLeft(0);
       }
-      if(climber.getCurrentRight()>=28.5){
+      if(climber.getCurrentRight()>=27.5){
         rightDone = true;
         climber.climbRight(0);
       }

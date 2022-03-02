@@ -69,7 +69,7 @@ public class RobotContainer {
   // private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
   // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
 
-  private final JoystickButton driveB = new JoystickButton(drivePad, 2);
+  private final JoystickButton driveY = new JoystickButton(drivePad, 4);
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
 
   /**
@@ -110,7 +110,7 @@ public class RobotContainer {
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
     //driveB.whenPressed(new ChangeDriveMode(driveTrain));
-    driveB.whileHeld(new ClimbUp(climber));
+    driveY.whileHeld(new ClimbUp(climber));
     //driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
   }

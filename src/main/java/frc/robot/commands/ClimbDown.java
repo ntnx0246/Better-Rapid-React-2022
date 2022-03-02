@@ -25,11 +25,12 @@ public class ClimbDown extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.climb(Constants.CLIMBER_DOWN_SPEED);
+    climber.climbRight(Constants.CLIMBER_DOWN_SPEED);
     SmartDashboard.putNumber("climber Speed", 10);
+    System.out.println("initialize climb down");
 
     if (climber.getRightEncoderCount() > 50000) {
-      goal = 25000;
+      goal = 21000; //25000
       
     }
     else {

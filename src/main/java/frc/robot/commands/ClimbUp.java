@@ -23,6 +23,8 @@ public class ClimbUp extends CommandBase {
   @Override
   public void initialize() {
     climber.climb(Constants.CLIMBER_UP_SPEED);
+    climber.setPositionLeft(Constants.CLIMBER_UP_ENCODER_LEFT);
+    climber.setPositionRight(Constants.CLIMBER_UP_ENCODER_RIGHT);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

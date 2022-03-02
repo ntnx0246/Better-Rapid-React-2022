@@ -55,6 +55,14 @@ public class Climber extends SubsystemBase {
     rightMotor.set(ControlMode.Position, encoder);
   }
 
+  public void setPositionLeft(double encoder){
+    leftMotor.set(ControlMode.Position, encoder);
+  }
+
+  public void setPositionRight(double encoder){
+    rightMotor.set(ControlMode.Position, encoder);
+  }
+
   public void resetEncoders() {
     leftMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
     rightMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
@@ -69,16 +77,16 @@ public class Climber extends SubsystemBase {
   }
 
   public double getCurrentLeft() {
-    return leftMotor.getStatorCurrent();
+    return Math.abs(leftMotor.getStatorCurrent());
   }
 
   public double getCurrentRight() {
-    return rightMotor.getStatorCurrent();
+    return Math.abs(rightMotor.getStatorCurrent());
   }
 
   public void printEncoders() {
-    System.out.println("Left: " + getLeftEncoderCount());
-    System.out.println("Right: " + getRightEncoderCount());
+    System.out.println(leftMotor.getDeviceID() + ": " + getLeftEncoderCount());
+    System.out.println(rightMotor.getDeviceID() + ": " + getRightEncoderCount());
   }
 
   public void stop() {
@@ -101,6 +109,6 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     //System.out.println(rightMotor.getStatorCurrent());
-    // printEncoders();
+    //printEncoders();
   }
 }

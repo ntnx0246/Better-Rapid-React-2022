@@ -28,7 +28,7 @@ public final class Constants {
   public static final int SHOOTER_RIGHT_ID = 4;
   public static final double SHOOTER_SPEED = -0.6;
   public static final double SHOOTER_VELOCITY = -3500;
-  public static final double SHOOTER_RPM_TOLERANCE = 25;
+  public static final double SHOOTER_RPM_TOLERANCE = 50;
 
   public static final double SHOOTER_P = 0.0001;
   public static final double SHOOTER_I = 0;
@@ -47,8 +47,8 @@ public final class Constants {
   public static final int BACK_LEFT_ID = 8;
   public static final int BACK_RIGHT_ID = 7;
 
-  public static final double CLIMBER_UP_SPEED = 0.3;
-  public static final double CLIMBER_DOWN_SPEED = -0.3;
+  public static final double CLIMBER_UP_SPEED = 0.3; //0.3
+  public static final double CLIMBER_DOWN_SPEED = -0.3; //-0.3
 
   public static final double SLOW_MODE = 0.1;
   public static final double REGULAR_MODE = 0.4;
@@ -66,13 +66,16 @@ public final class Constants {
   public static final double ERROR_ANGLE_TOLERANCE = 5;
   public static final double AUTO_CLIMB_TOLERANCE = 50;
 
-  public static final double CALIBRATION_SPEED = -0.1;
+  public static final double CALIBRATION_SPEED = -0.1; //-0.1
 
-  public static final double CLIMBER_P = 0;
+  public static final double CLIMBER_P = 0.1;
   public static final double CLIMBER_I = 0;
   public static final double CLIMBER_D = 0;
   public static final double CLIMBER_F = 0;
   public static final int CLIMBER_SLOT_ID = 0;
+
+  public static final double CLIMBER_UP_ENCODER_LEFT = 236000;
+  public static final double CLIMBER_UP_ENCODER_RIGHT = 225000;
 
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
