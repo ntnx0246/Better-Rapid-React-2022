@@ -18,14 +18,14 @@ package frc.robot;
  */
 public final class Constants {
 
-  public static final int INTAKE_TOP_SPARK = 8;
-  public static final int INTAKE_BOTTOM_SPARK = 9;
+  public static final int INTAKE_TOP_SPARK = 2;
+  public static final int INTAKE_BOTTOM_SPARK = 3;
   public static final double INTAKE_SPEED = 0.4;
   public static final double INTAKE_TOP_SPEED = 0.6;
   public static final double INTAKE_BOTTOM_SPEED = 0.25;
 
-  public static final int SHOOTER_LEFT_ID = 6;
-  public static final int SHOOTER_RIGHT_ID = 7;
+  public static final int SHOOTER_LEFT_ID = 5;
+  public static final int SHOOTER_RIGHT_ID = 4;
   public static final double SHOOTER_SPEED = -0.6;
   public static final double SHOOTER_VELOCITY = -3500;
   public static final double SHOOTER_RPM_TOLERANCE = 25;
@@ -39,13 +39,13 @@ public final class Constants {
   public static final int SENSOR_UNITS_PER_ROTATION = 2048;
   public static final int DRIVE_WHEEL_DIAMETER_INCHES = 6;
 
-  public static final int CLIMBER_LEFT_ID = 4;
-  public static final int CLIMBER_RIGHT_ID = 5;
+  public static final int CLIMBER_LEFT_ID = 11; //10
+  public static final int CLIMBER_RIGHT_ID = 10; //11
 
-  public static final int FRONT_LEFT_ID = 3;
-  public static final int FRONT_RIGHT_ID = 1;
-  public static final int BACK_LEFT_ID = 2;
-  public static final int BACK_RIGHT_ID = 0;
+  public static final int FRONT_LEFT_ID = 9;
+  public static final int FRONT_RIGHT_ID = 6;
+  public static final int BACK_LEFT_ID = 8;
+  public static final int BACK_RIGHT_ID = 7;
 
   public static final double CLIMBER_UP_SPEED = 0.3;
   public static final double CLIMBER_DOWN_SPEED = -0.3;
