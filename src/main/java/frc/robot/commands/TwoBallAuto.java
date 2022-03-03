@@ -21,10 +21,11 @@ public class TwoBallAuto extends SequentialCommandGroup {
   NavX navX;
 
   /** Creates a new TwoBallAuto. */
-  public TwoBallAuto() {
+  public TwoBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new CargoManipulation(intake, shooter, true, true),
+    addCommands(new DriveStraight(driveTrain, Constants.TWOBALLAUTO_GET_SECONDBALL_GOAL),
+        new CargoManipulation(intake, shooter, true, true),
         new TurnToAngle(driveTrain, navX, Constants.TWOBALLAUTO_ANGLE),
         new DriveStraight(driveTrain, Constants.TWOBALLAUTOFORWARD_GOAL),
         new CargoManipulation(intake, shooter, false, true),

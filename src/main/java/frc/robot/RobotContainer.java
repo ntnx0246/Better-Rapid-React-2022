@@ -20,6 +20,7 @@ import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCargo;
 import frc.robot.commands.OneBallAuto;
+import frc.robot.commands.TwoBallAuto;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -74,6 +75,7 @@ public class RobotContainer {
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
 
   private final OneBallAuto oneBallAuto = new OneBallAuto(intake, shooter, driveTrain);
+  private final TwoBallAuto twoBallAuto = new TwoBallAuto(intake, shooter, driveTrain);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -125,7 +127,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return oneBallAuto;
+    return twoBallAuto;
   }
 
   public Command calibrationClimber() {

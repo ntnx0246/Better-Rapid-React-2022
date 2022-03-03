@@ -24,6 +24,7 @@ public class CargoManipulation extends CommandBase {
     this.intake = intake;
     this.shooter = shooter;
     this.isIntaking = isIntaking;
+    this.isAuto = isAuto;
     timer = new Timer();
   }
 
