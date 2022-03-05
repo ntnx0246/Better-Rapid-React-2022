@@ -47,24 +47,25 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void arcadeDrive(double x, double y) {
-    frontL.set(ControlMode.PercentOutput, y-x);
-    frontR.set(ControlMode.PercentOutput, y+x);
+    frontL.set(ControlMode.PercentOutput, y - x);
+    frontR.set(ControlMode.PercentOutput, y + x);
   }
 
-  public boolean getSlowMode(){
+  public boolean getSlowMode() {
     return slowModeOn;
   }
 
-  public void setSlowMode(boolean slowMode){
+  public void setSlowMode(boolean slowMode) {
     slowModeOn = slowMode;
   }
-  //for testing purposes
+
+  // for testing purposes
   public void tankDrive(double left, double right) {
     frontL.set(ControlMode.PercentOutput, left);
     frontR.set(ControlMode.PercentOutput, right);
   }
 
-  public void stop(){
+  public void stop() {
     frontL.set(ControlMode.PercentOutput, 0.0);
     frontR.set(ControlMode.PercentOutput, 0.0);
   }
@@ -78,11 +79,13 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getNativeUnitsFromInches(double inches) {
-    return inches*Constants.MOTOR_TO_WHEEL_REVOLUTION/(Math.PI*Constants.DRIVE_WHEEL_DIAMETER_INCHES)*Constants.SENSOR_UNITS_PER_ROTATION;
+    return inches * Constants.MOTOR_TO_WHEEL_REVOLUTION / (Math.PI * Constants.DRIVE_WHEEL_DIAMETER_INCHES)
+        * Constants.SENSOR_UNITS_PER_ROTATION;
   }
-  
+
   public double getInchesFromNativeUnits(double native_units) {
-    return native_units/Constants.MOTOR_TO_WHEEL_REVOLUTION*(Math.PI*Constants.DRIVE_WHEEL_DIAMETER_INCHES)/Constants.SENSOR_UNITS_PER_ROTATION;
+    return native_units / Constants.MOTOR_TO_WHEEL_REVOLUTION * (Math.PI * Constants.DRIVE_WHEEL_DIAMETER_INCHES)
+        / Constants.SENSOR_UNITS_PER_ROTATION;
   }
 
   public void resetEncoders() {
@@ -102,7 +105,7 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run 
+    // This method will be called once per scheduler run
   }
 
   public void setPosition(double pos) {
@@ -110,13 +113,13 @@ public class DriveTrain extends SubsystemBase {
     frontR.set(ControlMode.MotionMagic, pos);
   }
 
-  public void setLeftPID(int slotID, double p, double i, double d){
+  public void setLeftPID(int slotID, double p, double i, double d) {
     frontL.config_kP(slotID, p);
     frontL.config_kI(slotID, i);
     frontL.config_kD(slotID, d);
   }
 
-  public void setRightPID(int slotID, double p, double i, double d){
+  public void setRightPID(int slotID, double p, double i, double d) {
     frontR.config_kP(slotID, p);
     frontR.config_kI(slotID, i);
     frontR.config_kD(slotID, d);

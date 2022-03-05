@@ -12,28 +12,27 @@ import frc.robot.subsystems.Climber;
 
 public class ClimbDown extends CommandBase {
   /** Creates a new ClimbDown. */
-  
+
   private final Climber climber;
-  private int goal; 
-  
+  private int goal;
+
   public ClimbDown(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(climber); 
-    this.climber = climber;  
+    addRequirements(climber);
+    this.climber = climber;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     // climber.climb(Constants.CLIMBER_DOWN_SPEED);
-    System.out.println("initialize climb down"); 
+    System.out.println("initialize climb down");
 
     if (climber.getRightEncoderCount() > 50000) {
-      goal = 21000; //25000
-      
-    }
-    else {
-      goal = 1000; 
+      goal = 21000; // 25000
+
+    } else {
+      goal = 1000;
     }
     climber.setPosition(goal);
     System.out.println("finished climb down initalize");
@@ -43,12 +42,12 @@ public class ClimbDown extends CommandBase {
   @Override
   public void execute() {
     // if (climber.getRightEncoderCount() < goal) {
-    //   climber.stop();
+    // climber.stop();
     // }
     // else {
-    //   climber.printEncoders();
+    // climber.printEncoders();
     // }
-    
+
   }
 
   // Called once the command ends or is interrupted.
@@ -58,10 +57,10 @@ public class ClimbDown extends CommandBase {
     climber.stop();
 
     // try {
-    //   Thread.sleep(5000);
+    // Thread.sleep(5000);
     // } catch (InterruptedException e) {
-    //   // TODO Auto-generated catch block
-    //   e.printStackTrace();
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
     // }
 
     // climber.printEncoders();

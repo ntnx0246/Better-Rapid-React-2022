@@ -10,13 +10,13 @@ import frc.robot.subsystems.Climber;
 
 public class ClimbUp extends CommandBase {
   /** Creates a new ClimbTeleop. */
-  
-  private final Climber climber; 
-    
+
+  private final Climber climber;
+
   public ClimbUp(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(climber); 
-    this.climber = climber; 
+    addRequirements(climber);
+    this.climber = climber;
   }
 
   // Called when the command is initially scheduled.

@@ -41,7 +41,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
-  //private final LogitechGamingPad opPad = new LogitechGamingPad(1);
+  // private final LogitechGamingPad opPad = new LogitechGamingPad(1);
 
   private final DriveTrain driveTrain = new DriveTrain();
   private final Shooter shooter = new Shooter();
@@ -63,7 +63,6 @@ public class RobotContainer {
   // private final JoystickButton startButton = new JoystickButton(drivePad, 8);
   // private final JoystickButton opY = new JoystickButton(opPad, 4);
   // private final JoystickButton opA = new JoystickButton(opPad, 1);
-  
 
   // private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
   // private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
@@ -105,13 +104,13 @@ public class RobotContainer {
     // rightBumper.whileHeld(new IntakeCargo(intake, true));
     // leftBumper.whenPressed(new Shoot(shooter));
 
-    //driveA.whileHeld(new ClimbUp(climber)); //opY
-    //opA.whileHeld(new ClimbDown(climber)); //opA
+    // driveA.whileHeld(new ClimbUp(climber)); //opY
+    // opA.whileHeld(new ClimbDown(climber)); //opA
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
-    //driveB.whenPressed(new ChangeDriveMode(driveTrain));
+    // driveB.whenPressed(new ChangeDriveMode(driveTrain));
     driveY.whileHeld(new ClimbUp(climber));
-    //driveA.whenPressed(new Calibration(climber));
+    // driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
   }
 
