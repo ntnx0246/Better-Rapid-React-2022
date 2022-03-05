@@ -41,7 +41,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
-  private final LogitechGamingPad opPad = new LogitechGamingPad(1);
+  //private final LogitechGamingPad opPad = new LogitechGamingPad(1);
 
   private final DriveTrain driveTrain = new DriveTrain();
   private final Shooter shooter = new Shooter();
@@ -61,15 +61,15 @@ public class RobotContainer {
   // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
   // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
   // private final JoystickButton startButton = new JoystickButton(drivePad, 8);
-  private final JoystickButton opY = new JoystickButton(opPad, 4);
-  private final JoystickButton opA = new JoystickButton(opPad, 1);
+  // private final JoystickButton opY = new JoystickButton(opPad, 4);
+  // private final JoystickButton opA = new JoystickButton(opPad, 1);
   
 
   // private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
   // private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
   // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
 
-  private final JoystickButton driveB = new JoystickButton(drivePad, 2);
+  private final JoystickButton driveY = new JoystickButton(drivePad, 4);
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
 
   /**
@@ -106,11 +106,11 @@ public class RobotContainer {
     // leftBumper.whenPressed(new Shoot(shooter));
 
     //driveA.whileHeld(new ClimbUp(climber)); //opY
-    opA.whileHeld(new ClimbDown(climber)); //opA
+    //opA.whileHeld(new ClimbDown(climber)); //opA
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
     //driveB.whenPressed(new ChangeDriveMode(driveTrain));
-    driveB.whileHeld(new ClimbUp(climber));
+    driveY.whileHeld(new ClimbUp(climber));
     //driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
   }
@@ -129,7 +129,7 @@ public class RobotContainer {
     // return new TurnToAngle(driveTrain, navX, 90);
   }
 
-  public Command calibrationClimber() {
+  public Command getTestCommand() {
     return new Calibration(climber);
   }
 }
