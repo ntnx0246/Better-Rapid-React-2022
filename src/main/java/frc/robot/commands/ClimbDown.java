@@ -12,43 +12,52 @@ import frc.robot.subsystems.Climber;
 
 public class ClimbDown extends CommandBase {
   /** Creates a new ClimbDown. */
-  
+
   private final Climber climber;
-  private int goal; 
-  
+  private int goal;
+  private double climberEncoder;
+
   public ClimbDown(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(climber); 
-    this.climber = climber;  
+    addRequirements(climber);
+    this.climber = climber;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // climber.climb(Constants.CLIMBER_DOWN_SPEED);
-    System.out.println("initialize climb down"); 
-
-    if (climber.getRightEncoderCount() > 50000) {
-      goal = 21000; //25000
-      
-    }
-    else {
-      goal = 1000; 
-    }
-    climber.setPosition(goal);
+    climber.climb(Constants.CLIMBER_DOWN_SPEED);
     System.out.println("finished climb down initalize");
+
+    climberEncoder = Math.abs(climber.getLeftEncoderCount());
+    if (climberEncoder > 50000) {
+      goal = 21000; // 25000
+
+    } else {
+      goal = 1000;
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
+
   @Override
   public void execute() {
     // if (climber.getRightEncoderCount() < goal) {
-    //   climber.stop();
+    // climber.stop();
     // }
     // else {
-    //   climber.printEncoders();
+    // climber.printEncoders();
     // }
-    
+    climberEncoder = Math.abs(climber.getLeftEncoderCount());
+    if (climberEncoder < 100000) { // 25000
+      if (goal == 1000) {
+        climber.selectProfile(1);
+      } else {
+        climber.selectProfile(0);
+      }
+      climber.setPosition(goal);
+    }
+
   }
 
   // Called once the command ends or is interrupted.
@@ -58,10 +67,10 @@ public class ClimbDown extends CommandBase {
     climber.stop();
 
     // try {
-    //   Thread.sleep(5000);
+    // Thread.sleep(5000);
     // } catch (InterruptedException e) {
-    //   // TODO Auto-generated catch block
-    //   e.printStackTrace();
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
     // }
 
     // climber.printEncoders();

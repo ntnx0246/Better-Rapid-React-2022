@@ -39,8 +39,8 @@ public final class Constants {
   public static final int SENSOR_UNITS_PER_ROTATION = 2048;
   public static final int DRIVE_WHEEL_DIAMETER_INCHES = 6;
 
-  public static final int CLIMBER_LEFT_ID = 11; //10
-  public static final int CLIMBER_RIGHT_ID = 10; //11
+  public static final int CLIMBER_LEFT_ID = 10; //10
+  public static final int CLIMBER_RIGHT_ID = 11; //11
 
   public static final int FRONT_LEFT_ID = 9;
   public static final int FRONT_RIGHT_ID = 6;
@@ -68,14 +68,21 @@ public final class Constants {
 
   public static final double CALIBRATION_SPEED = -0.1; //-0.1
 
-  public static final double CLIMBER_P = 0.02;
-  public static final double CLIMBER_I = 0;
-  public static final double CLIMBER_D = 0;
-  public static final double CLIMBER_F = 0;
-  public static final int CLIMBER_SLOT_ID = 0;
+  public static final double CLIMBER_P_0 = 0.008;
+  public static final double CLIMBER_I_0 = 0;
+  public static final double CLIMBER_D_0 = 0;
+  public static final double CLIMBER_F_0 = 0;
+  public static final int CLIMBER_SLOT_ID_0 = 0;
 
-  public static final double CLIMBER_UP_ENCODER_LEFT = 236000;
-  public static final double CLIMBER_UP_ENCODER_RIGHT = 225000;
+  public static final double CLIMBER_P_1 = 0.05;
+  public static final double CLIMBER_I_1 = 0;
+  public static final double CLIMBER_D_1 = 0;
+  public static final double CLIMBER_F_1 = 0;
+  public static final int CLIMBER_SLOT_ID_1 = 1;
+
+
+  public static final double CLIMBER_UP_ENCODER_RIGHT = 236000;
+  public static final double CLIMBER_UP_ENCODER_LEFT = 229000;
 
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
