@@ -25,9 +25,8 @@ public class ClimbDown extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.climbRight(Constants.CLIMBER_DOWN_SPEED);
-    SmartDashboard.putNumber("climber Speed", 10);
-    System.out.println("initialize climb down");
+    // climber.climb(Constants.CLIMBER_DOWN_SPEED);
+    System.out.println("initialize climb down"); 
 
     if (climber.getRightEncoderCount() > 50000) {
       goal = 21000; //25000
@@ -37,6 +36,7 @@ public class ClimbDown extends CommandBase {
       goal = 1000; 
     }
     climber.setPosition(goal);
+    System.out.println("finished climb down initalize");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -57,14 +57,14 @@ public class ClimbDown extends CommandBase {
     climber.printEncoders();
     climber.stop();
 
-    try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    // try {
+    //   Thread.sleep(5000);
+    // } catch (InterruptedException e) {
+    //   // TODO Auto-generated catch block
+    //   e.printStackTrace();
+    // }
 
-    climber.printEncoders();
+    // climber.printEncoders();
   }
 
   // Returns true when the command should end.

@@ -68,7 +68,7 @@ public final class Constants {
 
   public static final double CALIBRATION_SPEED = -0.1; //-0.1
 
-  public static final double CLIMBER_P = 0.1;
+  public static final double CLIMBER_P = 0.02;
   public static final double CLIMBER_I = 0;
   public static final double CLIMBER_D = 0;
   public static final double CLIMBER_F = 0;
