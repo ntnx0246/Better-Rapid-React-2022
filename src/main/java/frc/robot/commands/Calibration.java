@@ -15,6 +15,7 @@ public class Calibration extends CommandBase {
   boolean leftDone;
   boolean rightDone;
   Timer timer;
+
   public Calibration(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climber);
@@ -29,19 +30,23 @@ public class Calibration extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
+    System.out.println("*********climber climb with speed******");
     climber.climb(Constants.CALIBRATION_SPEED); // make constant
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(timer.get()>0.1){
-      if(climber.getVelocityLeft()<=0){
+    System.out.println("executing stuff");
+    if (timer.get() > 0.1) {
+      if (climber.getCurrentLeft() >= 27.5) {
         leftDone = true;
+        System.out.println("left is done *****");
         climber.climbLeft(0);
       }
-      if(climber.getVelocityRight()<=0){
+      if (climber.getCurrentRight() >= 27.5) {
         rightDone = true;
+        System.out.println("right is done *****");
         climber.climbRight(0);
       }
     }
@@ -50,6 +55,7 @@ public class Calibration extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("climber calibration stop");
     timer.stop();
     climber.stop();
     climber.resetEncoders();
@@ -58,17 +64,14 @@ public class Calibration extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-  //  return rightDone && leftDone;
-    return false;
+    return rightDone && leftDone;
+    // return false;
   }
 
-
-
-
   /*
-  -- after all the self test(motor, rio tests, sensors)
-  bring the climber down at 0.1 speed
-  detect stall when climber is all the way down
-  reset encoders
-  */
+   * -- after all the self test(motor, rio tests, sensors)
+   * bring the climber down at 0.1 speed
+   * detect stall when climber is all the way down
+   * reset encoders
+   */
 }

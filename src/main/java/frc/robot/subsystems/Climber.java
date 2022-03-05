@@ -18,7 +18,6 @@ public class Climber extends SubsystemBase {
 
   /** Creates a new Climber. */
   public Climber() {
-    ;
     leftMotor = new TalonFX(Constants.CLIMBER_LEFT_ID);
     rightMotor = new TalonFX(Constants.CLIMBER_RIGHT_ID);
 
@@ -26,6 +25,11 @@ public class Climber extends SubsystemBase {
 
     leftMotor.setNeutralMode(NeutralMode.Brake);
     rightMotor.setNeutralMode(NeutralMode.Brake);
+
+    leftMotor.configPeakOutputForward(1);
+    leftMotor.configPeakOutputReverse(-1);
+    rightMotor.configPeakOutputForward(1);
+    rightMotor.configPeakOutputReverse(-1);
 
     leftMotor.config_kP(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_P);
     leftMotor.config_kI(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_I);
@@ -35,11 +39,13 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kI(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_I);
     rightMotor.config_kD(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_D);
     rightMotor.config_kF(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_F);
+    System.out.println("initalized climber AHAHAHAHAAHAHAHAHAHAHAHAHHAA");
   }
 
   public void climb(double speed) {
     leftMotor.set(ControlMode.PercentOutput, speed);
     rightMotor.set(ControlMode.PercentOutput, speed);
+    System.out.println("got to climb with a speed");
   }
 
   public void climbLeft(double speed) {
@@ -52,6 +58,14 @@ public class Climber extends SubsystemBase {
 
   public void setPosition(double encoder) {
     leftMotor.set(ControlMode.Position, encoder);
+    rightMotor.set(ControlMode.Position, encoder);
+  }
+
+  public void setPositionLeft(double encoder) {
+    leftMotor.set(ControlMode.Position, encoder);
+  }
+
+  public void setPositionRight(double encoder) {
     rightMotor.set(ControlMode.Position, encoder);
   }
 
@@ -69,16 +83,16 @@ public class Climber extends SubsystemBase {
   }
 
   public double getCurrentLeft() {
-    return leftMotor.getStatorCurrent();
+    return Math.abs(leftMotor.getStatorCurrent());
   }
 
   public double getCurrentRight() {
-    return rightMotor.getStatorCurrent();
+    return Math.abs(rightMotor.getStatorCurrent());
   }
 
   public void printEncoders() {
-    System.out.println("Left: " + getLeftEncoderCount());
-    System.out.println("Right: " + getRightEncoderCount());
+    System.out.println(leftMotor.getDeviceID() + ": " + getLeftEncoderCount());
+    System.out.println(rightMotor.getDeviceID() + ": " + getRightEncoderCount());
   }
 
   public void stop() {
@@ -94,9 +108,14 @@ public class Climber extends SubsystemBase {
   public double getVelocityRight() {
     return rightMotor.getSelectedSensorVelocity();
   }
+  // limit the encoder for climber when going up, don't let the numbers get to
+  // high
+  // right has to get to 210000 (currently - L: -202964 R: 204334)
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // System.out.println(rightMotor.getStatorCurrent());
+    // printEncoders();
   }
 }
