@@ -15,6 +15,7 @@ public class Calibration extends CommandBase {
   boolean leftDone;
   boolean rightDone;
   Timer timer;
+
   public Calibration(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climber);
@@ -37,13 +38,13 @@ public class Calibration extends CommandBase {
   @Override
   public void execute() {
     System.out.println("executing stuff");
-    if(timer.get()>0.1){
-      if(climber.getCurrentLeft()>=27.5){
+    if (timer.get() > 0.1) {
+      if (climber.getCurrentLeft() >= 27.5) {
         leftDone = true;
         System.out.println("left is done *****");
         climber.climbLeft(0);
       }
-      if(climber.getCurrentRight()>=27.5){
+      if (climber.getCurrentRight() >= 27.5) {
         rightDone = true;
         System.out.println("right is done *****");
         climber.climbRight(0);
@@ -64,16 +65,13 @@ public class Calibration extends CommandBase {
   @Override
   public boolean isFinished() {
     return rightDone && leftDone;
-    //return false;
+    // return false;
   }
 
-
-
-
   /*
-  -- after all the self test(motor, rio tests, sensors)
-  bring the climber down at 0.1 speed
-  detect stall when climber is all the way down
-  reset encoders
-  */
+   * -- after all the self test(motor, rio tests, sensors)
+   * bring the climber down at 0.1 speed
+   * detect stall when climber is all the way down
+   * reset encoders
+   */
 }
