@@ -19,7 +19,7 @@ public class DriveStraight extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
-    this.goal = driveTrain.getNativeUnitsFromInches(-goal); 
+    this.goal = driveTrain.getNativeUnitsFromInches(goal); 
   }
 
   // Called when the command is initially scheduled.

@@ -8,12 +8,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.Timer;
 
 public class CargoManipulation extends CommandBase {
-  private final Intake intake; 
+  private final Intake intake;
   private Shooter shooter;
   public boolean isIntaking;
-
+  public boolean isAuto = false;
+  private Timer timer;
+  public double shooterVelocity = Constants.SHOOTER_VELOCITY;
 
   public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -23,27 +26,44 @@ public class CargoManipulation extends CommandBase {
     this.isIntaking = isIntaking;
   }
 
+  public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto, double shooterVelocity) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intake, shooter);
+    this.intake = intake;
+    this.shooter = shooter;
+    this.isIntaking = isIntaking;
+    this.isAuto = true;
+    timer = new Timer();
+    this.shooterVelocity = shooterVelocity;
+
+  }
+
   // Called when the command is initially scheduled.
   @Override
-  
+
   public void initialize() {
+    if (isAuto) {
+      timer.reset();
+      timer.start();
+    }
 
     if (isIntaking == true) {
       intake.intakeTopMotor(Constants.INTAKE_TOP_SPEED);
       intake.intakeBottomMotor(Constants.INTAKE_BOTTOM_SPEED);
     } else {
-      shooter.setVelocity(Constants.SHOOTER_VELOCITY);
+      shooter.setVelocity(shooterVelocity);
     }
 
   }
 
   // Called every time the scheduler runs while the command is scheduled
   double error = 0;
+
   @Override
   public void execute() {
-    error = Math.abs(Constants.SHOOTER_VELOCITY-shooter.getLeftVelocity());
-    if (isIntaking == false && error<= Constants.SHOOTER_RPM_TOLERANCE) {
-      intake.intakeTopMotor(Constants.INTAKE_SPEED*-1);
+    error = Math.abs(shooterVelocity - shooter.getLeftVelocity());
+    if (isIntaking == false && error <= Constants.SHOOTER_RPM_TOLERANCE) {
+      intake.intakeTopMotor(Constants.INTAKE_SPEED * -1);
       intake.intakeBottomMotor(Constants.INTAKE_SPEED);
     }
   }
@@ -51,13 +71,17 @@ public class CargoManipulation extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.stop(); 
+    intake.stop();
     shooter.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (isAuto && timer.get() > 5) {
+      timer.stop();
+      return true;
+    }
     return false;
   }
 }

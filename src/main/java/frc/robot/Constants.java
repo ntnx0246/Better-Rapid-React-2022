@@ -77,6 +77,8 @@ public final class Constants {
   public static final double CLIMBER_UP_ENCODER_LEFT = 236000;
   public static final double CLIMBER_UP_ENCODER_RIGHT = 225000;
 
+  public static final double ONEBALLAUTO_GOAL = -90;
+  public static final double ONEBALLAUTO_SHOOTER_VELOCITY = -3000;
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
 
