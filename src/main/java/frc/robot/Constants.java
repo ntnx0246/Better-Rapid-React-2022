@@ -59,10 +59,11 @@ public final class Constants {
   public static final double kI = 0;
   public static final double kD = 0;
   
-  public static final double TWOBALLAUTO_GET_SECONDBALL_GOAL = 10;
-  public static final double TWOBALLAUTOFORWARD_GOAL = 120;
+  public static final double TWOBALLAUTO_GET_SECONDBALL_GOAL = 30;
+  public static final double TWOBALLAUTOFORWARD_GOAL = 60;
   public static final double TWOBALLAUTOBACKWARD_GOAL = -120;
   public static final double TWOBALLAUTO_ANGLE = 180;
+  public static final double TWOBALLAUTO_VELOCITY = -3000;
 
   public static final int CRUISE_VELOCITY = 7000; // max is around 21500
   public static final int ACCELERATION = 3500;

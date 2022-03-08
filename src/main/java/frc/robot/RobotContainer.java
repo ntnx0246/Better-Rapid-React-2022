@@ -20,6 +20,7 @@ import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCargo;
 import frc.robot.commands.OneBallAuto;
+import frc.robot.commands.TwoBallAuto;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -127,7 +128,8 @@ public class RobotContainer {
     // if (chooser.getSelected().equals(test)) {
 
     // }
-    return new OneBallAuto(intake, shooter, driveTrain); // in inches
+    //return new OneBallAuto(intake, shooter, driveTrain); // in inches
+    return new TwoBallAuto(intake, shooter, driveTrain, navX);
     // return new TurnToAngle(driveTrain, navX, 90);
   }
 
