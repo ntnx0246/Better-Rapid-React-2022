@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
@@ -18,12 +19,14 @@ public class CargoManipulation extends CommandBase {
   private Timer timer;
   public double shooterVelocity = Constants.SHOOTER_VELOCITY;
 
-  public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking) {
+  public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake, shooter);
     this.intake = intake;
     this.shooter = shooter;
     this.isIntaking = isIntaking;
+    this.isAuto = isAuto;
+    timer = new Timer();
   }
 
   public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto, double shooterVelocity) {
@@ -53,7 +56,6 @@ public class CargoManipulation extends CommandBase {
     } else {
       shooter.setVelocity(shooterVelocity);
     }
-
   }
 
   // Called every time the scheduler runs while the command is scheduled

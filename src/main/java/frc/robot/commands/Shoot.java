@@ -18,7 +18,7 @@ public class Shoot extends CommandBase {
     this.shooter = shooter;
   }
 
-  // Called when the command is initially scheduled.
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {
     System.out.println("shoot");
