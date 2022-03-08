@@ -73,7 +73,6 @@ public class RobotContainer {
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
 
   private final OneBallAuto oneBallAuto = new OneBallAuto(intake, shooter, driveTrain);
-  private final TwoBallAuto twoBallAuto = new TwoBallAuto(intake, shooter, driveTrain);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
