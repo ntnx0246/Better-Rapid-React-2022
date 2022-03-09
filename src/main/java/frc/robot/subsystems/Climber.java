@@ -31,7 +31,6 @@ public class Climber extends SubsystemBase {
     rightMotor.configPeakOutputForward(1);
     rightMotor.configPeakOutputReverse(-1);
 
-
     leftMotor.config_kP(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_P_0);
     leftMotor.config_kI(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_I_0);
     leftMotor.config_kD(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_D_0);
@@ -75,11 +74,11 @@ public class Climber extends SubsystemBase {
     rightMotor.set(ControlMode.Position, encoder);
   }
 
-  public void setPositionLeft(double encoder){
+  public void setPositionLeft(double encoder) {
     leftMotor.set(ControlMode.Position, encoder);
   }
 
-  public void setPositionRight(double encoder){
+  public void setPositionRight(double encoder) {
     rightMotor.set(ControlMode.Position, encoder);
   }
 
@@ -122,13 +121,14 @@ public class Climber extends SubsystemBase {
   public double getVelocityRight() {
     return rightMotor.getSelectedSensorVelocity();
   }
-  // limit the encoder for climber when going up, don't let the numbers get to high
-  //right has to get to 210000 (currently - L: -202964 R: 204334)
+  // limit the encoder for climber when going up, don't let the numbers get to
+  // high
+  // right has to get to 210000 (currently - L: -202964 R: 204334)
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //System.out.println(rightMotor.getStatorCurrent());
-    //printEncoders();
+    // System.out.println(rightMotor.getStatorCurrent());
+    // printEncoders();
   }
 }

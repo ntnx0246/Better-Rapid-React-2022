@@ -17,6 +17,7 @@ public class ClimbDown extends CommandBase {
   private int goal;
   private double climberEncoder;
 
+
   public ClimbDown(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climber);
@@ -31,6 +32,7 @@ public class ClimbDown extends CommandBase {
 
     climberEncoder = Math.abs(climber.getLeftEncoderCount());
     if (climberEncoder > 50000) {
+
       goal = 21000; // 25000
 
     } else {
@@ -57,6 +59,7 @@ public class ClimbDown extends CommandBase {
       }
       climber.setPosition(goal);
     }
+
 
   }
 

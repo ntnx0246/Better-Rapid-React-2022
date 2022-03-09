@@ -13,12 +13,11 @@ public class ClimbUp extends CommandBase {
   
   private final Climber climber; 
   
-    
   public ClimbUp(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climber); 
     this.climber = climber; 
-    
+
   }
 
   // Called when the command is initially scheduled.

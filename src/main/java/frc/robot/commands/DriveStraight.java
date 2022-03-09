@@ -11,22 +11,22 @@ import frc.robot.subsystems.DriveTrain;
 
 public class DriveStraight extends CommandBase {
   /** Creates a new DriveStraight. */
-  private final DriveTrain driveTrain; 
+  private final DriveTrain driveTrain;
   private double goal; // put goal in as a constant
-  int count = 0; 
+  int count = 0;
 
   public DriveStraight(DriveTrain driveTrain, double goal) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
-    this.goal = driveTrain.getNativeUnitsFromInches(-goal); 
+    this.goal = driveTrain.getNativeUnitsFromInches(goal); 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     driveTrain.resetEncoders();
-    driveTrain.setLeftPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD); //make into constants
+    driveTrain.setLeftPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD); // make into constants
     driveTrain.setRightPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD);
     driveTrain.setPosition(goal);
     Timer.delay(.1);
@@ -37,9 +37,8 @@ public class DriveStraight extends CommandBase {
   public void execute() {
     double leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
     double rightError = Math.abs(goal + driveTrain.getRightEncoderCount());
-    
 
-    if((leftError <= Constants.ERROR_THRESHOLD) && (rightError <= Constants.ERROR_THRESHOLD)) {
+    if ((leftError <= Constants.ERROR_THRESHOLD) && (rightError <= Constants.ERROR_THRESHOLD)) {
       count++;
     } else {
       count = 0;
@@ -47,7 +46,7 @@ public class DriveStraight extends CommandBase {
   }
 
   // Called once the command ends or is interrupted.
-  
+
   @Override
   public void end(boolean interrupted) {
     driveTrain.stop();
@@ -59,7 +58,7 @@ public class DriveStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return count>=10;
-    
+    return count >= 10;
+
   }
 }
