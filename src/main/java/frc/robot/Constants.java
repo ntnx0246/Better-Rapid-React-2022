@@ -58,6 +58,12 @@ public final class Constants {
   public static final double kP = 0.15;
   public static final double kI = 0;
   public static final double kD = 0;
+  
+  public static final double TWOBALLAUTO_GET_SECONDBALL_GOAL = 30;
+  public static final double TWOBALLAUTOFORWARD_GOAL = 60;
+  public static final double TWOBALLAUTOBACKWARD_GOAL = -120;
+  public static final double TWOBALLAUTO_ANGLE = 180;
+  public static final double TWOBALLAUTO_VELOCITY = -3000;
 
   public static final int CRUISE_VELOCITY = 7000; // max is around 21500
   public static final int ACCELERATION = 3500;
@@ -77,6 +83,8 @@ public final class Constants {
   public static final double CLIMBER_UP_ENCODER_LEFT = 236000;
   public static final double CLIMBER_UP_ENCODER_RIGHT = 225000;
 
+  public static final double ONEBALLAUTO_GOAL = -90;
+  public static final double ONEBALLAUTO_SHOOTER_VELOCITY = -3000;
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
 
