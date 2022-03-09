@@ -20,9 +20,12 @@ public final class Constants {
 
   public static final int INTAKE_TOP_SPARK = 8;
   public static final int INTAKE_BOTTOM_SPARK = 9;
+  public static final int INTAKE_OUTSIDE_SPARK = 1; 
+  
   public static final double INTAKE_SPEED = 0.4;
   public static final double INTAKE_TOP_SPEED = 0.6;
   public static final double INTAKE_BOTTOM_SPEED = 0.25;
+  public static final double INTAKE_OUTSIDE_SPEED = 1;
 
   public static final int SHOOTER_LEFT_ID = 6;
   public static final int SHOOTER_RIGHT_ID = 7;

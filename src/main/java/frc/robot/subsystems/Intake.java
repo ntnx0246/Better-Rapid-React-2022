@@ -14,11 +14,13 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
   private CANSparkMax topMotor; 
-  private CANSparkMax bottomMotor; 
+  private CANSparkMax bottomMotor;
+  private CANSparkMax outsideMotor; 
 
   public Intake() {
     topMotor = new CANSparkMax(Constants.INTAKE_TOP_SPARK, MotorType.kBrushless);
     bottomMotor = new CANSparkMax(Constants.INTAKE_BOTTOM_SPARK, MotorType.kBrushless);
+    outsideMotor = new CANSparkMax(Constants.INTAKE_OUTSIDE_SPARK, MotorType.kBrushless);
     
   }
 
@@ -30,9 +32,14 @@ public class Intake extends SubsystemBase {
     bottomMotor.set(speed);
   }
 
+  public void intakeOutsideMotor(double speed){
+    outsideMotor.set(speed);
+  }
+
   public void stop(){
     topMotor.set(0);
     bottomMotor.set(0);
+    outsideMotor.set(0);
   }
 
   @Override
