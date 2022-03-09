@@ -7,13 +7,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.LinearServo;
+import frc.robot.subsystems.LinearServo2;
 
 public class ClimbUp extends CommandBase {
   /** Creates a new ClimbTeleop. */
 
   private final Climber climber;
-  private final LinearServo servo;
+  private final LinearServo2 servo;
 
   public ClimbUp(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -22,9 +22,9 @@ public class ClimbUp extends CommandBase {
     servo = null;
   }
 
-  public ClimbUp(Climber climber, LinearServo servo) {
+  public ClimbUp(Climber climber, LinearServo2 servo) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(climber, servo);
+    addRequirements(climber);
     this.servo = servo;
     servo.setPosition(0);
     this.climber = climber;
@@ -37,7 +37,7 @@ public class ClimbUp extends CommandBase {
     climber.setPositionLeft(Constants.CLIMBER_UP_ENCODER_LEFT);
     climber.setPositionRight(Constants.CLIMBER_UP_ENCODER_RIGHT);
     if(servo != null){
-      servo.setPosition(0.5);
+      servo.setPosition(100);
     }
     // climber.setPositionLeft(1000);
     // climber.setPositionRight(1000);
