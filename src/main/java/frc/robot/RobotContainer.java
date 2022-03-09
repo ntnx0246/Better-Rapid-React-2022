@@ -55,10 +55,6 @@ public class RobotContainer {
   private final JoystickButton leftBumper = new JoystickButton(drivePad, 5);
   private final JoystickButton rightBumper = new JoystickButton(drivePad, 6);
 
-  public SendableChooser<String> chooser;
-  private final String test = "test";
-  private final String competition = "competition";
-
   // private final Intake intake = new Intake();
   // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
   // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
@@ -73,7 +69,11 @@ public class RobotContainer {
   private final JoystickButton driveY = new JoystickButton(drivePad, 4);
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
 
-  private final OneBallAuto oneBallAuto = new OneBallAuto(intake, shooter, driveTrain);
+  public SendableChooser<String> chooser;
+  private final OneBallAuto oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
+  private final TwoBallAuto twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
+  private final String OneBall = "OneBall";
+  private final String TwoBall = "TwoBall";
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -86,10 +86,10 @@ public class RobotContainer {
     // SmartDashboard.putData("idk", new ChangeDriveMode(driveTrain));
 
     chooser = new SendableChooser<String>();
-    chooser.setDefaultOption("Test", test);
-    chooser.addOption("Competition", competition);
+    chooser.setDefaultOption("TwoBall", TwoBall);
+    chooser.addOption("OneBall", OneBall);
 
-    SmartDashboard.putData("Climber Speed", chooser);
+    SmartDashboard.putData("AUTO CHOOSER", chooser);
   }
 
   /**
@@ -124,13 +124,15 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    // if (chooser.getSelected().equals(test)) {
-
-    // }
-    //return new OneBallAuto(intake, shooter, driveTrain); // in inches
-    return new TwoBallAuto(intake, shooter, driveTrain, navX);
-    // return new TurnToAngle(driveTrain, navX, 90);
+    if(chooser.getSelected().equals(TwoBall)) {
+      return twoBallAuto_command;
+    }
+    else if(chooser.getSelected().equals(OneBall)) {
+      return oneBallAuto_command;
+    }
+    else {
+      return new DriveStraight(driveTrain, 50);
+    }
   }
 
   public Command getTestCommand() {
