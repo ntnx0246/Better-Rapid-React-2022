@@ -77,6 +77,10 @@ public final class Constants {
   public static final double CLIMBER_UP_ENCODER_LEFT = 236000;
   public static final double CLIMBER_UP_ENCODER_RIGHT = 225000;
 
+  public static final int LINEARSERVO_LEFT_CHANNEL = 0;
+  public static final int LINEARSERVO_RIGHT_CHANNEL = 1;
+  public static final double LINEARSERVO_SPEED = 0.5;
+
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
 

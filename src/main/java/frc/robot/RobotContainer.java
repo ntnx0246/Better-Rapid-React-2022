@@ -18,8 +18,9 @@ import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.IntakeCargo;
+//import frc.robot.commands.IntakeCargo;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LinearServo;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -47,6 +48,7 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Climber climber = new Climber();
   private final NavX navX = new NavX();
+  private final LinearServo servo = new LinearServo();
 
   private final Intake intake = new Intake();
   private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
@@ -97,7 +99,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    rightBumper.whileHeld(new IntakeCargo(intake, true));
+    //rightBumper.whileHeld(new IntakeCargo(intake, true));
     // leftBumper.whileHeld(new FeederToShooter(intake, shooter));
     leftBumper.whileHeld(new CargoManipulation(intake, shooter, false));
     // buttonX.whenPressed(new IntakeCargo(intake, false));
@@ -109,7 +111,7 @@ public class RobotContainer {
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
     // driveB.whenPressed(new ChangeDriveMode(driveTrain));
-    driveY.whileHeld(new ClimbUp(climber));
+    driveY.whileHeld(new ClimbUp(climber, servo));
     // driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
   }
