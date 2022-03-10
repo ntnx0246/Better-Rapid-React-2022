@@ -7,13 +7,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.LinearServo2;
+import frc.robot.subsystems.LinearServo;
 
 public class ClimbUp extends CommandBase {
   /** Creates a new ClimbTeleop. */
 
   private final Climber climber;
-  private final LinearServo2 servo;
+  private final LinearServo servo;
 
   public ClimbUp(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -22,7 +22,7 @@ public class ClimbUp extends CommandBase {
     servo = null;
   }
 
-  public ClimbUp(Climber climber, LinearServo2 servo) {
+  public ClimbUp(Climber climber, LinearServo servo) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climber);
     this.servo = servo;
@@ -39,6 +39,11 @@ public class ClimbUp extends CommandBase {
     // if(servo != null){
     //   servo.setPosition(100);
     // }
+    System.out.println("stuff is wrong");
+    // if (servo != null) {
+    //   servo.setPosition(0);
+    // }
+    climber.setInitalized(true);
     // climber.setPositionLeft(1000);
     // climber.setPositionRight(1000);
   }
@@ -46,6 +51,9 @@ public class ClimbUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // if (servo != null) {
+    //   servo.setPosition(0);
+    // }
   }
 
   // Called once the command ends or is interrupted.
@@ -53,6 +61,10 @@ public class ClimbUp extends CommandBase {
   public void end(boolean interrupted) {
     climber.stop();
     // servo.setPosition(0);
+    // if (servo != null) {
+    //   servo.setPosition(1);
+    // }
+    // servo.setPosition(1);
   }
 
   // Returns true when the command should end.

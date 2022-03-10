@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.CargoManipulation;
 import frc.robot.commands.ArcadeDrive;
@@ -20,14 +21,16 @@ import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.PistonMove;
 //import frc.robot.commands.IntakeCargo;
+import frc.robot.commands.OneBallAuto;
+import frc.robot.commands.TwoBallAuto;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.LinearServo;
-import frc.robot.subsystems.LinearServo2;
+// import frc.robot.subsystems.LinearServo2;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.LinearServo;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -50,17 +53,14 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Climber climber = new Climber();
   private final NavX navX = new NavX();
-  private final LinearServo servo = new LinearServo();
-  private final LinearServo2 servo2 = new LinearServo2(0);
+  // private final LinearServo2 servo2 = new LinearServo2(0);
 
   private final Intake intake = new Intake();
   private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
   private final JoystickButton leftBumper = new JoystickButton(drivePad, 5);
   private final JoystickButton rightBumper = new JoystickButton(drivePad, 6);
 
-  public SendableChooser<String> chooser;
-  private final String test = "test";
-  private final String competition = "competition";
+  private final LinearServo servo = new LinearServo();
 
   // private final Intake intake = new Intake();
   // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
@@ -76,6 +76,12 @@ public class RobotContainer {
   private final JoystickButton driveY = new JoystickButton(drivePad, 4);
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
 
+  public SendableChooser<String> chooser;
+  private final OneBallAuto oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
+  private final TwoBallAuto twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
+  private final String OneBall = "OneBall";
+  private final String TwoBall = "TwoBall";
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -87,10 +93,10 @@ public class RobotContainer {
     // SmartDashboard.putData("idk", new ChangeDriveMode(driveTrain));
 
     chooser = new SendableChooser<String>();
-    chooser.setDefaultOption("Test", test);
-    chooser.addOption("Competition", competition);
+    chooser.setDefaultOption("TwoBall", TwoBall);
+    chooser.addOption("OneBall", OneBall);
 
-    SmartDashboard.putData("Climber Speed", chooser);
+    SmartDashboard.putData("AUTO CHOOSER", chooser);
   }
 
   /**
@@ -102,9 +108,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //rightBumper.whileHeld(new IntakeCargo(intake, true));
+    rightBumper.whileHeld(new CargoManipulation(intake, shooter, true, false));
     // leftBumper.whileHeld(new FeederToShooter(intake, shooter));
-    leftBumper.whileHeld(new CargoManipulation(intake, shooter, false));
+    leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
     // buttonX.whenPressed(new IntakeCargo(intake, false));
     // rightBumper.whileHeld(new IntakeCargo(intake, true));
     // leftBumper.whenPressed(new Shoot(shooter));
@@ -114,7 +120,7 @@ public class RobotContainer {
 
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
     // driveB.whenPressed(new ChangeDriveMode(driveTrain));
-    driveY.whileHeld(new ClimbUp(climber, servo2));
+    driveY.whileHeld(new ClimbUp(climber));
     driveY.whileHeld(new PistonMove(servo));
     // driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
@@ -126,15 +132,21 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    // if (chooser.getSelected().equals(test)) {
-
-    // }
-    return new DriveStraight(driveTrain, 60); // in inches
-    // return new TurnToAngle(driveTrain, navX, 90);
+    if(chooser.getSelected().equals(TwoBall)) {
+      return twoBallAuto_command;
+    }
+    else if(chooser.getSelected().equals(OneBall)) {
+      return oneBallAuto_command;
+    }
+    else {
+      return new DriveStraight(driveTrain, 50);
+    }
   }
 
   public Command getTestCommand() {
     return new Calibration(climber);
+  }
+  public Climber getClimber(){
+    return climber;
   }
 }

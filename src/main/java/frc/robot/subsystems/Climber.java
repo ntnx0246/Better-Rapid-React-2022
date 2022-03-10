@@ -15,13 +15,14 @@ public class Climber extends SubsystemBase {
 
   public TalonFX leftMotor;
   public TalonFX rightMotor;
+  public boolean initalized = false;
 
   /** Creates a new Climber. */
   public Climber() {
     leftMotor = new TalonFX(Constants.CLIMBER_LEFT_ID);
     rightMotor = new TalonFX(Constants.CLIMBER_RIGHT_ID);
 
-    leftMotor.setInverted(true);
+    rightMotor.setInverted(true);
 
     leftMotor.setNeutralMode(NeutralMode.Brake);
     rightMotor.setNeutralMode(NeutralMode.Brake);
@@ -31,15 +32,28 @@ public class Climber extends SubsystemBase {
     rightMotor.configPeakOutputForward(1);
     rightMotor.configPeakOutputReverse(-1);
 
-    leftMotor.config_kP(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_P);
-    leftMotor.config_kI(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_I);
-    leftMotor.config_kD(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_D);
-    leftMotor.config_kF(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_F);
-    rightMotor.config_kP(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_P);
-    rightMotor.config_kI(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_I);
-    rightMotor.config_kD(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_D);
-    rightMotor.config_kF(Constants.CLIMBER_SLOT_ID, Constants.CLIMBER_F);
-    System.out.println("initalized climber AHAHAHAHAAHAHAHAHAHAHAHAHHAA");
+    leftMotor.config_kP(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_P_0);
+    leftMotor.config_kI(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_I_0);
+    leftMotor.config_kD(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_D_0);
+    leftMotor.config_kF(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_F_0);
+    rightMotor.config_kP(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_P_0);
+    rightMotor.config_kI(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_I_0);
+    rightMotor.config_kD(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_D_0);
+    rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_F_0);
+
+    leftMotor.config_kP(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_P_1);
+    leftMotor.config_kI(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_I_1);
+    leftMotor.config_kD(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_D_1);
+    leftMotor.config_kF(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_F_1);
+    rightMotor.config_kP(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_P_1);
+    rightMotor.config_kI(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_I_1);
+    rightMotor.config_kD(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_D_1);
+    rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_F_1);
+  }
+
+  public void selectProfile(int id){
+    leftMotor.selectProfileSlot(id, 0);
+    rightMotor.selectProfileSlot(id, 0);
   }
 
   public void climb(double speed) {
@@ -107,6 +121,13 @@ public class Climber extends SubsystemBase {
 
   public double getVelocityRight() {
     return rightMotor.getSelectedSensorVelocity();
+  }
+
+  public void setInitalized(boolean initalized){
+    this.initalized = initalized;
+  }
+  public boolean getIntialized(){
+    return initalized;
   }
   // limit the encoder for climber when going up, don't let the numbers get to
   // high
