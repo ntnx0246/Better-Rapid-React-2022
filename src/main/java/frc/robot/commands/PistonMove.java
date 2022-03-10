@@ -13,6 +13,7 @@ public class PistonMove extends CommandBase {
 
     private final LinearServo servo;
     private int counter;
+    private boolean calibrating;
 
     public PistonMove(LinearServo servo) {
         // Use addRequirements() here to declare subsystem dependencies.

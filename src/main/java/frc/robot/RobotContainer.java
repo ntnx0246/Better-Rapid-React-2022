@@ -149,4 +149,7 @@ public class RobotContainer {
   public Climber getClimber(){
     return climber;
   }
+  public Command getTest2Command(){
+    return new PistonMove(servo);
+  }
 }

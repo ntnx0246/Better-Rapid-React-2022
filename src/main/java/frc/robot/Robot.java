@@ -120,10 +120,11 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().enable();
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().schedule(m_robotContainer.getTestCommand());
-    CommandScheduler.getInstance().schedule(new PistonMove(servo));
+    CommandScheduler.getInstance().schedule(m_robotContainer.getTest2Command());
     // CommandScheduler.getInstance().run();
     // m_robotContainer.getTestCommand().schedule();
-    // m_robotContainer.getTestCommand().execute();
+    m_robotContainer.getTestCommand().execute();
+    m_robotContainer.getTest2Command().execute();
 
     // CommandScheduler.getInstance().cancelAll();
     // servo = new LinearServo();
