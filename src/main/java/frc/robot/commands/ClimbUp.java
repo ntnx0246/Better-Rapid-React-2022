@@ -37,7 +37,7 @@ public class ClimbUp extends CommandBase {
     climber.setPositionLeft(Constants.CLIMBER_UP_ENCODER_LEFT);
     climber.setPositionRight(Constants.CLIMBER_UP_ENCODER_RIGHT);
     if(servo != null){
-      servo.setPosition(100);
+      servo.setPosition(50);
     }
     // climber.setPositionLeft(1000);
     // climber.setPositionRight(1000);
