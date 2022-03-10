@@ -20,6 +20,7 @@ public final class Constants {
 
   public static final int INTAKE_TOP_SPARK = 2;
   public static final int INTAKE_BOTTOM_SPARK = 3;
+  public static final int INTAKE_FRONT_SPARK = 1;
   public static final double INTAKE_SPEED = 0.4;
   public static final double INTAKE_TOP_SPEED = 0.6;
   public static final double INTAKE_BOTTOM_SPEED = 0.25;
