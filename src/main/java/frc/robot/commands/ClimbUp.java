@@ -26,7 +26,7 @@ public class ClimbUp extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climber);
     this.servo = servo;
-    servo.setPosition(0);
+    // servo.setPosition(0);
     this.climber = climber;
   }
 
@@ -36,9 +36,9 @@ public class ClimbUp extends CommandBase {
     climber.climb(Constants.CLIMBER_UP_SPEED);
     climber.setPositionLeft(Constants.CLIMBER_UP_ENCODER_LEFT);
     climber.setPositionRight(Constants.CLIMBER_UP_ENCODER_RIGHT);
-    if(servo != null){
-      servo.setPosition(100);
-    }
+    // if(servo != null){
+    //   servo.setPosition(100);
+    // }
     // climber.setPositionLeft(1000);
     // climber.setPositionRight(1000);
   }
@@ -52,7 +52,7 @@ public class ClimbUp extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     climber.stop();
-    servo.setPosition(0);
+    // servo.setPosition(0);
   }
 
   // Returns true when the command should end.

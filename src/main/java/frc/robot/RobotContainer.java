@@ -18,6 +18,7 @@ import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PistonMove;
 //import frc.robot.commands.IntakeCargo;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LinearServo;
@@ -114,6 +115,7 @@ public class RobotContainer {
     // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
     // driveB.whenPressed(new ChangeDriveMode(driveTrain));
     driveY.whileHeld(new ClimbUp(climber, servo2));
+    driveY.whileHeld(new PistonMove(servo));
     // driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
   }
