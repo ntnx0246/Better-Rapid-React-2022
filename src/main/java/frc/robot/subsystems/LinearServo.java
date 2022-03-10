@@ -31,12 +31,12 @@ public class LinearServo extends SubsystemBase {
     // m_speed = speed;
   }
 
-  public void setSpeed(double speed) {
-    // = MathUtil.clamp(setpoint, 0, m_length);
-    left.setSpeed(Constants.LINEARSERVO_SPEED);
-    right.setSpeed(Constants.LINEARSERVO_SPEED);
-    //right.setPosition(setPos);
-  }
+  // public void setSpeed(double speed) {
+  //   // = MathUtil.clamp(setpoint, 0, m_length);
+  //   left.setSpeed(Constants.LINEARSERVO_SPEED);
+  //   right.setSpeed(Constants.LINEARSERVO_SPEED);
+  //   //right.setPosition(setPos);
+  // }
 
   public void setPosition(double value){
     value = MathUtil.clamp(value, 0, 1);
@@ -44,22 +44,32 @@ public class LinearServo extends SubsystemBase {
     right.set(value);
   }
 
-  double lastTime = 0;
-  
-  public void updateCurPos() {
-    double dt = Timer.getFPGATimestamp() - lastTime;
-    if (curPos > setPos + m_speed * dt) {
-      curPos -= m_speed * dt;
-    } else if (curPos < setPos - m_speed * dt) {
-      curPos += m_speed * dt;
-    } else {
-      curPos = setPos;
-    }
+  public double getLeftPosition(){
+    System.out.println(left.get());
+    return left.get();
   }
 
-  public double getPosition() {
-    return curPos;
+  public double getRightPosition() {
+    System.out.println(right.get());
+    return right.get();
   }
+
+  // double lastTime = 0;
+  
+  // public void updateCurPos() {
+  //   double dt = Timer.getFPGATimestamp() - lastTime;
+  //   if (curPos > setPos + m_speed * dt) {
+  //     curPos -= m_speed * dt;
+  //   } else if (curPos < setPos - m_speed * dt) {
+  //     curPos += m_speed * dt;
+  //   } else {
+  //     curPos = setPos;
+  //   }
+  // }
+
+  // public double getPosition() {
+  //   return curPos;
+  // }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

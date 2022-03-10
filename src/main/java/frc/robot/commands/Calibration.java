@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
+// import frc.robot.subsystems.LinearServo2;
 
 public class Calibration extends CommandBase {
   /** Creates a new Calibration. */
@@ -15,6 +16,7 @@ public class Calibration extends CommandBase {
   boolean leftDone;
   boolean rightDone;
   Timer timer;
+  // LinearServo2 servo;
 
   public Calibration(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -23,6 +25,7 @@ public class Calibration extends CommandBase {
     leftDone = false;
     rightDone = false;
     timer = new Timer();
+    // this.servo = servo;
   }
 
   // Called when the command is initially scheduled.
@@ -32,6 +35,7 @@ public class Calibration extends CommandBase {
     timer.start();
     System.out.println("*********climber climb with speed******");
     climber.climb(Constants.CALIBRATION_SPEED); // make constant
+    // servo.setMyPosition(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -65,8 +69,8 @@ public class Calibration extends CommandBase {
   @Override
   public boolean isFinished() {
     System.out.println("Calibration isFinished: " + (rightDone && leftDone));
-    return rightDone && leftDone;
-    // return false;
+    // return rightDone && leftDone;
+    return false;
   }
 
   /*

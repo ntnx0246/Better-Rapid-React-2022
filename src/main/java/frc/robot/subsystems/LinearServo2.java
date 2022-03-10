@@ -37,15 +37,13 @@ public class LinearServo2 extends Servo {
    */
   public void setPosition(double setpoint) {
     System.out.println("AHAHAHAAHAHAFDKSLDKSJKLASLJKDFJKDJFK");
-    setPos = MathUtil.clamp(setpoint, 0, m_angle);
-    try {
-      super.setSpeed(-1);
-      
-    } catch (Exception e) {
-      //  TODO: handle exception
-      System.out.println(e);
-    }
-    
+    setPos = MathUtil.clamp(setpoint, 0, 1);
+    super.set(setPos);
+  }
+
+  public void setMyPosition(double setpoint){
+    setPos = MathUtil.clamp(setpoint, 0, 1);
+    super.set(setPos);
   }
 
   double lastTime = 0;
