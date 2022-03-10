@@ -55,6 +55,7 @@ public final class Constants {
 
   public static final double SLOW_MODE = 0.5;
   public static final double REGULAR_MODE = 1.0;
+  public static final double REGULAR_MODE_TURN = 0.65;
 
   // drivetrain PID
   public static final int SLOT_ID = 0;

@@ -36,7 +36,7 @@ public class ClimbDown extends CommandBase {
       goal = 21000; // 25000
 
     } else {
-      goal = 1000;
+      goal = 21000; //1000
     }
   }
 
