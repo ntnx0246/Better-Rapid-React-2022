@@ -73,7 +73,6 @@ public class RobotContainer {
 
     driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, drivePad));
     configureButtonBindings();
-    // SmartDashboard.putData("idk", new ChangeDriveMode(driveTrain));
 
     chooser = new SendableChooser<String>();
     chooser.setDefaultOption("TwoBall", TwoBall);
@@ -92,20 +91,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     rightBumper.whileHeld(new CargoManipulation(intake, shooter, true, false));
-    // leftBumper.whileHeld(new FeederToShooter(intake, shooter));
     leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
-    // buttonX.whenPressed(new IntakeCargo(intake, false));
-    // rightBumper.whileHeld(new IntakeCargo(intake, true));
-    // leftBumper.whenPressed(new Shoot(shooter));
 
-    // driveA.whileHeld(new ClimbUp(climber)); //opY
-    // opA.whileHeld(new ClimbDown(climber)); //opA
-
-    // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
-    // driveB.whenPressed(new ChangeDriveMode(driveTrain));
     driveY.whileHeld(new ClimbUp(climber));
-    // driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
+    driveB.whenPressed(new ChangeDriveMode(driveTrain));
   }
 
   /**
