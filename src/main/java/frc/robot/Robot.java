@@ -152,7 +152,7 @@ public class Robot extends TimedRobot {
     if (servo_counter > 100) {
       servo.setPosition(1);
     } else {
-      servo.setPosition(0.5);
+      servo.setPosition(0.4);
     }
   }
 }

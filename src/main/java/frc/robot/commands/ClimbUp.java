@@ -37,9 +37,9 @@ public class ClimbUp extends CommandBase {
     climber.setPositionLeft(Constants.CLIMBER_UP_ENCODER_LEFT);
     climber.setPositionRight(Constants.CLIMBER_UP_ENCODER_RIGHT);
     System.out.println("stuff is wrong");
-    if (servo != null) {
-      servo.setPosition(0);
-    }
+    // if (servo != null) {
+    //   servo.setPosition(0);
+    // }
     climber.setInitalized(true);
     // climber.setPositionLeft(1000);
     // climber.setPositionRight(1000);
@@ -48,18 +48,18 @@ public class ClimbUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (servo != null) {
-      servo.setPosition(0);
-    }
+    // if (servo != null) {
+    //   servo.setPosition(0);
+    // }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     climber.stop();
-    if (servo != null) {
-      servo.setPosition(1);
-    }
+    // if (servo != null) {
+    //   servo.setPosition(1);
+    // }
     // servo.setPosition(1);
   }
 
