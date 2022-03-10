@@ -15,6 +15,8 @@ public class ClimbDown extends CommandBase {
 
   private final Climber climber;
   private int goal;
+  private double climberEncoder;
+
 
   public ClimbDown(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -25,20 +27,21 @@ public class ClimbDown extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // climber.climb(Constants.CLIMBER_DOWN_SPEED);
-    System.out.println("initialize climb down");
+    climber.climb(Constants.CLIMBER_DOWN_SPEED);
+    System.out.println("finished climb down initalize");
 
-    if (climber.getRightEncoderCount() > 50000) {
+    climberEncoder = Math.abs(climber.getLeftEncoderCount());
+    if (climberEncoder > 50000) {
+
       goal = 21000; // 25000
 
     } else {
       goal = 1000;
     }
-    climber.setPosition(goal);
-    System.out.println("finished climb down initalize");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
+
   @Override
   public void execute() {
     // if (climber.getRightEncoderCount() < goal) {
@@ -47,6 +50,16 @@ public class ClimbDown extends CommandBase {
     // else {
     // climber.printEncoders();
     // }
+    climberEncoder = Math.abs(climber.getLeftEncoderCount());
+    if (climberEncoder < 100000) { // 25000
+      if (goal == 1000) {
+        climber.selectProfile(1);
+      } else {
+        climber.selectProfile(0);
+      }
+      climber.setPosition(goal);
+    }
+
 
   }
 
