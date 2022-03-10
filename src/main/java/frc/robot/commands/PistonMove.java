@@ -18,6 +18,7 @@ public class PistonMove extends CommandBase {
     public PistonMove(LinearServo servo) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.servo = servo;
+        counter = 0;
     }
 
     // Called when the command is initially scheduled.
@@ -46,6 +47,9 @@ public class PistonMove extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+        if (counter > 200){
+            return true;
+        }
         return false;
     }
 }
