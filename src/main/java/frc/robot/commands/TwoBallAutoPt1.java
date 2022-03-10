@@ -5,21 +5,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Constants;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class FeederToShooter extends ParallelCommandGroup {
-  /** Creates a new IntakeBalls. */
-
-  public FeederToShooter(Intake intake, Shooter shooter) {
+public class TwoBallAutoPt1 extends ParallelCommandGroup {
+  /** Creates a new TwoBallAutoPt1. */
+  public TwoBallAutoPt1(DriveTrain driveTrain, Shooter shooter, Intake intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new Shoot(shooter), new IntakeCargo(intake, false));
-
-    
-
+    addCommands(new DriveStraight(driveTrain, Constants.TWOBALLAUTO_GET_SECONDBALL_GOAL),
+                new CargoManipulation(intake, shooter, true, true));
   }
 }

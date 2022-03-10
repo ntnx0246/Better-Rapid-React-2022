@@ -64,6 +64,7 @@ public class Calibration extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    System.out.println("Calibration isFinished: " + (rightDone && leftDone));
     return rightDone && leftDone;
     // return false;
   }

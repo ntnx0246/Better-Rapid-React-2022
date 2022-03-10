@@ -18,7 +18,8 @@ import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.IntakeCargo;
+import frc.robot.commands.OneBallAuto;
+import frc.robot.commands.TwoBallAuto;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -47,29 +48,22 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Climber climber = new Climber();
   private final NavX navX = new NavX();
-
   private final Intake intake = new Intake();
-  private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
+
+  private final JoystickButton driveA = new JoystickButton(drivePad, 1);
+  private final JoystickButton driveB = new JoystickButton(drivePad, 2);
+  private final JoystickButton driveX = new JoystickButton(drivePad, 3);
+  private final JoystickButton driveY = new JoystickButton(drivePad, 4);
   private final JoystickButton leftBumper = new JoystickButton(drivePad, 5);
   private final JoystickButton rightBumper = new JoystickButton(drivePad, 6);
+  private final JoystickButton driveBackButton = new JoystickButton(drivePad, 7);
+  private final JoystickButton driveStartButton = new JoystickButton(drivePad, 8);
 
   public SendableChooser<String> chooser;
-  private final String test = "test";
-  private final String competition = "competition";
-
-  // private final Intake intake = new Intake();
-  // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
-  // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
-  // private final JoystickButton startButton = new JoystickButton(drivePad, 8);
-  // private final JoystickButton opY = new JoystickButton(opPad, 4);
-  // private final JoystickButton opA = new JoystickButton(opPad, 1);
-
-  // private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
-  // private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
-  // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
-
-  private final JoystickButton driveY = new JoystickButton(drivePad, 4);
-  private final JoystickButton driveA = new JoystickButton(drivePad, 1);
+  private final OneBallAuto oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
+  private final TwoBallAuto twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
+  private final String OneBall = "OneBall";
+  private final String TwoBall = "TwoBall";
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -79,13 +73,12 @@ public class RobotContainer {
 
     driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, drivePad));
     configureButtonBindings();
-    // SmartDashboard.putData("idk", new ChangeDriveMode(driveTrain));
 
     chooser = new SendableChooser<String>();
-    chooser.setDefaultOption("Test", test);
-    chooser.addOption("Competition", competition);
+    chooser.setDefaultOption("TwoBall", TwoBall);
+    chooser.addOption("OneBall", OneBall);
 
-    SmartDashboard.putData("Climber Speed", chooser);
+    SmartDashboard.putData("AUTO CHOOSER", chooser);
   }
 
   /**
@@ -97,21 +90,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    rightBumper.whileHeld(new IntakeCargo(intake, true));
-    // leftBumper.whileHeld(new FeederToShooter(intake, shooter));
-    leftBumper.whileHeld(new CargoManipulation(intake, shooter, false));
-    // buttonX.whenPressed(new IntakeCargo(intake, false));
-    // rightBumper.whileHeld(new IntakeCargo(intake, true));
-    // leftBumper.whenPressed(new Shoot(shooter));
+    rightBumper.whileHeld(new CargoManipulation(intake, shooter, true, false));
+    leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
 
-    // driveA.whileHeld(new ClimbUp(climber)); //opY
-    // opA.whileHeld(new ClimbDown(climber)); //opA
-
-    // buttonA.whenPressed(new ArcadeDrive(driveTrain, drivePad));
-    // driveB.whenPressed(new ChangeDriveMode(driveTrain));
     driveY.whileHeld(new ClimbUp(climber));
-    // driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
+    driveB.whenPressed(new ChangeDriveMode(driveTrain));
   }
 
   /**
@@ -120,12 +104,15 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    // if (chooser.getSelected().equals(test)) {
-
-    // }
-    return new DriveStraight(driveTrain, 60); // in inches
-    // return new TurnToAngle(driveTrain, navX, 90);
+    if(chooser.getSelected().equals(TwoBall)) {
+      return twoBallAuto_command;
+    }
+    else if(chooser.getSelected().equals(OneBall)) {
+      return oneBallAuto_command;
+    }
+    else {
+      return new DriveStraight(driveTrain, 50);
+    }
   }
 
   public Command getTestCommand() {
