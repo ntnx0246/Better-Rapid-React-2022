@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 
 import frc.robot.commands.DriveStraight;
-import frc.robot.commands.Shoot;
 import frc.robot.commands.CargoManipulation;
 
 import frc.robot.subsystems.DriveTrain;
