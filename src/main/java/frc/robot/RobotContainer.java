@@ -18,7 +18,6 @@ import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.IntakeCargo;
 import frc.robot.commands.OneBallAuto;
 import frc.robot.commands.TwoBallAuto;
 import frc.robot.subsystems.Intake;
