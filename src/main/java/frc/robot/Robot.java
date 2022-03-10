@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Calibration;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.LinearServo;
+import frc.robot.commands.PistonMove;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -119,13 +120,15 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().enable();
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().schedule(m_robotContainer.getTestCommand());
+    CommandScheduler.getInstance().schedule(new PistonMove(servo));
     // CommandScheduler.getInstance().run();
     // m_robotContainer.getTestCommand().schedule();
-    m_robotContainer.getTestCommand().execute();
+    // m_robotContainer.getTestCommand().execute();
+
     // CommandScheduler.getInstance().cancelAll();
-    servo = new LinearServo();
-    servo_counter = 0;
-    System.out.println("servo SHOULD BE FALSEEEEE");
+    // servo = new LinearServo();
+    // servo_counter = 0;
+    // System.out.println("servo SHOULD BE FALSEEEEE");
   }
 
   /** This function is called periodically during test mode. */
@@ -144,15 +147,15 @@ public class Robot extends TimedRobot {
     // } else {
     //   servo.setPosition(0.4);
     // }
-
+      
 
 
     
-    servo_counter++;
-    if (servo_counter > 100) {
-      servo.setPosition(1);
-    } else {
-      servo.setPosition(0.4);
-    }
+    // servo_counter++;
+    // if (servo_counter > 100) {
+    // servo.setPosition(1);
+    // } else {
+    // servo.setPosition(0.4);
+    // }
   }
 }
