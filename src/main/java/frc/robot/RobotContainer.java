@@ -20,7 +20,6 @@ import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
 //import frc.robot.commands.IntakeCargo;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.LinearServo;
 import frc.robot.subsystems.LinearServo2;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -49,7 +48,6 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Climber climber = new Climber();
   private final NavX navX = new NavX();
-  private final LinearServo servo = new LinearServo();
   private final LinearServo2 servo2 = new LinearServo2(0);
 
   private final Intake intake = new Intake();
