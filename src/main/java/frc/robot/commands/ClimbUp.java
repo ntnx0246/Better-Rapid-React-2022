@@ -7,17 +7,27 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.LinearServo;
 
 public class ClimbUp extends CommandBase {
   /** Creates a new ClimbTeleop. */
-  
-  private final Climber climber; 
-  
+
+  private final Climber climber;
+  private final LinearServo servo;
+
   public ClimbUp(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(climber); 
-    this.climber = climber; 
+    addRequirements(climber);
+    this.climber = climber;
+    servo = null;
+  }
 
+  public ClimbUp(Climber climber, LinearServo servo) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(climber);
+    this.servo = servo;
+    // servo.setPosition(0);
+    this.climber = climber;
   }
 
   // Called when the command is initially scheduled.
@@ -26,6 +36,14 @@ public class ClimbUp extends CommandBase {
     climber.climb(Constants.CLIMBER_UP_SPEED);
     climber.setPositionLeft(Constants.CLIMBER_UP_ENCODER_LEFT);
     climber.setPositionRight(Constants.CLIMBER_UP_ENCODER_RIGHT);
+    // if(servo != null){
+    //   servo.setPosition(100);
+    // }
+    System.out.println("stuff is wrong");
+    // if (servo != null) {
+    //   servo.setPosition(0);
+    // }
+    climber.setInitalized(true);
     // climber.setPositionLeft(1000);
     // climber.setPositionRight(1000);
   }
@@ -33,12 +51,20 @@ public class ClimbUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // if (servo != null) {
+    //   servo.setPosition(0);
+    // }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     climber.stop();
+    // servo.setPosition(0);
+    // if (servo != null) {
+    //   servo.setPosition(1);
+    // }
+    // servo.setPosition(1);
   }
 
   // Returns true when the command should end.

@@ -15,6 +15,7 @@ public class Climber extends SubsystemBase {
 
   public TalonFX leftMotor;
   public TalonFX rightMotor;
+  public boolean initalized = false;
 
   /** Creates a new Climber. */
   public Climber() {
@@ -120,6 +121,13 @@ public class Climber extends SubsystemBase {
 
   public double getVelocityRight() {
     return rightMotor.getSelectedSensorVelocity();
+  }
+
+  public void setInitalized(boolean initalized){
+    this.initalized = initalized;
+  }
+  public boolean getIntialized(){
+    return initalized;
   }
   // limit the encoder for climber when going up, don't let the numbers get to
   // high

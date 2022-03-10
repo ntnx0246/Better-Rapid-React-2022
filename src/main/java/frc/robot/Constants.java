@@ -89,6 +89,10 @@ public final class Constants {
   public static final double CLIMBER_F_1 = 0;
   public static final int CLIMBER_SLOT_ID_1 = 1;
 
+  public static final int LINEARSERVO_LEFT_CHANNEL = 0;
+  public static final int LINEARSERVO_RIGHT_CHANNEL = 1;
+  public static final double LINEARSERVO_SPEED = 0.5;
+
 
   public static final double CLIMBER_UP_ENCODER_RIGHT = 236000;
   public static final double CLIMBER_UP_ENCODER_LEFT = 229000;
