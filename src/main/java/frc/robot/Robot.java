@@ -108,10 +108,10 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    System.out.println(climber.getIntialized());
-    if(climber.getIntialized()){
-      servo.setPosition(0);
-    }
+    // System.out.println(climber.getIntialized());
+    // if(climber.getIntialized()){
+    //   servo.setPosition(0);
+    // }
   }
 
   @Override
