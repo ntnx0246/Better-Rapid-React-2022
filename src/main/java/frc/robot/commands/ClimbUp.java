@@ -34,6 +34,7 @@ public class ClimbUp extends CommandBase {
   @Override
   public void initialize() {
     climber.climb(Constants.CLIMBER_UP_SPEED);
+    climber.selectProfile(2);
     climber.setPositionLeft(Constants.CLIMBER_UP_ENCODER_LEFT);
     climber.setPositionRight(Constants.CLIMBER_UP_ENCODER_RIGHT);
     // if(servo != null){

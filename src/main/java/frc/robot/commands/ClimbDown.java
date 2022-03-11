@@ -34,9 +34,10 @@ public class ClimbDown extends CommandBase {
     if (climberEncoder > 50000) {
 
       goal = 21000; // 25000
-
+      climber.selectProfile(0);
     } else {
-      goal = 21000; //1000
+      goal = 1000; //1000
+      climber.selectProfile(1);
     }
   }
 
@@ -52,13 +53,15 @@ public class ClimbDown extends CommandBase {
     // }
     climberEncoder = Math.abs(climber.getLeftEncoderCount());
     if (climberEncoder < 100000) { // 25000
-      if (goal == 1000) {
-        climber.selectProfile(1);
-      } else {
-        climber.selectProfile(0);
-      }
-      climber.setPosition(goal);
+      // if (goal == 1000) {
+      //   climber.selectProfile(1);
+      // } else {
+      //   climber.selectProfile(0);
+      // }
+      climber.setPositionLeft(goal*0.9762);
+      climber.setPositionRight(goal);
     }
+
 
 
   }
