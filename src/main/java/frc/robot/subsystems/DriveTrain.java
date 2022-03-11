@@ -35,6 +35,16 @@ public class DriveTrain extends SubsystemBase {
     frontR.setInverted(true);
     backR.setInverted(true);
 
+    frontL.configClosedloopRamp(Constants.CLOSED_LOOP_RAMP);
+    frontR.configClosedloopRamp(Constants.CLOSED_LOOP_RAMP);
+    backL.configClosedloopRamp(Constants.CLOSED_LOOP_RAMP);
+    backR.configClosedloopRamp(Constants.CLOSED_LOOP_RAMP);
+
+    frontL.configOpenloopRamp(Constants.OPEN_LOOP_RAMP);
+    frontR.configOpenloopRamp(Constants.OPEN_LOOP_RAMP);
+    backL.configOpenloopRamp(Constants.OPEN_LOOP_RAMP);
+    backR.configOpenloopRamp(Constants.OPEN_LOOP_RAMP);
+    
     frontL.configPeakOutputForward(1);
     frontL.configPeakOutputReverse(-1);
     frontR.configPeakOutputForward(1);
