@@ -115,7 +115,7 @@ public class RobotContainer {
     leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
 
     driveY.whileHeld(new ClimbUp(climber));
-    driveY.whileHeld(new PistonMove(servo));
+    driveX.whileHeld(new PistonMove(servo));
     // driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
     driveB.whenPressed(new ChangeDriveMode(driveTrain));
