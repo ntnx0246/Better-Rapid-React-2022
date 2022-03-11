@@ -87,7 +87,7 @@ public final class Constants {
   public static final int CLIMBER_SLOT_ID_0 = 0;
 
   public static final double CLIMBER_P_1 = 0.05;
-  public static final double CLIMBER_I_1 = 0;
+  public static final double CLIMBER_I_1 = 0.0005;
   public static final double CLIMBER_D_1 = 0;
   public static final double CLIMBER_F_1 = 0;
   public static final int CLIMBER_SLOT_ID_1 = 1;
