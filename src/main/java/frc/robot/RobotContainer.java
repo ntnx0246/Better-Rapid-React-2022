@@ -129,11 +129,9 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     if(chooser.getSelected().equals(TwoBall)) {
       return twoBallAuto_command;
-    }
-    else if(chooser.getSelected().equals(OneBall)) {
+    } else if(chooser.getSelected().equals(OneBall)) {
       return oneBallAuto_command;
-    }
-    else {
+    } else {
       return new DriveStraight(driveTrain, 50);
     }
   }
@@ -147,4 +145,5 @@ public class RobotContainer {
   public Command getTest2Command(){
     return new PistonMove(servo);
   }
+
 }

@@ -30,7 +30,7 @@ public final class Constants {
   public static final int SHOOTER_LEFT_ID = 5;
   public static final int SHOOTER_RIGHT_ID = 4;
   public static final double SHOOTER_SPEED = -0.6;
-  public static final double SHOOTER_VELOCITY = -3000;
+  public static final double SHOOTER_VELOCITY = -3200;
   public static final double SHOOTER_RPM_TOLERANCE = 50;
 
   public static final double SHOOTER_P = 0.0001;
@@ -72,8 +72,8 @@ public final class Constants {
   public static final int CRUISE_VELOCITY = 7000; // max is around 21500
   public static final int ACCELERATION = 3500;
   public static final int ERROR_THRESHOLD = 500;
-  public static final double OPEN_LOOP_RAMP = 5;
-  public static final double CLOSED_LOOP_RAMP = 5;
+  public static final double OPEN_LOOP_RAMP = .5;
+  public static final double CLOSED_LOOP_RAMP = .5;
 
   public static final double ERROR_ANGLE_TOLERANCE = 5;
   public static final double AUTO_CLIMB_TOLERANCE = 50;

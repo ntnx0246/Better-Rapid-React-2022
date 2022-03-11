@@ -10,7 +10,6 @@ import frc.robot.subsystems.LinearServo;
 
 public class PistonMove extends CommandBase {
     /** Creates a new ClimbTeleop. */
-
     private final LinearServo servo;
     private int counter;
     private boolean calibrating;
