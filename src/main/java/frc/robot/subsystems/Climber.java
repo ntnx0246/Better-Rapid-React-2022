@@ -49,6 +49,15 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kI(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_I_1);
     rightMotor.config_kD(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_D_1);
     rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_F_1);
+
+    leftMotor.config_kP(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_P_2);
+    leftMotor.config_kI(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_I_2);
+    leftMotor.config_kD(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_D_2);
+    leftMotor.config_kF(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_F_2);
+    rightMotor.config_kP(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_P_2);
+    rightMotor.config_kI(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_I_2);
+    rightMotor.config_kD(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_D_2);
+    rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_F_2);
   }
 
   public void selectProfile(int id){
@@ -137,6 +146,6 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // System.out.println(rightMotor.getStatorCurrent());
-    // printEncoders();
+    printEncoders();
   }
 }
