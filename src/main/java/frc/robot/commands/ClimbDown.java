@@ -37,11 +37,13 @@ public class ClimbDown extends CommandBase {
       climber.selectProfile(0);
     } else {
       goal = 1000; //1000
-      climber.selectProfile(1);
+      // climber.selectProfile(1);
+      climber.climb(-0.4);
     }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
+
 
   @Override
   public void execute() {
@@ -51,19 +53,18 @@ public class ClimbDown extends CommandBase {
     // else {
     // climber.printEncoders();
     // }
-    climberEncoder = Math.abs(climber.getLeftEncoderCount());
-    if (climberEncoder < 100000) { // 25000
-      // if (goal == 1000) {
-      //   climber.selectProfile(1);
-      // } else {
-      //   climber.selectProfile(0);
-      // }
-      climber.setPositionLeft(goal*0.9762);
-      climber.setPositionRight(goal);
+    if(goal != 1000){
+      climberEncoder = Math.abs(climber.getLeftEncoderCount());
+      if (climberEncoder < 100000) { // 25000
+        // if (goal == 1000) {
+        // climber.selectProfile(1);
+        // } else {
+        // climber.selectProfile(0);
+        // }
+        climber.setPositionLeft(goal * 0.9762);
+        climber.setPositionRight(goal);
+      }
     }
-
-
-
   }
 
   // Called once the command ends or is interrupted.
