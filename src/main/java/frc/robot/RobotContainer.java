@@ -1,7 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -10,10 +8,7 @@ import frc.robot.commands.BackUpAndShoot;
 import frc.robot.commands.Calibration;
 import frc.robot.commands.CargoManipulation;
 import frc.robot.commands.ChangeDriveMode;
-import frc.robot.commands.DriveStraight;
 import frc.robot.commands.PistonMove;
-import frc.robot.commands.Auto.OneBallAuto;
-import frc.robot.commands.Auto.TwoBallAuto;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
 
@@ -56,11 +51,11 @@ public class RobotContainer {
 
   public void configureButtonBindings() {
     rightBumper.whileHeld(new CargoManipulation(intake, shooter, true, false));
+    // TODO look once vision done
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
     leftBumper.whileHeld(new BackUpAndShoot(driveTrain, intake, shooter));
     driveY.whileHeld(new ClimbUp(climber));
     driveX.whileHeld(new PistonMove(servo));
-    // driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
     driveB.whenPressed(new ChangeDriveMode(driveTrain));
   }
@@ -75,5 +70,9 @@ public class RobotContainer {
 
   public Command calibrateServo() {
     return new PistonMove(servo);
+  }
+
+  public void setShooterRPM(){
+    shuffleBoard.setShooterRPM();
   }
 }

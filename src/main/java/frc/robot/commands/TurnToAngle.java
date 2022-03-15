@@ -14,9 +14,9 @@ public class TurnToAngle extends CommandBase {
   private final NavX navX;
   private double goalAngle;
   private double currentAngle;
+
   /** Creates a new TurnToAngle. */
   public TurnToAngle(DriveTrain driveTrain, NavX navX, double goalAngle) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain, navX);
     this.driveTrain = driveTrain;
     this.navX = navX;
@@ -24,28 +24,24 @@ public class TurnToAngle extends CommandBase {
     this.currentAngle = 0.0;
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     navX.reset();
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     currentAngle = navX.getAngle();
     double errorAngle = goalAngle - currentAngle;
-    double power = errorAngle/goalAngle;
+    double power = errorAngle / goalAngle;
     driveTrain.tankDrive(power, -power);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     driveTrain.stop();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     double errorAngle = goalAngle - currentAngle;

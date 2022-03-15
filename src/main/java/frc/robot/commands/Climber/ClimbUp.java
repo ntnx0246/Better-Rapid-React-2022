@@ -21,7 +21,6 @@ public class ClimbUp extends CommandBase {
     climber.selectProfile(2);
     climber.setPositionLeft(Constants.Climber.UP_ENCODER_LEFT);
     climber.setPositionRight(Constants.Climber.UP_ENCODER_RIGHT);
-    System.out.println("stuff is wrong");
   }
 
   @Override

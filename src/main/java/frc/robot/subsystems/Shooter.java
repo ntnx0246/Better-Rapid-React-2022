@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
@@ -13,13 +9,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class Shooter extends SubsystemBase {
-  /** Creates a new Shooter. */
   private CANSparkMax left;
   private CANSparkMax right;
   private SparkMaxPIDController leftPIDController;
   private SparkMaxPIDController rightPIDController;
   private RelativeEncoder leftEncoder;
   private RelativeEncoder rightEncoder;
+  private int shooterVelocity;
 
   public Shooter() {
     left = new CANSparkMax(Constants.ID.SHOOTER_LEFT, MotorType.kBrushless);
@@ -49,13 +45,11 @@ public class Shooter extends SubsystemBase {
     right.set(speed);
   }
 
-  // set velocity
   public void setVelocity(double velocity) {
     leftPIDController.setReference(velocity, CANSparkMax.ControlType.kVelocity);
     rightPIDController.setReference(velocity, CANSparkMax.ControlType.kVelocity);
   }
 
-  // get velocity
   public double getLeftVelocity() {
     return leftEncoder.getVelocity();
   }
@@ -64,8 +58,14 @@ public class Shooter extends SubsystemBase {
     return rightEncoder.getVelocity();
   }
 
-  // one starts shooter motor, second one that pushes game piece into the shooter,
-  // turns of a few seconds after both are shooted.
+  public void setShooterVelocity(int shooterVelocity){
+    this.shooterVelocity = shooterVelocity;
+  }
+
+  public int getShooterVelocity(){
+    return shooterVelocity;
+  }
+  
   public void stop() {
     left.stopMotor();
     right.stopMotor();
@@ -73,7 +73,6 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
     // System.out.println("Left: " + getLeftVelocity());
     // System.out.println("Right: " + getRightVelocity());
   }

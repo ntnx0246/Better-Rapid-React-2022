@@ -12,13 +12,12 @@ import frc.robot.subsystems.DriveTrain;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ChangeDriveMode extends InstantCommand {
   private final DriveTrain driveTrain;
+
   public ChangeDriveMode(DriveTrain driveTrain) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     if (driveTrain.getSlowMode()) {

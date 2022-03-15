@@ -15,14 +15,12 @@ public class AutoClimb extends CommandBase {
   private int count;
 
   public AutoClimb(Climber climber, double goal) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climber);
     this.climber = climber;
     this.goal = goal;
     count = 0;
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     climber.resetEncoders();
@@ -32,7 +30,6 @@ public class AutoClimb extends CommandBase {
     // when current stall the velocity goes down and current goes up
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double error = Math.abs(goal - climber.getLeftEncoderCount());
@@ -43,13 +40,11 @@ public class AutoClimb extends CommandBase {
     }
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     climber.stop();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     // return false;

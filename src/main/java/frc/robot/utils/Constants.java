@@ -17,7 +17,7 @@ package frc.robot.utils;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public final class ID {
+  public final static class ID {
     public static final int INTAKE_OUTSIDE_SPARK = 1;
     public static final int INTAKE_TOP_SPARK = 2;
     public static final int INTAKE_BOTTOM_SPARK = 3;
@@ -31,13 +31,13 @@ public final class Constants {
     public static final int CLIMBER_RIGHT = 11; // 11
   }
 
-  public final class Intake {
+  public final static class Intake {
     public static final double TOP_SPEED = 0.6;
     public static final double BOTTOM_SPEED = 0.25;
     public static final double OUTSIDE_SPEED = -0.5;
   }
 
-  public final class Shooter {
+  public final static class Shooter {
     public static final double PUSH_SPEED = 0.4;
     public static final double FENDER_HIGH_VELOCITY = -3200;
     public static final double FENDER_LOW_VELOCITY = -2000;
@@ -48,7 +48,7 @@ public final class Constants {
     public static final double F = 0.000174;
   }
 
-  public final class DriveTrain {
+  public final static class DriveTrain {
     public static final double SLOW_MODE = 0.5;
     public static final double REGULAR_MODE = 1.0;
     public static final double REGULAR_MODE_TURN = 0.3;
@@ -67,13 +67,13 @@ public final class Constants {
     public static final double ANGLE_TOLERANCE = 5;
   }
 
-  public final class Climber {
+  public final static class Climber {
     public static final double UP_SPEED = 0.3; // 0.3
     public static final double DOWN_SPEED = -0.3; // -0.3
     public static final double CALIBRATION_SPEED = -0.1; // -0.1
     public static final double UP_ENCODER_RIGHT = 236000;
     public static final double UP_ENCODER_LEFT = 229000;
-    
+
     public static final double CLIMB_TOLERANCE = 50;
 
     public static final double P_0 = 0.008;
@@ -95,13 +95,14 @@ public final class Constants {
     public static final int SLOT_ID_2 = 2;
   }
 
-  public final class Auto {
+  public final static class Auto {
     public final class OneBall {
       public static final double DRIVE = -180;
       public static final double SHOOT_VELOCITY = -3000;
 
     }
-    public final class TwoBall {
+
+    public final static class TwoBall {
       public static final double TWOBALLAUTO_GET_SECONDBALL_GOAL = 90;
       public static final double TWOBALLAUTOFORWARD_GOAL = 120;
       public static final double TWOBALLAUTOBACKWARD_GOAL = -180;
@@ -110,12 +111,12 @@ public final class Constants {
     }
   }
 
-  public final class ShuffleBoard {
+  public final static class ShuffleBoard {
     public static final String OneBall = "OneBall";
     public static final String TwoBall = "TwoBall";
 
-    public static final String LOW_RPM  = "3200";
-    public static final String HIGH_RPM = "3500";
+    public static final String LOW_RPM = Double.toString(Shooter.FENDER_LOW_VELOCITY);
+    public static final String HIGH_RPM = Double.toString(Shooter.FENDER_HIGH_VELOCITY);
 
   }
 

@@ -27,11 +27,6 @@ public class ShuffleBoard {
       Shooter shooter,
       DriveTrain driveTrain,
       NavX navX) {
-    // shuffleboard stuff we want:
-    // auto
-    // shooter rpm
-    // camera stuff (this will prolly be in vision file or not maybe thats why our
-    // cam keeps dying)
 
     // AUTO
     autoChoose.setDefaultOption(Constants.ShuffleBoard.OneBall, Constants.ShuffleBoard.OneBall);
@@ -42,6 +37,10 @@ public class ShuffleBoard {
     shooterSpeedChoose.setDefaultOption(Constants.ShuffleBoard.HIGH_RPM, Constants.ShuffleBoard.HIGH_RPM);
     shooterSpeedChoose.addOption(Constants.ShuffleBoard.LOW_RPM, Constants.ShuffleBoard.LOW_RPM);
     SmartDashboard.putData("SHOOTER SPEED", shooterSpeedChoose);
+
+    // TODO auto position 1,2,3
+
+    // TODO camera
   }
 
   public Command getAutonomousCommand() {
@@ -49,6 +48,8 @@ public class ShuffleBoard {
         : twoBallAuto_command;
   }
 
-  
+  public void setShooterRPM() {
+    shooter.setShooterVelocity(Integer.parseInt(shooterSpeedChoose.getSelected()));
+  }
 
 }

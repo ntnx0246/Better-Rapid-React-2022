@@ -30,6 +30,7 @@ public class Vision extends SubsystemBase {
   public double getAngle() {
     NetworkTableEntry angleEntry = this.visionTable.getEntry(ANGLE_ENTRY);
     double angle = angleEntry.getDouble(-1);
+    // TODO kill print
     System.out.println("Angle: " + angle);
     return angle;
   }
@@ -37,6 +38,7 @@ public class Vision extends SubsystemBase {
   public double getDistance() {
     NetworkTableEntry distanceEntry = this.visionTable.getEntry(DISTANCE_ENTRY);
     double distance = distanceEntry.getDouble(-1);
+    // TODO kill print
     System.out.println("Distance: " + distance);
     return distance;
   }

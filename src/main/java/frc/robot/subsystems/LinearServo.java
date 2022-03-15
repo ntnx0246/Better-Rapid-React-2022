@@ -45,31 +45,13 @@ public class LinearServo extends SubsystemBase {
   }
 
   public double getLeftPosition() {
-    System.out.println(left.get());
     return left.get();
   }
 
   public double getRightPosition() {
-    System.out.println(right.get());
     return right.get();
   }
-
-  // double lastTime = 0;
-
-  // public void updateCurPos() {
-  // double dt = Timer.getFPGATimestamp() - lastTime;
-  // if (curPos > setPos + m_speed * dt) {
-  // curPos -= m_speed * dt;
-  // } else if (curPos < setPos - m_speed * dt) {
-  // curPos += m_speed * dt;
-  // } else {
-  // curPos = setPos;
-  // }
-  // }
-
-  // public double getPosition() {
-  // return curPos;
-  // }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

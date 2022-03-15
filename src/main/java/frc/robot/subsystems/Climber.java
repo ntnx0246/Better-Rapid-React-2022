@@ -67,7 +67,6 @@ public class Climber extends SubsystemBase {
   public void climb(double speed) {
     leftMotor.set(ControlMode.PercentOutput, speed);
     rightMotor.set(ControlMode.PercentOutput, speed);
-    System.out.println("got to climb with a speed");
   }
 
   public void climbLeft(double speed) {
@@ -137,8 +136,6 @@ public class Climber extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    // System.out.println(rightMotor.getStatorCurrent());
-    printEncoders();
+    // printEncoders();
   }
 }

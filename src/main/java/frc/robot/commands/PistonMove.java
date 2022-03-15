@@ -13,19 +13,16 @@ public class PistonMove extends CommandBase {
     private int counter;
 
     public PistonMove(LinearServo servo) {
-        // Use addRequirements() here to declare subsystem dependencies.
         this.servo = servo;
         counter = 0;
     }
 
-    // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         servo.setPosition(0.4);
         counter = 0;
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         if (counter > 100) {
@@ -35,13 +32,11 @@ public class PistonMove extends CommandBase {
 
     }
 
-    // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         servo.setPosition(1);
     }
 
-    // Returns true when the command should end.
     @Override
     public boolean isFinished() {
         if (counter > 200) {

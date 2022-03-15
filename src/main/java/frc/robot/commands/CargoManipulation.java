@@ -20,7 +20,6 @@ public class CargoManipulation extends CommandBase {
   public double shooterVelocity = Constants.Shooter.FENDER_HIGH_VELOCITY;
 
   public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake, shooter);
     this.intake = intake;
     this.shooter = shooter;
@@ -30,7 +29,6 @@ public class CargoManipulation extends CommandBase {
   }
 
   public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto, double shooterVelocity) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake, shooter);
     this.intake = intake;
     this.shooter = shooter;
@@ -41,7 +39,6 @@ public class CargoManipulation extends CommandBase {
 
   }
 
-  // Called when the command is initially scheduled.
   @Override
 
   public void initialize() {
@@ -71,14 +68,12 @@ public class CargoManipulation extends CommandBase {
     }
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     intake.stop();
     shooter.stop();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     if (isAuto && timer.get() > 5) {

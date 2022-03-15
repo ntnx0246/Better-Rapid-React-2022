@@ -16,23 +16,22 @@ public class DriveStraight extends CommandBase {
   int count = 0;
 
   public DriveStraight(DriveTrain driveTrain, double goal) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
-    this.goal = driveTrain.getNativeUnitsFromInches(goal); 
+    this.goal = driveTrain.getNativeUnitsFromInches(goal);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     driveTrain.resetEncoders();
-    driveTrain.setLeftPID(Constants.DriveTrain.SLOT_ID, Constants.DriveTrain.P, Constants.DriveTrain.I, Constants.DriveTrain.D); // make into constants
-    driveTrain.setRightPID(Constants.DriveTrain.SLOT_ID, Constants.DriveTrain.P, Constants.DriveTrain.I, Constants.DriveTrain.D);
+    driveTrain.setLeftPID(Constants.DriveTrain.SLOT_ID, Constants.DriveTrain.P, Constants.DriveTrain.I,
+        Constants.DriveTrain.D); // make into constants
+    driveTrain.setRightPID(Constants.DriveTrain.SLOT_ID, Constants.DriveTrain.P, Constants.DriveTrain.I,
+        Constants.DriveTrain.D);
     driveTrain.setPosition(goal);
     Timer.delay(.1);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
@@ -45,17 +44,13 @@ public class DriveStraight extends CommandBase {
     }
   }
 
-  // Called once the command ends or is interrupted.
-
   @Override
   public void end(boolean interrupted) {
     driveTrain.stop();
     driveTrain.printEncoders();
     driveTrain.printInches();
-    System.out.println("end");
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return count >= 10;
