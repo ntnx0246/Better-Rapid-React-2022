@@ -17,16 +17,7 @@ public class CargoManipulation extends CommandBase {
   public boolean isIntaking;
   public boolean isAuto = false;
   private Timer timer;
-  public double shooterVelocity = Constants.Shooter.FENDER_HIGH_VELOCITY;
-
-  public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto) {
-    addRequirements(intake, shooter);
-    this.intake = intake;
-    this.shooter = shooter;
-    this.isIntaking = isIntaking;
-    this.isAuto = isAuto;
-    timer = new Timer();
-  }
+  public double shooterVelocity;
 
   public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto, double shooterVelocity) {
     addRequirements(intake, shooter);
@@ -51,6 +42,8 @@ public class CargoManipulation extends CommandBase {
       intake.intakeTopMotor(Constants.Intake.TOP_SPEED);
       intake.intakeBottomMotor(Constants.Intake.BOTTOM_SPEED);
       intake.intakeOutsideMotor(Constants.Intake.OUTSIDE_SPEED);
+    } else if(shooterVelocity == -1) {
+      shooter.setVelocity(shooter.getShooterVelocity());
     } else {
       shooter.setVelocity(shooterVelocity);
     }
@@ -61,11 +54,19 @@ public class CargoManipulation extends CommandBase {
 
   @Override
   public void execute() {
-    error = Math.abs(shooterVelocity - shooter.getLeftVelocity());
-    if (isIntaking == false && error <= Constants.Shooter.RPM_TOLERANCE) {
-      intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
-      intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
+    if (shooterVelocity == -1) {
+      error = Math.abs(shooter.getShooterVelocity() - shooter.getLeftVelocity());
+      if (isIntaking == false && error <= Constants.Shooter.RPM_TOLERANCE) {
+        intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
+        intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
+      }
+      error = Math.abs(shooterVelocity - shooter.getLeftVelocity());
+      if (isIntaking == false && error <= Constants.Shooter.RPM_TOLERANCE) {
+        intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
+        intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
+      }
     }
+    
   }
 
   @Override

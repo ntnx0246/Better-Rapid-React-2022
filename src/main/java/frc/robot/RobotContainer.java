@@ -50,7 +50,7 @@ public class RobotContainer {
   }
 
   public void configureButtonBindings() {
-    rightBumper.whileHeld(new CargoManipulation(intake, shooter, true, false));
+    rightBumper.whileHeld(new CargoManipulation(intake, shooter, true, false, -1));
     // TODO look once vision done
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
     leftBumper.whileHeld(new BackUpAndShoot(driveTrain, intake, shooter));

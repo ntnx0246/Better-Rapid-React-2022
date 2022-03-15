@@ -12,13 +12,13 @@ import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
 
 public class ShuffleBoard {
-  private Intake intake;
+  // private Intake intake;
   private Shooter shooter;
-  private DriveTrain driveTrain;
-  private NavX navX;
+  // private DriveTrain driveTrain;
+  // private NavX navX;
 
-  private final OneBallAuto oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
-  private final TwoBallAuto twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
+  private OneBallAuto oneBallAuto_command;
+  private TwoBallAuto twoBallAuto_command;
   public final SendableChooser<String> autoChoose = new SendableChooser<String>();
   public final SendableChooser<String> shooterSpeedChoose = new SendableChooser<String>();
 
@@ -27,7 +27,8 @@ public class ShuffleBoard {
       Shooter shooter,
       DriveTrain driveTrain,
       NavX navX) {
-
+    oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
+    twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
     // AUTO
     autoChoose.setDefaultOption(Constants.ShuffleBoard.OneBall, Constants.ShuffleBoard.OneBall);
     autoChoose.addOption(Constants.ShuffleBoard.TwoBall, Constants.ShuffleBoard.TwoBall);

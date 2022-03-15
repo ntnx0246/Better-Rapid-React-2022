@@ -15,6 +15,6 @@ public class BackUpAndShoot extends ParallelCommandGroup {
   public BackUpAndShoot(DriveTrain driveTrain, Intake intake, Shooter shooter) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new DriveStraight(driveTrain, Constants.BACK_UP_TO_SHOOT), new CargoManipulation(intake, shooter, false, false));
+    addCommands(new DriveStraight(driveTrain, Constants.BACK_UP_TO_SHOOT), new CargoManipulation(intake, shooter, false, false,-1));
   }
 }
