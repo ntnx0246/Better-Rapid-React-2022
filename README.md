@@ -4,4 +4,6 @@
 
 this code was made in retaliation to team 4079's out out out out man
 
-Out out out out
+## Article 2
+
+Out out man needs to go out out
