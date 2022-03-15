@@ -1,1 +1,1 @@
-./Declaration Of Independence.md
+../Declaration Of Independence.md
