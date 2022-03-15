@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.utils;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -108,6 +108,15 @@ public final class Constants {
       public static final double TWOBALLAUTO_ANGLE = 200;
       public static final double TWOBALLAUTO_VELOCITY = -3000;
     }
+  }
+
+  public final class ShuffleBoard {
+    public static final String OneBall = "OneBall";
+    public static final String TwoBall = "TwoBall";
+
+    public static final String LOW_RPM  = "3200";
+    public static final String HIGH_RPM = "3500";
+
   }
 
   // TODO delete once done

@@ -9,13 +9,12 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.utils.Constants;
 
 public class Climber extends SubsystemBase {
 
   public TalonFX leftMotor;
   public TalonFX rightMotor;
-  public boolean initalized = false;
 
   /** Creates a new Climber. */
   public Climber() {
@@ -132,13 +131,6 @@ public class Climber extends SubsystemBase {
     return rightMotor.getSelectedSensorVelocity();
   }
 
-  public void setInitalized(boolean initalized) {
-    this.initalized = initalized;
-  }
-
-  public boolean getIntialized() {
-    return initalized;
-  }
   // limit the encoder for climber when going up, don't let the numbers get to
   // high
   // right has to get to 210000 (currently - L: -202964 R: 204334)

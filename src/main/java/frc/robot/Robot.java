@@ -10,61 +10,24 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.LinearServo;
 
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the
- * name of this class or
- * the package after creating this project, you must also update the
- * build.gradle file in the
- * project.
- */
-
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private static LinearServo servo;
   private RobotContainer m_robotContainer;
   private int servo_counter = 0;
   private Climber climber;
-  // LinearServo2 servo = new LinearServo2(1);
 
-  /**
-   * This function is run when the robot is first started up and should be used
-   * for any
-   * initialization code.
-   */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer. This will perform all our button bindings,
-    // and put our
-    // autonomous chooser on the dashboard.
+
     m_robotContainer = new RobotContainer();
   }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use this for
-   * items like
-   * diagnostics that you want ran during disabled, autonomous, teleoperated and
-   * test.
-   *
-   * <p>
-   * This runs after the mode specific periodic functions, but before LiveWindow
-   * and
-   * SmartDashboard integrated updating.
-   */
   @Override
   public void robotPeriodic() {
-    // Runs the Scheduler. This is responsible for polling buttons, adding
-    // newly-scheduled
-    // commands, running already-scheduled commands, removing finished or
-    // interrupted commands,
-    // and running subsystem periodic() methods. This must be called from the
-    // robot's periodic
-    // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
   }
 
-  /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
   }
@@ -101,7 +64,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    climber = m_robotContainer.getClimber();
+    m_robotContainer.configureButtonBindings();
+
   }
 
   /** This function is called periodically during operator control. */
@@ -109,52 +73,24 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // System.out.println(climber.getIntialized());
     // if(climber.getIntialized()){
-    //   servo.setPosition(0);
+    // servo.setPosition(0);
     // }
   }
 
   @Override
   public void testInit() {
     CommandScheduler.getInstance().enable();
-    // Cancels all running commands at the start of test mode.
-    CommandScheduler.getInstance().schedule(m_robotContainer.getTestCommand());
-    CommandScheduler.getInstance().schedule(m_robotContainer.getTest2Command());
-    // CommandScheduler.getInstance().run();
-    // m_robotContainer.getTestCommand().schedule();
-    m_robotContainer.getTestCommand().execute();
-    m_robotContainer.getTest2Command().execute();
 
-    // CommandScheduler.getInstance().cancelAll();
-    // servo = new LinearServo();
-    // servo_counter = 0;
-    // System.out.println("servo SHOULD BE FALSEEEEE");
+    CommandScheduler.getInstance().schedule(m_robotContainer.calibrateClimber());
+    CommandScheduler.getInstance().schedule(m_robotContainer.calibrateServo());
+    // m_robotContainer.getTestCommand().schedule();
+    // m_robotContainer.calibrateClimber().execute();
+    // m_robotContainer.calibrateServo().execute();
   }
 
-  /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
-    // System.out.println(servo_extended);
-    // if (servo.getLeftPosition() < 0.5 && servo_counter > 100) {
-    //   System.out.println("servo retracted completly");
-    //   servo_extended = true;
-    // } else if (servo.getLeftPosition() < 0.5){
-    //   servo_counter ++;
-    // }
-    // System.out.println(servo_extended);
-    // if (servo_extended == true) {
-    //   servo.setPosition(1);
-    // } else {
-    //   servo.setPosition(0.4);
-    // }
-      
+    CommandScheduler.getInstance().run();
 
-
-    
-    // servo_counter++;
-    // if (servo_counter > 100) {
-    // servo.setPosition(1);
-    // } else {
-    // servo.setPosition(0.4);
-    // }
   }
 }
