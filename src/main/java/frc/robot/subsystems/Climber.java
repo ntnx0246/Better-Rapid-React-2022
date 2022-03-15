@@ -60,7 +60,7 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_F_2);
   }
 
-  public void selectProfile(int id){
+  public void selectProfile(int id) {
     leftMotor.selectProfileSlot(id, 0);
     rightMotor.selectProfileSlot(id, 0);
   }
@@ -132,10 +132,11 @@ public class Climber extends SubsystemBase {
     return rightMotor.getSelectedSensorVelocity();
   }
 
-  public void setInitalized(boolean initalized){
+  public void setInitalized(boolean initalized) {
     this.initalized = initalized;
   }
-  public boolean getIntialized(){
+
+  public boolean getIntialized() {
     return initalized;
   }
   // limit the encoder for climber when going up, don't let the numbers get to

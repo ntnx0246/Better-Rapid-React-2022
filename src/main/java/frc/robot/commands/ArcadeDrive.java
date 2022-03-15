@@ -4,8 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -15,6 +13,7 @@ import frc.robot.subsystems.DriveTrain;
 public class ArcadeDrive extends CommandBase {
   DriveTrain driveTrain;
   LogitechGamingPad drivePad;
+
   /** Creates a new ArcadeDrive. */
   public ArcadeDrive(DriveTrain driveTrain, LogitechGamingPad drivePad) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -33,13 +32,15 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void execute() {
     if (driveTrain.getSlowMode()) {
-      driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis()*-Constants.SLOW_MODE), (drivePad.getLeftAnalogYAxis()*-Constants.SLOW_MODE));
+      driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis() * -Constants.SLOW_MODE),
+          (drivePad.getLeftAnalogYAxis() * -Constants.SLOW_MODE));
       SmartDashboard.putBoolean("Slow Mode: ", true);
     } else {
-      driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis()*-Constants.REGULAR_MODE_TURN), (drivePad.getLeftAnalogYAxis()*-Constants.REGULAR_MODE));
+      driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis() * -Constants.REGULAR_MODE_TURN),
+          (drivePad.getLeftAnalogYAxis() * -Constants.REGULAR_MODE));
       SmartDashboard.putBoolean("Slow Mode: ", false);
     }
-    
+
   }
 
   // Called once the command ends or is interrupted.

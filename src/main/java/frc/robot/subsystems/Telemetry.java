@@ -4,16 +4,15 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Telemetry extends SubsystemBase {
   /** Creates a new Telemetry. */
   public Telemetry(Climber climber) {
-    //SmartDashboard.putData("Reset Climb Encoder", climber.resetEncoders());
+    // SmartDashboard.putData("Reset Climb Encoder", climber.resetEncoders());
   }
 
-  public void update(){
+  public void update() {
 
   }
 

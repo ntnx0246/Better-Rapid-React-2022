@@ -41,7 +41,7 @@ public class LinearServo2 extends Servo {
     super.set(setPos);
   }
 
-  public void setMyPosition(double setpoint){
+  public void setMyPosition(double setpoint) {
     setPos = MathUtil.clamp(setpoint, 0, 1);
     super.set(setPos);
   }

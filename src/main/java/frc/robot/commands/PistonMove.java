@@ -46,7 +46,7 @@ public class PistonMove extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if (counter > 200){
+        if (counter > 200) {
             return true;
         }
         return false;

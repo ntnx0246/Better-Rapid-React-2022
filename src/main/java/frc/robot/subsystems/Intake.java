@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -13,30 +12,30 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
-  private CANSparkMax topMotor; 
+  private CANSparkMax topMotor;
   private CANSparkMax bottomMotor;
-  private CANSparkMax outsideMotor; 
+  private CANSparkMax outsideMotor;
 
   public Intake() {
     topMotor = new CANSparkMax(Constants.INTAKE_TOP_SPARK, MotorType.kBrushless);
     bottomMotor = new CANSparkMax(Constants.INTAKE_BOTTOM_SPARK, MotorType.kBrushless);
     outsideMotor = new CANSparkMax(Constants.INTAKE_OUTSIDE_SPARK, MotorType.kBrushless);
-    
+
   }
 
-  public void intakeTopMotor(double speed){
+  public void intakeTopMotor(double speed) {
     topMotor.set(speed);
   }
 
-  public void intakeBottomMotor(double speed){
+  public void intakeBottomMotor(double speed) {
     bottomMotor.set(speed);
   }
 
-  public void intakeOutsideMotor(double speed){
+  public void intakeOutsideMotor(double speed) {
     outsideMotor.set(speed);
   }
 
-  public void stop(){
+  public void stop() {
     topMotor.set(0);
     bottomMotor.set(0);
     outsideMotor.set(0);

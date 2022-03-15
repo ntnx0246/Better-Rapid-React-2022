@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.CargoManipulation;
 import frc.robot.commands.ArcadeDrive;
@@ -19,7 +18,6 @@ import frc.robot.commands.ChangeDriveMode;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveStraight;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.PistonMove;
 //import frc.robot.commands.IntakeCargo;
 import frc.robot.commands.OneBallAuto;
@@ -28,7 +26,6 @@ import frc.robot.subsystems.Intake;
 // import frc.robot.subsystems.LinearServo2;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.LinearServo;
@@ -44,8 +41,6 @@ import frc.robot.subsystems.LinearServo;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
   // private final LogitechGamingPad opPad = new LogitechGamingPad(1);
@@ -58,8 +53,6 @@ public class RobotContainer {
 
   private final NavX navX = new NavX();
   // private final LinearServo2 servo2 = new LinearServo2(0);
-
-
 
   // private final Intake intake = new Intake();
   // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
@@ -128,9 +121,9 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    if(chooser.getSelected().equals(TwoBall)) {
+    if (chooser.getSelected().equals(TwoBall)) {
       return twoBallAuto_command;
-    } else if(chooser.getSelected().equals(OneBall)) {
+    } else if (chooser.getSelected().equals(OneBall)) {
       return oneBallAuto_command;
     } else {
       return new DriveStraight(driveTrain, 50);
@@ -140,10 +133,12 @@ public class RobotContainer {
   public Command getTestCommand() {
     return new Calibration(climber);
   }
-  public Climber getClimber(){
+
+  public Climber getClimber() {
     return climber;
   }
-  public Command getTest2Command(){
+
+  public Command getTest2Command() {
     return new PistonMove(servo);
   }
 
