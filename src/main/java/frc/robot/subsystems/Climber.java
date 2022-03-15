@@ -15,6 +15,7 @@ public class Climber extends SubsystemBase {
 
   public TalonFX leftMotor;
   public TalonFX rightMotor;
+  public boolean initalized = false;
 
   /** Creates a new Climber. */
   public Climber() {
@@ -48,6 +49,15 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kI(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_I_1);
     rightMotor.config_kD(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_D_1);
     rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_F_1);
+
+    leftMotor.config_kP(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_P_2);
+    leftMotor.config_kI(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_I_2);
+    leftMotor.config_kD(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_D_2);
+    leftMotor.config_kF(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_F_2);
+    rightMotor.config_kP(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_P_2);
+    rightMotor.config_kI(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_I_2);
+    rightMotor.config_kD(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_D_2);
+    rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_F_2);
   }
 
   public void selectProfile(int id){
@@ -121,6 +131,13 @@ public class Climber extends SubsystemBase {
   public double getVelocityRight() {
     return rightMotor.getSelectedSensorVelocity();
   }
+
+  public void setInitalized(boolean initalized){
+    this.initalized = initalized;
+  }
+  public boolean getIntialized(){
+    return initalized;
+  }
   // limit the encoder for climber when going up, don't let the numbers get to
   // high
   // right has to get to 210000 (currently - L: -202964 R: 204334)
@@ -129,6 +146,6 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // System.out.println(rightMotor.getStatorCurrent());
-    // printEncoders();
+    printEncoders();
   }
 }

@@ -25,12 +25,12 @@ public final class Constants {
   public static final double INTAKE_SPEED = 0.4;
   public static final double INTAKE_TOP_SPEED = 0.6;
   public static final double INTAKE_BOTTOM_SPEED = 0.25;
-  public static final double INTAKE_OUTSIDE_SPEED = 1;
+  public static final double INTAKE_OUTSIDE_SPEED = -0.5;
 
   public static final int SHOOTER_LEFT_ID = 5;
   public static final int SHOOTER_RIGHT_ID = 4;
   public static final double SHOOTER_SPEED = -0.6;
-  public static final double SHOOTER_VELOCITY = -3500;
+  public static final double SHOOTER_VELOCITY = -3200;
   public static final double SHOOTER_RPM_TOLERANCE = 50;
 
   public static final double SHOOTER_P = 0.0001;
@@ -55,6 +55,7 @@ public final class Constants {
 
   public static final double SLOW_MODE = 0.5;
   public static final double REGULAR_MODE = 1.0;
+  public static final double REGULAR_MODE_TURN = 0.3;
 
   // drivetrain PID
   public static final int SLOT_ID = 0;
@@ -62,15 +63,17 @@ public final class Constants {
   public static final double kI = 0;
   public static final double kD = 0;
   
-  public static final double TWOBALLAUTO_GET_SECONDBALL_GOAL = 30;
-  public static final double TWOBALLAUTOFORWARD_GOAL = 60;
-  public static final double TWOBALLAUTOBACKWARD_GOAL = -120;
-  public static final double TWOBALLAUTO_ANGLE = 180;
+  public static final double TWOBALLAUTO_GET_SECONDBALL_GOAL = 90;
+  public static final double TWOBALLAUTOFORWARD_GOAL = 120;
+  public static final double TWOBALLAUTOBACKWARD_GOAL = -180;
+  public static final double TWOBALLAUTO_ANGLE = 200;
   public static final double TWOBALLAUTO_VELOCITY = -3000;
 
   public static final int CRUISE_VELOCITY = 7000; // max is around 21500
   public static final int ACCELERATION = 3500;
   public static final int ERROR_THRESHOLD = 500;
+  public static final double OPEN_LOOP_RAMP = .5;
+  public static final double CLOSED_LOOP_RAMP = .5;
 
   public static final double ERROR_ANGLE_TOLERANCE = 5;
   public static final double AUTO_CLIMB_TOLERANCE = 50;
@@ -78,23 +81,35 @@ public final class Constants {
   public static final double CALIBRATION_SPEED = -0.1; // -0.1
 
   public static final double CLIMBER_P_0 = 0.008;
-  public static final double CLIMBER_I_0 = 0;
-  public static final double CLIMBER_D_0 = 0;
+  public static final double CLIMBER_I_0 = 0.000001;
+  public static final double CLIMBER_D_0 = 0.5;
   public static final double CLIMBER_F_0 = 0;
   public static final int CLIMBER_SLOT_ID_0 = 0;
 
   public static final double CLIMBER_P_1 = 0.05;
-  public static final double CLIMBER_I_1 = 0;
+  public static final double CLIMBER_I_1 = 0.0005;
   public static final double CLIMBER_D_1 = 0;
   public static final double CLIMBER_F_1 = 0;
   public static final int CLIMBER_SLOT_ID_1 = 1;
+
+  public static final double CLIMBER_P_2 = 0.008;
+  public static final double CLIMBER_I_2 = 0;
+  public static final double CLIMBER_D_2 = 0;
+  public static final double CLIMBER_F_2 = 0;
+  public static final int CLIMBER_SLOT_ID_2 = 2;
+
+  public static final int LINEARSERVO_LEFT_CHANNEL = 0;
+  public static final int LINEARSERVO_RIGHT_CHANNEL = 1;
+  public static final double LINEARSERVO_SPEED = 0.5;
 
 
   public static final double CLIMBER_UP_ENCODER_RIGHT = 236000;
   public static final double CLIMBER_UP_ENCODER_LEFT = 229000;
 
-  public static final double ONEBALLAUTO_GOAL = -90;
+  public static final double ONEBALLAUTO_GOAL = -180;
   public static final double ONEBALLAUTO_SHOOTER_VELOCITY = -3000;
+
+  public static final double BACK_UP_TO_SHOOT = -12;
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
 

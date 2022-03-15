@@ -9,23 +9,29 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.CargoManipulation;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.BackUpAndShoot;
 import frc.robot.commands.Calibration;
 import frc.robot.commands.ChangeDriveMode;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PistonMove;
+//import frc.robot.commands.IntakeCargo;
 import frc.robot.commands.OneBallAuto;
 import frc.robot.commands.TwoBallAuto;
 import frc.robot.subsystems.Intake;
+// import frc.robot.subsystems.LinearServo2;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.LinearServo;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -47,8 +53,24 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
   private final Shooter shooter = new Shooter();
   private final Climber climber = new Climber();
-  private final NavX navX = new NavX();
+  private final LinearServo servo = new LinearServo();
   private final Intake intake = new Intake();
+
+  private final NavX navX = new NavX();
+  // private final LinearServo2 servo2 = new LinearServo2(0);
+
+
+
+  // private final Intake intake = new Intake();
+  // private final JoystickButton buttonX = new JoystickButton(drivePad, 3);
+  // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
+  // private final JoystickButton startButton = new JoystickButton(drivePad, 8);
+  // private final JoystickButton opY = new JoystickButton(opPad, 4);
+  // private final JoystickButton opA = new JoystickButton(opPad, 1);
+
+  // private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
+  // private final JoystickButton leftBumper = new JoystickButton(drivePad, 9);
+  // private final JoystickButton rightBumper = new JoystickButton(drivePad, 10);
 
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
   private final JoystickButton driveB = new JoystickButton(drivePad, 2);
@@ -91,9 +113,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     rightBumper.whileHeld(new CargoManipulation(intake, shooter, true, false));
-    leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
-
+    // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
+    leftBumper.whileHeld(new BackUpAndShoot(driveTrain, intake, shooter));
     driveY.whileHeld(new ClimbUp(climber));
+    driveX.whileHeld(new PistonMove(servo));
+    // driveA.whenPressed(new Calibration(climber));
     driveA.whileHeld(new ClimbDown(climber));
     driveB.whenPressed(new ChangeDriveMode(driveTrain));
   }
@@ -106,11 +130,9 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     if(chooser.getSelected().equals(TwoBall)) {
       return twoBallAuto_command;
-    }
-    else if(chooser.getSelected().equals(OneBall)) {
+    } else if(chooser.getSelected().equals(OneBall)) {
       return oneBallAuto_command;
-    }
-    else {
+    } else {
       return new DriveStraight(driveTrain, 50);
     }
   }
@@ -118,4 +140,11 @@ public class RobotContainer {
   public Command getTestCommand() {
     return new Calibration(climber);
   }
+  public Climber getClimber(){
+    return climber;
+  }
+  public Command getTest2Command(){
+    return new PistonMove(servo);
+  }
+
 }

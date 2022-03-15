@@ -36,7 +36,7 @@ public class ArcadeDrive extends CommandBase {
       driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis()*-Constants.SLOW_MODE), (drivePad.getLeftAnalogYAxis()*-Constants.SLOW_MODE));
       SmartDashboard.putBoolean("Slow Mode: ", true);
     } else {
-      driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis()*-Constants.REGULAR_MODE), (drivePad.getLeftAnalogYAxis()*-Constants.REGULAR_MODE));
+      driveTrain.arcadeDrive((drivePad.getRightAnalogXAxis()*-Constants.REGULAR_MODE_TURN), (drivePad.getLeftAnalogYAxis()*-Constants.REGULAR_MODE));
       SmartDashboard.putBoolean("Slow Mode: ", false);
     }
     
