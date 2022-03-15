@@ -30,7 +30,7 @@ public final class Constants {
   public static final int SHOOTER_LEFT_ID = 5;
   public static final int SHOOTER_RIGHT_ID = 4;
   public static final double SHOOTER_SPEED = -0.6;
-  public static final double SHOOTER_VELOCITY = -2000;
+  public static final double SHOOTER_VELOCITY = -3200;
   public static final double SHOOTER_RPM_TOLERANCE = 50;
 
   public static final double SHOOTER_P = 0.0001;
@@ -109,7 +109,7 @@ public final class Constants {
   public static final double ONEBALLAUTO_GOAL = -180;
   public static final double ONEBALLAUTO_SHOOTER_VELOCITY = -3000;
 
-  public static final double BACK_UP_TO_SHOOT = 0;
+  public static final double BACK_UP_TO_SHOOT = -12;
   // might need to add a driveStraightP vs turnAngleP
   // might also need leftPID vs rightPID bc of motor controllers
 

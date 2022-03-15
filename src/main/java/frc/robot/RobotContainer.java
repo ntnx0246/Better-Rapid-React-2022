@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.CargoManipulation;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.BackUpAndShoot;
 import frc.robot.commands.Calibration;
 import frc.robot.commands.ChangeDriveMode;
 import frc.robot.commands.ClimbDown;
@@ -112,8 +113,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     rightBumper.whileHeld(new CargoManipulation(intake, shooter, true, false));
-    leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
-
+    // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, false));
+    leftBumper.whileHeld(new BackUpAndShoot(driveTrain, intake, shooter));
     driveY.whileHeld(new ClimbUp(climber));
     driveX.whileHeld(new PistonMove(servo));
     // driveA.whenPressed(new Calibration(climber));

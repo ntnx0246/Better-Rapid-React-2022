@@ -31,6 +31,8 @@ public class OneBallAuto extends SequentialCommandGroup {
     // this.intake = intake;
     // this.shooter = shooter;
     // this.driveTrain = driveTrain;
-    addCommands(new DriveStraight(driveTrain, Constants.BACK_UP_TO_SHOOT),new CargoManipulation(intake, shooter, false, true, Constants.ONEBALLAUTO_SHOOTER_VELOCITY), new DriveStraight(driveTrain, Constants.ONEBALLAUTO_GOAL));
+    // addCommands(new DriveStraight(driveTrain, Constants.BACK_UP_TO_SHOOT),new CargoManipulation(intake, shooter, false, true, Constants.ONEBALLAUTO_SHOOTER_VELOCITY), new DriveStraight(driveTrain, Constants.ONEBALLAUTO_GOAL));
+    addCommands(new CargoManipulation(intake, shooter, false, true, Constants.ONEBALLAUTO_SHOOTER_VELOCITY),
+        new DriveStraight(driveTrain, Constants.ONEBALLAUTO_GOAL));
   }
 }
