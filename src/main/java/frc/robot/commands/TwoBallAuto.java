@@ -12,8 +12,6 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
 
-import frc.robot.commands.CargoManipulation;
-
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
@@ -29,10 +27,10 @@ public class TwoBallAuto extends SequentialCommandGroup {
         // addCommands(new FooCommand(), new BarCommand());
         addCommands(
                 new TwoBallAutoPt1(driveTrain, shooter, intake),
-                new TurnToAngle(driveTrain, navX, Constants.TWOBALLAUTO_ANGLE),
-                new DriveStraight(driveTrain, Constants.TWOBALLAUTOFORWARD_GOAL),
-                new CargoManipulation(intake, shooter, false, true,Constants.TWOBALLAUTO_VELOCITY),
-                new DriveStraight(driveTrain, Constants.TWOBALLAUTOBACKWARD_GOAL));
+                new TurnToAngle(driveTrain, navX, Constants.Auto.TwoBall.TWOBALLAUTO_ANGLE),
+                new DriveStraight(driveTrain, Constants.Auto.TwoBall.TWOBALLAUTOFORWARD_GOAL),
+                new CargoManipulation(intake, shooter, false, true, Constants.Auto.TwoBall.TWOBALLAUTO_VELOCITY),
+                new DriveStraight(driveTrain, Constants.Auto.TwoBall.TWOBALLAUTOBACKWARD_GOAL));
 
     }
 }

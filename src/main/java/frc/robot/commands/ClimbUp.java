@@ -33,10 +33,10 @@ public class ClimbUp extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.climb(Constants.CLIMBER_UP_SPEED);
+    climber.climb(Constants.Climber.UP_SPEED);
     climber.selectProfile(2);
-    climber.setPositionLeft(Constants.CLIMBER_UP_ENCODER_LEFT);
-    climber.setPositionRight(Constants.CLIMBER_UP_ENCODER_RIGHT);
+    climber.setPositionLeft(Constants.Climber.UP_ENCODER_LEFT);
+    climber.setPositionRight(Constants.Climber.UP_ENCODER_RIGHT);
     // if(servo != null){
     //   servo.setPosition(100);
     // }

@@ -17,9 +17,9 @@ public class Intake extends SubsystemBase {
   private CANSparkMax outsideMotor;
 
   public Intake() {
-    topMotor = new CANSparkMax(Constants.INTAKE_TOP_SPARK, MotorType.kBrushless);
-    bottomMotor = new CANSparkMax(Constants.INTAKE_BOTTOM_SPARK, MotorType.kBrushless);
-    outsideMotor = new CANSparkMax(Constants.INTAKE_OUTSIDE_SPARK, MotorType.kBrushless);
+    topMotor = new CANSparkMax(Constants.ID.INTAKE_TOP_SPARK, MotorType.kBrushless);
+    bottomMotor = new CANSparkMax(Constants.ID.INTAKE_BOTTOM_SPARK, MotorType.kBrushless);
+    outsideMotor = new CANSparkMax(Constants.ID.INTAKE_OUTSIDE_SPARK, MotorType.kBrushless);
 
   }
 

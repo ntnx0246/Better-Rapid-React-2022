@@ -49,7 +49,7 @@ public class TurnToAngle extends CommandBase {
   @Override
   public boolean isFinished() {
     double errorAngle = goalAngle - currentAngle;
-    return (errorAngle < Constants.ERROR_ANGLE_TOLERANCE);
+    return (errorAngle < Constants.DriveTrain.ANGLE_TOLERANCE);
   }
 
 }

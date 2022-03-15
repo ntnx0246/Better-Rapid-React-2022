@@ -32,7 +32,9 @@ public class OneBallAuto extends SequentialCommandGroup {
     // CargoManipulation(intake, shooter, false, true,
     // Constants.ONEBALLAUTO_SHOOTER_VELOCITY), new DriveStraight(driveTrain,
     // Constants.ONEBALLAUTO_GOAL));
-    addCommands(new CargoManipulation(intake, shooter, false, true, Constants.ONEBALLAUTO_SHOOTER_VELOCITY),
-        new DriveStraight(driveTrain, Constants.ONEBALLAUTO_GOAL));
+    addCommands(
+      new CargoManipulation(intake, shooter, false, true, Constants.Auto.OneBall.SHOOT_VELOCITY),
+      new DriveStraight(driveTrain, Constants.Auto.OneBall.DRIVE)
+    );
   }
 }

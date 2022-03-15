@@ -34,7 +34,7 @@ public class Calibration extends CommandBase {
     timer.reset();
     timer.start();
     System.out.println("*********climber climb with speed******");
-    climber.climb(Constants.CALIBRATION_SPEED); // make constant
+    climber.climb(Constants.Climber.CALIBRATION_SPEED); // make constant
     // servo.setMyPosition(0);
   }
 

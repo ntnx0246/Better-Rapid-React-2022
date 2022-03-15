@@ -17,7 +17,7 @@ public class CargoManipulation extends CommandBase {
   public boolean isIntaking;
   public boolean isAuto = false;
   private Timer timer;
-  public double shooterVelocity = Constants.SHOOTER_VELOCITY;
+  public double shooterVelocity = Constants.Shooter.FENDER_HIGH_VELOCITY;
 
   public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -51,9 +51,9 @@ public class CargoManipulation extends CommandBase {
     }
 
     if (isIntaking == true) {
-      intake.intakeTopMotor(Constants.INTAKE_TOP_SPEED);
-      intake.intakeBottomMotor(Constants.INTAKE_BOTTOM_SPEED);
-      intake.intakeOutsideMotor(Constants.INTAKE_OUTSIDE_SPEED);
+      intake.intakeTopMotor(Constants.Intake.TOP_SPEED);
+      intake.intakeBottomMotor(Constants.Intake.BOTTOM_SPEED);
+      intake.intakeOutsideMotor(Constants.Intake.OUTSIDE_SPEED);
     } else {
       shooter.setVelocity(shooterVelocity);
     }
@@ -65,9 +65,9 @@ public class CargoManipulation extends CommandBase {
   @Override
   public void execute() {
     error = Math.abs(shooterVelocity - shooter.getLeftVelocity());
-    if (isIntaking == false && error <= Constants.SHOOTER_RPM_TOLERANCE) {
-      intake.intakeTopMotor(Constants.INTAKE_SPEED * -1);
-      intake.intakeBottomMotor(Constants.INTAKE_SPEED);
+    if (isIntaking == false && error <= Constants.Shooter.RPM_TOLERANCE) {
+      intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
+      intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
     }
   }
 

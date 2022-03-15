@@ -22,8 +22,8 @@ public class Shooter extends SubsystemBase {
   private RelativeEncoder rightEncoder;
 
   public Shooter() {
-    left = new CANSparkMax(Constants.SHOOTER_LEFT_ID, MotorType.kBrushless);
-    right = new CANSparkMax(Constants.SHOOTER_RIGHT_ID, MotorType.kBrushless);
+    left = new CANSparkMax(Constants.ID.SHOOTER_LEFT, MotorType.kBrushless);
+    right = new CANSparkMax(Constants.ID.SHOOTER_RIGHT, MotorType.kBrushless);
 
     leftPIDController = left.getPIDController();
     rightPIDController = right.getPIDController();
@@ -33,15 +33,15 @@ public class Shooter extends SubsystemBase {
     leftEncoder = left.getEncoder();
     rightEncoder = right.getEncoder();
 
-    leftPIDController.setP(Constants.SHOOTER_P);
-    leftPIDController.setI(Constants.SHOOTER_I);
-    leftPIDController.setD(Constants.SHOOTER_D);
-    leftPIDController.setFF(Constants.SHOOTER_F);
+    leftPIDController.setP(Constants.Shooter.P);
+    leftPIDController.setI(Constants.Shooter.I);
+    leftPIDController.setD(Constants.Shooter.D);
+    leftPIDController.setFF(Constants.Shooter.F);
 
-    rightPIDController.setP(Constants.SHOOTER_P);
-    rightPIDController.setI(Constants.SHOOTER_I);
-    rightPIDController.setD(Constants.SHOOTER_D);
-    rightPIDController.setFF(Constants.SHOOTER_F);
+    rightPIDController.setP(Constants.Shooter.P);
+    rightPIDController.setI(Constants.Shooter.I);
+    rightPIDController.setD(Constants.Shooter.D);
+    rightPIDController.setFF(Constants.Shooter.F);
   }
 
   public void setSpeed(double speed) {

@@ -5,14 +5,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.LinearServo;
 
 public class PistonMove extends CommandBase {
     /** Creates a new ClimbTeleop. */
     private final LinearServo servo;
     private int counter;
-    private boolean calibrating;
 
     public PistonMove(LinearServo servo) {
         // Use addRequirements() here to declare subsystem dependencies.

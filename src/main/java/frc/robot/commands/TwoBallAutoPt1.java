@@ -18,7 +18,9 @@ public class TwoBallAutoPt1 extends ParallelCommandGroup {
   public TwoBallAutoPt1(DriveTrain driveTrain, Shooter shooter, Intake intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new DriveStraight(driveTrain, Constants.TWOBALLAUTO_GET_SECONDBALL_GOAL),
-                new CargoManipulation(intake, shooter, true, true));
+    addCommands(
+      new DriveStraight(driveTrain, Constants.Auto.TwoBall.TWOBALLAUTO_GET_SECONDBALL_GOAL),
+      new CargoManipulation(intake, shooter, true, true)
+    );
   }
 }

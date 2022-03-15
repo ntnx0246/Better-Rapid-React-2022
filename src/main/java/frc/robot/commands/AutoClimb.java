@@ -36,7 +36,7 @@ public class AutoClimb extends CommandBase {
   @Override
   public void execute() {
     double error = Math.abs(goal - climber.getLeftEncoderCount());
-    if (error <= Constants.AUTO_CLIMB_TOLERANCE) {
+    if (error <= Constants.Climber.CLIMB_TOLERANCE) {
       count++;
     } else {
       count = 0;

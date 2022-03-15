@@ -26,8 +26,8 @@ public class DriveStraight extends CommandBase {
   @Override
   public void initialize() {
     driveTrain.resetEncoders();
-    driveTrain.setLeftPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD); // make into constants
-    driveTrain.setRightPID(Constants.SLOT_ID, Constants.kP, Constants.kI, Constants.kD);
+    driveTrain.setLeftPID(Constants.DriveTrain.SLOT_ID, Constants.DriveTrain.P, Constants.DriveTrain.I, Constants.DriveTrain.D); // make into constants
+    driveTrain.setRightPID(Constants.DriveTrain.SLOT_ID, Constants.DriveTrain.P, Constants.DriveTrain.I, Constants.DriveTrain.D);
     driveTrain.setPosition(goal);
     Timer.delay(.1);
   }
@@ -38,7 +38,7 @@ public class DriveStraight extends CommandBase {
     double leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
     double rightError = Math.abs(goal + driveTrain.getRightEncoderCount());
 
-    if ((leftError <= Constants.ERROR_THRESHOLD) && (rightError <= Constants.ERROR_THRESHOLD)) {
+    if ((leftError <= Constants.DriveTrain.ERROR_THRESHOLD) && (rightError <= Constants.DriveTrain.ERROR_THRESHOLD)) {
       count++;
     } else {
       count = 0;

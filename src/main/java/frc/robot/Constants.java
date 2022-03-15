@@ -17,100 +17,103 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  public final class ID {
+    public static final int INTAKE_OUTSIDE_SPARK = 1;
+    public static final int INTAKE_TOP_SPARK = 2;
+    public static final int INTAKE_BOTTOM_SPARK = 3;
+    public static final int SHOOTER_RIGHT = 4;
+    public static final int SHOOTER_LEFT = 5;
+    public static final int DRIVETRAIN_FRONT_RIGHT = 6;
+    public static final int DRIVETRAIN_BACK_RIGHT = 7;
+    public static final int DRIVETRAIN_BACK_LEFT = 8;
+    public static final int DRIVETRAIN_FRONT_LEFT = 9;
+    public static final int CLIMBER_LEFT = 10; // 10
+    public static final int CLIMBER_RIGHT = 11; // 11
+  }
 
-  public static final int INTAKE_TOP_SPARK = 2;
-  public static final int INTAKE_BOTTOM_SPARK = 3;
-  public static final int INTAKE_OUTSIDE_SPARK = 1; 
-  
-  public static final double INTAKE_SPEED = 0.4;
-  public static final double INTAKE_TOP_SPEED = 0.6;
-  public static final double INTAKE_BOTTOM_SPEED = 0.25;
-  public static final double INTAKE_OUTSIDE_SPEED = -0.5;
+  public final class Intake {
+    public static final double TOP_SPEED = 0.6;
+    public static final double BOTTOM_SPEED = 0.25;
+    public static final double OUTSIDE_SPEED = -0.5;
+  }
 
-  public static final int SHOOTER_LEFT_ID = 5;
-  public static final int SHOOTER_RIGHT_ID = 4;
-  public static final double SHOOTER_SPEED = -0.6;
-  public static final double SHOOTER_VELOCITY = -3200;
-  public static final double SHOOTER_RPM_TOLERANCE = 50;
+  public final class Shooter {
+    public static final double PUSH_SPEED = 0.4;
+    public static final double FENDER_HIGH_VELOCITY = -3200;
+    public static final double FENDER_LOW_VELOCITY = -2000;
+    public static final double RPM_TOLERANCE = 50;
+    public static final double P = 0.0001;
+    public static final double I = 0;
+    public static final double D = 0;
+    public static final double F = 0.000174;
+  }
 
-  public static final double SHOOTER_P = 0.0001;
-  public static final double SHOOTER_I = 0;
-  public static final double SHOOTER_D = 0;
-  public static final double SHOOTER_F = 0.000174;
+  public final class DriveTrain {
+    public static final double SLOW_MODE = 0.5;
+    public static final double REGULAR_MODE = 1.0;
+    public static final double REGULAR_MODE_TURN = 0.3;
+    public static final double MOTOR_TO_WHEEL_REVOLUTION = 10.71;
+    public static final int SENSOR_UNITS_PER_ROTATION = 2048;
+    public static final int DRIVE_WHEEL_DIAMETER_INCHES = 6;
+    public static final int SLOT_ID = 0;
+    public static final double P = 0.15;
+    public static final double I = 0;
+    public static final double D = 0;
+    public static final int CRUISE_VELOCITY = 7000; // max is around 21500
+    public static final int ACCELERATION = 3500;
+    public static final int ERROR_THRESHOLD = 500;
+    public static final double OPEN_LOOP_RAMP = .5;
+    public static final double CLOSED_LOOP_RAMP = .5;
+    public static final double ANGLE_TOLERANCE = 5;
+  }
 
-  public static final double MOTOR_TO_WHEEL_REVOLUTION = 10.71;
-  public static final int SENSOR_UNITS_PER_ROTATION = 2048;
-  public static final int DRIVE_WHEEL_DIAMETER_INCHES = 6;
+  public final class Climber {
+    public static final double UP_SPEED = 0.3; // 0.3
+    public static final double DOWN_SPEED = -0.3; // -0.3
+    public static final double CALIBRATION_SPEED = -0.1; // -0.1
+    public static final double UP_ENCODER_RIGHT = 236000;
+    public static final double UP_ENCODER_LEFT = 229000;
+    
+    public static final double CLIMB_TOLERANCE = 50;
 
-  public static final int CLIMBER_LEFT_ID = 10; //10
-  public static final int CLIMBER_RIGHT_ID = 11; //11
+    public static final double P_0 = 0.008;
+    public static final double I_0 = 0.000001;
+    public static final double D_0 = 0.5;
+    public static final double F_0 = 0;
+    public static final int SLOT_ID_0 = 0;
 
-  public static final int FRONT_LEFT_ID = 9;
-  public static final int FRONT_RIGHT_ID = 6;
-  public static final int BACK_LEFT_ID = 8;
-  public static final int BACK_RIGHT_ID = 7;
+    public static final double P_1 = 0.05;
+    public static final double I_1 = 0.0005;
+    public static final double D_1 = 0;
+    public static final double F_1 = 0;
+    public static final int SLOT_ID_1 = 1;
 
-  public static final double CLIMBER_UP_SPEED = 0.3; // 0.3
-  public static final double CLIMBER_DOWN_SPEED = -0.3; // -0.3
+    public static final double P_2 = 0.008;
+    public static final double I_2 = 0;
+    public static final double D_2 = 0;
+    public static final double F_2 = 0;
+    public static final int SLOT_ID_2 = 2;
+  }
 
-  public static final double SLOW_MODE = 0.5;
-  public static final double REGULAR_MODE = 1.0;
-  public static final double REGULAR_MODE_TURN = 0.3;
+  public final class Auto {
+    public final class OneBall {
+      public static final double DRIVE = -180;
+      public static final double SHOOT_VELOCITY = -3000;
 
-  // drivetrain PID
-  public static final int SLOT_ID = 0;
-  public static final double kP = 0.15;
-  public static final double kI = 0;
-  public static final double kD = 0;
-  
-  public static final double TWOBALLAUTO_GET_SECONDBALL_GOAL = 90;
-  public static final double TWOBALLAUTOFORWARD_GOAL = 120;
-  public static final double TWOBALLAUTOBACKWARD_GOAL = -180;
-  public static final double TWOBALLAUTO_ANGLE = 200;
-  public static final double TWOBALLAUTO_VELOCITY = -3000;
+    }
+    public final class TwoBall {
+      public static final double TWOBALLAUTO_GET_SECONDBALL_GOAL = 90;
+      public static final double TWOBALLAUTOFORWARD_GOAL = 120;
+      public static final double TWOBALLAUTOBACKWARD_GOAL = -180;
+      public static final double TWOBALLAUTO_ANGLE = 200;
+      public static final double TWOBALLAUTO_VELOCITY = -3000;
+    }
+  }
 
-  public static final int CRUISE_VELOCITY = 7000; // max is around 21500
-  public static final int ACCELERATION = 3500;
-  public static final int ERROR_THRESHOLD = 500;
-  public static final double OPEN_LOOP_RAMP = .5;
-  public static final double CLOSED_LOOP_RAMP = .5;
-
-  public static final double ERROR_ANGLE_TOLERANCE = 5;
-  public static final double AUTO_CLIMB_TOLERANCE = 50;
-
-  public static final double CALIBRATION_SPEED = -0.1; // -0.1
-
-  public static final double CLIMBER_P_0 = 0.008;
-  public static final double CLIMBER_I_0 = 0.000001;
-  public static final double CLIMBER_D_0 = 0.5;
-  public static final double CLIMBER_F_0 = 0;
-  public static final int CLIMBER_SLOT_ID_0 = 0;
-
-  public static final double CLIMBER_P_1 = 0.05;
-  public static final double CLIMBER_I_1 = 0.0005;
-  public static final double CLIMBER_D_1 = 0;
-  public static final double CLIMBER_F_1 = 0;
-  public static final int CLIMBER_SLOT_ID_1 = 1;
-
-  public static final double CLIMBER_P_2 = 0.008;
-  public static final double CLIMBER_I_2 = 0;
-  public static final double CLIMBER_D_2 = 0;
-  public static final double CLIMBER_F_2 = 0;
-  public static final int CLIMBER_SLOT_ID_2 = 2;
-
+  // TODO delete once done
   public static final int LINEARSERVO_LEFT_CHANNEL = 0;
   public static final int LINEARSERVO_RIGHT_CHANNEL = 1;
   public static final double LINEARSERVO_SPEED = 0.5;
 
-
-  public static final double CLIMBER_UP_ENCODER_RIGHT = 236000;
-  public static final double CLIMBER_UP_ENCODER_LEFT = 229000;
-
-  public static final double ONEBALLAUTO_GOAL = -180;
-  public static final double ONEBALLAUTO_SHOOTER_VELOCITY = -3000;
-
   public static final double BACK_UP_TO_SHOOT = -12;
-  // might need to add a driveStraightP vs turnAngleP
-  // might also need leftPID vs rightPID bc of motor controllers
-
 }

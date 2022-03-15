@@ -19,10 +19,10 @@ public class DriveTrain extends SubsystemBase {
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    frontR = new TalonFX(Constants.FRONT_RIGHT_ID);
-    frontL = new TalonFX(Constants.FRONT_LEFT_ID);
-    backR = new TalonFX(Constants.BACK_RIGHT_ID);
-    backL = new TalonFX(Constants.BACK_LEFT_ID);
+    frontR = new TalonFX(Constants.ID.DRIVETRAIN_FRONT_RIGHT);
+    frontL = new TalonFX(Constants.ID.DRIVETRAIN_FRONT_LEFT);
+    backR = new TalonFX(Constants.ID.DRIVETRAIN_BACK_RIGHT);
+    backL = new TalonFX(Constants.ID.DRIVETRAIN_BACK_LEFT);
     slowModeOn = false;
 
     backL.follow(frontL);
@@ -32,25 +32,25 @@ public class DriveTrain extends SubsystemBase {
     frontR.setInverted(true);
     backR.setInverted(true);
 
-    frontL.configClosedloopRamp(Constants.CLOSED_LOOP_RAMP);
-    frontR.configClosedloopRamp(Constants.CLOSED_LOOP_RAMP);
-    backL.configClosedloopRamp(Constants.CLOSED_LOOP_RAMP);
-    backR.configClosedloopRamp(Constants.CLOSED_LOOP_RAMP);
+    frontL.configClosedloopRamp(Constants.DriveTrain.CLOSED_LOOP_RAMP);
+    frontR.configClosedloopRamp(Constants.DriveTrain.CLOSED_LOOP_RAMP);
+    backL.configClosedloopRamp(Constants.DriveTrain.CLOSED_LOOP_RAMP);
+    backR.configClosedloopRamp(Constants.DriveTrain.CLOSED_LOOP_RAMP);
 
-    frontL.configOpenloopRamp(Constants.OPEN_LOOP_RAMP);
-    frontR.configOpenloopRamp(Constants.OPEN_LOOP_RAMP);
-    backL.configOpenloopRamp(Constants.OPEN_LOOP_RAMP);
-    backR.configOpenloopRamp(Constants.OPEN_LOOP_RAMP);
+    frontL.configOpenloopRamp(Constants.DriveTrain.OPEN_LOOP_RAMP);
+    frontR.configOpenloopRamp(Constants.DriveTrain.OPEN_LOOP_RAMP);
+    backL.configOpenloopRamp(Constants.DriveTrain.OPEN_LOOP_RAMP);
+    backR.configOpenloopRamp(Constants.DriveTrain.OPEN_LOOP_RAMP);
 
     frontL.configPeakOutputForward(1);
     frontL.configPeakOutputReverse(-1);
     frontR.configPeakOutputForward(1);
     frontR.configPeakOutputReverse(-1);
 
-    frontL.configMotionCruiseVelocity(Constants.CRUISE_VELOCITY);
-    frontL.configMotionAcceleration(Constants.ACCELERATION);
-    frontR.configMotionCruiseVelocity(Constants.CRUISE_VELOCITY);
-    frontR.configMotionAcceleration(Constants.ACCELERATION);
+    frontL.configMotionCruiseVelocity(Constants.DriveTrain.CRUISE_VELOCITY);
+    frontL.configMotionAcceleration(Constants.DriveTrain.ACCELERATION);
+    frontR.configMotionCruiseVelocity(Constants.DriveTrain.CRUISE_VELOCITY);
+    frontR.configMotionAcceleration(Constants.DriveTrain.ACCELERATION);
   }
 
   public void arcadeDrive(double x, double y) {
@@ -86,13 +86,13 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getNativeUnitsFromInches(double inches) {
-    return inches * Constants.MOTOR_TO_WHEEL_REVOLUTION / (Math.PI * Constants.DRIVE_WHEEL_DIAMETER_INCHES)
-        * Constants.SENSOR_UNITS_PER_ROTATION;
+    return inches * Constants.DriveTrain.MOTOR_TO_WHEEL_REVOLUTION / (Math.PI * Constants.DriveTrain.DRIVE_WHEEL_DIAMETER_INCHES)
+        * Constants.DriveTrain.SENSOR_UNITS_PER_ROTATION;
   }
 
   public double getInchesFromNativeUnits(double native_units) {
-    return native_units / Constants.MOTOR_TO_WHEEL_REVOLUTION * (Math.PI * Constants.DRIVE_WHEEL_DIAMETER_INCHES)
-        / Constants.SENSOR_UNITS_PER_ROTATION;
+    return native_units / Constants.DriveTrain.MOTOR_TO_WHEEL_REVOLUTION * (Math.PI * Constants.DriveTrain.DRIVE_WHEEL_DIAMETER_INCHES)
+        / Constants.DriveTrain.SENSOR_UNITS_PER_ROTATION;
   }
 
   public void resetEncoders() {

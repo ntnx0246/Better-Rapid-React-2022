@@ -19,8 +19,8 @@ public class Climber extends SubsystemBase {
 
   /** Creates a new Climber. */
   public Climber() {
-    leftMotor = new TalonFX(Constants.CLIMBER_LEFT_ID);
-    rightMotor = new TalonFX(Constants.CLIMBER_RIGHT_ID);
+    leftMotor = new TalonFX(Constants.ID.CLIMBER_LEFT);
+    rightMotor = new TalonFX(Constants.ID.CLIMBER_RIGHT);
 
     rightMotor.setInverted(true);
 
@@ -32,32 +32,32 @@ public class Climber extends SubsystemBase {
     rightMotor.configPeakOutputForward(1);
     rightMotor.configPeakOutputReverse(-1);
 
-    leftMotor.config_kP(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_P_0);
-    leftMotor.config_kI(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_I_0);
-    leftMotor.config_kD(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_D_0);
-    leftMotor.config_kF(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_F_0);
-    rightMotor.config_kP(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_P_0);
-    rightMotor.config_kI(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_I_0);
-    rightMotor.config_kD(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_D_0);
-    rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_0, Constants.CLIMBER_F_0);
+    leftMotor.config_kP(Constants.Climber.SLOT_ID_0, Constants.Climber.P_0);
+    leftMotor.config_kI(Constants.Climber.SLOT_ID_0, Constants.Climber.I_0);
+    leftMotor.config_kD(Constants.Climber.SLOT_ID_0, Constants.Climber.D_0);
+    leftMotor.config_kF(Constants.Climber.SLOT_ID_0, Constants.Climber.F_0);
+    rightMotor.config_kP(Constants.Climber.SLOT_ID_0, Constants.Climber.P_0);
+    rightMotor.config_kI(Constants.Climber.SLOT_ID_0, Constants.Climber.I_0);
+    rightMotor.config_kD(Constants.Climber.SLOT_ID_0, Constants.Climber.D_0);
+    rightMotor.config_kF(Constants.Climber.SLOT_ID_0, Constants.Climber.F_0);
 
-    leftMotor.config_kP(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_P_1);
-    leftMotor.config_kI(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_I_1);
-    leftMotor.config_kD(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_D_1);
-    leftMotor.config_kF(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_F_1);
-    rightMotor.config_kP(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_P_1);
-    rightMotor.config_kI(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_I_1);
-    rightMotor.config_kD(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_D_1);
-    rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_1, Constants.CLIMBER_F_1);
+    leftMotor.config_kP(Constants.Climber.SLOT_ID_1, Constants.Climber.P_1);
+    leftMotor.config_kI(Constants.Climber.SLOT_ID_1, Constants.Climber.I_1);
+    leftMotor.config_kD(Constants.Climber.SLOT_ID_1, Constants.Climber.D_1);
+    leftMotor.config_kF(Constants.Climber.SLOT_ID_1, Constants.Climber.F_1);
+    rightMotor.config_kP(Constants.Climber.SLOT_ID_1, Constants.Climber.P_1);
+    rightMotor.config_kI(Constants.Climber.SLOT_ID_1, Constants.Climber.I_1);
+    rightMotor.config_kD(Constants.Climber.SLOT_ID_1, Constants.Climber.D_1);
+    rightMotor.config_kF(Constants.Climber.SLOT_ID_1, Constants.Climber.F_1);
 
-    leftMotor.config_kP(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_P_2);
-    leftMotor.config_kI(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_I_2);
-    leftMotor.config_kD(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_D_2);
-    leftMotor.config_kF(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_F_2);
-    rightMotor.config_kP(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_P_2);
-    rightMotor.config_kI(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_I_2);
-    rightMotor.config_kD(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_D_2);
-    rightMotor.config_kF(Constants.CLIMBER_SLOT_ID_2, Constants.CLIMBER_F_2);
+    leftMotor.config_kP(Constants.Climber.SLOT_ID_2, Constants.Climber.P_2);
+    leftMotor.config_kI(Constants.Climber.SLOT_ID_2, Constants.Climber.I_2);
+    leftMotor.config_kD(Constants.Climber.SLOT_ID_2, Constants.Climber.D_2);
+    leftMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
+    rightMotor.config_kP(Constants.Climber.SLOT_ID_2, Constants.Climber.P_2);
+    rightMotor.config_kI(Constants.Climber.SLOT_ID_2, Constants.Climber.I_2);
+    rightMotor.config_kD(Constants.Climber.SLOT_ID_2, Constants.Climber.D_2);
+    rightMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
   }
 
   public void selectProfile(int id) {
