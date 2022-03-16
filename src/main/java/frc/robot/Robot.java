@@ -56,9 +56,9 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().enable();
     CommandScheduler.getInstance().schedule(robotContainer.calibrateClimber());
     CommandScheduler.getInstance().schedule(robotContainer.calibrateServo());
-    // m_robotContainer.getTestCommand().schedule();
-    // m_robotContainer.calibrateClimber().execute();
-    // m_robotContainer.calibrateServo().execute();
+    // robotContainer.getTestCommand().schedule();
+    // robotContainer.calibrateClimber().execute();
+    // robotContainer.calibrateServo().execute();
   }
 
   @Override
