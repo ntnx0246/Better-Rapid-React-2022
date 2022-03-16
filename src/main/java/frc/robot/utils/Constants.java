@@ -1,21 +1,5 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.utils;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide
- * numerical or boolean
- * constants. This class should not be used for any other purpose. All constants
- * should be declared
- * globally (i.e. public static). Do not put anything functional in this class.
- *
- * <p>
- * It is advised to statically import this class (or one of its inner classes)
- * wherever the
- * constants are needed, to reduce verbosity.
- */
 public final class Constants {
   public final static class ID {
     public static final int INTAKE_OUTSIDE_SPARK = 1;
@@ -46,6 +30,7 @@ public final class Constants {
     public static final double I = 0;
     public static final double D = 0;
     public static final double F = 0.000174;
+    public static final double BACK_UP_TO_SHOOT = -12;
   }
 
   public final static class DriveTrain {
@@ -113,12 +98,9 @@ public final class Constants {
   }
 
   public final static class ShuffleBoard {
-    public static final String OneBall = "OneBall";
-    public static final String TwoBall = "TwoBall";
-
-    public static final String LOW_RPM = Integer.toString(Shooter.FENDER_LOW_VELOCITY);
-    public static final String HIGH_RPM = Integer.toString(Shooter.FENDER_HIGH_VELOCITY);
-
+    public enum Auto {
+      OneBall, TwoBall, ThreeBall, FourBall
+    }
   }
 
   // TODO delete once done
@@ -126,5 +108,5 @@ public final class Constants {
   public static final int LINEARSERVO_RIGHT_CHANNEL = 1;
   public static final double LINEARSERVO_SPEED = 0.5;
 
-  public static final double BACK_UP_TO_SHOOT = -12;
+  
 }

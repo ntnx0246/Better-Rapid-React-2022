@@ -3,13 +3,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.CargoManipulation;
 import frc.robot.commands.PistonMove;
 import frc.robot.commands.Climber.Calibration;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
 import frc.robot.commands.DriveTrain.ArcadeDrive;
 import frc.robot.commands.DriveTrain.DriveStraight;
+import frc.robot.commands.IntakeBalls;
+import frc.robot.commands.Shoot;
+
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -19,7 +21,6 @@ import frc.robot.subsystems.Shooter;
 
 import frc.robot.utils.LogitechGamingPad;
 import frc.robot.utils.ShuffleBoard;
-import frc.robot.utils.Constants;
 
 public class RobotContainer {
   private final LogitechGamingPad drivePad = new LogitechGamingPad(0);
@@ -50,10 +51,10 @@ public class RobotContainer {
   }
 
   public void configureButtonBindings() {
-    rightBumper.whileHeld(new CargoManipulation(intake, shooter, false));
+    rightBumper.whileHeld(new IntakeBalls(intake));
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
-    leftBumper.whileHeld(new DriveStraight(driveTrain, Constants.BACK_UP_TO_SHOOT)
-        .alongWith(new CargoManipulation(intake, shooter, false, -1)));
+    leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
+        .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity())));
     driveY.whileHeld(new ClimbUp(climber));
     driveX.whileHeld(new PistonMove(servo));
     driveA.whileHeld(new ClimbDown(climber));
@@ -72,7 +73,4 @@ public class RobotContainer {
     return new PistonMove(servo);
   }
 
-  public void setShooterRPM(){
-    shuffleBoard.setShooterRPM();
-  }
 }

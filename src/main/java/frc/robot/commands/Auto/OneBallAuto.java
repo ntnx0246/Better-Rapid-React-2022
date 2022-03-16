@@ -6,7 +6,7 @@ package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.utils.Constants;
-import frc.robot.commands.CargoManipulation;
+import frc.robot.commands.Shoot;
 import frc.robot.commands.DriveTrain.DriveStraight;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -17,8 +17,8 @@ public class OneBallAuto extends SequentialCommandGroup {
   public OneBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain) {
 
     addCommands(
-      new CargoManipulation(intake, shooter, true, Constants.Auto.OneBall.SHOOT_VELOCITY),
-      new DriveStraight(driveTrain, Constants.Auto.OneBall.CROSS_LINE)
+      new Shoot(intake, shooter, 5, Constants.Auto.OneBall.SHOOT_VELOCITY),
+      new DriveStraight(driveTrain, () -> Constants.Auto.OneBall.CROSS_LINE)
     );
   }
 }

@@ -4,6 +4,8 @@
 
 package frc.robot.commands.DriveTrain;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
@@ -12,13 +14,13 @@ import frc.robot.subsystems.DriveTrain;
 public class DriveStraight extends CommandBase {
   /** Creates a new DriveStraight. */
   private final DriveTrain driveTrain;
-  private double goal; // put goal in as a constant
+  private DoubleSupplier suppliedGoal; // put goal in as a constant
   int count = 0;
 
-  public DriveStraight(DriveTrain driveTrain, double goal) {
+  public DriveStraight(DriveTrain driveTrain, DoubleSupplier suppliedGoal) {
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
-    this.goal = driveTrain.getNativeUnitsFromInches(goal);
+    this.suppliedGoal = suppliedGoal;
   }
 
   @Override
@@ -28,14 +30,16 @@ public class DriveStraight extends CommandBase {
         Constants.DriveTrain.D); // make into constants
     driveTrain.setRightPID(Constants.DriveTrain.SLOT_ID, Constants.DriveTrain.P, Constants.DriveTrain.I,
         Constants.DriveTrain.D);
-    driveTrain.setPosition(goal);
+    driveTrain.setPosition(driveTrain.getNativeUnitsFromInches(suppliedGoal.getAsDouble()));
     Timer.delay(.1);
   }
 
   @Override
   public void execute() {
-    double leftError = Math.abs(goal - driveTrain.getLeftEncoderCount());
-    double rightError = Math.abs(goal + driveTrain.getRightEncoderCount());
+    double leftError = Math.abs(
+        driveTrain.getNativeUnitsFromInches(suppliedGoal.getAsDouble()) - driveTrain.getLeftEncoderCount());
+    double rightError = Math.abs(
+        driveTrain.getNativeUnitsFromInches(suppliedGoal.getAsDouble()) + driveTrain.getRightEncoderCount());
 
     if ((leftError <= Constants.DriveTrain.ERROR_THRESHOLD) && (rightError <= Constants.DriveTrain.ERROR_THRESHOLD)) {
       count++;

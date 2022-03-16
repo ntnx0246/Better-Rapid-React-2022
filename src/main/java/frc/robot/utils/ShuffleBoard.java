@@ -13,14 +13,13 @@ import frc.robot.subsystems.Shooter;
 
 public class ShuffleBoard {
   // private Intake intake;
-  private Shooter shooter;
   // private DriveTrain driveTrain;
   // private NavX navX;
-
+  private final SendableChooser<Constants.ShuffleBoard.Auto> autoChoose = new SendableChooser<Constants.ShuffleBoard.Auto>();
   private OneBallAuto oneBallAuto_command;
   private TwoBallAuto twoBallAuto_command;
-  public final SendableChooser<String> autoChoose = new SendableChooser<String>();
-  public final SendableChooser<String> shooterSpeedChoose = new SendableChooser<String>();
+
+  private final SendableChooser<Integer> shooterVelocityChoose = new SendableChooser<Integer>();
 
   public ShuffleBoard(
       Intake intake,
@@ -30,14 +29,14 @@ public class ShuffleBoard {
     oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
     twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
     // AUTO
-    autoChoose.setDefaultOption(Constants.ShuffleBoard.OneBall, Constants.ShuffleBoard.OneBall);
-    autoChoose.addOption(Constants.ShuffleBoard.TwoBall, Constants.ShuffleBoard.TwoBall);
+    autoChoose.setDefaultOption("One Ball", Constants.ShuffleBoard.Auto.OneBall);
+    autoChoose.addOption("Two Ball", Constants.ShuffleBoard.Auto.TwoBall);
     SmartDashboard.putData("AUTO MODE", autoChoose);
 
     // RPM
-    shooterSpeedChoose.setDefaultOption(Constants.ShuffleBoard.HIGH_RPM, Constants.ShuffleBoard.HIGH_RPM);
-    shooterSpeedChoose.addOption(Constants.ShuffleBoard.LOW_RPM, Constants.ShuffleBoard.LOW_RPM);
-    SmartDashboard.putData("SHOOTER SPEED", shooterSpeedChoose);
+    shooterVelocityChoose.setDefaultOption("High Shooting", Constants.Shooter.FENDER_HIGH_VELOCITY);
+    shooterVelocityChoose.addOption("Low Shooting", Constants.Shooter.FENDER_LOW_VELOCITY);
+    SmartDashboard.putData("SHOOTER SPEED", shooterVelocityChoose);
 
     // TODO auto position 1,2,3
 
@@ -45,12 +44,29 @@ public class ShuffleBoard {
   }
 
   public Command getAutonomousCommand() {
-    return (autoChoose.getSelected().equals(Constants.ShuffleBoard.OneBall)) ? oneBallAuto_command
-        : twoBallAuto_command;
+    switch (autoChoose.getSelected()) {
+      case OneBall:
+        return oneBallAuto_command;
+      case TwoBall:
+        return twoBallAuto_command;
+      // case ThreeBall:
+      // break;
+      // case FourBall:
+      // break;
+      default:
+        return oneBallAuto_command;
+
+    }
   }
 
-  public void setShooterRPM() {
-    shooter.setShooterVelocity(Integer.parseInt(shooterSpeedChoose.getSelected()));
+  public int getShooterVelocity() {
+    return shooterVelocityChoose.getSelected().intValue();
+  }
+
+  public double getMoveBack() {
+    return shooterVelocityChoose.getSelected().intValue() == Constants.Shooter.FENDER_HIGH_VELOCITY
+        ? Constants.Shooter.BACK_UP_TO_SHOOT
+        : 0;
   }
 
 }

@@ -15,7 +15,6 @@ public class Shooter extends SubsystemBase {
   private SparkMaxPIDController rightPIDController;
   private RelativeEncoder leftEncoder;
   private RelativeEncoder rightEncoder;
-  private int shooterVelocity;
 
   public Shooter() {
     left = new CANSparkMax(Constants.ID.SHOOTER_LEFT, MotorType.kBrushless);
@@ -45,7 +44,7 @@ public class Shooter extends SubsystemBase {
     right.set(speed);
   }
 
-  public void setVelocity(double velocity) {
+  public void setVelocity(int velocity) {
     leftPIDController.setReference(velocity, CANSparkMax.ControlType.kVelocity);
     rightPIDController.setReference(velocity, CANSparkMax.ControlType.kVelocity);
   }
@@ -58,14 +57,7 @@ public class Shooter extends SubsystemBase {
     return rightEncoder.getVelocity();
   }
 
-  public void setShooterVelocity(int shooterVelocity){
-    this.shooterVelocity = shooterVelocity;
-  }
 
-  public int getShooterVelocity(){
-    return shooterVelocity;
-  }
-  
   public void stop() {
     left.stopMotor();
     right.stopMotor();
