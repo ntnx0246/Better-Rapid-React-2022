@@ -17,28 +17,34 @@ public class CargoManipulation extends CommandBase {
   public boolean isIntaking;
   public boolean isAuto = false;
   private Timer timer;
-  public double shooterVelocity;
+  public int shooterVelocity;
 
-  public CargoManipulation(Intake intake, Shooter shooter, boolean isIntaking, boolean isAuto, double shooterVelocity) {
+  public CargoManipulation(Intake intake, Shooter shooter, boolean isAuto) {
     addRequirements(intake, shooter);
     this.intake = intake;
     this.shooter = shooter;
-    this.isIntaking = isIntaking;
-    this.isAuto = true;
+    this.isIntaking = true;
+    this.isAuto = isAuto;
+    timer = new Timer();
+  }
+  public CargoManipulation(Intake intake, Shooter shooter, boolean isAuto, int shooterVelocity) {
+    addRequirements(intake, shooter);
+    this.intake = intake;
+    this.shooter = shooter;
+    this.isIntaking = false;
+    this.isAuto = isAuto;
     timer = new Timer();
     this.shooterVelocity = shooterVelocity;
-
   }
 
   @Override
-
   public void initialize() {
     if (isAuto) {
       timer.reset();
       timer.start();
     }
 
-    if (isIntaking == true) {
+    if (isIntaking) {
       intake.intakeTopMotor(Constants.Intake.TOP_SPEED);
       intake.intakeBottomMotor(Constants.Intake.BOTTOM_SPEED);
       intake.intakeOutsideMotor(Constants.Intake.OUTSIDE_SPEED);
@@ -60,13 +66,13 @@ public class CargoManipulation extends CommandBase {
         intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
         intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
       }
+    } else {
       error = Math.abs(shooterVelocity - shooter.getLeftVelocity());
       if (isIntaking == false && error <= Constants.Shooter.RPM_TOLERANCE) {
         intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
         intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
       }
     }
-    
   }
 
   @Override

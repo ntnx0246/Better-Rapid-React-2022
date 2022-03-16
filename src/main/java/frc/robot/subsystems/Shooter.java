@@ -73,7 +73,5 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // System.out.println("Left: " + getLeftVelocity());
-    // System.out.println("Right: " + getRightVelocity());
   }
 }

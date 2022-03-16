@@ -7,35 +7,18 @@ package frc.robot.commands.Auto;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.utils.Constants;
 import frc.robot.commands.CargoManipulation;
-import frc.robot.commands.DriveStraight;
+import frc.robot.commands.DriveTrain.DriveStraight;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class OneBallAuto extends SequentialCommandGroup {
-  /** Creates a new OneBallAuto. */
-  // Intake intake;
-  // Shooter shooter;
-  // DriveTrain driveTrain;
-  // this.isAuto = isAuto;
-  // timer = new Timer();
 
   public OneBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    // this.intake = intake;
-    // this.shooter = shooter;
-    // this.driveTrain = driveTrain;
-    // addCommands(new DriveStraight(driveTrain, Constants.BACK_UP_TO_SHOOT),new
-    // CargoManipulation(intake, shooter, false, true,
-    // Constants.ONEBALLAUTO_SHOOTER_VELOCITY), new DriveStraight(driveTrain,
-    // Constants.ONEBALLAUTO_GOAL));
+
     addCommands(
-      new CargoManipulation(intake, shooter, false, true, Constants.Auto.OneBall.SHOOT_VELOCITY),
-      new DriveStraight(driveTrain, Constants.Auto.OneBall.DRIVE)
+      new CargoManipulation(intake, shooter, true, Constants.Auto.OneBall.SHOOT_VELOCITY),
+      new DriveStraight(driveTrain, Constants.Auto.OneBall.CROSS_LINE)
     );
   }
 }

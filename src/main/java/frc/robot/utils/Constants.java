@@ -39,8 +39,8 @@ public final class Constants {
 
   public final static class Shooter {
     public static final double PUSH_SPEED = 0.4;
-    public static final double FENDER_HIGH_VELOCITY = -3200;
-    public static final double FENDER_LOW_VELOCITY = -2000;
+    public static final int FENDER_HIGH_VELOCITY = -3200;
+    public static final int FENDER_LOW_VELOCITY = -2000;
     public static final double RPM_TOLERANCE = 50;
     public static final double P = 0.0001;
     public static final double I = 0;
@@ -97,17 +97,18 @@ public final class Constants {
 
   public final static class Auto {
     public final class OneBall {
-      public static final double DRIVE = -180;
-      public static final double SHOOT_VELOCITY = -3000;
+      public static final double CROSS_LINE = -180;
+      public static final int SHOOT_VELOCITY = -3000;
 
     }
 
     public final static class TwoBall {
-      public static final double TWOBALLAUTO_GET_SECONDBALL_GOAL = 90;
-      public static final double TWOBALLAUTOFORWARD_GOAL = 120;
-      public static final double TWOBALLAUTOBACKWARD_GOAL = -180;
-      public static final double TWOBALLAUTO_ANGLE = 200;
-      public static final double TWOBALLAUTO_VELOCITY = -3000;
+      public static final double GET_SECONDBALL = 90;
+      public static final double SPACE_TO_TURN = -90;
+      public static final double MOVE_TOWARDS_SHOOT = 30;
+      public static final double CROSS_LINE = -180;
+      public static final double TURN_ANGLE = 180;
+      public static final int SHOOT_VELOCITY = -3000;
     }
   }
 
@@ -115,8 +116,8 @@ public final class Constants {
     public static final String OneBall = "OneBall";
     public static final String TwoBall = "TwoBall";
 
-    public static final String LOW_RPM = Double.toString(Shooter.FENDER_LOW_VELOCITY);
-    public static final String HIGH_RPM = Double.toString(Shooter.FENDER_HIGH_VELOCITY);
+    public static final String LOW_RPM = Integer.toString(Shooter.FENDER_LOW_VELOCITY);
+    public static final String HIGH_RPM = Integer.toString(Shooter.FENDER_HIGH_VELOCITY);
 
   }
 
