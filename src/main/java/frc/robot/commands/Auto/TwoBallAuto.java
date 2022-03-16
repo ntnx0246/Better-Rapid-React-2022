@@ -29,7 +29,9 @@ public class TwoBallAuto extends SequentialCommandGroup {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
         addCommands(
-                new TwoBallAutoPt1(driveTrain, shooter, intake),
+                new DriveStraight(driveTrain, Constants.Auto.TwoBall.TWOBALLAUTO_GET_SECONDBALL_GOAL).alongWith(
+                    new CargoManipulation(intake, shooter, true, true,Constants.Auto.TwoBall.TWOBALLAUTO_VELOCITY)
+                ),
                 new TurnToAngle(driveTrain, navX, Constants.Auto.TwoBall.TWOBALLAUTO_ANGLE),
                 new DriveStraight(driveTrain, Constants.Auto.TwoBall.TWOBALLAUTOFORWARD_GOAL),
                 new CargoManipulation(intake, shooter, false, true, Constants.Auto.TwoBall.TWOBALLAUTO_VELOCITY),
