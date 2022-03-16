@@ -29,7 +29,7 @@ public class PistonMove extends CommandBase {
             servo.setPosition(1);
         }
         counter++;
-
+        System.out.println("servo execte");
     }
 
     @Override

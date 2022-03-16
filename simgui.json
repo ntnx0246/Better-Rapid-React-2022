@@ -30,6 +30,12 @@
   },
   "NetworkTables": {
     "SmartDashboard": {
+      "AUTO MODE": {
+        "open": true
+      },
+      "SHOOTER SPEED": {
+        "open": true
+      },
       "open": true
     }
   }
