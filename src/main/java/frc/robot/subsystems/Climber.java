@@ -4,9 +4,15 @@
 
 package frc.robot.subsystems;
 
+import java.util.ResourceBundle.Control;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType; 
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
@@ -15,11 +21,36 @@ public class Climber extends SubsystemBase {
 
   public TalonFX leftMotor;
   public TalonFX rightMotor;
+  public CANSparkMax leftPivot;
+  public CANSparkMax rightPivot;
+  private RelativeEncoder leftPivotEncoder;
+  private RelativeEncoder rightPivotEncoder;
+  private SparkMaxPIDController leftPivotController;
+  private SparkMaxPIDController rightPivotController;
 
   /** Creates a new Climber. */
   public Climber() {
     leftMotor = new TalonFX(Constants.ID.CLIMBER_LEFT);
     rightMotor = new TalonFX(Constants.ID.CLIMBER_RIGHT);
+    leftPivot = new CANSparkMax(Constants.ID.PIVOT_LEFT, MotorType.kBrushless);
+    rightPivot = new CANSparkMax(Constants.ID.PIVOT_RIGHT, MotorType.kBrushless);
+    rightPivot.setInverted(true);
+
+    leftPivotEncoder = leftPivot.getEncoder();
+    rightPivotEncoder = rightPivot.getEncoder();
+
+    leftPivotController = leftPivot.getPIDController();
+    rightPivotController = rightPivot.getPIDController();
+
+    leftPivotController.setP(Constants.Climber.P_3);
+    leftPivotController.setI(Constants.Climber.I_3);
+    leftPivotController.setD(Constants.Climber.D_3);
+    leftPivotController.setFF(Constants.Climber.F_3);
+
+    rightPivotController.setP(Constants.Climber.P_3);
+    rightPivotController.setI(Constants.Climber.I_3);
+    rightPivotController.setD(Constants.Climber.D_3);
+    rightPivotController.setFF(Constants.Climber.F_3);
 
     rightMotor.setInverted(true);
 
@@ -57,6 +88,40 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kI(Constants.Climber.SLOT_ID_2, Constants.Climber.I_2);
     rightMotor.config_kD(Constants.Climber.SLOT_ID_2, Constants.Climber.D_2);
     rightMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
+  }
+
+  public void setPositionPivots(double encoder){
+    leftPivotController.setReference(encoder, CANSparkMax.ControlType.kPosition);
+    rightPivotController.setReference(encoder, CANSparkMax.ControlType.kPosition);
+  }
+
+  public double getLeftPivotEncoder(){
+    return leftPivotEncoder.getPosition();
+  }
+
+  public double getRightPivotEncoder(){
+    return rightPivotEncoder.getPosition();
+  }
+
+  public void climbPivotLeft(double speed){
+    leftPivot.set(speed);
+  }
+
+  public void climbPivotRight(double speed){
+    rightPivot.set(speed);
+  }
+
+  public void climbPivots(double speed){
+    leftPivot.set(speed);
+    rightPivot.set(speed);
+  }
+
+  public double getCurrentPivotLeft(){
+    return leftPivot.getOutputCurrent();
+  }
+
+  public double getCurrentPivotRight(){
+    return rightPivot.getOutputCurrent();
   }
 
   public void selectProfile(int id) {

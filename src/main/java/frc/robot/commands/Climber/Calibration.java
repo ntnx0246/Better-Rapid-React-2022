@@ -10,6 +10,8 @@ public class Calibration extends CommandBase {
   Climber climber;
   boolean leftDone;
   boolean rightDone;
+  boolean leftPivotDone;
+  boolean rightPivotDone;
   Timer timer;
   // LinearServo2 servo;
 
@@ -18,6 +20,8 @@ public class Calibration extends CommandBase {
     this.climber = climber;
     leftDone = false;
     rightDone = false;
+    leftPivotDone = false;
+    rightPivotDone = false;
     timer = new Timer();
     // this.servo = servo;
   }
@@ -27,7 +31,7 @@ public class Calibration extends CommandBase {
     timer.reset();
     timer.start();
     climber.climb(Constants.Climber.CALIBRATION_SPEED); // make constant
-    // servo.setMyPosition(0);
+    climber.climbPivots(Constants.Climber.CALIBRATION_SPEED);
   }
 
   @Override
@@ -40,6 +44,14 @@ public class Calibration extends CommandBase {
       if (climber.getCurrentRight() >= 27.5) {
         rightDone = true;
         climber.climbRight(0);
+      }
+      if (climber.getCurrentPivotLeft() >= 27.5) {
+        leftPivotDone = true;
+        climber.climbPivotLeft(0);
+      }
+      if (climber.getCurrentPivotRight() >= 27.5) {
+        rightPivotDone = true;
+        climber.climbPivotRight(0);
       }
     }
   }
@@ -54,7 +66,7 @@ public class Calibration extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return rightDone && leftDone;
+    return rightDone && leftDone && leftPivotDone && rightPivotDone;
   }
 
   /*

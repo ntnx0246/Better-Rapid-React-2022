@@ -13,6 +13,8 @@ public final class Constants {
     public static final int DRIVETRAIN_FRONT_LEFT = 9;
     public static final int CLIMBER_LEFT = 10; // 10
     public static final int CLIMBER_RIGHT = 11; // 11
+    public static final int PIVOT_LEFT = 12;
+    public static final int PIVOT_RIGHT = 13;
   }
 
   public final static class Intake {
@@ -78,6 +80,11 @@ public final class Constants {
     public static final double D_2 = 0;
     public static final double F_2 = 0;
     public static final int SLOT_ID_2 = 2;
+
+    public static final double P_3 = 0.008;
+    public static final double I_3 = 0;
+    public static final double D_3 = 0;
+    public static final double F_3 = 0;
   }
 
   public final static class Auto {
