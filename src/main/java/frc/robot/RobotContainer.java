@@ -56,13 +56,15 @@ public class RobotContainer {
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
         .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity())));
+
     // driveY.whileHeld(new ClimbUp(climber));
     driveY.whileHeld(new PivotRelative(climber, true));
+    
+    driveX.whileHeld(new PistonMove(servo));
 
-    // driveX.whileHeld(new PistonMove(servo));
-    driveX.whileHeld(new PivotRelative(climber, false));
+    driveA.whileHeld(new PivotRelative(climber, false));
+    // driveA.whileHeld(new ClimbDown(climber));
 
-    driveA.whileHeld(new ClimbDown(climber));
     driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
   }
 

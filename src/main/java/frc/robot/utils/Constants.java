@@ -5,16 +5,16 @@ public final class Constants {
     public static final int INTAKE_OUTSIDE_SPARK = 1;
     public static final int INTAKE_TOP_SPARK = 2;
     public static final int INTAKE_BOTTOM_SPARK = 3;
-    public static final int SHOOTER_RIGHT = 4;
-    public static final int SHOOTER_LEFT = 5;
+    public static final int SHOOTER_RIGHT = 13; // 4
+    public static final int SHOOTER_LEFT = 12; // 5
     public static final int DRIVETRAIN_FRONT_RIGHT = 6;
     public static final int DRIVETRAIN_BACK_RIGHT = 7;
     public static final int DRIVETRAIN_BACK_LEFT = 8;
     public static final int DRIVETRAIN_FRONT_LEFT = 9;
     public static final int CLIMBER_LEFT = 10; // 10
     public static final int CLIMBER_RIGHT = 11; // 11
-    public static final int PIVOT_LEFT = 12;
-    public static final int PIVOT_RIGHT = 13;
+    public static final int PIVOT_LEFT = 4;
+    public static final int PIVOT_RIGHT = 5;
   }
 
   public final static class Intake {
@@ -81,7 +81,7 @@ public final class Constants {
     public static final double F_2 = 0;
     public static final int SLOT_ID_2 = 2;
 
-    public static final double P_3 = 0.008;
+    public static final double P_3 = 0.8;
     public static final double I_3 = 0;
     public static final double D_3 = 0;
     public static final double F_3 = 0;

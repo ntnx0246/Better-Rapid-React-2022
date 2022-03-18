@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import java.util.ResourceBundle.Control;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -114,6 +112,8 @@ public class Climber extends SubsystemBase {
   public void climbPivots(double speed){
     leftPivot.set(speed);
     rightPivot.set(speed);
+    System.out.println("testing pivot motor"+leftPivot.get());
+
   }
 
   public double getCurrentPivotLeft(){
