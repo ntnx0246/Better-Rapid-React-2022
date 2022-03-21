@@ -23,7 +23,7 @@ public class PivotRelative extends CommandBase {
         climber.climbPivots(0.5);
         System.out.println(climber.getLeftEncoderCount());
     } else {
-        climber.setPositionPivots(climber.getLeftPivotEncoder()+(angle-5)*64*2048/360);
+        climber.setPositionPivots(climber.getLeftPivotEncoder()+(angle-5)*64*42/360);
     }
   }
 
