@@ -160,6 +160,8 @@ public class Climber extends SubsystemBase {
   public void resetEncoders() {
     leftMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
     rightMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
+    leftPivotEncoder.setPosition(0);
+    rightPivotEncoder.setPosition(0);
   }
 
   public double getLeftEncoderCount() {
@@ -206,6 +208,6 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // printEncoders();
-    System.out.println(this.getLeftPivotEncoder());
+    System.out.println(this.getRightPivotEncoder());
   }
 }
