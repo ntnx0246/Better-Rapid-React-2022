@@ -14,7 +14,7 @@ public final class Constants {
     public static final int CLIMBER_LEFT = 10; // 10
     public static final int CLIMBER_RIGHT = 11; // 11
     public static final int PIVOT_LEFT = 4;
-    public static final int PIVOT_RIGHT = 5;
+    public static final int PIVOT_RIGHT = 13;
   }
 
   public final static class Intake {
