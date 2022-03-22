@@ -11,6 +11,7 @@ import frc.robot.commands.DriveTrain.ArcadeDrive;
 import frc.robot.commands.DriveTrain.DriveStraight;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.Climber.PivotRelative;
 
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -55,10 +56,13 @@ public class RobotContainer {
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
         .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity())));
-    driveY.whileHeld(new ClimbUp(climber));
-    driveX.whileHeld(new PistonMove(servo));
-    driveA.whileHeld(new ClimbDown(climber));
-    driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
+
+    driveB.whileHeld(new ClimbUp(climber));
+    driveA.whileHeld(new PivotRelative(climber, true));
+    driveY.whileHeld(new PivotRelative(climber, false));
+    driveX.whileHeld(new ClimbDown(climber));
+
+    // driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
   }
 
   public Command getAutonomousCommand() {

@@ -7,6 +7,10 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType; 
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
@@ -15,11 +19,36 @@ public class Climber extends SubsystemBase {
 
   public TalonFX leftMotor;
   public TalonFX rightMotor;
+  public CANSparkMax leftPivot;
+  public CANSparkMax rightPivot;
+  private RelativeEncoder leftPivotEncoder;
+  private RelativeEncoder rightPivotEncoder;
+  private SparkMaxPIDController leftPivotController;
+  private SparkMaxPIDController rightPivotController;
 
   /** Creates a new Climber. */
   public Climber() {
     leftMotor = new TalonFX(Constants.ID.CLIMBER_LEFT);
     rightMotor = new TalonFX(Constants.ID.CLIMBER_RIGHT);
+    leftPivot = new CANSparkMax(Constants.ID.PIVOT_LEFT, MotorType.kBrushless);
+    rightPivot = new CANSparkMax(Constants.ID.PIVOT_RIGHT, MotorType.kBrushless);
+    rightPivot.setInverted(true);
+
+    leftPivotEncoder = leftPivot.getEncoder();
+    rightPivotEncoder = rightPivot.getEncoder();
+
+    leftPivotController = leftPivot.getPIDController();
+    rightPivotController = rightPivot.getPIDController();
+
+    leftPivotController.setP(Constants.Climber.P_3);
+    leftPivotController.setI(Constants.Climber.I_3);
+    leftPivotController.setD(Constants.Climber.D_3);
+    leftPivotController.setFF(Constants.Climber.F_3);
+
+    rightPivotController.setP(Constants.Climber.P_3);
+    rightPivotController.setI(Constants.Climber.I_3);
+    rightPivotController.setD(Constants.Climber.D_3);
+    rightPivotController.setFF(Constants.Climber.F_3);
 
     rightMotor.setInverted(true);
 
@@ -59,6 +88,44 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
   }
 
+  public void setPositionPivots(double position){
+    leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition);
+    rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition);
+    // leftPivotEncoder.setPosition(position);
+    // rightPivotEncoder.setPosition(position);
+  }
+
+  public double getLeftPivotEncoder(){
+    return leftPivotEncoder.getPosition();
+  }
+
+  public double getRightPivotEncoder(){
+    return rightPivotEncoder.getPosition();
+  }
+
+  public void climbPivotLeft(double speed){
+    leftPivot.set(speed);
+  }
+
+  public void climbPivotRight(double speed){
+    rightPivot.set(speed);
+  }
+
+  public void climbPivots(double speed){
+    leftPivot.set(speed);
+    rightPivot.set(speed);
+    System.out.println("testing pivot motor"+leftPivot.get());
+
+  }
+
+  public double getCurrentPivotLeft(){
+    return leftPivot.getOutputCurrent();
+  }
+
+  public double getCurrentPivotRight(){
+    return rightPivot.getOutputCurrent();
+  }
+
   public void selectProfile(int id) {
     leftMotor.selectProfileSlot(id, 0);
     rightMotor.selectProfileSlot(id, 0);
@@ -93,6 +160,8 @@ public class Climber extends SubsystemBase {
   public void resetEncoders() {
     leftMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
     rightMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
+    leftPivotEncoder.setPosition(0);
+    rightPivotEncoder.setPosition(0);
   }
 
   public double getLeftEncoderCount() {
@@ -119,6 +188,8 @@ public class Climber extends SubsystemBase {
   public void stop() {
     leftMotor.set(ControlMode.PercentOutput, 0.0);
     rightMotor.set(ControlMode.PercentOutput, 0.0);
+    leftPivot.set(0);
+    rightPivot.set(0);
   }
 
   // check for stall of the motors
@@ -137,5 +208,7 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // printEncoders();
+    System.out.println("Right: "+this.getRightPivotEncoder());
+    System.out.println("Left: "+this.getLeftPivotEncoder());
   }
 }
