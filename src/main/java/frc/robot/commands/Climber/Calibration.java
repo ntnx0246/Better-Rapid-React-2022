@@ -31,8 +31,8 @@ public class Calibration extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
-    climber.climb(Constants.Climber.CALIBRATION_SPEED); // make constant
-    climber.climbPivots(Constants.Climber.CALIBRATION_SPEED);
+    climber.climb(Constants.Climber.CALIBRATION_SPEED);
+    climber.climbPivots(-Constants.Climber.CALIBRATION_SPEED);
   }
 
   @Override
@@ -46,11 +46,11 @@ public class Calibration extends CommandBase {
         rightDone = true;
         climber.climbRight(0);
       }
-      if (climber.getCurrentPivotLeft() >= 27.5) {
+      if (climber.getCurrentPivotLeft() >= 15) {
         leftPivotDone = true;
         climber.climbPivotLeft(0);
       }
-      if (climber.getCurrentPivotRight() >= 27.5) {
+      if (climber.getCurrentPivotRight() >= 15) {
         rightPivotDone = true;
         climber.climbPivotRight(0);
       }

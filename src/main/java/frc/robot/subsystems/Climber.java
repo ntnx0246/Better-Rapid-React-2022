@@ -88,9 +88,11 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
   }
 
-  public void setPositionPivots(double encoder){
-    leftPivotController.setReference(encoder, CANSparkMax.ControlType.kPosition);
-    rightPivotController.setReference(encoder, CANSparkMax.ControlType.kPosition);
+  public void setPositionPivots(double position){
+    leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition);
+    rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition);
+    // leftPivotEncoder.setPosition(position);
+    // rightPivotEncoder.setPosition(position);
   }
 
   public double getLeftPivotEncoder(){
@@ -158,6 +160,8 @@ public class Climber extends SubsystemBase {
   public void resetEncoders() {
     leftMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
     rightMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
+    leftPivotEncoder.setPosition(0);
+    rightPivotEncoder.setPosition(0);
   }
 
   public double getLeftEncoderCount() {
@@ -184,6 +188,8 @@ public class Climber extends SubsystemBase {
   public void stop() {
     leftMotor.set(ControlMode.PercentOutput, 0.0);
     rightMotor.set(ControlMode.PercentOutput, 0.0);
+    leftPivot.set(0);
+    rightPivot.set(0);
   }
 
   // check for stall of the motors
@@ -202,5 +208,6 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // printEncoders();
+    System.out.println(this.getRightPivotEncoder());
   }
 }

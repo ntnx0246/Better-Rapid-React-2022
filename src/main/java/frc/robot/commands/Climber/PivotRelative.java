@@ -17,13 +17,14 @@ public class PivotRelative extends CommandBase {
 
   @Override
   public void initialize() {
+    System.out.println("want to be: "+climber.getRightPivotEncoder()+(5.0*64/360));
+    System.out.println("what its at: "+climber.getRightPivotEncoder());
     if(forward){
-
-        // climber.setPositionPivots(climber.getLeftPivotEncoder()+(angle+5)*64*2048/360);
-        climber.climbPivots(0.5);
-        System.out.println(climber.getLeftEncoderCount());
+        climber.setPositionPivots(climber.getRightPivotEncoder()+(5.0*64/360));
+        // climber.climbPivots(0.5);
     } else {
-        climber.setPositionPivots(climber.getLeftPivotEncoder()+(angle-5)*64*42/360);
+        climber.setPositionPivots(climber.getRightPivotEncoder()+(-5.0*64/360));
+        System.out.println(climber.getRightPivotEncoder());
     }
   }
 
@@ -34,7 +35,7 @@ public class PivotRelative extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    
+    climber.stop();
   }
 
   @Override
