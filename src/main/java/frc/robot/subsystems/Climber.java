@@ -208,6 +208,7 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // printEncoders();
-    // System.out.println(this.getRightPivotEncoder());
+    System.out.println("Right: "+this.getRightPivotEncoder());
+    System.out.println("Left: "+this.getLeftPivotEncoder());
   }
 }

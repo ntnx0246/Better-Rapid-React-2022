@@ -24,7 +24,6 @@ public class PivotRelative extends CommandBase {
         // climber.climbPivots(0.5);
     } else {
         climber.setPositionPivots(climber.getRightPivotEncoder()+(-5.0*64/360));
-        System.out.println(climber.getRightPivotEncoder());
     }
   }
 

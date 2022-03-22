@@ -37,6 +37,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    CommandScheduler.getInstance().cancelAll();
+    CommandScheduler.getInstance().clearButtons();
     autonomousCommand = robotContainer.getAutonomousCommand();
     if (autonomousCommand != null) {
       autonomousCommand.schedule();
@@ -49,6 +51,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    CommandScheduler.getInstance().cancelAll();
+    CommandScheduler.getInstance().clearButtons();
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
@@ -62,6 +66,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit() {
+    CommandScheduler.getInstance().cancelAll();
+    CommandScheduler.getInstance().clearButtons();
     CommandScheduler.getInstance().enable();
     CommandScheduler.getInstance().schedule(robotContainer.calibrateClimber());
     // CommandScheduler.getInstance().schedule(robotContainer.calibrateServo());
