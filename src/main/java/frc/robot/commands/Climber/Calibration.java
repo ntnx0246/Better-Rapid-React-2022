@@ -58,8 +58,6 @@ public class Calibration extends CommandBase {
     SmartDashboard.putNumber("Bus Voltage", climber.rightPivot.getBusVoltage());
     SmartDashboard.putNumber("Output Current", climber.rightPivot.getOutputCurrent());
     SmartDashboard.putNumber("Stick Faults", climber.rightPivot.getStickyFaults());
-    System.out.println("running calibrate");
-    System.out.println(climber.getLeftPivotEncoder());
   }
 
   @Override

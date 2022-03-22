@@ -21,10 +21,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    // double value = sd.getEntry("test").getDouble(-1);
-    // if (value != -1) {
-    //   System.out.println(value);
-    // }
   }
 
   @Override

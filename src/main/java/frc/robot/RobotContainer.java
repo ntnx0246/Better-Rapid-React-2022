@@ -1,9 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.PistonMove;
 import frc.robot.commands.Climber.Calibration;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
@@ -16,7 +14,6 @@ import frc.robot.commands.Climber.PivotRelative;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.LinearServo;
 import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
 
@@ -29,7 +26,6 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
   private final Shooter shooter = new Shooter();
   private final Climber climber = new Climber();
-  private final LinearServo servo = new LinearServo();
   private final Intake intake = new Intake();
   private final NavX navX = new NavX();
 
@@ -72,9 +68,4 @@ public class RobotContainer {
   public Command calibrateClimber() {
     return new Calibration(climber);
   }
-
-  public Command calibrateServo() {
-    return new PistonMove(servo);
-  }
-
 }

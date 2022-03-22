@@ -109,11 +109,4 @@ public final class Constants {
       OneBall, TwoBall, ThreeBall, FourBall
     }
   }
-
-  // TODO delete once done
-  public static final int LINEARSERVO_LEFT_CHANNEL = 0;
-  public static final int LINEARSERVO_RIGHT_CHANNEL = 1;
-  public static final double LINEARSERVO_SPEED = 0.5;
-
-  
 }
