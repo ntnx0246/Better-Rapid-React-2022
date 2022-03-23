@@ -41,7 +41,7 @@ public class ShuffleBoard {
 
     // TODO auto position 1,2,3
 
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
   }
 
   public Command getAutonomousCommand() {
