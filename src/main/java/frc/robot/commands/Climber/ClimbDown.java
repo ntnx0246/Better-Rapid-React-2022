@@ -22,8 +22,8 @@ public class ClimbDown extends CommandBase {
   public void initialize() {
     if (usingPID){
       climber.selectProfile(0);
-      climber.setPositionLeft(19000 * 0.9762);
-      climber.setPositionRight(19000);
+      climber.setPositionLeft(0 * 0.9762);
+      climber.setPositionRight(0);
     } else {
       climber.climb(Constants.Climber.DOWN_SPEED);
     }

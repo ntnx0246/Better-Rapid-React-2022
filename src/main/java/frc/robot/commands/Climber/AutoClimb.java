@@ -14,16 +14,19 @@ public class AutoClimb extends SequentialCommandGroup {
     addRequirements(climber);
     this.climber = climber;
     addCommands(
-      new PivotRelative(climber, 230),
-      // new InstantCommand(()->climber.setPositionPivots(41)),
-      new ClimbDown(climber, false)
+      new PivotRelative(climber, -230),
+      // unused 
+      // new InstantCommand(()->climber.setPositionPivots(-41)),
+      // new ClimbDown(climber, true)
       // new ParallelDeadlineGroup(, new ClimbDown(climber, false))
-      // new ClimbDown(climber, true).withTimeout(3),
-      // new PivotRelative(climber, -20)
+      new ClimbDown(climber, true).withTimeout(3),
+      new PivotRelative(climber, 20),
+      // untested
       // new InstantCommand(()->climber.climb(0.2)).alongWith(new InstantCommand(()->climber.climbPivots(0.1))).withTimeout(2),
-      // new ParallelCommandGroup(new ClimbUp(climber), new PivotRelative(climber, -90)),
-      // new PivotRelative(climber, 10),
-      // new ParallelDeadlineGroup(new PivotRelative(climber, 100), new ClimbDown(climber, false))
+      new ParallelDeadlineGroup(new PivotRelative(climber, 90), new InstantCommand(()->climber.climb(0.2))),
+      new ClimbUp(climber).withTimeout(3),
+      new PivotRelative(climber, 10),
+      new ParallelDeadlineGroup(new PivotRelative(climber, -50), new ClimbDown(climber, false))
     );
   }
 }
