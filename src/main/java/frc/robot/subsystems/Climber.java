@@ -118,6 +118,10 @@ public class Climber extends SubsystemBase {
 
   }
 
+  public boolean pivotStalled(){
+    return leftPivot.getOutputCurrent() > 15 && rightPivot.getOutputCurrent() > 15;
+  }
+
   public double getCurrentPivotLeft(){
     return leftPivot.getOutputCurrent();
   }

@@ -34,6 +34,10 @@ public class ClimbUp extends CommandBase {
 
   @Override
   public boolean isFinished() {
+    if (Math.abs(climber.getRightEncoderCount()-Constants.Climber.UP_ENCODER_RIGHT)<1000
+     && Math.abs(climber.getLeftEncoderCount()-Constants.Climber.UP_ENCODER_LEFT)<1000){
+      return true;
+    }
     return false;
   }
 }

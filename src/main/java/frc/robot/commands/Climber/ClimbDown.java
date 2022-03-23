@@ -9,45 +9,32 @@ import frc.robot.utils.Constants;
 import frc.robot.subsystems.Climber;
 
 public class ClimbDown extends CommandBase {
-  /** Creates a new ClimbDown. */
-
   private final Climber climber;
-  private int goal;
-  private double climberEncoder;
+  private boolean usingPID;
 
-  public ClimbDown(Climber climber) {
+  public ClimbDown(Climber climber, boolean usingPID) {
     addRequirements(climber);
     this.climber = climber;
+    this.usingPID = usingPID;
   }
 
   @Override
   public void initialize() {
-    climber.climb(Constants.Climber.DOWN_SPEED);
-    climberEncoder = Math.abs(climber.getLeftEncoderCount());
-    if (climberEncoder > 50000) {
-
-      goal = 21000; // 25000
+    if (usingPID){
       climber.selectProfile(0);
+      climber.setPositionLeft(19000 * 0.9762);
+      climber.setPositionRight(19000);
     } else {
-      goal = 1000; // 1000
-      climber.climb(-0.4);
+      climber.climb(Constants.Climber.DOWN_SPEED);
     }
   }
 
   @Override
   public void execute() {
-    if (goal != 1000) {
-      climberEncoder = Math.abs(climber.getLeftEncoderCount());
-      if (climberEncoder < 100000) { // 25000
-        climber.setPositionLeft(goal * 0.9762);
-        climber.setPositionRight(goal);
-      }
-    }
   }
 
   @Override
   public void end(boolean interrupted) {
-    // climber.printEncoders();
     climber.stop();
   }
 

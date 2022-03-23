@@ -1,53 +1,31 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands.Climber;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.utils.Constants;
+// import frc.robot.utils.Constants;
 import frc.robot.subsystems.Climber;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
-public class AutoClimb extends CommandBase {
-  /** Creates a new AutoClimb. */
+public class AutoClimb extends SequentialCommandGroup {
   private Climber climber;
-  private double goal;
-  private int count;
 
-  public AutoClimb(Climber climber, double goal) {
+  public AutoClimb(Climber climber) {
     addRequirements(climber);
     this.climber = climber;
-    this.goal = goal;
-    count = 0;
   }
 
   @Override
   public void initialize() {
-    climber.resetEncoders();
-    climber.setPosition(goal);
-    // check encoder for each side
-    // get current
-    // when current stall the velocity goes down and current goes up
+    addCommands(
+      new ParallelDeadlineGroup(new InstantCommand(()->climber.setPositionPivots(41)), new ClimbDown(climber, false)),
+      new ClimbDown(climber, true).withTimeout(3),
+      new PivotRelative(climber, -20),
+      new InstantCommand(()->climber.climb(0.2)).alongWith(new InstantCommand(()->climber.climbPivots(0.1))).withTimeout(2),
+      new ParallelCommandGroup(new ClimbUp(climber), new PivotRelative(climber, -90)),
+      new PivotRelative(climber, 10),
+      new ParallelDeadlineGroup(new PivotRelative(climber, 100), new ClimbDown(climber, false))
+    );
   }
 
-  @Override
-  public void execute() {
-    double error = Math.abs(goal - climber.getLeftEncoderCount());
-    if (error <= Constants.Climber.CLIMB_TOLERANCE) {
-      count++;
-    } else {
-      count = 0;
-    }
-  }
-
-  @Override
-  public void end(boolean interrupted) {
-    climber.stop();
-  }
-
-  @Override
-  public boolean isFinished() {
-    // return false;
-    return count >= 10;
-  }
 }

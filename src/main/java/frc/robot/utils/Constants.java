@@ -56,25 +56,29 @@ public final class Constants {
 
   public final static class Climber {
     public static final double UP_SPEED = 0.3; // 0.3
-    public static final double DOWN_SPEED = -0.3; // -0.3
+    public static final double DOWN_SPEED = -0.2; // -0.3
     public static final double CALIBRATION_SPEED = -0.1; // -0.1
     public static final double UP_ENCODER_RIGHT = 236000;
     public static final double UP_ENCODER_LEFT = 229000;
 
     public static final double CLIMB_TOLERANCE = 50;
-
+    
+    // going down part 1
     public static final double P_0 = 0.008;
     public static final double I_0 = 0.000001;
     public static final double D_0 = 0.5;
     public static final double F_0 = 0;
     public static final int SLOT_ID_0 = 0;
-
+    
+    // going all the way down
+    //TODO kill this
     public static final double P_1 = 0.05;
     public static final double I_1 = 0.0005;
     public static final double D_1 = 0;
     public static final double F_1 = 0;
     public static final int SLOT_ID_1 = 1;
 
+    // going up
     public static final double P_2 = 0.008;
     public static final double I_2 = 0;
     public static final double D_2 = 0;

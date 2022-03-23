@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
 import frc.robot.subsystems.Climber;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import frc.robot.subsystems.LinearServo2;
 
 public class Calibration extends CommandBase {
@@ -55,9 +55,9 @@ public class Calibration extends CommandBase {
         climber.climbPivotRight(0);
       }
     }
-    SmartDashboard.putNumber("Bus Voltage", climber.rightPivot.getBusVoltage());
-    SmartDashboard.putNumber("Output Current", climber.rightPivot.getOutputCurrent());
-    SmartDashboard.putNumber("Stick Faults", climber.rightPivot.getStickyFaults());
+    // SmartDashboard.putNumber("Bus Voltage", climber.rightPivot.getBusVoltage());
+    // SmartDashboard.putNumber("Output Current", climber.rightPivot.getOutputCurrent());
+    // SmartDashboard.putNumber("Stick Faults", climber.rightPivot.getStickyFaults());
   }
 
   @Override
