@@ -1,7 +1,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Climber.AutoClimb;
 import frc.robot.commands.Climber.Calibration;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
@@ -53,12 +55,10 @@ public class RobotContainer {
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
         .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity())));
 
-    driveY.whileHeld(new PivotRelative(climber, -5));
-    driveA.whileHeld(new PivotRelative(climber, 5));
-    driveB.whileHeld(new ClimbUp(climber));
-    driveX.whileHeld(new ClimbDown(climber, false));
-
-    // driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
+    driveX.whenPressed(new AutoClimb(climber));
+    driveY.whileHeld(new ClimbUp(climber));
+    driveA.whileHeld(new ClimbDown(climber, false));
+    driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
   }
 
   public Command getAutonomousCommand() {
