@@ -46,11 +46,11 @@ public class Calibration extends CommandBase {
         rightDone = true;
         climber.climbRight(0);
       }
-      if (climber.getCurrentPivotLeft() >= 15) {
+      if (climber.getCurrentPivotLeft() >= 20) {
         leftPivotDone = true;
         climber.climbPivotLeft(0);
       }
-      if (climber.getCurrentPivotRight() >= 15) {
+      if (climber.getCurrentPivotRight() >= 20) {
         rightPivotDone = true;
         climber.climbPivotRight(0);
       }

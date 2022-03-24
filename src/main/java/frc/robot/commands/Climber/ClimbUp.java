@@ -9,18 +9,29 @@ import frc.robot.utils.Constants;
 import frc.robot.subsystems.Climber;
 public class ClimbUp extends CommandBase {
   private final Climber climber;
+  private double encoderLeft;
+  private double encoderRight;
 
   public ClimbUp(Climber climber) {
     addRequirements(climber);
     this.climber = climber;
+    encoderLeft = Constants.Climber.UP_ENCODER_LEFT;
+    encoderRight = Constants.Climber.UP_ENCODER_RIGHT;
+  }
+
+  public ClimbUp(Climber climber, double encoderLeft, double encoderRight) {
+    addRequirements(climber);
+    this.climber = climber;
+    this.encoderLeft = encoderLeft;
+    this.encoderRight = encoderRight;
   }
 
   @Override
   public void initialize() {
     // climber.climb(Constants.Climber.UP_SPEED);
     climber.selectProfile(1);
-    climber.setPositionLeft(Constants.Climber.UP_ENCODER_LEFT);
-    climber.setPositionRight(Constants.Climber.UP_ENCODER_RIGHT);
+    climber.setPositionLeft(encoderLeft);
+    climber.setPositionRight(encoderRight);
   }
 
   @Override
@@ -34,10 +45,11 @@ public class ClimbUp extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    // if (Math.abs(climber.getRightEncoderCount()-Constants.Climber.UP_ENCODER_RIGHT)<1000
-    //  && Math.abs(climber.getLeftEncoderCount()-Constants.Climber.UP_ENCODER_LEFT)<1000){
-    //   return true;
-    // }
+    if (Math.abs(climber.getRightEncoderCount()-Constants.Climber.UP_ENCODER_RIGHT)<10000
+     && Math.abs(climber.getLeftEncoderCount()-Constants.Climber.UP_ENCODER_LEFT)<10000){
+      System.out.println("CLIMB UP FINISHED ");
+      return true;
+    }
     return false;
   }
 }

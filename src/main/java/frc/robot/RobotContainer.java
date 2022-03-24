@@ -50,25 +50,30 @@ public class RobotContainer {
       intake, shooter, driveTrain, navX);
 
   // should be temp climb
-  private int selectCounter = -1;
+  private int selectCounter = 0;
 
   private int select() {
-    System.out.println("AHHHH INCREASING SELECT COUNTER"+selectCounter);
-    if (selectCounter == 2) {
+    return selectCounter;
+  }
+
+  public void increaseSelect(){
+    if (selectCounter == 5) {
       selectCounter = 0;
     } else {
       selectCounter++;
     }
-    return selectCounter;
+    System.out.println("BUTTON CLICKED IS NOW AT: "+selectCounter);
   }
 
   private final Command autoClimb = new SelectCommand(
       Map.ofEntries(
-          Map.entry(0, new PivotRelative(climber, -230)),
-          Map.entry(1, new ClimbDown(climber, true).withTimeout(3)),
-          Map.entry(2, new PivotRelative(climber, 20))
+          Map.entry(0, new PivotRelative(climber, -230).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(1, new ClimbDown(climber, true).withTimeout(3).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(2, new PivotRelative(climber, 20).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(3, new ClimbUp(climber, 100000, 100000).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(4, new PivotRelative(climber, 90).beforeStarting(new InstantCommand(()->increaseSelect()))),
           // Map.entry(3, new PivotRelative(climber, 90).deadlineWith(new InstantCommand(() -> climber.climb(0.2)))),
-          // Map.entry(4, new ClimbUp(climber).withTimeout(3)),
+          Map.entry(5, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect())))
           // Map.entry(5, new PivotRelative(climber, -50).deadlineWith(new ClimbDown(climber, false)))
           ),
       this::select);
@@ -79,7 +84,7 @@ public class RobotContainer {
   }
 
   public void configureButtonBindings() {
-    selectCounter = -1;
+    selectCounter = 0;
     rightBumper.whileHeld(new IntakeBalls(intake));
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())

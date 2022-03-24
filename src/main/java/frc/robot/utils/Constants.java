@@ -58,8 +58,8 @@ public final class Constants {
     public static final double UP_SPEED = 0.3; // 0.3
     public static final double DOWN_SPEED = -0.2; // -0.3
     public static final double CALIBRATION_SPEED = -0.1; // -0.1
-    public static final double UP_ENCODER_RIGHT = 236000/2;
-    public static final double UP_ENCODER_LEFT = 229000/2;
+    public static final double UP_ENCODER_RIGHT = 236000;
+    public static final double UP_ENCODER_LEFT = 229000;
 
     public static final double CLIMB_TOLERANCE = 50;
     
@@ -75,7 +75,7 @@ public final class Constants {
     public static final double I_1 = 0;
     public static final double D_1 = 0;
     public static final double F_1 = 0;
-    public static final int SLOT_ID_1 = 2;
+    public static final int SLOT_ID_1 = 1;
 
     public static final double P_2 = 0.8;
     public static final double I_2 = 0;
