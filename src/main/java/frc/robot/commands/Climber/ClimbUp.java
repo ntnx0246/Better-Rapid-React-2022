@@ -18,7 +18,7 @@ public class ClimbUp extends CommandBase {
   @Override
   public void initialize() {
     climber.climb(Constants.Climber.UP_SPEED);
-    climber.selectProfile(2);
+    climber.selectProfile(1);
     climber.setPositionLeft(Constants.Climber.UP_ENCODER_LEFT);
     climber.setPositionRight(Constants.Climber.UP_ENCODER_RIGHT);
   }

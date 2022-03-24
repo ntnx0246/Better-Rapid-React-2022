@@ -1,7 +1,11 @@
 package frc.robot;
 
+import java.util.Map;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Climber.AutoClimb;
 import frc.robot.commands.Climber.Calibration;
@@ -45,6 +49,29 @@ public class RobotContainer {
   private final ShuffleBoard shuffleBoard = new ShuffleBoard(
       intake, shooter, driveTrain, navX);
 
+  // should be temp climb
+  private int selectCounter = -1;
+
+  private int select() {
+    if (selectCounter == 5) {
+      selectCounter = 0;
+    } else {
+      selectCounter++;
+    }
+    return selectCounter;
+  }
+
+  private final Command autoClimb = new SelectCommand(
+      Map.ofEntries(
+          Map.entry(0, new PivotRelative(climber, -230)),
+          Map.entry(1, new ClimbDown(climber, true).withTimeout(3)),
+          Map.entry(2, new PivotRelative(climber, 20)),
+          Map.entry(3, new ParallelDeadlineGroup(new PivotRelative(climber, 90), new InstantCommand(() -> climber.climb(0.2)))),
+          Map.entry(4, new ClimbUp(climber).withTimeout(3)),
+          Map.entry(5, new ParallelDeadlineGroup(new PivotRelative(climber, -50), new ClimbDown(climber, false)))),
+      this::select);
+  // end of should be temp climb
+  
   public RobotContainer() {
     driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, drivePad));
   }
@@ -55,11 +82,13 @@ public class RobotContainer {
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
         .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity())));
 
-    driveX.whenPressed(new AutoClimb(climber));
+    // driveX.whenPressed(new AutoClimb(climber));
+    driveX.whenPressed(autoClimb);
     driveY.whileHeld(new ClimbUp(climber));
     driveA.whileHeld(new ClimbDown(climber, false));
     driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
   }
+
 
   public Command getAutonomousCommand() {
     return shuffleBoard.getAutonomousCommand();

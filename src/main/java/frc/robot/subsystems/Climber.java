@@ -40,15 +40,15 @@ public class Climber extends SubsystemBase {
     leftPivotController = leftPivot.getPIDController();
     rightPivotController = rightPivot.getPIDController();
 
-    leftPivotController.setP(Constants.Climber.P_3);
-    leftPivotController.setI(Constants.Climber.I_3);
-    leftPivotController.setD(Constants.Climber.D_3);
-    leftPivotController.setFF(Constants.Climber.F_3);
+    leftPivotController.setP(Constants.Climber.P_2);
+    leftPivotController.setI(Constants.Climber.I_2);
+    leftPivotController.setD(Constants.Climber.D_2);
+    leftPivotController.setFF(Constants.Climber.F_2);
 
-    rightPivotController.setP(Constants.Climber.P_3);
-    rightPivotController.setI(Constants.Climber.I_3);
-    rightPivotController.setD(Constants.Climber.D_3);
-    rightPivotController.setFF(Constants.Climber.F_3);
+    rightPivotController.setP(Constants.Climber.P_2);
+    rightPivotController.setI(Constants.Climber.I_2);
+    rightPivotController.setD(Constants.Climber.D_2);
+    rightPivotController.setFF(Constants.Climber.F_2);
 
     rightMotor.setInverted(true);
 
@@ -77,15 +77,6 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kI(Constants.Climber.SLOT_ID_1, Constants.Climber.I_1);
     rightMotor.config_kD(Constants.Climber.SLOT_ID_1, Constants.Climber.D_1);
     rightMotor.config_kF(Constants.Climber.SLOT_ID_1, Constants.Climber.F_1);
-
-    leftMotor.config_kP(Constants.Climber.SLOT_ID_2, Constants.Climber.P_2);
-    leftMotor.config_kI(Constants.Climber.SLOT_ID_2, Constants.Climber.I_2);
-    leftMotor.config_kD(Constants.Climber.SLOT_ID_2, Constants.Climber.D_2);
-    leftMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
-    rightMotor.config_kP(Constants.Climber.SLOT_ID_2, Constants.Climber.P_2);
-    rightMotor.config_kI(Constants.Climber.SLOT_ID_2, Constants.Climber.I_2);
-    rightMotor.config_kD(Constants.Climber.SLOT_ID_2, Constants.Climber.D_2);
-    rightMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
   }
 
   public void setPositionPivots(double position){
@@ -196,7 +187,6 @@ public class Climber extends SubsystemBase {
     rightPivot.set(0);
   }
 
-  // check for stall of the motors
   public double getVelocityLeft() {
     return leftMotor.getSelectedSensorVelocity();
   }
@@ -204,10 +194,6 @@ public class Climber extends SubsystemBase {
   public double getVelocityRight() {
     return rightMotor.getSelectedSensorVelocity();
   }
-
-  // limit the encoder for climber when going up, don't let the numbers get to
-  // high
-  // right has to get to 210000 (currently - L: -202964 R: 204334)
 
   @Override
   public void periodic() {
