@@ -53,7 +53,8 @@ public class RobotContainer {
   private int selectCounter = -1;
 
   private int select() {
-    if (selectCounter == 5) {
+    System.out.println("AHHHH INCREASING SELECT COUNTER"+selectCounter);
+    if (selectCounter == 2) {
       selectCounter = 0;
     } else {
       selectCounter++;
@@ -65,10 +66,11 @@ public class RobotContainer {
       Map.ofEntries(
           Map.entry(0, new PivotRelative(climber, -230)),
           Map.entry(1, new ClimbDown(climber, true).withTimeout(3)),
-          Map.entry(2, new PivotRelative(climber, 20)),
-          Map.entry(3, new ParallelDeadlineGroup(new PivotRelative(climber, 90), new InstantCommand(() -> climber.climb(0.2)))),
-          Map.entry(4, new ClimbUp(climber).withTimeout(3)),
-          Map.entry(5, new ParallelDeadlineGroup(new PivotRelative(climber, -50), new ClimbDown(climber, false)))),
+          Map.entry(2, new PivotRelative(climber, 20))
+          // Map.entry(3, new PivotRelative(climber, 90).deadlineWith(new InstantCommand(() -> climber.climb(0.2)))),
+          // Map.entry(4, new ClimbUp(climber).withTimeout(3)),
+          // Map.entry(5, new PivotRelative(climber, -50).deadlineWith(new ClimbDown(climber, false)))
+          ),
       this::select);
   // end of should be temp climb
   
@@ -77,6 +79,7 @@ public class RobotContainer {
   }
 
   public void configureButtonBindings() {
+    selectCounter = -1;
     rightBumper.whileHeld(new IntakeBalls(intake));
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
