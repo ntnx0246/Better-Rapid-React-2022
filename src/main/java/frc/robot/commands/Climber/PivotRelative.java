@@ -1,23 +1,23 @@
 package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Pivots;
 
 public class PivotRelative extends CommandBase {
-  Climber climber;
+  Pivots pivots;
   double angle;
   double target;
   
-  public PivotRelative(Climber climber, double angle) {
-    addRequirements(climber);
-    this.climber = climber;    
+  public PivotRelative(Pivots pivots,double angle) {
+    addRequirements(pivots); 
     this.angle = angle;
+    this.pivots = pivots;
   }
 
   @Override
   public void initialize() {
-    target = climber.getRightPivotEncoder()+(angle*64/360);
-    climber.setPositionPivots(climber.getRightPivotEncoder()+(angle*64/360));
+    target = pivots.getRightPivotEncoder()+(angle*64/360);
+    pivots.setPositionPivots(pivots.getRightPivotEncoder()+(angle*64/360));
   }
 
   @Override
@@ -27,12 +27,12 @@ public class PivotRelative extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    climber.stop();
+    pivots.stop();
   }
 
   @Override
   public boolean isFinished() {
-    if (Math.abs(climber.getRightPivotEncoder()-target)<0.05){
+    if (Math.abs(pivots.getRightPivotEncoder()-target)<0.05){
       return true;
     }
     return false;

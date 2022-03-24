@@ -6,9 +6,11 @@ import frc.robot.utils.Constants;
 import frc.robot.subsystems.Climber;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import frc.robot.subsystems.LinearServo2;
+import frc.robot.subsystems.Pivots;
 
 public class Calibration extends CommandBase {
   Climber climber;
+  Pivots pivots;
   boolean leftDone;
   boolean rightDone;
   boolean leftPivotDone;
@@ -16,9 +18,10 @@ public class Calibration extends CommandBase {
   Timer timer;
   // LinearServo2 servo;
 
-  public Calibration(Climber climber) {
+  public Calibration(Climber climber, Pivots pivots) {
     addRequirements(climber);
     this.climber = climber;
+    this.pivots = pivots;
     leftDone = false;
     rightDone = false;
     leftPivotDone = false;
@@ -32,7 +35,7 @@ public class Calibration extends CommandBase {
     timer.reset();
     timer.start();
     climber.climb(Constants.Climber.CALIBRATION_SPEED);
-    climber.climbPivots(-Constants.Climber.CALIBRATION_SPEED);
+    pivots.climbPivots(-Constants.Climber.CALIBRATION_SPEED);
   }
 
   @Override
@@ -46,13 +49,13 @@ public class Calibration extends CommandBase {
         rightDone = true;
         climber.climbRight(0);
       }
-      if (climber.getCurrentPivotLeft() >= 20) {
+      if (pivots.getCurrentPivotLeft() >= 20) {
         leftPivotDone = true;
-        climber.climbPivotLeft(0);
+        pivots.climbPivotLeft(0);
       }
-      if (climber.getCurrentPivotRight() >= 20) {
+      if (pivots.getCurrentPivotRight() >= 20) {
         rightPivotDone = true;
-        climber.climbPivotRight(0);
+        pivots.climbPivotRight(0);
       }
     }
     // SmartDashboard.putNumber("Bus Voltage", climber.rightPivot.getBusVoltage());
@@ -66,6 +69,7 @@ public class Calibration extends CommandBase {
     timer.stop();
     climber.stop();
     climber.resetEncoders();
+    pivots.resetEncoders();
   }
 
   @Override

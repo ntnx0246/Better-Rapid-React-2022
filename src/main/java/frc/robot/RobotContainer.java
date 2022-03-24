@@ -21,6 +21,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.NavX;
+import frc.robot.subsystems.Pivots;
 import frc.robot.subsystems.Shooter;
 
 import frc.robot.utils.LogitechGamingPad;
@@ -34,6 +35,7 @@ public class RobotContainer {
   private final Climber climber = new Climber();
   private final Intake intake = new Intake();
   private final NavX navX = new NavX();
+  private final Pivots pivots = new Pivots();
 
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
   private final JoystickButton driveB = new JoystickButton(drivePad, 2);
@@ -67,11 +69,11 @@ public class RobotContainer {
 
   private final Command autoClimb = new SelectCommand(
       Map.ofEntries(
-          Map.entry(0, new PivotRelative(climber, -230).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(0, new PivotRelative(pivots, -230).beforeStarting(new InstantCommand(()->increaseSelect()))),
           Map.entry(1, new ClimbDown(climber, true).withTimeout(2).beforeStarting(new InstantCommand(()->increaseSelect()))),
-          Map.entry(2, new PivotRelative(climber, 20).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(2, new PivotRelative(pivots, 20).beforeStarting(new InstantCommand(()->increaseSelect()))),
           Map.entry(3, new ClimbUp(climber, 100000, 100000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
-          Map.entry(4, new PivotRelative(climber, 90).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(4, new PivotRelative(pivots, 90).beforeStarting(new InstantCommand(()->increaseSelect()))),
           // Map.entry(3, new PivotRelative(climber, 90).deadlineWith(new InstantCommand(() -> climber.climb(0.2)))),
           Map.entry(5, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect())))
           // Map.entry(5, new PivotRelative(climber, -50).deadlineWith(new ClimbDown(climber, false)))
@@ -103,6 +105,6 @@ public class RobotContainer {
   }
 
   public Command calibrateClimber() {
-    return new Calibration(climber);
+    return new Calibration(climber, pivots);
   }
 }

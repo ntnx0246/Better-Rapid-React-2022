@@ -19,36 +19,11 @@ public class Climber extends SubsystemBase {
 
   public TalonFX leftMotor;
   public TalonFX rightMotor;
-  public CANSparkMax leftPivot;
-  public CANSparkMax rightPivot;
-  private RelativeEncoder leftPivotEncoder;
-  private RelativeEncoder rightPivotEncoder;
-  private SparkMaxPIDController leftPivotController;
-  private SparkMaxPIDController rightPivotController;
 
   /** Creates a new Climber. */
   public Climber() {
     leftMotor = new TalonFX(Constants.ID.CLIMBER_LEFT);
     rightMotor = new TalonFX(Constants.ID.CLIMBER_RIGHT);
-    leftPivot = new CANSparkMax(Constants.ID.PIVOT_LEFT, MotorType.kBrushless);
-    rightPivot = new CANSparkMax(Constants.ID.PIVOT_RIGHT, MotorType.kBrushless);
-    rightPivot.setInverted(true);
-
-    leftPivotEncoder = leftPivot.getEncoder();
-    rightPivotEncoder = rightPivot.getEncoder();
-
-    leftPivotController = leftPivot.getPIDController();
-    rightPivotController = rightPivot.getPIDController();
-
-    leftPivotController.setP(Constants.Climber.P_2);
-    leftPivotController.setI(Constants.Climber.I_2);
-    leftPivotController.setD(Constants.Climber.D_2);
-    leftPivotController.setFF(Constants.Climber.F_2);
-
-    rightPivotController.setP(Constants.Climber.P_2);
-    rightPivotController.setI(Constants.Climber.I_2);
-    rightPivotController.setD(Constants.Climber.D_2);
-    rightPivotController.setFF(Constants.Climber.F_2);
 
     rightMotor.setInverted(true);
 
@@ -77,48 +52,6 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kI(Constants.Climber.SLOT_ID_1, Constants.Climber.I_1);
     rightMotor.config_kD(Constants.Climber.SLOT_ID_1, Constants.Climber.D_1);
     rightMotor.config_kF(Constants.Climber.SLOT_ID_1, Constants.Climber.F_1);
-  }
-
-  public void setPositionPivots(double position){
-    leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition);
-    rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition);
-    // leftPivotEncoder.setPosition(position);
-    // rightPivotEncoder.setPosition(position);
-  }
-
-  public double getLeftPivotEncoder(){
-    return leftPivotEncoder.getPosition();
-  }
-
-  public double getRightPivotEncoder(){
-    return rightPivotEncoder.getPosition();
-  }
-
-  public void climbPivotLeft(double speed){
-    leftPivot.set(speed);
-  }
-
-  public void climbPivotRight(double speed){
-    rightPivot.set(speed);
-  }
-
-  public void climbPivots(double speed){
-    leftPivot.set(speed);
-    rightPivot.set(speed);
-    System.out.println("testing pivot motor"+leftPivot.get());
-
-  }
-
-  public boolean pivotStalled(){
-    return leftPivot.getOutputCurrent() > 15 && rightPivot.getOutputCurrent() > 15;
-  }
-
-  public double getCurrentPivotLeft(){
-    return leftPivot.getOutputCurrent();
-  }
-
-  public double getCurrentPivotRight(){
-    return rightPivot.getOutputCurrent();
   }
 
   public void selectProfile(int id) {
@@ -155,8 +88,6 @@ public class Climber extends SubsystemBase {
   public void resetEncoders() {
     leftMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
     rightMotor.getSensorCollection().setIntegratedSensorPosition(0, 0);
-    leftPivotEncoder.setPosition(0);
-    rightPivotEncoder.setPosition(0);
   }
 
   public double getLeftEncoderCount() {
@@ -183,8 +114,6 @@ public class Climber extends SubsystemBase {
   public void stop() {
     leftMotor.set(ControlMode.PercentOutput, 0.0);
     rightMotor.set(ControlMode.PercentOutput, 0.0);
-    leftPivot.set(0);
-    rightPivot.set(0);
   }
 
   public double getVelocityLeft() {
@@ -197,7 +126,5 @@ public class Climber extends SubsystemBase {
 
   @Override
   public void periodic() {
-    this.getLeftPivotEncoder();
-    this.getRightPivotEncoder();
   }
 }
