@@ -20,10 +20,10 @@ public class PivotRelative extends CommandBase {
     System.out.println("want to be: "+climber.getRightPivotEncoder()+(5.0*64/360));
     System.out.println("what its at: "+climber.getRightPivotEncoder());
     if(forward){
-        climber.setPositionPivots(climber.getRightPivotEncoder()+(5.0*64/360));
+        climber.setPositionPivots(climber.getRightPivotEncoder()+(10.0*64/360));
         // climber.climbPivots(0.5);
     } else {
-        climber.setPositionPivots(climber.getRightPivotEncoder()+(-5.0*64/360));
+        climber.setPositionPivots(climber.getRightPivotEncoder()+(-10.0*64/360));
     }
   }
 
