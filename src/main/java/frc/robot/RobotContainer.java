@@ -68,9 +68,9 @@ public class RobotContainer {
   private final Command autoClimb = new SelectCommand(
       Map.ofEntries(
           Map.entry(0, new PivotRelative(climber, -230).beforeStarting(new InstantCommand(()->increaseSelect()))),
-          Map.entry(1, new ClimbDown(climber, true).withTimeout(3).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(1, new ClimbDown(climber, true).withTimeout(2).beforeStarting(new InstantCommand(()->increaseSelect()))),
           Map.entry(2, new PivotRelative(climber, 20).beforeStarting(new InstantCommand(()->increaseSelect()))),
-          Map.entry(3, new ClimbUp(climber, 100000, 100000).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(3, new ClimbUp(climber, 100000, 100000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
           Map.entry(4, new PivotRelative(climber, 90).beforeStarting(new InstantCommand(()->increaseSelect()))),
           // Map.entry(3, new PivotRelative(climber, 90).deadlineWith(new InstantCommand(() -> climber.climb(0.2)))),
           Map.entry(5, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect())))
