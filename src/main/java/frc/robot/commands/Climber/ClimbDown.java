@@ -32,7 +32,7 @@ public class ClimbDown extends CommandBase {
   public void initialize() {
     if (usingPID){
       climber.selectProfile(0);
-      climber.setPositionLeft(leftEncoder * 0.9762);
+      climber.setPositionLeft(leftEncoder);
       climber.setPositionRight(rightEncoder);
     } else {
       climber.climb(Constants.Climber.DOWN_SPEED);

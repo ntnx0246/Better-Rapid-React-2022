@@ -59,26 +59,28 @@ public class RobotContainer {
   }
 
   public void increaseSelect(){
-    if (selectCounter == 7) {
+    System.out.println("WE ARE ON STEP: "+selectCounter);
+    if (selectCounter == 8) {
       selectCounter = 0;
     } else {
       selectCounter++;
     }
-    System.out.println("BUTTON CLICKED IS NOW AT: "+selectCounter);
   }
 
   private final Command autoClimb = new SelectCommand(
       Map.ofEntries(
-          Map.entry(0, new PivotRelative(pivots, -230).beforeStarting(new InstantCommand(()->increaseSelect()))),
-          Map.entry(1, new ClimbDown(climber, 1000, 1000).withTimeout(2).beforeStarting(new InstantCommand(()->increaseSelect())).andThen(new PivotRelative(pivots, 17))),
+          Map.entry(0, new PivotRelative(pivots, -230).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+          Map.entry(1, new ClimbDown(climber, 1000, 1000).withTimeout(2).beforeStarting(new InstantCommand(()->increaseSelect())).andThen(new PivotRelative(pivots, 17).withTimeout(3))),
           // Map.entry(2, new PivotRelative(pivots, 14).alongWith(new ClimbDown(climber, 0, 0).withTimeout(3))),
-          Map.entry(2, new ClimbUp(climber, 20000, 20000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2).andThen(new PivotRelative(pivots, -5))),
-          Map.entry(3, new PivotRelative(pivots, 90).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(2, new ClimbUp(climber, 40000, 40000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2).andThen(new PivotRelative(pivots, -10).withTimeout(3))),
+          Map.entry(3, new PivotRelative(pivots, 90).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
           // Map.entry(3, new PivotRelative(climber, 90).deadlineWith(new InstantCommand(() -> climber.climb(0.2)))),
-          Map.entry(4, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect()))),
-          Map.entry(5, new PivotRelative(pivots, -10).beforeStarting(new InstantCommand(()->increaseSelect()))),
-          Map.entry(6, new ClimbDown(climber, 210000, 210000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
-          Map.entry(7, new PivotRelative(pivots, -100).beforeStarting(new InstantCommand(()->increaseSelect())))
+          Map.entry(4, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
+          Map.entry(5, new PivotRelative(pivots, -10).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
+          Map.entry(6, new ClimbDown(climber, 220000, 220000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+          Map.entry(7, new PivotRelative(pivots, -100).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
+          Map.entry(8, new ClimbDown(climber, 150000, 150000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2))
+          // Map.entry(9, new InstantCommand(()-> pivots.climbPivots(speed);).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2))
           // Map.entry(5, new PivotRelative(climber, -50).deadlineWith(new ClimbDown(climber, false)))
           ),
       this::select);
