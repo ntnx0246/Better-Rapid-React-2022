@@ -65,7 +65,7 @@ public final class Constants {
     
     // going down part 1
     public static final double P_0 = 0.008;
-    public static final double I_0 = 0.000001;
+    public static final double I_0 = 0.00001;
     public static final double D_0 = 0.5;
     public static final double F_0 = 0;
     public static final int SLOT_ID_0 = 0;

@@ -11,19 +11,29 @@ import frc.robot.subsystems.Climber;
 public class ClimbDown extends CommandBase {
   private final Climber climber;
   private boolean usingPID;
+  private double leftEncoder;
+  private double rightEncoder;
 
-  public ClimbDown(Climber climber, boolean usingPID) {
+  public ClimbDown(Climber climber) {
     addRequirements(climber);
     this.climber = climber;
-    this.usingPID = usingPID;
+    this.usingPID = false;
+  }
+
+  public ClimbDown(Climber climber, double leftEncoder, double rightEncoder) {
+    addRequirements(climber);
+    this.climber = climber;
+    this.usingPID = true;
+    this.leftEncoder = leftEncoder;
+    this.rightEncoder = rightEncoder;
   }
 
   @Override
   public void initialize() {
     if (usingPID){
       climber.selectProfile(0);
-      climber.setPositionLeft(0 * 0.9762);
-      climber.setPositionRight(0);
+      climber.setPositionLeft(leftEncoder * 0.9762);
+      climber.setPositionRight(rightEncoder);
     } else {
       climber.climb(Constants.Climber.DOWN_SPEED);
     }

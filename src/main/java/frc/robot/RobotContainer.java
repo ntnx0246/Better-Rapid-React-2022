@@ -59,7 +59,7 @@ public class RobotContainer {
   }
 
   public void increaseSelect(){
-    if (selectCounter == 5) {
+    if (selectCounter == 7) {
       selectCounter = 0;
     } else {
       selectCounter++;
@@ -70,12 +70,15 @@ public class RobotContainer {
   private final Command autoClimb = new SelectCommand(
       Map.ofEntries(
           Map.entry(0, new PivotRelative(pivots, -230).beforeStarting(new InstantCommand(()->increaseSelect()))),
-          Map.entry(1, new ClimbDown(climber, true).withTimeout(2).beforeStarting(new InstantCommand(()->increaseSelect()))),
-          Map.entry(2, new PivotRelative(pivots, 20).beforeStarting(new InstantCommand(()->increaseSelect()))),
-          Map.entry(3, new ClimbUp(climber, 100000, 100000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
-          Map.entry(4, new PivotRelative(pivots, 90).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(1, new ClimbDown(climber, 1000, 1000).withTimeout(2).beforeStarting(new InstantCommand(()->increaseSelect())).andThen(new PivotRelative(pivots, 17))),
+          // Map.entry(2, new PivotRelative(pivots, 14).alongWith(new ClimbDown(climber, 0, 0).withTimeout(3))),
+          Map.entry(2, new ClimbUp(climber, 20000, 20000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2).andThen(new PivotRelative(pivots, -5))),
+          Map.entry(3, new PivotRelative(pivots, 90).beforeStarting(new InstantCommand(()->increaseSelect()))),
           // Map.entry(3, new PivotRelative(climber, 90).deadlineWith(new InstantCommand(() -> climber.climb(0.2)))),
-          Map.entry(5, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect())))
+          Map.entry(4, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(5, new PivotRelative(pivots, -10).beforeStarting(new InstantCommand(()->increaseSelect()))),
+          Map.entry(6, new ClimbDown(climber, 210000, 210000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+          Map.entry(7, new PivotRelative(pivots, -100).beforeStarting(new InstantCommand(()->increaseSelect())))
           // Map.entry(5, new PivotRelative(climber, -50).deadlineWith(new ClimbDown(climber, false)))
           ),
       this::select);
@@ -95,7 +98,7 @@ public class RobotContainer {
     // driveX.whenPressed(new AutoClimb(climber));
     driveX.whenPressed(autoClimb);
     driveY.whileHeld(new ClimbUp(climber));
-    driveA.whileHeld(new ClimbDown(climber, false));
+    driveA.whileHeld(new ClimbDown(climber));
     driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
   }
 
