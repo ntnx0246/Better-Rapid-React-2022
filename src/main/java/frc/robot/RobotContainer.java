@@ -4,10 +4,9 @@ import java.util.Map;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-// import frc.robot.commands.Climber.AutoClimb;
+import frc.robot.commands.Climber.AutoClimb;
 import frc.robot.commands.Climber.Calibration;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
@@ -60,7 +59,7 @@ public class RobotContainer {
 
   public void increaseSelect(){
     System.out.println("WE ARE ON STEP: "+selectCounter);
-    if (selectCounter == 8) {
+    if (selectCounter == 9) {
       selectCounter = 0;
     } else {
       selectCounter++;
@@ -71,17 +70,14 @@ public class RobotContainer {
       Map.ofEntries(
           Map.entry(0, new PivotRelative(pivots, -230).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
           Map.entry(1, new ClimbDown(climber, 1000, 1000).withTimeout(2).beforeStarting(new InstantCommand(()->increaseSelect())).andThen(new PivotRelative(pivots, 17).withTimeout(3))),
-          // Map.entry(2, new PivotRelative(pivots, 14).alongWith(new ClimbDown(climber, 0, 0).withTimeout(3))),
           Map.entry(2, new ClimbUp(climber, 40000, 40000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2).andThen(new PivotRelative(pivots, -10).withTimeout(3))),
           Map.entry(3, new PivotRelative(pivots, 90).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
-          // Map.entry(3, new PivotRelative(climber, 90).deadlineWith(new InstantCommand(() -> climber.climb(0.2)))),
           Map.entry(4, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
           Map.entry(5, new PivotRelative(pivots, -10).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
           Map.entry(6, new ClimbDown(climber, 220000, 220000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
           Map.entry(7, new PivotRelative(pivots, -100).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
-          Map.entry(8, new ClimbDown(climber, 150000, 150000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2))
-          // Map.entry(9, new InstantCommand(()-> pivots.climbPivots(speed);).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2))
-          // Map.entry(5, new PivotRelative(climber, -50).deadlineWith(new ClimbDown(climber, false)))
+          Map.entry(8, new ClimbDown(climber, 150000, 150000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+          Map.entry(9, new InstantCommand(()-> pivots.setPositionPivots(0)).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2))
           ),
       this::select);
   // end of should be temp climb
