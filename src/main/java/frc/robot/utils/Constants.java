@@ -97,10 +97,10 @@ public final class Constants {
     public final static class TwoBall {
       public static final double GET_SECONDBALL = 90;
       public static final double SPACE_TO_TURN = -90;
-      public static final double MOVE_TOWARDS_SHOOT = 30;
+      public static final double MOVE_TOWARDS_SHOOT = 10;
       public static final double CROSS_LINE = -180;
       public static final double TURN_ANGLE = 180;
-      public static final int SHOOT_VELOCITY = -3000;
+      public static final int SHOOT_VELOCITY = -3200;
     }
   }
 

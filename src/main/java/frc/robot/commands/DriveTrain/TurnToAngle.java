@@ -33,7 +33,7 @@ public class TurnToAngle extends CommandBase {
   public void execute() {
     currentAngle = navX.getAngle();
     double errorAngle = goalAngle - currentAngle;
-    double power = errorAngle / goalAngle;
+    double power = (errorAngle / goalAngle)*0.75;
     driveTrain.tankDrive(power, -power);
   }
 
