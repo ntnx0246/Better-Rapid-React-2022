@@ -106,8 +106,8 @@ public class RobotContainer {
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
         .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity())));
 
-    // driveX.whenPressed(new AutoClimb(climber));
-    driveX.whenPressed(autoClimb);
+    driveX.whenPressed(new AutoClimb(climber, pivots));
+    // driveX.whenPressed(autoClimb);
     driveY.whileHeld(new ClimbUp(climber));
     driveA.whileHeld(new ClimbDown(climber));
     driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
