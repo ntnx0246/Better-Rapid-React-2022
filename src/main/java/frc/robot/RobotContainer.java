@@ -45,8 +45,7 @@ public class RobotContainer {
   private final JoystickButton rightBumper = new JoystickButton(drivePad, 6);
   // private final JoystickButton driveBackButton = new JoystickButton(drivePad,
   // 7);
-  // private final JoystickButton driveStartButton = new JoystickButton(drivePad,
-  // 8);
+  private final JoystickButton driveStartButton = new JoystickButton(drivePad, 8);
 
   // private final JoystickButton opA = new JoystickButton(opPad, 1);
   // private final JoystickButton opB = new JoystickButton(opPad, 2);
@@ -105,6 +104,7 @@ public class RobotContainer {
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
         .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity())));
+    driveStartButton.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity()));
 
     driveX.whenPressed(new AutoClimb(climber, pivots));
     // driveX.whenPressed(autoClimb);

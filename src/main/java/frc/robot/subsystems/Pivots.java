@@ -31,21 +31,38 @@ public class Pivots extends SubsystemBase {
     leftPivotController = leftPivot.getPIDController();
     rightPivotController = rightPivot.getPIDController();
 
-    leftPivotController.setP(Constants.Climber.P_2);
-    leftPivotController.setI(Constants.Climber.I_2);
-    leftPivotController.setD(Constants.Climber.D_2);
-    leftPivotController.setFF(Constants.Climber.F_2);
+    leftPivotController.setP(Constants.Climber.P_2, 0);
+    leftPivotController.setI(Constants.Climber.I_2, 0);
+    leftPivotController.setD(Constants.Climber.D_2, 0);
+    leftPivotController.setFF(Constants.Climber.F_2, 0);
 
-    rightPivotController.setP(Constants.Climber.P_2);
-    rightPivotController.setI(Constants.Climber.I_2);
-    rightPivotController.setD(Constants.Climber.D_2);
-    rightPivotController.setFF(Constants.Climber.F_2);
+    rightPivotController.setP(Constants.Climber.P_2, 0);
+    rightPivotController.setI(Constants.Climber.I_2, 0);
+    rightPivotController.setD(Constants.Climber.D_2, 0);
+    rightPivotController.setFF(Constants.Climber.F_2, 0);
+
+    leftPivotController.setP(Constants.Climber.P_3, 1);
+    leftPivotController.setI(Constants.Climber.I_3, 1);
+    leftPivotController.setD(Constants.Climber.D_3, 1);
+    leftPivotController.setFF(Constants.Climber.F_3, 1);
+
+    rightPivotController.setP(Constants.Climber.P_3, 1);
+    rightPivotController.setI(Constants.Climber.I_3, 1);
+    rightPivotController.setD(Constants.Climber.D_3, 1);
+    rightPivotController.setFF(Constants.Climber.F_3, 1);
 
   }
 
   public void setPositionPivots(double position){
-    leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition);
-    rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition);
+    leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 0);
+    rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 0);
+    // leftPivotEncoder.setPosition(position);
+    // rightPivotEncoder.setPosition(position);
+  }
+
+  public void setPositionPivots1(double position){
+    leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 1);
+    rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 1);
     // leftPivotEncoder.setPosition(position);
     // rightPivotEncoder.setPosition(position);
   }

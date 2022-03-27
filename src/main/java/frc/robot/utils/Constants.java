@@ -63,7 +63,7 @@ public final class Constants {
 
     public static final double CLIMB_TOLERANCE = 50;
     
-    // going down part 1
+    // going down 
     public static final double P_0 = 0.008;
     public static final double I_0 = 0.000005; // .00001
     public static final double D_0 = 0.5;
@@ -77,10 +77,17 @@ public final class Constants {
     public static final double F_1 = 0;
     public static final int SLOT_ID_1 = 1;
 
+    // fast pivot
     public static final double P_2 = 0.8;
     public static final double I_2 = 0;
     public static final double D_2 = 0;
     public static final double F_2 = 0;
+
+    // slow pivot 
+    public static final double P_3 = 0.02;
+    public static final double I_3 = 0;
+    public static final double D_3 = 0;
+    public static final double F_3 = 0;
   }
 
   public final static class Auto {

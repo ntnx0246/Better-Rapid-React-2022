@@ -7,17 +7,31 @@ public class PivotRelative extends CommandBase {
   Pivots pivots;
   double angle;
   double target;
+  boolean slow;
   
   public PivotRelative(Pivots pivots,double angle) {
     addRequirements(pivots); 
     this.angle = angle;
     this.pivots = pivots;
+    this.slow = false;
+  }
+
+  public PivotRelative(Pivots pivots,double angle, boolean slow) {
+    addRequirements(pivots); 
+    this.angle = angle;
+    this.pivots = pivots;
+    this.slow = true;
   }
 
   @Override
   public void initialize() {
-    target = pivots.getRightPivotEncoder()+(angle*64/360);
-    pivots.setPositionPivots(pivots.getRightPivotEncoder()+(angle*64/360));
+    if(slow){
+      target = pivots.getRightPivotEncoder()+(angle*64/360);
+      pivots.setPositionPivots1(pivots.getRightPivotEncoder()+(angle*64/360));
+    } else {
+      target = pivots.getRightPivotEncoder()+(angle*64/360);
+      pivots.setPositionPivots(pivots.getRightPivotEncoder()+(angle*64/360));
+    }
   }
 
   @Override
