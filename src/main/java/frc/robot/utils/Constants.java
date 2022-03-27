@@ -24,12 +24,12 @@ public final class Constants {
   }
 
   public final static class Shooter {
-    public static final double PUSH_SPEED = 0.4;
-    public static final int FENDER_HIGH_VELOCITY = -3200;
+    public static final double PUSH_SPEED = 0.8;
+    public static final int FENDER_HIGH_VELOCITY = -3300; // -3200
     public static final int FENDER_LOW_VELOCITY = -2000;
     public static final double RPM_TOLERANCE = 50;
-    public static final double P = 0.0001;
-    public static final double I = 0;
+    public static final double P = 0.0002;
+    public static final double I = 0.00000005;
     public static final double D = 0;
     public static final double F = 0.000174;
     public static final double BACK_UP_TO_SHOOT = -12;
@@ -93,10 +93,10 @@ public final class Constants {
     public final static class TwoBall {
       public static final double GET_SECONDBALL = 90;
       public static final double SPACE_TO_TURN = -90;
-      public static final double MOVE_TOWARDS_SHOOT = 30;
+      public static final double MOVE_TOWARDS_SHOOT = 10;
       public static final double CROSS_LINE = -180;
       public static final double TURN_ANGLE = 180;
-      public static final int SHOOT_VELOCITY = -3000;
+      public static final int SHOOT_VELOCITY = -3200;
     }
   }
 
