@@ -27,6 +27,7 @@ public class PivotRelative extends CommandBase {
   public void initialize() {
     if(slow){
       target = pivots.getRightPivotEncoder()+(angle*64/360);
+      System.out.println("USING SLOW MODE PIVOT POSITION");
       pivots.setPositionPivots1(pivots.getRightPivotEncoder()+(angle*64/360));
     } else {
       target = pivots.getRightPivotEncoder()+(angle*64/360);
