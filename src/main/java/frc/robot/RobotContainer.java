@@ -100,6 +100,7 @@ public class RobotContainer {
 
   public void configureButtonBindings() {
     selectCounter = 0;
+    driveTrain.setSlowMode(false);
     rightBumper.whileHeld(new IntakeBalls(intake));
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())

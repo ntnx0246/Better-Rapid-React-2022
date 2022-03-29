@@ -66,6 +66,10 @@ public class DriveTrain extends SubsystemBase {
     slowModeOn = ! slowModeOn;
   }
 
+  public void setSlowMode(boolean slowMode) {
+    slowModeOn = slowMode;
+  }
+
   public void tankDrive(double left, double right) {
     frontL.set(ControlMode.PercentOutput, left);
     frontR.set(ControlMode.PercentOutput, right);
