@@ -21,6 +21,8 @@ public class ShuffleBoard {
 
   private final SendableChooser<Integer> shooterVelocityChoose = new SendableChooser<Integer>();
 
+  private final SendableChooser<Integer> shooterRollerVelocityChoose = new SendableChooser<Integer>();
+
   public ShuffleBoard(
       Intake intake,
       Shooter shooter,
@@ -38,6 +40,9 @@ public class ShuffleBoard {
     shooterVelocityChoose.addOption("Low Shooting", Constants.Shooter.FENDER_LOW_VELOCITY);
     SmartDashboard.putData("SHOOTER SPEED", shooterVelocityChoose);
 
+    //BACK ROLLER
+    shooterRollerVelocityChoose.setDefaultOption("Some rolling", 1000);
+    shooterRollerVelocityChoose.addOption("MOre rolling", 2000);
     // TODO auto position 1,2,3
 
     // CameraServer.startAutomaticCapture();
@@ -61,6 +66,10 @@ public class ShuffleBoard {
 
   public int getShooterVelocity() {
     return shooterVelocityChoose.getSelected().intValue();
+  }
+
+  public int getRollerVelocity() {
+    return shooterRollerVelocityChoose.getSelected().intValue();
   }
 
   public double getMoveBack() {

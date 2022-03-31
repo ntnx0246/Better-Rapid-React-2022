@@ -15,6 +15,8 @@ public final class Constants {
     public static final int CLIMBER_RIGHT = 11;
     public static final int PIVOT_LEFT = 12;
     public static final int PIVOT_RIGHT = 13;
+    public static final int SHOOTER_BACKLEFT = 14;
+    public static final int SHOOTER_BACKRIGHT = 15;
   }
 
   public final static class Intake {
@@ -33,6 +35,10 @@ public final class Constants {
     public static final double D = 0;
     public static final double F = 0.000174;
     public static final double BACK_UP_TO_SHOOT = -12;
+    public static final double P_BACK = 0.0002;
+    public static final double I_BACK = 0.00000005;
+    public static final double D_BACK = 0;
+    public static final double F_BACK = 0.000174;
   }
 
   public final static class DriveTrain {
