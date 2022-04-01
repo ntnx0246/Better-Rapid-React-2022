@@ -103,9 +103,6 @@ public class Shooter extends SubsystemBase {
   public void stop() {
     left.stopMotor();
     right.stopMotor();
-  }
-
-  public void stopRoller(){
     backLeft.stopMotor();
     backRight.stopMotor();
   }

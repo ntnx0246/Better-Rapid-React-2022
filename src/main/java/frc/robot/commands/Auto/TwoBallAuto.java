@@ -29,7 +29,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
                 new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.SPACE_TO_TURN).withTimeout(5),
                 new TurnToAngle(driveTrain, navX, Constants.Auto.TwoBall.TURN_ANGLE).withTimeout(5),
                 new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.MOVE_TOWARDS_SHOOT).withTimeout(5),
-                new Shoot(intake, shooter, 5, Constants.Auto.TwoBall.SHOOT_VELOCITY, 0).withTimeout(5),
+                new Shoot(intake, shooter, Constants.Auto.TwoBall.SHOOT_VELOCITY, 0).withTimeout(5),
                 new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.CROSS_LINE).withTimeout(5));
     }
 }

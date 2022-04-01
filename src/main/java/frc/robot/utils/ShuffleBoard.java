@@ -42,10 +42,9 @@ public class ShuffleBoard {
 
     //BACK ROLLER
     shooterRollerVelocityChoose.setDefaultOption("Some rolling", 1000);
-    shooterRollerVelocityChoose.addOption("MOre rolling", 2000);
+    shooterRollerVelocityChoose.addOption("More rolling", 2000);
+    
     // TODO auto position 1,2,3
-
-    // CameraServer.startAutomaticCapture();
   }
 
   public Command getAutonomousCommand() {

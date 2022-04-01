@@ -23,8 +23,6 @@ public class Shoot extends CommandBase {
     private IntSupplier suppliedVelocity;
     private IntSupplier suppliedRollerVelocity;
 
-    private double wait;
-
     // TELEOP
     public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity) {
         addRequirements(intake, shooter);
@@ -36,12 +34,11 @@ public class Shoot extends CommandBase {
     }
 
     // AUTO
-    public Shoot(Intake intake, Shooter shooter, double wait, int shooterVelocity, int rollerVelocity) {
+    public Shoot(Intake intake, Shooter shooter, int shooterVelocity, int rollerVelocity) {
         addRequirements(intake, shooter);
         this.intake = intake;
         this.shooter = shooter;
         this.isAuto = true;
-        this.wait = wait;
         timer = new Timer();
         this.shooterVelocity = shooterVelocity;
         this.rollerVelocity = rollerVelocity;
@@ -74,15 +71,10 @@ public class Shoot extends CommandBase {
     public void end(boolean interrupted) {
         intake.stop();
         shooter.stop();
-        shooter.stopRoller();
     }
 
     @Override
     public boolean isFinished() {
-        if (isAuto && timer.get() > wait) {
-            timer.stop();
-            return true;
-        }
         return false;
     }
 }
