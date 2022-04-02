@@ -27,7 +27,7 @@ public final class Constants {
 
   public final static class Shooter {
     public static final double PUSH_SPEED = 0.8;
-    public static final int FENDER_HIGH_VELOCITY = -5000; // -3300
+    public static final int FENDER_HIGH_VELOCITY = -3300; // -3300
     public static final int FENDER_LOW_VELOCITY = -2000;
     public static final double RPM_TOLERANCE = 50;
     public static final double P = 0.0002;
@@ -43,8 +43,9 @@ public final class Constants {
 
   public final static class DriveTrain {
     public static final double SLOW_MODE = 0.5;
+    public static final double SLOW_MODE_TURN = 0.3;
     public static final double REGULAR_MODE = 1.0;
-    public static final double REGULAR_MODE_TURN = 0.6;
+    public static final double REGULAR_MODE_TURN = 0.3;
     public static final double MOTOR_TO_WHEEL_REVOLUTION = 10.71;
     public static final int SENSOR_UNITS_PER_ROTATION = 2048;
     public static final int DRIVE_WHEEL_DIAMETER_INCHES = 6;

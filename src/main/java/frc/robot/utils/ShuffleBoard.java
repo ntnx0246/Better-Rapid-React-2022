@@ -41,9 +41,10 @@ public class ShuffleBoard {
     SmartDashboard.putData("SHOOTER SPEED", shooterVelocityChoose);
 
     //BACK ROLLER
-    shooterRollerVelocityChoose.setDefaultOption("Some rolling", 1000);
-    shooterRollerVelocityChoose.addOption("More rolling", 2000);
-    
+    shooterRollerVelocityChoose.setDefaultOption("Low Rolling", 1000);
+    shooterRollerVelocityChoose.addOption("Fast Rolling", 2000);
+    SmartDashboard.putData("BACK ROLLER SPEED", shooterRollerVelocityChoose);
+
     // TODO auto position 1,2,3
   }
 
