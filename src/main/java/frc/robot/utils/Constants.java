@@ -29,6 +29,9 @@ public final class Constants {
     public static final double PUSH_SPEED = 0.8;
     public static final int FENDER_HIGH_VELOCITY = -3300; // -3300
     public static final int FENDER_LOW_VELOCITY = -2000;
+    public static final int BACKROLLER_LOW_VELOCITY = 2000;
+    public static final int BACKROLLER_HIGH_VELOCITY = 5000;
+
     public static final double RPM_TOLERANCE = 50;
     public static final double P = 0.0002;
     public static final double I = 0.00000005;
