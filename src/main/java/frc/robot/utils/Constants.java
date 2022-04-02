@@ -55,8 +55,8 @@ public final class Constants {
   }
 
   public final static class Climber {
-    public static final double UP_SPEED = 0.3; // 0.3
-    public static final double DOWN_SPEED = -0.2; // -0.3
+    public static final double UP_SPEED = 0.5; // 0.3
+    public static final double DOWN_SPEED = -0.3; // -0.3
     public static final double CALIBRATION_SPEED = -0.1; // -0.1
     public static final double UP_ENCODER_RIGHT = 238000;
     public static final double UP_ENCODER_LEFT = 238000;
@@ -88,6 +88,12 @@ public final class Constants {
     public static final double I_3 = 0;
     public static final double D_3 = 0;
     public static final double F_3 = 0;
+
+    // turbo pivot
+    public static final double P_4 = 1;
+    public static final double I_4 = 1;
+    public static final double D_4 = 0;
+    public static final double F_4 = 1;
   }
 
   public final static class Auto {

@@ -51,21 +51,33 @@ public class Pivots extends SubsystemBase {
     rightPivotController.setD(Constants.Climber.D_3, 1);
     rightPivotController.setFF(Constants.Climber.F_3, 1);
 
+    leftPivotController.setP(Constants.Climber.P_4, 2);
+    leftPivotController.setI(Constants.Climber.I_4, 2);
+    leftPivotController.setD(Constants.Climber.D_4, 2);
+    leftPivotController.setFF(Constants.Climber.F_4, 2);
+
+    rightPivotController.setP(Constants.Climber.P_4, 2);
+    rightPivotController.setI(Constants.Climber.I_4, 2);
+    rightPivotController.setD(Constants.Climber.D_4, 2);
+    rightPivotController.setFF(Constants.Climber.F_4, 2);
+
   }
 
-  public void setPositionPivots(double position){
-    leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 0);
-    rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 0);
+  // 0 is fast, 1 is slow, 2 is turbo
+  public void setPositionPivots(double position, int slot){
+    leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition, slot);
+    rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition, slot);
+    System.out.println("USING SPECIFICSLOT: "+slot);
     // leftPivotEncoder.setPosition(position);
     // rightPivotEncoder.setPosition(position);
   }
 
-  public void setPositionPivots1(double position){
-    leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 1);
-    rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 1);
-    // leftPivotEncoder.setPosition(position);
-    // rightPivotEncoder.setPosition(position);
-  }
+  // public void setPositionPivots1(double position){
+  //   leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 1);
+  //   rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition, 1);
+  //   // leftPivotEncoder.setPosition(position);
+  //   // rightPivotEncoder.setPosition(position);
+  // }
 
   public double getLeftPivotEncoder(){
     return leftPivotEncoder.getPosition();

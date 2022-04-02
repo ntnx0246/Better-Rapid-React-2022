@@ -62,36 +62,36 @@ public class RobotContainer {
       intake, shooter, driveTrain, navX);
 
   // should be temp climb
-  private int selectCounter = 0;
+  // private int selectCounter = 0;
 
-  private int select() {
-    return selectCounter;
-  }
+  // private int select() {
+  //   return selectCounter;
+  // }
 
-  public void increaseSelect(){
-    System.out.println("WE ARE ON STEP: "+selectCounter);
-    if (selectCounter == 10) {
-      selectCounter = 0;
-    } else {
-      selectCounter++;
-    }
-  }
+  // public void increaseSelect(){
+  //   System.out.println("WE ARE ON STEP: "+selectCounter);
+  //   if (selectCounter == 10) {
+  //     selectCounter = 0;
+  //   } else {
+  //     selectCounter++;
+  //   }
+  // }
 
-  private final Command autoClimb = new SelectCommand(
-      Map.ofEntries(
-          Map.entry(0, new PivotRelative(pivots, -230).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
-          Map.entry(1, new ClimbDown(climber, 1000, 1000).withTimeout(2).beforeStarting(new InstantCommand(()->increaseSelect())).andThen(new PivotRelative(pivots, 20).withTimeout(3))),
-          Map.entry(2, new ClimbUp(climber, 40000, 40000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2).andThen(new PivotRelative(pivots, -10).withTimeout(3))),
-          Map.entry(3, new PivotRelative(pivots, 90).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
-          Map.entry(4, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
-          Map.entry(5, new PivotRelative(pivots, -10).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
-          Map.entry(6, new ClimbDown(climber, 220000, 220000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
-          Map.entry(7, new PivotRelative(pivots, -100).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
-          Map.entry(8, new ClimbDown(climber, 150000, 150000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
-          Map.entry(9, new ClimbDown(climber, 175000, 175000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
-          Map.entry(10, new InstantCommand(()-> pivots.setPositionPivots(0)).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2))
-          ),
-      this::select);
+  // private final Command autoClimb = new SelectCommand(
+  //     Map.ofEntries(
+  //         Map.entry(0, new PivotRelative(pivots, -230).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+  //         Map.entry(1, new ClimbDown(climber, 1000, 1000).withTimeout(2).beforeStarting(new InstantCommand(()->increaseSelect())).andThen(new PivotRelative(pivots, 20).withTimeout(3))),
+  //         Map.entry(2, new ClimbUp(climber, 40000, 40000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2).andThen(new PivotRelative(pivots, -10).withTimeout(3))),
+  //         Map.entry(3, new PivotRelative(pivots, 90).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+  //         Map.entry(4, new ClimbUp(climber).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(3)),
+  //         Map.entry(5, new PivotRelative(pivots, -12).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(1)),
+  //         Map.entry(6, new ClimbDown(climber, 220000, 220000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+  //         Map.entry(7, new PivotRelative(pivots, -100).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+  //         Map.entry(8, new ClimbDown(climber, 150000, 150000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+  //         Map.entry(9, new ClimbDown(climber, 175000, 175000).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2)),
+  //         Map.entry(10, new InstantCommand(()-> pivots.setPositionPivots(0, 0)).beforeStarting(new InstantCommand(()->increaseSelect())).withTimeout(2))
+  //         ),
+  //     this::select);
   // end of should be temp climb
   
   public RobotContainer() {
@@ -99,7 +99,7 @@ public class RobotContainer {
   }
 
   public void configureButtonBindings() {
-    selectCounter = 0;
+    // selectCounter = 0;
     driveTrain.setSlowMode(false);
     rightBumper.whileHeld(new IntakeBalls(intake));
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
