@@ -12,6 +12,7 @@ import frc.robot.utils.Constants;
 
 public class DriveTrain extends SubsystemBase {
   private boolean slowModeOn;
+  private boolean climbing;
   private TalonFX frontR;
   private TalonFX frontL;
   private TalonFX backR;
@@ -24,6 +25,7 @@ public class DriveTrain extends SubsystemBase {
     backR = new TalonFX(Constants.ID.DRIVETRAIN_BACK_RIGHT);
     backL = new TalonFX(Constants.ID.DRIVETRAIN_BACK_LEFT);
     slowModeOn = false;
+    climbing = false;
 
     backL.follow(frontL);
     backR.follow(frontR);
@@ -62,8 +64,16 @@ public class DriveTrain extends SubsystemBase {
     return slowModeOn;
   }
 
+  public boolean climbing(){
+    return climbing;
+  }
+
   public void toggleSlowMode() {
     slowModeOn = ! slowModeOn;
+  }
+
+  public void setClimbMode(){
+    climbing = true;
   }
 
   public void setSlowMode(boolean slowMode) {

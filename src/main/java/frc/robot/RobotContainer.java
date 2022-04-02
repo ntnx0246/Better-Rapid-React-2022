@@ -110,6 +110,7 @@ public class RobotContainer {
     driveX.whenPressed(new AutoClimb(climber, pivots));
     // driveX.whenPressed(autoClimb);
     driveY.whileHeld(new ClimbUp(climber));
+    driveY.whenPressed(new InstantCommand(driveTrain::setClimbMode));
     driveA.whileHeld(new ClimbDown(climber));
     driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
   }
