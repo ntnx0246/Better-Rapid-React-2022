@@ -1,33 +1,33 @@
-package frc.robot.commands.Climber;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
 import frc.robot.subsystems.Climber;
-// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-// import frc.robot.subsystems.LinearServo2;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pivots;
 
 public class Calibration extends CommandBase {
   Climber climber;
   Pivots pivots;
+  Intake intake;
   boolean leftDone;
   boolean rightDone;
   boolean leftPivotDone;
   boolean rightPivotDone;
+  boolean intakeDone;
   Timer timer;
-  // LinearServo2 servo;
 
-  public Calibration(Climber climber, Pivots pivots) {
+  public Calibration(Climber climber, Pivots pivots, Intake intake) {
     addRequirements(climber);
     this.climber = climber;
     this.pivots = pivots;
+    this.intake = intake;
     leftDone = false;
     rightDone = false;
     leftPivotDone = false;
     rightPivotDone = false;
     timer = new Timer();
-    // this.servo = servo;
   }
 
   @Override
@@ -36,6 +36,7 @@ public class Calibration extends CommandBase {
     timer.start();
     climber.climb(Constants.Climber.CALIBRATION_SPEED);
     pivots.climbPivots(-Constants.Climber.CALIBRATION_SPEED);
+    intake.setRaisingMotorSpeed(Constants.Intake.CALIBRATION_SPEED);
   }
 
   @Override
@@ -57,10 +58,11 @@ public class Calibration extends CommandBase {
         rightPivotDone = true;
         pivots.climbPivotRight(0);
       }
+      if (intake.getRaisingCurrent() >= 20) {
+        intakeDone = true;
+        intake.setRaisingMotorSpeed(0);
+      }
     }
-    // SmartDashboard.putNumber("Bus Voltage", climber.rightPivot.getBusVoltage());
-    // SmartDashboard.putNumber("Output Current", climber.rightPivot.getOutputCurrent());
-    // SmartDashboard.putNumber("Stick Faults", climber.rightPivot.getStickyFaults());
   }
 
   @Override
@@ -70,17 +72,12 @@ public class Calibration extends CommandBase {
     climber.stop();
     climber.resetEncoders();
     pivots.resetEncoders();
+    intake.resetEncoders();
   }
 
   @Override
   public boolean isFinished() {
-    return rightDone && leftDone && leftPivotDone && rightPivotDone;
+    return rightDone && leftDone && leftPivotDone && rightPivotDone && intakeDone;
   }
 
-  /*
-   * -- after all the self test(motor, rio tests, sensors)
-   * bring the climber down at 0.1 speed
-   * detect stall when climber is all the way down
-   * reset encoders
-   */
 }

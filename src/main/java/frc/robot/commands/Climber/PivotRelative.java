@@ -7,32 +7,19 @@ public class PivotRelative extends CommandBase {
   Pivots pivots;
   double angle;
   double target;
-  boolean slow;
-  
-  public PivotRelative(Pivots pivots,double angle) {
-    addRequirements(pivots); 
-    this.angle = angle;
-    this.pivots = pivots;
-    this.slow = false;
-  }
+  int slot;
 
-  public PivotRelative(Pivots pivots,double angle, boolean slow) {
+  public PivotRelative(Pivots pivots,double angle, int slot) {
     addRequirements(pivots); 
     this.angle = angle;
     this.pivots = pivots;
-    this.slow = true;
+    this.slot = slot;
   }
 
   @Override
   public void initialize() {
-    if(slow){
-      target = pivots.getRightPivotEncoder()+(angle*64/360);
-      System.out.println("USING SLOW MODE PIVOT POSITION");
-      pivots.setPositionPivots1(pivots.getRightPivotEncoder()+(angle*64/360));
-    } else {
-      target = pivots.getRightPivotEncoder()+(angle*64/360);
-      pivots.setPositionPivots(pivots.getRightPivotEncoder()+(angle*64/360));
-    }
+    target = pivots.getRightPivotEncoder()+(angle*64/360);
+    pivots.setPositionPivots(pivots.getRightPivotEncoder()+(angle*64/360), slot);
   }
 
   @Override
