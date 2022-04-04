@@ -103,8 +103,8 @@ public class RobotContainer {
     rightBumper.whileHeld(new IntakeBalls(intake));
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
     leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
-        .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity())));
-    driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
+        .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity())));
+    driveStartButton.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()));
 
     driveX.whenPressed(new AutoClimb(climber, pivots));
     // driveX.whenPressed(autoClimb);
@@ -119,7 +119,7 @@ public class RobotContainer {
     return shuffleBoard.getAutonomousCommand();
   }
 
-  public Command calibrateClimber() {
-    return new Calibration(climber, pivots, intake, driveTrain);
+  public Command calibrate() {
+    return new Calibration(climber, pivots, intake);
   }
 }
