@@ -17,7 +17,7 @@ public class IntakeBalls extends CommandBase {
     intake.intakeTopMotor(Constants.Intake.TOP_SPEED);
     intake.intakeBottomMotor(Constants.Intake.BOTTOM_SPEED);
     intake.intakeOutsideMotor(Constants.Intake.OUTSIDE_SPEED);
-    intake.setRaisingMotorPosition(Constants.Intake.INTAKE_OUT_ENCODER);
+    intake.setRaisingMotorPosition(-Constants.Intake.INTAKE_OUT_ENCODER);
   }
 
   @Override
