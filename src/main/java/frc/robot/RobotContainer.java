@@ -120,6 +120,6 @@ public class RobotContainer {
   }
 
   public Command calibrate() {
-    return new Calibration(climber, pivots, intake);
+    return new Calibration(climber, pivots, intake, driveTrain);
   }
 }

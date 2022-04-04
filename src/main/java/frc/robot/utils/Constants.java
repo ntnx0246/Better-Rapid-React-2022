@@ -24,7 +24,7 @@ public final class Constants {
     public static final double TOP_SPEED = 0.6;
     public static final double BOTTOM_SPEED = 0.25;
     public static final double OUTSIDE_SPEED = -0.5;
-    public static final double INTAKE_OUT_ENCODER = 90;
+    public static final double INTAKE_OUT_ENCODER = 95;
     public static final double CALIBRATION_SPEED = 0.1;
     public static final double P = 0.2;
     public static final double I = 0;
