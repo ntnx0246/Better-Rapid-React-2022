@@ -17,8 +17,8 @@ public class OneBallAuto extends SequentialCommandGroup {
   public OneBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain) {
 
     addCommands(
-      new Shoot(intake, shooter, 5, Constants.Auto.OneBall.SHOOT_VELOCITY),
-      new DriveStraight(driveTrain, () -> Constants.Auto.OneBall.CROSS_LINE)
+      new Shoot(intake, shooter, Constants.Auto.OneBall.SHOOT_VELOCITY, 0).withTimeout(5),
+      new DriveStraight(driveTrain, () -> Constants.Auto.OneBall.CROSS_LINE).withTimeout(5)
     );
   }
 }
