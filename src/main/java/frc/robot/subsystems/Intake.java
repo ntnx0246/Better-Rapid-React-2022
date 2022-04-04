@@ -5,6 +5,8 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,12 +17,25 @@ public class Intake extends SubsystemBase {
   private CANSparkMax topMotor;
   private CANSparkMax bottomMotor;
   private CANSparkMax outsideMotor;
+  private CANSparkMax raisingMotor;
+  private SparkMaxPIDController raisingMotorPIDController;
+  private RelativeEncoder raisingMotorEncoder;
+
+  
 
   public Intake() {
     topMotor = new CANSparkMax(Constants.ID.INTAKE_TOP_SPARK, MotorType.kBrushless);
     bottomMotor = new CANSparkMax(Constants.ID.INTAKE_BOTTOM_SPARK, MotorType.kBrushless);
     outsideMotor = new CANSparkMax(Constants.ID.INTAKE_OUTSIDE_SPARK, MotorType.kBrushless);
+    raisingMotor = new CANSparkMax(Constants.ID.INTAKE_RAISING_SPARK, MotorType.kBrushless);
 
+    raisingMotorPIDController = raisingMotor.getPIDController();
+    raisingMotorEncoder = raisingMotor.getEncoder();
+
+    raisingMotorPIDController.setP(Constants.Climber.P_2);
+    raisingMotorPIDController.setI(Constants.Climber.I_2);
+    raisingMotorPIDController.setD(Constants.Climber.D_2);
+    raisingMotorPIDController.setFF(Constants.Climber.F_2);
   }
 
   public void intakeTopMotor(double speed) {
@@ -33,6 +48,22 @@ public class Intake extends SubsystemBase {
 
   public void intakeOutsideMotor(double speed) {
     outsideMotor.set(speed);
+  }
+
+  public void setRaisingMotorSpeed(double speed) {
+    raisingMotor.set(speed);
+  }
+
+  public double getRaisingCurrent() {
+    return Math.abs(raisingMotor.getOutputCurrent());
+  }
+
+  public void setRaisingMotorPosition(double position){
+    raisingMotorPIDController.setReference(position, CANSparkMax.ControlType.kPosition);  
+  }
+
+  public void resetEncoders() {
+    raisingMotorEncoder.setPosition(0);
   }
 
   public void stop() {

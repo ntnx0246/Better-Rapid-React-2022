@@ -2,7 +2,6 @@ package frc.robot.utils;
 
 public final class Constants {
   public final static class ID {
-    public static final int INTAKE_OUTSIDE_SPARK = 1;
     public static final int INTAKE_TOP_SPARK = 2;
     public static final int INTAKE_BOTTOM_SPARK = 3;
     public static final int SHOOTER_RIGHT = 4;
@@ -15,12 +14,16 @@ public final class Constants {
     public static final int CLIMBER_RIGHT = 11;
     public static final int PIVOT_LEFT = 12;
     public static final int PIVOT_RIGHT = 13;
+    public static final int INTAKE_OUTSIDE_SPARK = 14;
+    public static final int INTAKE_RAISING_SPARK = 15;
   }
 
   public final static class Intake {
     public static final double TOP_SPEED = 0.6;
     public static final double BOTTOM_SPEED = 0.25;
     public static final double OUTSIDE_SPEED = -0.5;
+    public static final double INTAKE_OUT_ENCODER = 5;
+    public static final double CALIBRATION_SPEED = 0.1;
   }
 
   public final static class Shooter {

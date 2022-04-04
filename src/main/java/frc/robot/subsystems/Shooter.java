@@ -57,7 +57,6 @@ public class Shooter extends SubsystemBase {
     return rightEncoder.getVelocity();
   }
 
-
   public void stop() {
     left.stopMotor();
     right.stopMotor();

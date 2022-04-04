@@ -11,36 +11,18 @@ import frc.robot.subsystems.Intake;
 
 public class IntakeBalls extends CommandBase {
   private final Intake intake;
-  public boolean isIntaking;
-  private Timer timer;
-  private double wait;
-  private boolean isAuto;
 
   public IntakeBalls(Intake intake) {
     addRequirements(intake);
     this.intake = intake;
-    this.isAuto = false;
-  }
-
-  public IntakeBalls(Intake intake, double wait) {
-    addRequirements(intake);
-    this.intake = intake;
-    this.wait = wait;
-    this.isAuto = true;
-    timer = new Timer();
   }
 
   @Override
   public void initialize() {
-    if (isAuto) {
-      timer.reset();
-      timer.start();
-    }
-
     intake.intakeTopMotor(Constants.Intake.TOP_SPEED);
     intake.intakeBottomMotor(Constants.Intake.BOTTOM_SPEED);
     intake.intakeOutsideMotor(Constants.Intake.OUTSIDE_SPEED);
-
+    intake.setRaisingMotorPosition(Constants.Intake.INTAKE_OUT_ENCODER);
   }
 
   @Override
@@ -49,15 +31,12 @@ public class IntakeBalls extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    intake.setRaisingMotorPosition(0);
     intake.stop();
   }
 
   @Override
   public boolean isFinished() {
-    if (isAuto && timer.get() > wait) {
-      timer.stop();
-      return true;
-    }
     return false;
   }
 }

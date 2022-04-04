@@ -1,20 +1,20 @@
 package frc.robot;
 
-import java.util.Map;
+// import java.util.Map;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SelectCommand;
+// import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Climber.AutoClimb;
-import frc.robot.commands.Climber.Calibration;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
 import frc.robot.commands.DriveTrain.ArcadeDrive;
 import frc.robot.commands.DriveTrain.DriveStraight;
+import frc.robot.commands.Calibration;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.Shoot;
-import frc.robot.commands.Climber.PivotRelative;
+// import frc.robot.commands.Climber.PivotRelative;
 
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -121,6 +121,6 @@ public class RobotContainer {
   }
 
   public Command calibrateClimber() {
-    return new Calibration(climber, pivots);
+    return new Calibration(climber, pivots, intake);
   }
 }
