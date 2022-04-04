@@ -100,7 +100,7 @@ public final class Constants {
     public static final double I_2 = 0;
     public static final double D_2 = 0;
     public static final double F_2 = 0;
-    public static final int SLOT_ID_2 = 1;
+    public static final int SLOT_ID_2 = 2;
 
   }
 

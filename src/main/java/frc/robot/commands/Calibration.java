@@ -46,11 +46,11 @@ public class Calibration extends CommandBase {
   @Override
   public void execute() {
     if (timer.get() > 0.1) {
-      if (climber.getCurrentLeft() >= 27.5) {
+      if (climber.getCurrentLeft() >= 20) {
         leftDone = true;
         climber.climbLeft(0);
       }
-      if (climber.getCurrentRight() >= 27.5) {
+      if (climber.getCurrentRight() >= 20) {
         rightDone = true;
         climber.climbRight(0);
       }
@@ -81,6 +81,9 @@ public class Calibration extends CommandBase {
 
   @Override
   public boolean isFinished() {
+    System.out.println("INTAKE: "+intakeDone);
+    System.out.println("RIGHT CLIMBER: "+rightDone);
+    System.out.println("LEFT CLIMBER: "+leftDone);
     return rightDone && leftDone && leftPivotDone && rightPivotDone && intakeDone;
   }
 
