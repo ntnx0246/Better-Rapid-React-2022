@@ -24,6 +24,10 @@ public final class Constants {
     public static final double OUTSIDE_SPEED = -0.5;
     public static final double INTAKE_OUT_ENCODER = 5;
     public static final double CALIBRATION_SPEED = 0.1;
+    public static final double P = 0.2;
+    public static final double I = 0;
+    public static final double D = 0;
+    public static final double F = 0;
   }
 
   public final static class Shooter {
