@@ -11,17 +11,20 @@ public class ClimbUp extends CommandBase {
   private final Climber climber;
   private double encoderLeft;
   private double encoderRight;
+  private int pidProfile;
 
-  public ClimbUp(Climber climber) {
+  public ClimbUp(Climber climber, int pidProfile) {
     addRequirements(climber);
     this.climber = climber;
+    this.pidProfile = pidProfile;
     encoderLeft = Constants.Climber.UP_ENCODER_LEFT;
     encoderRight = Constants.Climber.UP_ENCODER_RIGHT;
   }
 
-  public ClimbUp(Climber climber, double encoderLeft, double encoderRight) {
+  public ClimbUp(Climber climber, double encoderLeft, double encoderRight, int pidProfile) {
     addRequirements(climber);
     this.climber = climber;
+    this.pidProfile = pidProfile;
     this.encoderLeft = encoderLeft;
     this.encoderRight = encoderRight;
   }
@@ -29,7 +32,7 @@ public class ClimbUp extends CommandBase {
   @Override
   public void initialize() {
     // climber.climb(Constants.Climber.UP_SPEED);
-    climber.selectProfile(1);
+    climber.selectProfile(pidProfile);
     climber.setPositionLeft(encoderLeft);
     climber.setPositionRight(encoderRight);
   }

@@ -43,8 +43,7 @@ public class RobotContainer {
   private final JoystickButton driveY = new JoystickButton(drivePad, 4);
   private final JoystickButton leftBumper = new JoystickButton(drivePad, 5);
   private final JoystickButton rightBumper = new JoystickButton(drivePad, 6);
-  // private final JoystickButton driveBackButton = new JoystickButton(drivePad,
-  // 7);
+  // private final JoystickButton driveBackButton = new JoystickButton(drivePad,7);
   private final JoystickButton driveStartButton = new JoystickButton(drivePad, 8);
 
   // private final JoystickButton opA = new JoystickButton(opPad, 1);
@@ -109,8 +108,8 @@ public class RobotContainer {
 
     driveX.whenPressed(new AutoClimb(climber, pivots));
     // driveX.whenPressed(autoClimb);
-    driveY.whileHeld(new ClimbUp(climber));
-    driveY.whenPressed(new InstantCommand(driveTrain::setClimbMode));
+    driveY.whileHeld(new ClimbUp(climber, 1));
+    driveY.whenPressed(new InstantCommand(driveTrain::climbingTrue));
     driveA.whileHeld(new ClimbDown(climber));
     driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
   }

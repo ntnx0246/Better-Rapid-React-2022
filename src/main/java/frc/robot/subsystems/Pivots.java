@@ -31,35 +31,35 @@ public class Pivots extends SubsystemBase {
     leftPivotController = leftPivot.getPIDController();
     rightPivotController = rightPivot.getPIDController();
 
-    leftPivotController.setP(Constants.Climber.P_2, 0);
-    leftPivotController.setI(Constants.Climber.I_2, 0);
-    leftPivotController.setD(Constants.Climber.D_2, 0);
-    leftPivotController.setFF(Constants.Climber.F_2, 0);
+    leftPivotController.setP(Constants.Pivot.P_0, 0);
+    leftPivotController.setI(Constants.Pivot.I_0, 0);
+    leftPivotController.setD(Constants.Pivot.D_0, 0);
+    leftPivotController.setFF(Constants.Pivot.F_0, 0);
 
-    rightPivotController.setP(Constants.Climber.P_2, 0);
-    rightPivotController.setI(Constants.Climber.I_2, 0);
-    rightPivotController.setD(Constants.Climber.D_2, 0);
-    rightPivotController.setFF(Constants.Climber.F_2, 0);
+    rightPivotController.setP(Constants.Pivot.P_0, 0);
+    rightPivotController.setI(Constants.Pivot.I_0, 0);
+    rightPivotController.setD(Constants.Pivot.D_0, 0);
+    rightPivotController.setFF(Constants.Pivot.F_0, 0);
 
-    leftPivotController.setP(Constants.Climber.P_3, 1);
-    leftPivotController.setI(Constants.Climber.I_3, 1);
-    leftPivotController.setD(Constants.Climber.D_3, 1);
-    leftPivotController.setFF(Constants.Climber.F_3, 1);
+    leftPivotController.setP(Constants.Pivot.P_1, 1);
+    leftPivotController.setI(Constants.Pivot.I_1, 1);
+    leftPivotController.setD(Constants.Pivot.D_1, 1);
+    leftPivotController.setFF(Constants.Pivot.F_1, 1);
 
-    rightPivotController.setP(Constants.Climber.P_3, 1);
-    rightPivotController.setI(Constants.Climber.I_3, 1);
-    rightPivotController.setD(Constants.Climber.D_3, 1);
-    rightPivotController.setFF(Constants.Climber.F_3, 1);
+    rightPivotController.setP(Constants.Pivot.P_1, 1);
+    rightPivotController.setI(Constants.Pivot.I_1, 1);
+    rightPivotController.setD(Constants.Pivot.D_1, 1);
+    rightPivotController.setFF(Constants.Pivot.F_1, 1);
 
-    leftPivotController.setP(Constants.Climber.P_4, 2);
-    leftPivotController.setI(Constants.Climber.I_4, 2);
-    leftPivotController.setD(Constants.Climber.D_4, 2);
-    leftPivotController.setFF(Constants.Climber.F_4, 2);
+    leftPivotController.setP(Constants.Pivot.P_2, 2);
+    leftPivotController.setI(Constants.Pivot.I_2, 2);
+    leftPivotController.setD(Constants.Pivot.D_2, 2);
+    leftPivotController.setFF(Constants.Pivot.F_2, 2);
 
-    rightPivotController.setP(Constants.Climber.P_4, 2);
-    rightPivotController.setI(Constants.Climber.I_4, 2);
-    rightPivotController.setD(Constants.Climber.D_4, 2);
-    rightPivotController.setFF(Constants.Climber.F_4, 2);
+    rightPivotController.setP(Constants.Pivot.P_2, 2);
+    rightPivotController.setI(Constants.Pivot.I_2, 2);
+    rightPivotController.setD(Constants.Pivot.D_2, 2);
+    rightPivotController.setFF(Constants.Pivot.F_2, 2);
 
   }
 

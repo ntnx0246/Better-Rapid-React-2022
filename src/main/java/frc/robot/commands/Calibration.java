@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pivots;
 
@@ -17,12 +18,14 @@ public class Calibration extends CommandBase {
   boolean rightPivotDone;
   boolean intakeDone;
   Timer timer;
+  DriveTrain driveTrain;
 
-  public Calibration(Climber climber, Pivots pivots, Intake intake) {
+  public Calibration(Climber climber, Pivots pivots, Intake intake, DriveTrain driveTrain) {
     addRequirements(climber);
     this.climber = climber;
     this.pivots = pivots;
     this.intake = intake;
+    this.driveTrain = driveTrain;
     leftDone = false;
     rightDone = false;
     leftPivotDone = false;
@@ -37,6 +40,7 @@ public class Calibration extends CommandBase {
     climber.climb(Constants.Climber.CALIBRATION_SPEED);
     pivots.climbPivots(-Constants.Climber.CALIBRATION_SPEED);
     intake.setRaisingMotorSpeed(Constants.Intake.CALIBRATION_SPEED);
+    driveTrain.setClimbMode(false);
   }
 
   @Override
