@@ -120,7 +120,7 @@ public class RobotContainer {
     return shuffleBoard.getAutonomousCommand();
   }
 
-  public Command calibrateClimber() {
+  public Command calibrate() {
     return new Calibration(climber, pivots, intake);
   }
 }
