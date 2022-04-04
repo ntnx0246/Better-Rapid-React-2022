@@ -24,9 +24,9 @@ public final class Constants {
     public static final double TOP_SPEED = 0.6;
     public static final double BOTTOM_SPEED = 0.25;
     public static final double OUTSIDE_SPEED = -0.5;
-    public static final double INTAKE_OUT_ENCODER = 95;
+    public static final double INTAKE_OUT_ENCODER = 92;
     public static final double CALIBRATION_SPEED = 0.1;
-    public static final double P = 0.2;
+    public static final double P = 0.6;
     public static final double I = 0;
     public static final double D = 0;
     public static final double F = 0;
@@ -34,7 +34,7 @@ public final class Constants {
 
   public final static class Shooter {
     public static final double PUSH_SPEED = 0.8;
-    public static final int FENDER_HIGH_VELOCITY = -3300; // -3300
+    public static final int FENDER_HIGH_VELOCITY = -5000; // -3300
     public static final int FENDER_LOW_VELOCITY = -2000;
     public static final int BACKROLLER_LOW_VELOCITY = 2000;
     public static final int BACKROLLER_HIGH_VELOCITY = 5000;
