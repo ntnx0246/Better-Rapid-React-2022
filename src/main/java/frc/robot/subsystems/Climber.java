@@ -48,6 +48,15 @@ public class Climber extends SubsystemBase {
     rightMotor.config_kI(Constants.Climber.SLOT_ID_1, Constants.Climber.I_1);
     rightMotor.config_kD(Constants.Climber.SLOT_ID_1, Constants.Climber.D_1);
     rightMotor.config_kF(Constants.Climber.SLOT_ID_1, Constants.Climber.F_1);
+
+    leftMotor.config_kP(Constants.Climber.SLOT_ID_2, Constants.Climber.P_2);
+    leftMotor.config_kI(Constants.Climber.SLOT_ID_2, Constants.Climber.I_2);
+    leftMotor.config_kD(Constants.Climber.SLOT_ID_2, Constants.Climber.D_2);
+    leftMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
+    rightMotor.config_kP(Constants.Climber.SLOT_ID_2, Constants.Climber.P_2);
+    rightMotor.config_kI(Constants.Climber.SLOT_ID_2, Constants.Climber.I_2);
+    rightMotor.config_kD(Constants.Climber.SLOT_ID_2, Constants.Climber.D_2);
+    rightMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
   }
 
   public void selectProfile(int id) {
