@@ -15,6 +15,8 @@ public final class Constants {
     public static final int CLIMBER_RIGHT = 11;
     public static final int PIVOT_LEFT = 12;
     public static final int PIVOT_RIGHT = 13;
+    public static final int SHOOTER_BACKLEFT = 14;
+    public static final int SHOOTER_BACKRIGHT = 15;
     public static final int INTAKE_OUTSIDE_SPARK = 16;
   }
 
@@ -32,21 +34,29 @@ public final class Constants {
 
   public final static class Shooter {
     public static final double PUSH_SPEED = 0.8;
-    public static final int FENDER_HIGH_VELOCITY = -5000; // -3300
+    public static final int FENDER_HIGH_VELOCITY = -3300; // -3300
     public static final int FENDER_LOW_VELOCITY = -2000;
+    public static final int BACKROLLER_LOW_VELOCITY = 2000;
+    public static final int BACKROLLER_HIGH_VELOCITY = 5000;
+
     public static final double RPM_TOLERANCE = 50;
     public static final double P = 0.0002;
     public static final double I = 0.00000005;
     public static final double D = 0;
     public static final double F = 0.000174;
     public static final double BACK_UP_TO_SHOOT = -12;
+    public static final double P_BACK = 0.0002;
+    public static final double I_BACK = 0.00000005;
+    public static final double D_BACK = 0;
+    public static final double F_BACK = 0.000174;
   }
 
   public final static class DriveTrain {
+    public static final double SLOW_MODE_TURN = 0.3;
     public static final double SLOW_MODE = 0.3;
     public static final double SUPER_SLOW_MODE = 0.1;
     public static final double REGULAR_MODE = 1.0;
-    public static final double REGULAR_MODE_TURN = 0.6;
+    public static final double REGULAR_MODE_TURN = 0.3;
     public static final double MOTOR_TO_WHEEL_REVOLUTION = 10.71;
     public static final int SENSOR_UNITS_PER_ROTATION = 2048;
     public static final int DRIVE_WHEEL_DIAMETER_INCHES = 6;
