@@ -43,9 +43,9 @@ public final class Constants {
     public static final int FENDER_HIGH_VELOCITY = -3000; // -3300
     public static final int BACKROLLER_HIGH_VELOCITY = 1500;
 
-    public static final double RPM_TOLERANCE = 50;
+    public static final double RPM_TOLERANCE = 30;
     public static final double P = 0.0002;
-    public static final double I = 0.00000005;
+    public static final double I = 0.000000005;
     public static final double D = 0;
     public static final double F = 0.000174;
     public static final double BACK_UP_TO_SHOOT = -12;
@@ -100,7 +100,7 @@ public final class Constants {
     public static final int SLOT_ID_1 = 1;
 
     // turbo going up
-    public static final double P_2 = 0.1;
+    public static final double P_2 = 0.2;
     public static final double I_2 = 0;
     public static final double D_2 = 0;
     public static final double F_2 = 0;

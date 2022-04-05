@@ -109,12 +109,12 @@ public class Shoot extends CommandBase {
     private void shootWhenReady(double velocity, double backVelocity) {
         double error = velocity - shooter.getLeftVelocity();
         double errorBack = backVelocity - shooter.getBackLeftVelocity();
-        SmartDashboard.putNumber("Front Shooter", shooter.getLeftVelocity());
-        SmartDashboard.putNumber("Back Shooter", shooter.getBackLeftVelocity());
+        SmartDashboard.putNumber("Front Shooter RPM IMPORTANTE", shooter.getLeftVelocity());
+        SmartDashboard.putNumber("Back Shooter RPM IMPORTANTE", shooter.getBackLeftVelocity());
         if (error <= Constants.Shooter.RPM_TOLERANCE && errorBack <= Constants.Shooter.RPM_TOLERANCE) {
             rpmCounter++;
         }
-        if(rpmCounter > 10){
+        if(rpmCounter > 15){
             if (pulseCounter < 10){
                 intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
                 intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
