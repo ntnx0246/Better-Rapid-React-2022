@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import java.util.ArrayList;
 import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -22,6 +23,8 @@ public class Shoot extends CommandBase {
     private int rollerVelocity;
     private IntSupplier suppliedVelocity;
     private IntSupplier suppliedRollerVelocity;
+    private int pulseCounter; 
+    private int rpmCounter;
 
     // TELEOP
     public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity) {
@@ -55,15 +58,28 @@ public class Shoot extends CommandBase {
             shooter.setVelocity(suppliedVelocity.getAsInt());
             shooter.setRollerVelocity(suppliedRollerVelocity.getAsInt());
         }
+        pulseCounter = 0;
+        rpmCounter = 0;
     }
 
     @Override
     public void execute() {
         double error = isAuto ? Math.abs(shooterVelocity - shooter.getLeftVelocity())
                 : Math.abs(suppliedVelocity.getAsInt() - shooter.getLeftVelocity());
-        if (error <= Constants.Shooter.RPM_TOLERANCE) {
-            intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
-            intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
+        if (error <= Constants.Shooter.RPM_TOLERANCE ) {
+            rpmCounter++;
+        }
+        if(rpmCounter > 10){
+            if (pulseCounter < 10){
+                intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
+                intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
+                pulseCounter ++;
+            } else {
+                intake.intakeTopMotor(0);
+                intake.intakeBottomMotor(0);
+                pulseCounter = 0;
+                rpmCounter = 0;
+            }
         }
     }
 
