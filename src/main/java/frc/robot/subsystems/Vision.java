@@ -17,8 +17,7 @@ public class Vision extends SubsystemBase {
 
   public Vision() {
 
-    // CameraServer.startAutomaticCapture();
-
+    CameraServer.startAutomaticCapture();
 
     // visionCam = new UsbCamera("cam0", 1);
     // visionCam = CameraServer.startAutomaticCapture();
