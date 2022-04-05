@@ -26,16 +26,19 @@
       "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/LinearServo": "Subsystem",
       "/LiveWindow/NavX": "Subsystem",
+      "/LiveWindow/Pivots": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/Ungrouped/navX-Sensor[1]": "Gyro",
+      "/LiveWindow/Vision": "Subsystem",
       "/SmartDashboard/AUTO MODE": "String Chooser",
+      "/SmartDashboard/BACK ROLLER SPEED": "String Chooser",
       "/SmartDashboard/SHOOTER SPEED": "String Chooser"
     }
   },
   "NetworkTables": {
     "SmartDashboard": {
-      "AUTO MODE": {
+      "BACK ROLLER SPEED": {
         "open": true
       },
       "SHOOTER SPEED": {
