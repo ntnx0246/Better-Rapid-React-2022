@@ -32,7 +32,7 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final NavX navX = new NavX();
   private final Pivots pivots = new Pivots();
-  private final Vision vision = new Vision();
+  // private final Vision vision = new Vision();
 
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
   private final JoystickButton driveB = new JoystickButton(drivePad, 2);

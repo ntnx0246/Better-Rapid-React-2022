@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoMode;
 // import edu.wpi.first.cscore.UsbCamera;
@@ -21,11 +20,8 @@ public class Vision extends SubsystemBase {
 
   public Vision() {
 
-    CameraServer.startAutomaticCapture(0);
-
     // visionCam = new UsbCamera("cam0", 1);
     // visionCam = CameraServer.startAutomaticCapture();
-
     // visionCam.setVideoMode(VideoMode.PixelFormat.kYUYV, 320, 240, 30);
 
     try {
@@ -54,18 +50,16 @@ public class Vision extends SubsystemBase {
 
   // @Override
   public void backgroundUpdate() {
-    if (isConnected) {
-      try {
-        String data = camPort.readString();
-        String[] realData = data.split(";");
-        if (realData.length == 2) {
-          angle = Double.valueOf(realData[0]);
-          yPos = Double.valueOf(realData[1]);
-        }
-      } catch (Exception e) {
-        isConnected = false;
-        SmartDashboard.putBoolean("Vision Serial Port", isConnected);
+    try {
+      String data = camPort.readString();
+      String[] realData = data.split(";");
+      if (realData.length == 2) {
+        angle = Double.valueOf(realData[0]);
+        yPos = Double.valueOf(realData[1]);
       }
+    } catch (Exception e) {
+      isConnected = false;
+      SmartDashboard.putBoolean("Vision Serial Port", isConnected);
     }
   }
 

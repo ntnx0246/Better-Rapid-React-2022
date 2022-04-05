@@ -1,5 +1,6 @@
 package frc.robot.utils;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -26,11 +27,9 @@ public class ShuffleBoard {
   private int shooterRPM = Constants.Shooter.FENDER_HIGH_VELOCITY;
   private int rollerRpm = Constants.Shooter.BACKROLLER_HIGH_VELOCITY;
 
-  public ShuffleBoard(
-      Intake intake,
-      Shooter shooter,
-      DriveTrain driveTrain,
-      NavX navX) {
+  public ShuffleBoard(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
+    CameraServer.startAutomaticCapture(0);
+
     oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
     twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
     // AUTO
