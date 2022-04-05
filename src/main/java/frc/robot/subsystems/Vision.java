@@ -50,12 +50,6 @@ public class Vision extends SubsystemBase {
   // @Override
   public void backgroundUpdate() {
     try {
-      // String data = "";
-      // while (data.equals("") || data.equals(" ")){
-      // System.out.println("Data is blank");
-      // data = camPort.readString();
-      // }
-      //
       String data = camPort.readString();
       String[] realData = data.split(";");
       if (realData.length == 2) {

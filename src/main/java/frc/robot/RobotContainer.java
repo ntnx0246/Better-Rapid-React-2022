@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Climber.AutoClimb;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
-import frc.robot.commands.Climber.PivotRelative;
+// import frc.robot.commands.Climber.PivotRelative;
 import frc.robot.commands.DriveTrain.ArcadeDrive;
 import frc.robot.commands.Calibration;
 import frc.robot.commands.IntakeBalls;
@@ -47,12 +47,10 @@ public class RobotContainer {
   private final JoystickButton opB = new JoystickButton(opPad, 2);
   private final JoystickButton opX = new JoystickButton(opPad, 3);
   private final JoystickButton opY = new JoystickButton(opPad, 4);
-  private final JoystickButton opLeftBumper = new JoystickButton(opPad, 5);
+  // private final JoystickButton opLeftBumper = new JoystickButton(opPad, 5);
   private final JoystickButton opRightBumper = new JoystickButton(opPad, 6);
   // private final JoystickButton opBackButton = new JoystickButton(opPad, 7);
   // private final JoystickButton opStartButton = new JoystickButton(opPad, 8);
-
-  
 
   private final ShuffleBoard shuffleBoard = new ShuffleBoard(
       intake, shooter, driveTrain, navX);
@@ -79,11 +77,11 @@ public class RobotContainer {
     // secondary driver
     opY.whileHeld(new ClimbUp(climber, 1)); // maybe add slow
     opA.whileHeld(new ClimbDown(climber));
-    opX.whileHeld(new PivotRelative(pivots, 10, 0));
-    // opX.whileHeld(new InstantCommand(() -> pivots.climbPivots(0.2)));
-    opB.whileHeld(new PivotRelative(pivots, -10, 0));
+    // opX.whileHeld(new PivotRelative(pivots, 10, 0));
+    opX.whileHeld(new InstantCommand(() -> pivots.climbPivots(0.2)));
+    // opB.whileHeld(new PivotRelative(pivots, -10, 0));
+    opB.whileHeld(new InstantCommand(() -> pivots.climbPivots(-0.2)));
     opRightBumper.whileHeld(new IntakeBalls(intake));
-    // opB.whileHeld(new InstantCommand(() -> pivots.climbPivots(-0.2)));
   }
 
   public Command getAutonomousCommand() {

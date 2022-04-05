@@ -3,7 +3,7 @@ package frc.robot.commands.Climber;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Pivots;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+// import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class AutoClimb extends SequentialCommandGroup {
