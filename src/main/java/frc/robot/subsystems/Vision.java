@@ -17,6 +17,8 @@ public class Vision extends SubsystemBase {
   private SerialPort camPort;
   // private UsbCamera visionCam;
 
+  private boolean isConnected = false;
+
   public Vision() {
 
     CameraServer.startAutomaticCapture(0);
@@ -43,26 +45,28 @@ public class Vision extends SubsystemBase {
       }
     }
     if (camPort != null) {
+      isConnected = true;
       packetListenerThread.start();
     }
-    SmartDashboard.putBoolean("Vision Alive", camPort != null);
+
+    SmartDashboard.putBoolean("Vision Serial Port", isConnected);
   }
 
   // @Override
   public void backgroundUpdate() {
-    try {
-      String data = camPort.readString();
-      String[] realData = data.split(";");
-      if (realData.length == 2) {
-        // System.out.println("ANGLE IS SUPPOSED TO BE: " + realData[0]);
-        // System.out.println("yPOS IS SUPPOSED TO BE: " + realData[1]);
-        angle = Double.valueOf(realData[0]);
-        yPos = Double.valueOf(realData[1]);
+    if (isConnected) {
+      try {
+        String data = camPort.readString();
+        String[] realData = data.split(";");
+        if (realData.length == 2) {
+          angle = Double.valueOf(realData[0]);
+          yPos = Double.valueOf(realData[1]);
+        }
+      } catch (Exception e) {
+        isConnected = false;
+        SmartDashboard.putBoolean("Vision Serial Port", isConnected);
       }
-    } catch (Exception e) {
-      System.out.println(e);
     }
-    return;
   }
 
   public double getAngle() {
@@ -79,10 +83,9 @@ public class Vision extends SubsystemBase {
 
   Thread packetListenerThread = new Thread(new Runnable() {
     public void run() {
-      while (!Thread.interrupted()) {
+      while (!Thread.interrupted() || isConnected) {
         backgroundUpdate();
       }
     }
   });
 }
-
