@@ -40,7 +40,8 @@ public class RobotContainer {
   private final JoystickButton driveY = new JoystickButton(drivePad, 4);
   private final JoystickButton leftBumper = new JoystickButton(drivePad, 5);
   private final JoystickButton rightBumper = new JoystickButton(drivePad, 6);
-  // private final JoystickButton driveBackButton = new JoystickButton(drivePad,7);
+  // private final JoystickButton driveBackButton = new
+  // JoystickButton(drivePad,7);
   private final JoystickButton driveStartButton = new JoystickButton(drivePad, 8);
 
   private final JoystickButton opA = new JoystickButton(opPad, 1);
@@ -54,7 +55,7 @@ public class RobotContainer {
 
   private final ShuffleBoard shuffleBoard = new ShuffleBoard(
       intake, shooter, driveTrain, navX);
-  
+
   public RobotContainer() {
     driveTrain.setDefaultCommand(new ArcadeDrive(driveTrain, drivePad));
   }
@@ -63,10 +64,11 @@ public class RobotContainer {
     // primary driver
     driveTrain.setSlowMode(false);
     rightBumper.whileHeld(new IntakeBalls(intake));
-    
-    leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()));
+
+    leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()));
     driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
-    // driveStartButton.whenPressed(new InstantCommand(()->configureButtonBindings()));
+    // driveStartButton.whenPressed(new
+    // InstantCommand(()->configureButtonBindings()));
 
     driveX.whenPressed(new AutoClimb(climber, pivots));
     // driveX.whileHeld(new AutoClimb(climber, pivots));
@@ -85,7 +87,7 @@ public class RobotContainer {
     opRightBumper.whileHeld(new IntakeBalls(intake));
   }
 
-  public void configureClimberButtonBindings(){
+  public void configureClimberButtonBindings() {
     driveY.whileHeld(new ClimbUp(climber, 1));
     driveY.whenPressed(new InstantCommand(driveTrain::climbingTrue));
     driveA.whileHeld(new ClimbDown(climber));
