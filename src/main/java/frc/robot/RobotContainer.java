@@ -102,8 +102,7 @@ public class RobotContainer {
     driveTrain.setSlowMode(false);
     rightBumper.whileHeld(new IntakeBalls(intake));
     // leftBumper.whileHeld(new CargoManipulation(intake, shooter, false, -1));
-    leftBumper.whileHeld(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())
-        .alongWith(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity())));
+    leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()));
     driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
 
     driveX.whenPressed(new AutoClimb(climber, pivots));

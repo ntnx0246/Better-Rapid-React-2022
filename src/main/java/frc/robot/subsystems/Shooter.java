@@ -88,6 +88,10 @@ public class Shooter extends SubsystemBase {
     return leftEncoder.getVelocity();
   }
 
+  public double getRollerLeftVelocity() {
+    return backLeftEncoder.getVelocity();
+  }
+
   public double getRightVelocity() {
     return rightEncoder.getVelocity();
   }

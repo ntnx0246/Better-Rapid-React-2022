@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import java.util.ArrayList;
 import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -66,7 +65,9 @@ public class Shoot extends CommandBase {
     public void execute() {
         double error = isAuto ? Math.abs(shooterVelocity - shooter.getLeftVelocity())
                 : Math.abs(suppliedVelocity.getAsInt() - shooter.getLeftVelocity());
-        if (error <= Constants.Shooter.RPM_TOLERANCE ) {
+        double errorBack = isAuto ? Math.abs(rollerVelocity - shooter.getRollerLeftVelocity())
+                : Math.abs(suppliedRollerVelocity.getAsInt() - shooter.getRollerLeftVelocity());
+        if (error <= Constants.Shooter.RPM_TOLERANCE && errorBack <= Constants.Shooter.RPM_TOLERANCE ) {
             rpmCounter++;
         }
         if(rpmCounter > 10){
