@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import java.util.function.IntSupplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
 import frc.robot.subsystems.DriveTrain;
@@ -108,6 +109,8 @@ public class Shoot extends CommandBase {
     private void shootWhenReady(double velocity, double backVelocity) {
         double error = velocity - shooter.getLeftVelocity();
         double errorBack = backVelocity - shooter.getBackLeftVelocity();
+        SmartDashboard.putNumber("Front Shooter", shooter.getLeftVelocity());
+        SmartDashboard.putNumber("Back Shooter", shooter.getBackLeftVelocity());
         if (error <= Constants.Shooter.RPM_TOLERANCE && errorBack <= Constants.Shooter.RPM_TOLERANCE) {
             rpmCounter++;
         }

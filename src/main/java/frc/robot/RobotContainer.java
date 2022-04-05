@@ -66,6 +66,7 @@ public class RobotContainer {
     leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()));
     // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity(), vision, driveTrain, navX));
     driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
+    // driveStartButton.whenPressed(new InstantCommand(()->configureButtonBindings()));
 
     driveX.whenPressed(new AutoClimb(climber, pivots));
     // driveX.whileHeld(new AutoClimb(climber, pivots));
@@ -82,6 +83,12 @@ public class RobotContainer {
     // opB.whileHeld(new PivotRelative(pivots, -10, 0));
     opB.whileHeld(new InstantCommand(() -> pivots.climbPivots(-0.2)));
     opRightBumper.whileHeld(new IntakeBalls(intake));
+  }
+
+  public void configureClimberButtonBindings(){
+    driveY.whileHeld(new ClimbUp(climber, 1));
+    driveY.whenPressed(new InstantCommand(driveTrain::climbingTrue));
+    driveA.whileHeld(new ClimbDown(climber));
   }
 
   public Command getAutonomousCommand() {
