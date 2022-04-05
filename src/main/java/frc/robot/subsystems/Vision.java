@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoMode;
 // import edu.wpi.first.cscore.UsbCamera;
 // import edu.wpi.first.cscore.VideoMode;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -13,11 +15,11 @@ public class Vision extends SubsystemBase {
   private double angle;
   private double yPos;
   private SerialPort camPort;
-  // private UsbCamera visionCam;
+  private UsbCamera visionCam;
 
   public Vision() {
 
-    CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture(0);
 
     // visionCam = new UsbCamera("cam0", 1);
     // visionCam = CameraServer.startAutomaticCapture();
