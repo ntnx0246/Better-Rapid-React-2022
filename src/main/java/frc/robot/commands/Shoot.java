@@ -1,24 +1,23 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
-import java.util.ArrayList;
 import java.util.function.IntSupplier;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
-// import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.Vision;
 
 public class Shoot extends CommandBase {
     private Intake intake;
     private Shooter shooter;
+    private DriveTrain driveTrain;
+    private NavX navX;
+    private Vision vision;
+    private boolean usingVision;
     private boolean isAuto;
-    private Timer timer;
     private int shooterVelocity;
     private int rollerVelocity;
     private IntSupplier suppliedVelocity;
@@ -26,12 +25,29 @@ public class Shoot extends CommandBase {
     private int pulseCounter; 
     private int rpmCounter;
 
+
+    // TELEOP VISION
+    public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity, Vision vision, DriveTrain driveTrain,
+            NavX navX) {
+        addRequirements(intake, shooter, vision, driveTrain);
+        this.intake = intake;
+        this.shooter = shooter;
+        this.isAuto = false;
+        this.vision = vision;
+        this.usingVision = true;
+        this.navX = navX;
+        this.driveTrain = driveTrain;
+        this.suppliedVelocity = suppliedVelocity;
+        this.suppliedRollerVelocity = suppliedRollerVelocity;
+    }
+    
     // TELEOP
     public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity) {
         addRequirements(intake, shooter);
         this.intake = intake;
         this.shooter = shooter;
         this.isAuto = false;
+        this.usingVision = false;
         this.suppliedVelocity = suppliedVelocity;
         this.suppliedRollerVelocity = suppliedRollerVelocity;
     }
@@ -42,7 +58,7 @@ public class Shoot extends CommandBase {
         this.intake = intake;
         this.shooter = shooter;
         this.isAuto = true;
-        timer = new Timer();
+        this.usingVision = false;
         this.shooterVelocity = shooterVelocity;
         this.rollerVelocity = rollerVelocity;
     }
@@ -50,23 +66,49 @@ public class Shoot extends CommandBase {
     @Override
     public void initialize() {
         if (isAuto) {
-            timer.reset();
-            timer.start();
             shooter.setVelocity(shooterVelocity);
             shooter.setRollerVelocity(rollerVelocity);
-        } else {
+        } else if (!usingVision) {
             shooter.setVelocity(suppliedVelocity.getAsInt());
             shooter.setRollerVelocity(suppliedRollerVelocity.getAsInt());
-        }
+        } else {
+            navX.reset();
+        } 
         pulseCounter = 0;
         rpmCounter = 0;
     }
 
     @Override
     public void execute() {
-        double error = isAuto ? Math.abs(shooterVelocity - shooter.getLeftVelocity())
-                : Math.abs(suppliedVelocity.getAsInt() - shooter.getLeftVelocity());
-        if (error <= Constants.Shooter.RPM_TOLERANCE ) {
+        if (usingVision) {
+            double visionAngle = vision.getAngle();
+            int visionFrontRPM = (int) vision.getFrontRPM();
+            int visionBackRPM = (int) vision.getBackRPM();
+            System.out.println("SHOOTTTINNGGGGG: " + visionAngle);
+            double errorAngle = visionAngle - navX.getAngle();
+            System.out.println("ERROR: " + errorAngle);
+            if (Math.abs(errorAngle) < 1) {
+                shooter.setVelocity(visionFrontRPM);
+                shooter.setRollerVelocity(visionBackRPM);
+                shootWhenReady(visionFrontRPM, visionBackRPM);
+                System.out.println("SHOOT READY");
+            } // else {
+              // double power = (errorAngle / visionAngle)*0.3;
+              // System.out.println("POWER SETTING DRIVETRAIN: " +power);
+              // driveTrain.tankDrive(power, -power);
+              // }
+            double power = (errorAngle / visionAngle) * 0.3;
+            System.out.println("POWER SETTING DRIVETRAIN: " + power);
+            driveTrain.tankDrive(power, -power);
+        } else {
+            shootWhenReady(isAuto ? shooterVelocity : suppliedVelocity.getAsInt(), isAuto ? rollerVelocity : suppliedRollerVelocity.getAsInt());
+        }
+    }
+
+    private void shootWhenReady(double velocity, double backVelocity) {
+        double error = velocity - shooter.getLeftVelocity();
+        double errorBack = backVelocity - shooter.getBackLeftVelocity();
+        if (error <= Constants.Shooter.RPM_TOLERANCE && errorBack <= Constants.Shooter.RPM_TOLERANCE) {
             rpmCounter++;
         }
         if(rpmCounter > 10){
