@@ -6,16 +6,16 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.utils.Debug;
 
 public class Robot extends TimedRobot {
   private Command autonomousCommand;
   private RobotContainer robotContainer;
-  // private NetworkTable sd;
 
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
-    // sd = NetworkTableInstance.getDefault().getTable("nano");
+    Debug.initialize();
   }
 
   @Override

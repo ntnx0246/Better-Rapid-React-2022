@@ -1,8 +1,5 @@
 package frc.robot.utils;
 
-import java.util.EnumMap;
-import java.util.stream.IntStream;
-
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,11 +39,10 @@ public class ShuffleBoard {
 
     SmartDashboard.putData("Shooter Location", shooterLocationChooser);
 
-    // TODO manual RPM input
-    // if (debugMode.get(Constants.ShuffleBoard.Subsystems.Shooter)) {
-    //   SmartDashboard.putNumber("Shooter Input RPM", shooterRPM);
-    //   SmartDashboard.putNumber("Back Input RPM", rollerRpm);
-    // }
+    if (Debug.values.get(Constants.Subsystems.Shooter)) {
+      SmartDashboard.putNumber("Shooter Input RPM", shooterRPM);
+      SmartDashboard.putNumber("Back Input RPM", rollerRpm);
+    }
 
   }
 

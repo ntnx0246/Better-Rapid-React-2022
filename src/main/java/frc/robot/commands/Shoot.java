@@ -1,11 +1,11 @@
 package frc.robot.commands;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Debug;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.NavX;
@@ -88,14 +88,16 @@ public class Shoot extends CommandBase {
             // System.out.println("SHOOTTTINNGGGGG: " + visionAngle);
             double errorAngle = visionAngle - navX.getAngle();
             // System.out.println("ERROR: " + errorAngle);
+            if(Debug.values.get(Constants.Subsystems.Shooter)){
+                System.out.println("HI THERE SHOOTER IS ON DEBUG");
+            }
             if (Math.abs(errorAngle) < 1) {
                 shooter.setVelocity(visionFrontRPM);
                 shooter.setRollerVelocity(visionBackRPM);
                 shootWhenReady(visionFrontRPM, visionBackRPM);
             }
+
             // else {
-            // we can show when its ready to shoot, velocity, and maybe encoders? if its
-            // vision then add in the angle it got from vision
             // double power = (errorAngle / visionAngle)*0.3;
             // System.out.println("POWER SETTING DRIVETRAIN: " +power);
             // driveTrain.tankDrive(power, -power);

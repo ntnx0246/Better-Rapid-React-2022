@@ -1,7 +1,6 @@
 package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.utils.Constants;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.DriveTrain.DriveStraight;

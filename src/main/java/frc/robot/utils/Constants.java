@@ -1,7 +1,4 @@
 package frc.robot.utils;
-
-import java.util.EnumMap;
-
 public final class Constants {
   public final static class ID {
     public static final int INTAKE_RAISING_SPARK = 1;
@@ -78,18 +75,14 @@ public final class Constants {
     public static final PID SLOW_PID = new PID(0.05, 0, 0, 0, 1);
     public static final PID TURBO_PID = new PID(1, 1, 0, 1, 2);
 
-  } // yeaaaa it would make it easier
+  } 
   public final static class ShuffleBoard {
     public enum Auto {
       OneBall, TwoBall, ThreeBall, FourBall
     }
-
-    public enum Subsystems {
-      Climber, DriveTrain, Intake, NavX, Pivots, Shooter, Vision
-    }
   }
-
-  public static EnumMap<Constants.ShuffleBoard.Subsystems, Boolean> debugMode = new EnumMap<>(
-      Constants.ShuffleBoard.Subsystems.class);
-
+  public enum Subsystems {
+    Climber, DriveTrain, Intake, NavX, Pivots, Shooter, Vision
+  }
+  
 }
