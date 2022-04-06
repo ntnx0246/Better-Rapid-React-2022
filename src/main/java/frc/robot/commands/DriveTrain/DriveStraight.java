@@ -26,10 +26,10 @@ public class DriveStraight extends CommandBase {
   @Override
   public void initialize() {
     driveTrain.resetEncoders();
-    driveTrain.setLeftPID(Constants.DriveTrain.SLOT_ID, Constants.DriveTrain.P, Constants.DriveTrain.I,
-        Constants.DriveTrain.D); // make into constants
-    driveTrain.setRightPID(Constants.DriveTrain.SLOT_ID, Constants.DriveTrain.P, Constants.DriveTrain.I,
-        Constants.DriveTrain.D);
+    driveTrain.setLeftPID(Constants.DriveTrain.PID.s, Constants.DriveTrain.PID.p, Constants.DriveTrain.PID.i,
+        Constants.DriveTrain.PID.d);
+    driveTrain.setRightPID(Constants.DriveTrain.PID.s, Constants.DriveTrain.PID.p, Constants.DriveTrain.PID.i,
+        Constants.DriveTrain.PID.d);
     driveTrain.setPosition(driveTrain.getNativeUnitsFromInches(suppliedGoal.getAsDouble()));
     Timer.delay(.1);
   }

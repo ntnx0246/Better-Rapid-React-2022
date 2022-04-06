@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.PID;
 
 public class Climber extends SubsystemBase {
 
@@ -30,33 +31,23 @@ public class Climber extends SubsystemBase {
     leftMotor.configPeakOutputReverse(-1);
     rightMotor.configPeakOutputForward(1);
     rightMotor.configPeakOutputReverse(-1);
+    
+    initPIDController(leftMotor, rightMotor, Constants.Climber.DOWN);
+    initPIDController(leftMotor, rightMotor, Constants.Climber.UP);
+    initPIDController(leftMotor, rightMotor, Constants.Climber.TURBO); 
+  }
 
-    leftMotor.config_kP(Constants.Climber.SLOT_ID_0, Constants.Climber.P_0);
-    leftMotor.config_kI(Constants.Climber.SLOT_ID_0, Constants.Climber.I_0);
-    leftMotor.config_kD(Constants.Climber.SLOT_ID_0, Constants.Climber.D_0);
-    leftMotor.config_kF(Constants.Climber.SLOT_ID_0, Constants.Climber.F_0);
-    rightMotor.config_kP(Constants.Climber.SLOT_ID_0, Constants.Climber.P_0);
-    rightMotor.config_kI(Constants.Climber.SLOT_ID_0, Constants.Climber.I_0);
-    rightMotor.config_kD(Constants.Climber.SLOT_ID_0, Constants.Climber.D_0);
-    rightMotor.config_kF(Constants.Climber.SLOT_ID_0, Constants.Climber.F_0);
+  private void initPIDController(TalonFX controller1, TalonFX controller2, PID PID) {
+    controller1.config_kP(PID.s, PID.p);
+    controller1.config_kI(PID.s, PID.i);
+    controller1.config_kD(PID.s, PID.d);
+    controller1.config_kF(PID.s, PID.f);
 
-    leftMotor.config_kP(Constants.Climber.SLOT_ID_1, Constants.Climber.P_1);
-    leftMotor.config_kI(Constants.Climber.SLOT_ID_1, Constants.Climber.I_1);
-    leftMotor.config_kD(Constants.Climber.SLOT_ID_1, Constants.Climber.D_1);
-    leftMotor.config_kF(Constants.Climber.SLOT_ID_1, Constants.Climber.F_1);
-    rightMotor.config_kP(Constants.Climber.SLOT_ID_1, Constants.Climber.P_1);
-    rightMotor.config_kI(Constants.Climber.SLOT_ID_1, Constants.Climber.I_1);
-    rightMotor.config_kD(Constants.Climber.SLOT_ID_1, Constants.Climber.D_1);
-    rightMotor.config_kF(Constants.Climber.SLOT_ID_1, Constants.Climber.F_1);
+    controller2.config_kP(PID.s, PID.p);
+    controller2.config_kI(PID.s, PID.i);
+    controller2.config_kD(PID.s, PID.d);
+    controller2.config_kF(PID.s, PID.f);
 
-    leftMotor.config_kP(Constants.Climber.SLOT_ID_2, Constants.Climber.P_2);
-    leftMotor.config_kI(Constants.Climber.SLOT_ID_2, Constants.Climber.I_2);
-    leftMotor.config_kD(Constants.Climber.SLOT_ID_2, Constants.Climber.D_2);
-    leftMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
-    rightMotor.config_kP(Constants.Climber.SLOT_ID_2, Constants.Climber.P_2);
-    rightMotor.config_kI(Constants.Climber.SLOT_ID_2, Constants.Climber.I_2);
-    rightMotor.config_kD(Constants.Climber.SLOT_ID_2, Constants.Climber.D_2);
-    rightMotor.config_kF(Constants.Climber.SLOT_ID_2, Constants.Climber.F_2);
   }
 
   public void selectProfile(int id) {

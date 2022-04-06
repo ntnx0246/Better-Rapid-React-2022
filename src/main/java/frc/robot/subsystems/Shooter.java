@@ -43,25 +43,26 @@ public class Shooter extends SubsystemBase {
     backLeftEncoder = backLeft.getEncoder();
     backRightEncoder = backRight.getEncoder();
 
-    leftPIDController.setP(Constants.Shooter.P);
-    leftPIDController.setI(Constants.Shooter.I);
-    leftPIDController.setD(Constants.Shooter.D);
-    leftPIDController.setFF(Constants.Shooter.F);
+    leftPIDController.setP(Constants.Shooter.PID.p);
+    leftPIDController.setI(Constants.Shooter.PID.i);
+    leftPIDController.setD(Constants.Shooter.PID.d);
+    leftPIDController.setFF(Constants.Shooter.PID.f);
 
-    rightPIDController.setP(Constants.Shooter.P);
-    rightPIDController.setI(Constants.Shooter.I);
-    rightPIDController.setD(Constants.Shooter.D);
-    rightPIDController.setFF(Constants.Shooter.F);
+    rightPIDController.setP(Constants.Shooter.PID.p);
+    rightPIDController.setI(Constants.Shooter.PID.i);
+    rightPIDController.setD(Constants.Shooter.PID.d);
+    rightPIDController.setFF(Constants.Shooter.PID.f);
+   
 
-    backLeftPIDController.setP(Constants.Shooter.P_BACK);
-    backLeftPIDController.setI(Constants.Shooter.I_BACK);
-    backLeftPIDController.setD(Constants.Shooter.D_BACK);
-    backLeftPIDController.setFF(Constants.Shooter.F_BACK);
+    backLeftPIDController.setP(Constants.Shooter.PID_BACK.p);
+    backLeftPIDController.setI(Constants.Shooter.PID_BACK.i);
+    backLeftPIDController.setD(Constants.Shooter.PID_BACK.d);
+    backLeftPIDController.setFF(Constants.Shooter.PID_BACK.f);
 
-    backRightPIDController.setP(Constants.Shooter.P_BACK);
-    backRightPIDController.setI(Constants.Shooter.I_BACK);
-    backRightPIDController.setD(Constants.Shooter.D_BACK);
-    backRightPIDController.setFF(Constants.Shooter.F_BACK);
+    backRightPIDController.setP(Constants.Shooter.PID_BACK.p);
+    backRightPIDController.setI(Constants.Shooter.PID_BACK.i);
+    backRightPIDController.setD(Constants.Shooter.PID_BACK.d);
+    backRightPIDController.setFF(Constants.Shooter.PID_BACK.f);
   }
 
   public void setSpeed(double speed) {

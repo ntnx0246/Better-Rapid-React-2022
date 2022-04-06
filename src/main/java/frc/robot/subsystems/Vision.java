@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.cscore.VideoMode;
 // import edu.wpi.first.cscore.UsbCamera;
 // import edu.wpi.first.cscore.VideoMode;
 import edu.wpi.first.wpilibj.SerialPort;

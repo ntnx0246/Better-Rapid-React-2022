@@ -32,10 +32,10 @@ public class Intake extends SubsystemBase {
     raisingMotorPIDController = raisingMotor.getPIDController();
     raisingMotorEncoder = raisingMotor.getEncoder();
 
-    raisingMotorPIDController.setP(Constants.Intake.P);
-    raisingMotorPIDController.setI(Constants.Intake.I);
-    raisingMotorPIDController.setD(Constants.Intake.D);
-    raisingMotorPIDController.setFF(Constants.Intake.F);
+    raisingMotorPIDController.setP(Constants.Intake.PID.p);
+    raisingMotorPIDController.setI(Constants.Intake.PID.i);
+    raisingMotorPIDController.setD(Constants.Intake.PID.d);
+    raisingMotorPIDController.setFF(Constants.Intake.PID.f);
   }
 
   public void intakeTopMotor(double speed) {

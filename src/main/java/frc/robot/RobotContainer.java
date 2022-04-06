@@ -1,7 +1,5 @@
 package frc.robot;
 
-import java.time.Instant;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -10,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Climber.AutoClimb;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
-// import frc.robot.commands.Climber.PivotRelative;
+import frc.robot.commands.Climber.PivotRelative;
 import frc.robot.commands.DriveTrain.ArcadeDrive;
 import frc.robot.commands.DriveTrain.DriveStraight;
 import frc.robot.commands.Calibration;
@@ -68,10 +66,9 @@ public class RobotContainer {
 
   public void configureButtonBindings() {
     // primary driver
-    driveTrain.setSlowMode(false);
+    driveTrain.setSlowMode(true); 
     rightBumper.whileHeld(new IntakeBalls(intake));
 
-    // temperary crap code for driver practice
     if (Constants.Shooter.DEBUG_MODE){
       leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
     } else {
@@ -82,7 +79,7 @@ public class RobotContainer {
     driveStartButton.whenPressed(new InstantCommand(driveTrain::climbingTrue));
 
     driveX.whileHeld(new ConditionalCommand(new AutoClimb(climber, pivots), new InstantCommand(), driveTrain::getClimbing));
-    driveY.whileHeld(new ConditionalCommand(new ClimbUp(climber, 1), new InstantCommand(), driveTrain::getClimbing));
+    driveY.whileHeld(new ConditionalCommand(new ClimbUp(climber, Constants.Climber.UP.s), new InstantCommand(), driveTrain::getClimbing));
     driveA.whileHeld(new ConditionalCommand(new ClimbDown(climber), new InstantCommand(), driveTrain::getClimbing));
 
     driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
@@ -90,14 +87,16 @@ public class RobotContainer {
     // driveY.whileHeld(new ClimbUp(climber, 1));
     // driveY.whenPressed(new InstantCommand(driveTrain::climbingTrue));
     // driveA.whileHeld(new ClimbDown(climber));
+  }
 
+  public void configureOPButtonBindings(){
     // secondary driver
-    opY.whileHeld(new ClimbUp(climber, 1)); // maybe add slow
+    opY.whileHeld(new ClimbUp(climber, Constants.Climber.UP.s)); // maybe add slow
     opA.whileHeld(new ClimbDown(climber));
-    // opX.whileHeld(new PivotRelative(pivots, 10, 0));
-    opX.whileHeld(new InstantCommand(() -> pivots.climbPivots(0.2)));
-    // opB.whileHeld(new PivotRelative(pivots, -10, 0));
-    opB.whileHeld(new InstantCommand(() -> pivots.climbPivots(-0.2)));
+    opX.whileHeld(new PivotRelative(pivots, 10, Constants.Pivot.FAST_PID.s));
+    // opX.whileHeld(new InstantCommand(() -> pivots.climbPivots(0.2)));
+    opB.whileHeld(new PivotRelative(pivots, -10, Constants.Pivot.FAST_PID.s));
+    // opB.whileHeld(new InstantCommand(() -> pivots.climbPivots(-0.2)));
     opRightBumper.whileHeld(new IntakeBalls(intake));
   }
 

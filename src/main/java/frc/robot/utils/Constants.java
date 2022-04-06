@@ -26,38 +26,18 @@ public final class Constants {
     public static final double OUTSIDE_SPEED = -0.8;
     public static final double INTAKE_OUT_ENCODER = 94;
     public static final double CALIBRATION_SPEED = 0.1;
-    public static final double P = 0.6;
-    public static final double I = 0;
-    public static final double D = 0;
-    public static final double F = 0;
+    public static final PID PID = new PID(0.6, 0, 0, 0);
   }
 
   public final static class Shooter {
     public static final double PUSH_SPEED = 1;
-
     public static final boolean DEBUG_MODE = false;
-
-    public static enum Shots {
-      FENDER(-2550, 1000, -24),
-      LAUNCHPAD(-5000, 5000, 0);
-
-      private final int frontRPM; private final int backRPM; private final int distanceBack;
-      Shots(int frontRPM, int backRPM, int distanceBack) { this.frontRPM = frontRPM; this.backRPM = backRPM; this.distanceBack = distanceBack; }
-      public int getFrontRPM() { return frontRPM; }
-      public int getBackRPM() { return backRPM; }
-      public int getDistance() { return distanceBack; }
-
-    }
-
+    public static final Shots FENDER = new Shots(-2550, 1000, -24);
+    public static final Shots LAUNCHPAD = new Shots(-5000, 5000, 0);
     public static final double RPM_TOLERANCE = 30;
-    public static final double P = 0.0002;
-    public static final double I = 0.000000005;
-    public static final double D = 0;
-    public static final double F = 0.000174;
-    public static final double P_BACK = 0.0002;
-    public static final double I_BACK = 0.00000005;
-    public static final double D_BACK = 0;
-    public static final double F_BACK = 0.000174;
+
+    public static final PID PID = new PID(0.0002, 0.000000005, 0, 0.000174);
+    public static final PID PID_BACK = new PID(0.0002, 0.00000005, 0, 0.000174);
   }
 
   public final static class DriveTrain {
@@ -69,10 +49,7 @@ public final class Constants {
     public static final double MOTOR_TO_WHEEL_REVOLUTION = 10.71;
     public static final int SENSOR_UNITS_PER_ROTATION = 2048;
     public static final int DRIVE_WHEEL_DIAMETER_INCHES = 6;
-    public static final int SLOT_ID = 0;
-    public static final double P = 0.15;
-    public static final double I = 0;
-    public static final double D = 0;
+    public static final PID PID = new PID(0.15, 0, 0, 0, 0);
     public static final int CRUISE_VELOCITY = 7000; // max is around 21500
     public static final int ACCELERATION = 3500;
     public static final int ERROR_THRESHOLD = 500;
@@ -87,50 +64,17 @@ public final class Constants {
     public static final double CALIBRATION_SPEED = -0.1; // -0.1
     public static final double UP_ENCODER_RIGHT = 238000;
     public static final double UP_ENCODER_LEFT = 238000;
-
     public static final double CLIMB_TOLERANCE = 50;
 
-    // going down
-    public static final double P_0 = 0.008;
-    public static final double I_0 = 0.000005; // .00001
-    public static final double D_0 = 0.5;
-    public static final double F_0 = 0;
-    public static final int SLOT_ID_0 = 0;
-
-    // going up
-    public static final double P_1 = 0.008;
-    public static final double I_1 = 0;
-    public static final double D_1 = 0;
-    public static final double F_1 = 0;
-    public static final int SLOT_ID_1 = 1;
-
-    // turbo going up
-    public static final double P_2 = 0.2;
-    public static final double I_2 = 0;
-    public static final double D_2 = 0;
-    public static final double F_2 = 0;
-    public static final int SLOT_ID_2 = 2;
-
+    public static final PID DOWN = new PID(0.008, 0.000005, 0.5, 0, 0);
+    public static final PID UP = new PID(0.008, 0, 0, 0, 1);
+    public static final PID TURBO = new PID(0.2, 0, 0, 0, 2);
   }
 
   public final static class Pivot {
-    // fast pivot
-    public static final double P_0 = 0.8;
-    public static final double I_0 = 0;
-    public static final double D_0 = 0;
-    public static final double F_0 = 0;
-
-    // slow pivot
-    public static final double P_1 = 0.05;
-    public static final double I_1 = 0;
-    public static final double D_1 = 0;
-    public static final double F_1 = 0;
-
-    // turbo pivot
-    public static final double P_2 = 1;
-    public static final double I_2 = 1;
-    public static final double D_2 = 0;
-    public static final double F_2 = 1;
+    public static final PID FAST_PID = new PID(0.8, 0, 0, 0, 0);
+    public static final PID SLOW_PID = new PID(0.05, 0, 0, 0, 1);
+    public static final PID TURBO_PID = new PID(1, 1, 0, 1, 2);
 
   }
 
@@ -138,7 +82,6 @@ public final class Constants {
     public final class OneBall {
       public static final double CROSS_LINE = -180;
       public static final int SHOOT_VELOCITY = -3000;
-
     }
 
     public final static class TwoBall {
@@ -155,5 +98,10 @@ public final class Constants {
     public enum Auto {
       OneBall, TwoBall, ThreeBall, FourBall
     }
+
+    public enum Subsytems {
+      Climber, DriveTrain, Intake, NavX, Pivots, Shooter, Vision
+    }
   }
+
 }

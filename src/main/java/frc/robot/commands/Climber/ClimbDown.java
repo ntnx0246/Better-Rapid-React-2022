@@ -31,7 +31,7 @@ public class ClimbDown extends CommandBase {
   @Override
   public void initialize() {
     if (usingPID){
-      climber.selectProfile(0);
+      climber.selectProfile(Constants.Climber.DOWN.s);
       climber.setPositionLeft(leftEncoder);
       climber.setPositionRight(rightEncoder);
     } else {
