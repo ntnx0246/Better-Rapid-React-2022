@@ -19,18 +19,18 @@ public class ThreeBallAuto extends SequentialCommandGroup {
 
     public ThreeBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
         addCommands(
-                new Shoot(intake, shooter, 5, Constants.Auto.TwoBall.SHOOT_VELOCITY),
-                new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.MOVE_TOWARDS_SHOOT),
-                new TurnToAngle(driveTrain, navX, Constants.Auto.TwoBall.TURN_ANGLE),
-                new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.GET_SECONDBALL).alongWith(
+                new Shoot(intake, shooter, 5, -3200),
+                new DriveStraight(driveTrain, () -> 10),
+                new TurnToAngle(driveTrain, navX, 180),
+                new DriveStraight(driveTrain, () -> 90).alongWith(
                         new IntakeBalls(intake)),
-                new TurnToAngle(driveTrain, navX, Constants.Auto.TwoBall.TURN_ANGLE),
-                new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.GET_SECONDBALL).alongWith(
+                new TurnToAngle(driveTrain, navX, 180),
+                new DriveStraight(driveTrain, () -> 90).alongWith(
                         new IntakeBalls(intake)),
-                new TurnToAngle(driveTrain, navX, Constants.Auto.TwoBall.TURN_ANGLE),
-                new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.CROSS_LINE),
-                new TurnToAngle(driveTrain, navX, Constants.Auto.TwoBall.TURN_ANGLE),
-                new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.SPACE_TO_TURN),
-                new Shoot(intake, shooter, 5, Constants.Auto.TwoBall.SHOOT_VELOCITY));
+                new TurnToAngle(driveTrain, navX, 180),
+                new DriveStraight(driveTrain, () -> -180),
+                new TurnToAngle(driveTrain, navX, 180),
+                new DriveStraight(driveTrain, () -> -90),
+                new Shoot(intake, shooter, 5, -3200));
     }
 }

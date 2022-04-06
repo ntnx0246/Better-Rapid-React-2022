@@ -6,7 +6,6 @@
 package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.utils.Constants;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.DriveTrain.DriveStraight;
@@ -24,12 +23,12 @@ public class TwoBallAuto extends SequentialCommandGroup {
 
     public TwoBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
         addCommands(
-                new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.GET_SECONDBALL).withTimeout(4).alongWith(
+                new DriveStraight(driveTrain, () -> 90).withTimeout(4).alongWith(
                         new IntakeBalls(intake)).withTimeout(4),
-                new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.SPACE_TO_TURN).withTimeout(5),
-                new TurnToAngle(driveTrain, navX, Constants.Auto.TwoBall.TURN_ANGLE).withTimeout(5),
-                new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.MOVE_TOWARDS_SHOOT).withTimeout(5),
-                new Shoot(intake, shooter, Constants.Auto.TwoBall.SHOOT_VELOCITY, 0).withTimeout(5),
-                new DriveStraight(driveTrain, () -> Constants.Auto.TwoBall.CROSS_LINE).withTimeout(5));
+                new DriveStraight(driveTrain, () -> -90).withTimeout(5),
+                new TurnToAngle(driveTrain, navX, 180).withTimeout(5),
+                new DriveStraight(driveTrain, () -> 10).withTimeout(5),
+                new Shoot(intake, shooter, -2550, 1000).withTimeout(5),
+                new DriveStraight(driveTrain, () -> -180).withTimeout(5));
     }
 }

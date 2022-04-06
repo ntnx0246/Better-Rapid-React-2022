@@ -1,6 +1,8 @@
 package frc.robot.utils;
 
-import edu.wpi.first.cameraserver.CameraServer;
+import java.util.EnumMap;
+import java.util.stream.IntStream;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -13,39 +15,50 @@ import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
 
 public class ShuffleBoard {
-  // private Intake intake;
-  // private DriveTrain driveTrain;
-  // private NavX navX;
   private final SendableChooser<Constants.ShuffleBoard.Auto> autoChoose = new SendableChooser<Constants.ShuffleBoard.Auto>();
   private OneBallAuto oneBallAuto_command;
   private TwoBallAuto twoBallAuto_command;
 
-  private final SendableChooser<Constants.Shooter.Shots> shooterLocationChooser = new SendableChooser<Constants.Shooter.Shots>();
+  private final SendableChooser<Shots> shooterLocationChooser = new SendableChooser<Shots>();
 
-  private int shooterRPM = Constants.Shooter.Shots.FENDER.getFrontRPM();
-  private int rollerRpm = Constants.Shooter.Shots.FENDER.getBackRPM();
+  private int shooterRPM = Constants.Shooter.FENDER.getFrontRPM();
+  private int rollerRpm = Constants.Shooter.FENDER.getBackRPM();
+
+  private final EnumMap<Constants.ShuffleBoard.Subsystems, Boolean> debugMode = new EnumMap<>(
+      Constants.ShuffleBoard.Subsystems.class);
+
+  private void initEnumMap() {
+    // Climber, dt, Intake, NavX, pivots, shooter, vision
+    for (Constants.ShuffleBoard.Subsystems sub : Constants.ShuffleBoard.Subsystems.values()) {
+      debugMode.put(sub, false);
+    }
+  }
 
   public ShuffleBoard(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
-    // CameraServer.startAutomaticCapture(0);
+    initEnumMap();
+
     oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
     twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
+
     // AUTO
     autoChoose.setDefaultOption("One Ball", Constants.ShuffleBoard.Auto.OneBall);
     autoChoose.addOption("Two Ball", Constants.ShuffleBoard.Auto.TwoBall);
     SmartDashboard.putData("AUTO MODE", autoChoose);
 
+    // TODO auto position 1,2,3
+
     // RPM
-    shooterLocationChooser.setDefaultOption("Fender Shooting", Constants.Shooter.Shots.FENDER);
-    shooterLocationChooser.addOption("LaunchPad Shooting", Constants.Shooter.Shots.LAUNCHPAD);
+    shooterLocationChooser.setDefaultOption("Fender Shooting", Constants.Shooter.FENDER);
+    shooterLocationChooser.addOption("LaunchPad Shooting", Constants.Shooter.LAUNCHPAD);
 
     SmartDashboard.putData("Shooter Location", shooterLocationChooser);
 
-    // manual RPM input
-    if (Constants.Shooter.DEBUG_MODE) {
-      SmartDashboard.putNumber("Shooter Input RPM", shooterRPM);
-      SmartDashboard.putNumber("Back Input RPM", rollerRpm);
-    }
-    // TODO auto position 1,2,3
+    // TODO manual RPM input
+    // if (debugMode.get(Constants.ShuffleBoard.Subsystems.Shooter)) {
+    //   SmartDashboard.putNumber("Shooter Input RPM", shooterRPM);
+    //   SmartDashboard.putNumber("Back Input RPM", rollerRpm);
+    // }
+
   }
 
   public Command getAutonomousCommand() {
@@ -82,5 +95,9 @@ public class ShuffleBoard {
 
   public int getRoller() {
     return (int) SmartDashboard.getNumber("Back Input RPM", 0);
+  }
+
+  public boolean getDebugMode() {
+    return SmartDashboard.getBoolean("Debug Mode", false);
   }
 }

@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,13 +24,12 @@ public class Shoot extends CommandBase {
     private int rollerVelocity;
     private IntSupplier suppliedVelocity;
     private IntSupplier suppliedRollerVelocity;
-    private int pulseCounter; 
+    private int pulseCounter;
     private int rpmCounter;
 
-
     // TELEOP VISION
-    public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity, Vision vision, DriveTrain driveTrain,
-            NavX navX) {
+    public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity,
+            Vision vision, DriveTrain driveTrain, NavX navX) {
         addRequirements(intake, shooter, vision, driveTrain);
         this.intake = intake;
         this.shooter = shooter;
@@ -41,7 +41,7 @@ public class Shoot extends CommandBase {
         this.suppliedVelocity = suppliedVelocity;
         this.suppliedRollerVelocity = suppliedRollerVelocity;
     }
-    
+
     // TELEOP
     public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity) {
         addRequirements(intake, shooter);
@@ -74,7 +74,7 @@ public class Shoot extends CommandBase {
             shooter.setRollerVelocity(suppliedRollerVelocity.getAsInt());
         } else {
             navX.reset();
-        } 
+        }
         pulseCounter = 0;
         rpmCounter = 0;
     }
@@ -92,17 +92,20 @@ public class Shoot extends CommandBase {
                 shooter.setVelocity(visionFrontRPM);
                 shooter.setRollerVelocity(visionBackRPM);
                 shootWhenReady(visionFrontRPM, visionBackRPM);
-                // System.out.println("SHOOT READY");
-            } // else {
-              // double power = (errorAngle / visionAngle)*0.3;
-              // System.out.println("POWER SETTING DRIVETRAIN: " +power);
-              // driveTrain.tankDrive(power, -power);
-              // }
+            }
+            // else {
+            // we can show when its ready to shoot, velocity, and maybe encoders? if its
+            // vision then add in the angle it got from vision
+            // double power = (errorAngle / visionAngle)*0.3;
+            // System.out.println("POWER SETTING DRIVETRAIN: " +power);
+            // driveTrain.tankDrive(power, -power);
+            // }
             double power = (errorAngle / visionAngle) * 0.3;
             // System.out.println("POWER SETTING DRIVETRAIN: " + power);
             driveTrain.tankDrive(power, -power);
         } else {
-            shootWhenReady(isAuto ? shooterVelocity : suppliedVelocity.getAsInt(), isAuto ? rollerVelocity : suppliedRollerVelocity.getAsInt());
+            shootWhenReady(isAuto ? shooterVelocity : suppliedVelocity.getAsInt(),
+                    isAuto ? rollerVelocity : suppliedRollerVelocity.getAsInt());
         }
     }
 
@@ -114,12 +117,12 @@ public class Shoot extends CommandBase {
         if (error <= Constants.Shooter.RPM_TOLERANCE && errorBack <= Constants.Shooter.RPM_TOLERANCE) {
             rpmCounter++;
         }
-        if(rpmCounter > 15){
-            if (pulseCounter < 10){
+        if (rpmCounter > 15) {
+            if (pulseCounter < 10) {
                 intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
                 intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
-                pulseCounter ++;
-            } else if (rpmCounter < 50 ) {
+                pulseCounter++;
+            } else if (rpmCounter < 50) {
                 intake.intakeTopMotor(0);
                 intake.intakeBottomMotor(0);
                 pulseCounter++;
