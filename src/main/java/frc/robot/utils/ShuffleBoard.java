@@ -20,12 +20,10 @@ public class ShuffleBoard {
   private OneBallAuto oneBallAuto_command;
   private TwoBallAuto twoBallAuto_command;
 
-  private final SendableChooser<Integer> shooterVelocityChoose = new SendableChooser<Integer>();
+  private final SendableChooser<Constants.Shooter.Shots> shooterLocationChooser = new SendableChooser<Constants.Shooter.Shots>();
 
-  private final SendableChooser<Integer> shooterRollerVelocityChoose = new SendableChooser<Integer>();
-
-  private int shooterRPM = Constants.Shooter.FENDER_HIGH_VELOCITY;
-  private int rollerRpm = Constants.Shooter.BACKROLLER_HIGH_VELOCITY;
+  private int shooterRPM = Constants.Shooter.Shots.FENDER.getFrontRPM();
+  private int rollerRpm = Constants.Shooter.Shots.FENDER.getBackRPM();
 
   public ShuffleBoard(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
     // CameraServer.startAutomaticCapture(0);
@@ -38,20 +36,16 @@ public class ShuffleBoard {
     SmartDashboard.putData("AUTO MODE", autoChoose);
 
     // RPM
-    shooterVelocityChoose.setDefaultOption("High Shooting", Constants.Shooter.FENDER_HIGH_VELOCITY);
-    shooterVelocityChoose.addOption("Low Shooting", Constants.Shooter.FENDER_LOW_VELOCITY);
-    SmartDashboard.putData("SHOOTER SPEED", shooterVelocityChoose);
+    shooterLocationChooser.setDefaultOption("Fender Shooting", Constants.Shooter.Shots.FENDER);
+    shooterLocationChooser.addOption("LaunchPad Shooting", Constants.Shooter.Shots.LAUNCHPAD);
 
-    // BACK ROLLER
-    shooterRollerVelocityChoose.setDefaultOption("High Rolling", Constants.Shooter.BACKROLLER_HIGH_VELOCITY);
-    shooterRollerVelocityChoose.addOption("Low Rolling", Constants.Shooter.BACKROLLER_LOW_VELOCITY);
-    shooterRollerVelocityChoose.addOption("OFF", 0);
+    SmartDashboard.putData("Shooter Location", shooterLocationChooser);
 
-    SmartDashboard.putData("BACK ROLLER SPEED", shooterRollerVelocityChoose);
-
-    SmartDashboard.putNumber("Shooter RPM", shooterRPM);
-    SmartDashboard.putNumber("Back RPM", rollerRpm);
-
+    // manual RPM input
+    if (Constants.Shooter.DEBUG_MODE) {
+      SmartDashboard.putNumber("Shooter RPM", shooterRPM);
+      SmartDashboard.putNumber("Back RPM", rollerRpm);
+    }
     // TODO auto position 1,2,3
   }
 
@@ -72,22 +66,19 @@ public class ShuffleBoard {
   }
 
   public int getShooterVelocity() {
-    return shooterVelocityChoose.getSelected().intValue();
+    return shooterLocationChooser.getSelected().getFrontRPM();
   }
 
   public int getRollerVelocity() {
-    return shooterRollerVelocityChoose.getSelected().intValue();
+    return shooterLocationChooser.getSelected().getBackRPM();
   }
 
   public double getMoveBack() {
-    return shooterVelocityChoose.getSelected().intValue() == Constants.Shooter.FENDER_HIGH_VELOCITY
-        ? Constants.Shooter.BACK_UP_TO_SHOOT
-        : 0;
+    return shooterLocationChooser.getSelected().getDistance();
   }
 
   public int getShoot() {
     return (int) SmartDashboard.getNumber("Shooter RPM", 0);
-
   }
 
   public int getRoller() {

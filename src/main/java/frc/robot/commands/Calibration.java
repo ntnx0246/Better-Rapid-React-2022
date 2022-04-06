@@ -40,7 +40,7 @@ public class Calibration extends CommandBase {
     climber.climb(Constants.Climber.CALIBRATION_SPEED);
     pivots.climbPivots(-Constants.Climber.CALIBRATION_SPEED);
     intake.setRaisingMotorSpeed(Constants.Intake.CALIBRATION_SPEED);
-    driveTrain.setClimbMode(false);
+    driveTrain.climbingFalse();
   }
 
   @Override

@@ -35,14 +35,36 @@ public final class Constants {
   public final static class Shooter {
     public static final double PUSH_SPEED = 1;
 
+    public static final boolean DEBUG_MODE = false;
+    
+    public static enum Shots{
+      FENDER (-2550, 1000, -24),
+      LAUNCHPAD (-5000, 5000, 0);
+      
+      private final int frontRPM;
+      private final int backRPM;
+      private final int distanceBack;
 
+      Shots(int frontRPM, int backRPM, int distanceBack){
+        this.frontRPM = frontRPM;
+        this.backRPM = backRPM;
+        this.distanceBack = distanceBack;
+      }
 
-    public static final int FENDER_LOW_VELOCITY = -500;
-    public static final int BACKROLLER_LOW_VELOCITY = 1000;
+      public int getFrontRPM() { return frontRPM; }
+      public int getBackRPM() { return backRPM; }
+      public int getDistance() { return distanceBack; }
 
-    public static final int FENDER_HIGH_VELOCITY = -2550; // -3300
-    public static final int BACKROLLER_HIGH_VELOCITY = 1000;
-    public static final double BACK_UP_TO_SHOOT = -24;
+    }
+    // public static final int FENDER_SHOOT = 0;
+    // public static final int FENDER_HIGH_VELOCITY = -2550; // -3300
+    // public static final int FENDER_BACKROLLER_HIGH_VELOCITY = 1000;
+    // public static final double FENDER_BACK_UP_TO_SHOOT = -24;
+
+    // public static final int HIGH_SHOOT = 1;
+    // public static final int HIGH_HIGH_VELOCITY = -5000; // -3300
+    // public static final int HIGH_BACKROLLER_HIGH_VELOCITY = 5000;
+    // public static final double HIGH_BACK_UP_TO_SHOOT = 0;
 
     public static final double RPM_TOLERANCE = 30;
     public static final double P = 0.0002;

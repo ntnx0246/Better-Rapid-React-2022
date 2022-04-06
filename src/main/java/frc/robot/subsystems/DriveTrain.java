@@ -72,12 +72,16 @@ public class DriveTrain extends SubsystemBase {
     slowModeOn = ! slowModeOn;
   }
 
-  public void setClimbMode(boolean climbMode){
-    climbing = climbMode;
+  public void climbingFalse(){
+    climbing = false;
   }
 
   public void climbingTrue(){
     climbing = true;
+  }
+
+  public boolean getClimbing(){
+    return climbing;
   }
 
   public void setSlowMode(boolean slowMode) {
