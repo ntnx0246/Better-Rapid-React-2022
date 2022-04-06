@@ -24,18 +24,7 @@ public class ShuffleBoard {
   private int shooterRPM = Constants.Shooter.FENDER.getFrontRPM();
   private int rollerRpm = Constants.Shooter.FENDER.getBackRPM();
 
-  private final EnumMap<Constants.ShuffleBoard.Subsystems, Boolean> debugMode = new EnumMap<>(
-      Constants.ShuffleBoard.Subsystems.class);
-
-  private void initEnumMap() {
-    // Climber, dt, Intake, NavX, pivots, shooter, vision
-    for (Constants.ShuffleBoard.Subsystems sub : Constants.ShuffleBoard.Subsystems.values()) {
-      debugMode.put(sub, false);
-    }
-  }
-
   public ShuffleBoard(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
-    initEnumMap();
 
     oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
     twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
