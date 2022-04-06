@@ -85,21 +85,21 @@ public class Shoot extends CommandBase {
             double visionAngle = vision.getAngle();
             int visionFrontRPM = (int) vision.getFrontRPM();
             int visionBackRPM = (int) vision.getBackRPM();
-            System.out.println("SHOOTTTINNGGGGG: " + visionAngle);
+            // System.out.println("SHOOTTTINNGGGGG: " + visionAngle);
             double errorAngle = visionAngle - navX.getAngle();
-            System.out.println("ERROR: " + errorAngle);
+            // System.out.println("ERROR: " + errorAngle);
             if (Math.abs(errorAngle) < 1) {
                 shooter.setVelocity(visionFrontRPM);
                 shooter.setRollerVelocity(visionBackRPM);
                 shootWhenReady(visionFrontRPM, visionBackRPM);
-                System.out.println("SHOOT READY");
+                // System.out.println("SHOOT READY");
             } // else {
               // double power = (errorAngle / visionAngle)*0.3;
               // System.out.println("POWER SETTING DRIVETRAIN: " +power);
               // driveTrain.tankDrive(power, -power);
               // }
             double power = (errorAngle / visionAngle) * 0.3;
-            System.out.println("POWER SETTING DRIVETRAIN: " + power);
+            // System.out.println("POWER SETTING DRIVETRAIN: " + power);
             driveTrain.tankDrive(power, -power);
         } else {
             shootWhenReady(isAuto ? shooterVelocity : suppliedVelocity.getAsInt(), isAuto ? rollerVelocity : suppliedRollerVelocity.getAsInt());
@@ -119,6 +119,10 @@ public class Shoot extends CommandBase {
                 intake.intakeTopMotor(Constants.Shooter.PUSH_SPEED * -1);
                 intake.intakeBottomMotor(Constants.Shooter.PUSH_SPEED);
                 pulseCounter ++;
+            } else if (rpmCounter < 50 ) {
+                intake.intakeTopMotor(0);
+                intake.intakeBottomMotor(0);
+                pulseCounter++;
             } else {
                 intake.intakeTopMotor(0);
                 intake.intakeBottomMotor(0);

@@ -23,8 +23,8 @@ public final class Constants {
   public final static class Intake {
     public static final double TOP_SPEED = 0.6;
     public static final double BOTTOM_SPEED = 0.25;
-    public static final double OUTSIDE_SPEED = -0.5;
-    public static final double INTAKE_OUT_ENCODER = 92;
+    public static final double OUTSIDE_SPEED = -0.8;
+    public static final double INTAKE_OUT_ENCODER = 94;
     public static final double CALIBRATION_SPEED = 0.1;
     public static final double P = 0.6;
     public static final double I = 0;
@@ -40,15 +40,15 @@ public final class Constants {
     public static final int FENDER_LOW_VELOCITY = -500;
     public static final int BACKROLLER_LOW_VELOCITY = 1000;
 
-    public static final int FENDER_HIGH_VELOCITY = -3000; // -3300
-    public static final int BACKROLLER_HIGH_VELOCITY = 1500;
+    public static final int FENDER_HIGH_VELOCITY = -2550; // -3300
+    public static final int BACKROLLER_HIGH_VELOCITY = 1000;
+    public static final double BACK_UP_TO_SHOOT = -24;
 
     public static final double RPM_TOLERANCE = 30;
     public static final double P = 0.0002;
     public static final double I = 0.000000005;
     public static final double D = 0;
     public static final double F = 0.000174;
-    public static final double BACK_UP_TO_SHOOT = -12;
     public static final double P_BACK = 0.0002;
     public static final double I_BACK = 0.00000005;
     public static final double D_BACK = 0;

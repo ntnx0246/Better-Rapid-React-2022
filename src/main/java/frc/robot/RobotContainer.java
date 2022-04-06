@@ -1,13 +1,17 @@
 package frc.robot;
 
+import java.time.Instant;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Climber.AutoClimb;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
 // import frc.robot.commands.Climber.PivotRelative;
 import frc.robot.commands.DriveTrain.ArcadeDrive;
+import frc.robot.commands.DriveTrain.DriveStraight;
 import frc.robot.commands.Calibration;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.Shoot;
@@ -65,10 +69,13 @@ public class RobotContainer {
     driveTrain.setSlowMode(false);
     rightBumper.whileHeld(new IntakeBalls(intake));
 
-    leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()));
+    // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()));
+
+    // temperary crap code for driver practice
+    leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+
     driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
-    // driveStartButton.whenPressed(new
-    // InstantCommand(()->configureButtonBindings()));
+    // driveStartButton.whenPressed(new InstantCommand(()->configureButtonBindings()));
 
     driveX.whenPressed(new AutoClimb(climber, pivots));
     // driveX.whileHeld(new AutoClimb(climber, pivots));

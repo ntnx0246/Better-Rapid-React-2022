@@ -28,7 +28,7 @@ public class ShuffleBoard {
   private int rollerRpm = Constants.Shooter.BACKROLLER_HIGH_VELOCITY;
 
   public ShuffleBoard(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
-    CameraServer.startAutomaticCapture(0);
+    // CameraServer.startAutomaticCapture(0);
 
     oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
     twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
