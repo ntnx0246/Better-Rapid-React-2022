@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.Auto.OneBallAuto;
+import frc.robot.commands.Auto.ThreeBallAuto;
 import frc.robot.commands.Auto.TwoBallAuto;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -15,6 +16,7 @@ public class ShuffleBoard {
   private final SendableChooser<Constants.ShuffleBoard.Auto> autoChoose = new SendableChooser<Constants.ShuffleBoard.Auto>();
   private OneBallAuto oneBallAuto_command;
   private TwoBallAuto twoBallAuto_command;
+  private ThreeBallAuto threeBallAuto_command;
 
   private final SendableChooser<Shots> shooterLocationChooser = new SendableChooser<Shots>();
 
@@ -25,6 +27,7 @@ public class ShuffleBoard {
 
     oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
     twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
+    threeBallAuto_command = new ThreeBallAuto(intake, shooter, driveTrain, navX);
 
     // AUTO
     autoChoose.setDefaultOption("One Ball", Constants.ShuffleBoard.Auto.OneBall);
@@ -38,8 +41,8 @@ public class ShuffleBoard {
     shooterLocationChooser.addOption("LaunchPad Shooting", Constants.Shooter.LAUNCHPAD);
 
     SmartDashboard.putData("Shooter Location", shooterLocationChooser);
-
-    if (Debug.values.get(Constants.Subsystems.Shooter)) {
+    
+    if (Constants.DEBUG) {
       SmartDashboard.putNumber("Shooter Input RPM", shooterRPM);
       SmartDashboard.putNumber("Back Input RPM", rollerRpm);
     }
@@ -52,8 +55,8 @@ public class ShuffleBoard {
         return oneBallAuto_command;
       case TwoBall:
         return twoBallAuto_command;
-      // case ThreeBall:
-      // break;
+      case ThreeBall:
+        return threeBallAuto_command;
       // case FourBall:
       // break;
       default:

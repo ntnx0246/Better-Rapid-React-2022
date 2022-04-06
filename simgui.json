@@ -33,7 +33,8 @@
       "/LiveWindow/Vision": "Subsystem",
       "/SmartDashboard/AUTO MODE": "String Chooser",
       "/SmartDashboard/BACK ROLLER SPEED": "String Chooser",
-      "/SmartDashboard/SHOOTER SPEED": "String Chooser"
+      "/SmartDashboard/SHOOTER SPEED": "String Chooser",
+      "/SmartDashboard/Shooter Location": "String Chooser"
     }
   },
   "NetworkTables": {

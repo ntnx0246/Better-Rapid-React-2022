@@ -5,7 +5,6 @@ import java.util.function.IntSupplier;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
-import frc.robot.utils.Debug;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.NavX;
@@ -88,7 +87,7 @@ public class Shoot extends CommandBase {
             // System.out.println("SHOOTTTINNGGGGG: " + visionAngle);
             double errorAngle = visionAngle - navX.getAngle();
             // System.out.println("ERROR: " + errorAngle);
-            if(Debug.values.get(Constants.Subsystems.Shooter)){
+            if(Constants.DEBUG){
                 System.out.println("HI THERE SHOOTER IS ON DEBUG");
             }
             if (Math.abs(errorAngle) < 1) {
