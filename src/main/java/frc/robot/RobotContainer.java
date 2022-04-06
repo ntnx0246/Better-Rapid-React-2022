@@ -3,6 +3,7 @@ package frc.robot;
 import java.time.Instant;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -23,6 +24,7 @@ import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Pivots;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
+import frc.robot.utils.Constants;
 import frc.robot.utils.LogitechGamingPad;
 import frc.robot.utils.ShuffleBoard;
 
@@ -72,17 +74,24 @@ public class RobotContainer {
     // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()));
 
     // temperary crap code for driver practice
-    leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+    if (Constants.Shooter.DEBUG_MODE){
+      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+    } else {
+      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+    }
 
-    driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
-    // driveStartButton.whenPressed(new InstantCommand(()->configureButtonBindings()));
+    // driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
+    driveStartButton.whenPressed(new InstantCommand(driveTrain::climbingTrue));
 
-    driveX.whenPressed(new AutoClimb(climber, pivots));
-    // driveX.whileHeld(new AutoClimb(climber, pivots));
-    driveY.whileHeld(new ClimbUp(climber, 1));
-    driveY.whenPressed(new InstantCommand(driveTrain::climbingTrue));
-    driveA.whileHeld(new ClimbDown(climber));
+    driveX.whileHeld(new ConditionalCommand(new AutoClimb(climber, pivots), new InstantCommand(), driveTrain::getClimbing));
+    driveY.whileHeld(new ConditionalCommand(new ClimbUp(climber, 1), new InstantCommand(), driveTrain::getClimbing));
+    driveA.whileHeld(new ConditionalCommand(new ClimbDown(climber), new InstantCommand(), driveTrain::getClimbing));
+
     driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
+
+    // driveY.whileHeld(new ClimbUp(climber, 1));
+    // driveY.whenPressed(new InstantCommand(driveTrain::climbingTrue));
+    // driveA.whileHeld(new ClimbDown(climber));
 
     // secondary driver
     opY.whileHeld(new ClimbUp(climber, 1)); // maybe add slow
@@ -92,12 +101,6 @@ public class RobotContainer {
     // opB.whileHeld(new PivotRelative(pivots, -10, 0));
     opB.whileHeld(new InstantCommand(() -> pivots.climbPivots(-0.2)));
     opRightBumper.whileHeld(new IntakeBalls(intake));
-  }
-
-  public void configureClimberButtonBindings() {
-    driveY.whileHeld(new ClimbUp(climber, 1));
-    driveY.whenPressed(new InstantCommand(driveTrain::climbingTrue));
-    driveA.whileHeld(new ClimbDown(climber));
   }
 
   public Command getAutonomousCommand() {
