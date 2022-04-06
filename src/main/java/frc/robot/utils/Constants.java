@@ -80,7 +80,7 @@ public final class Constants {
 
   public final static class ShuffleBoard {
     public enum Auto {
-      OneBall, TwoBall, ThreeBall, FourBall
+      OneBall, TwoBall, ThreeBall_1, ThreeBall_2, ThreeBall_3, FourBall
     }
   }
 

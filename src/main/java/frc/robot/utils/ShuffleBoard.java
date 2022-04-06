@@ -14,34 +14,38 @@ import frc.robot.subsystems.Shooter;
 
 public class ShuffleBoard {
   private final SendableChooser<Constants.ShuffleBoard.Auto> autoChoose = new SendableChooser<Constants.ShuffleBoard.Auto>();
-  private OneBallAuto oneBallAuto_command;
-  private TwoBallAuto twoBallAuto_command;
-  private ThreeBallAuto threeBallAuto_command;
 
   private final SendableChooser<Shots> shooterLocationChooser = new SendableChooser<Shots>();
 
   private int shooterRPM = Constants.Shooter.FENDER.getFrontRPM();
   private int rollerRpm = Constants.Shooter.FENDER.getBackRPM();
 
-  public ShuffleBoard(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
+  private Intake intake;
+  private Shooter shooter;
+  private DriveTrain driveTrain;
+  private NavX navX;
 
-    oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
-    twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
-    threeBallAuto_command = new ThreeBallAuto(intake, shooter, driveTrain, navX);
+  public ShuffleBoard(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
+    this.intake = intake;
+    this.shooter = shooter;
+    this.driveTrain = driveTrain;
+    this.navX = navX;
 
     // AUTO
     autoChoose.setDefaultOption("One Ball", Constants.ShuffleBoard.Auto.OneBall);
     autoChoose.addOption("Two Ball", Constants.ShuffleBoard.Auto.TwoBall);
-    SmartDashboard.putData("AUTO MODE", autoChoose);
+    autoChoose.addOption("Three Ball 1", Constants.ShuffleBoard.Auto.ThreeBall_1);
+    autoChoose.addOption("Three Ball 2", Constants.ShuffleBoard.Auto.ThreeBall_2);
+    autoChoose.addOption("Three Ball 3", Constants.ShuffleBoard.Auto.ThreeBall_3);
 
-    // TODO auto position 1,2,3
+    SmartDashboard.putData("AUTO MODE", autoChoose);
 
     // RPM
     shooterLocationChooser.setDefaultOption("Fender Shooting", Constants.Shooter.FENDER);
-    shooterLocationChooser.addOption("LaunchPad Shooting", Constants.Shooter.LAUNCHPAD);
+    shooterLocationChooser.addOption("Launchpad Shooting", Constants.Shooter.LAUNCHPAD);
 
     SmartDashboard.putData("Shooter Location", shooterLocationChooser);
-    
+
     if (Constants.DEBUG) {
       SmartDashboard.putNumber("Shooter Input RPM", shooterRPM);
       SmartDashboard.putNumber("Back Input RPM", rollerRpm);
@@ -52,15 +56,17 @@ public class ShuffleBoard {
   public Command getAutonomousCommand() {
     switch (autoChoose.getSelected()) {
       case OneBall:
-        return oneBallAuto_command;
+        return new OneBallAuto(intake, shooter, driveTrain);
       case TwoBall:
-        return twoBallAuto_command;
-      case ThreeBall:
-        return threeBallAuto_command;
-      // case FourBall:
-      // break;
+        return new TwoBallAuto(intake, shooter, driveTrain, navX);
+      case ThreeBall_1:
+        return new ThreeBallAuto(intake, shooter, driveTrain, navX, Constants.ShuffleBoard.Auto.ThreeBall_1);
+      case ThreeBall_2:
+        return new ThreeBallAuto(intake, shooter, driveTrain, navX, Constants.ShuffleBoard.Auto.ThreeBall_2);
+      case ThreeBall_3:
+        return new ThreeBallAuto(intake, shooter, driveTrain, navX, Constants.ShuffleBoard.Auto.ThreeBall_3);
       default:
-        return oneBallAuto_command;
+        return new OneBallAuto(intake, shooter, driveTrain);
 
     }
   }
