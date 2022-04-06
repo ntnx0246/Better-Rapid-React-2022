@@ -36,35 +36,18 @@ public final class Constants {
     public static final double PUSH_SPEED = 1;
 
     public static final boolean DEBUG_MODE = false;
-    
-    public static enum Shots{
-      FENDER (-2550, 1000, -24),
-      LAUNCHPAD (-5000, 5000, 0);
-      
-      private final int frontRPM;
-      private final int backRPM;
-      private final int distanceBack;
 
-      Shots(int frontRPM, int backRPM, int distanceBack){
-        this.frontRPM = frontRPM;
-        this.backRPM = backRPM;
-        this.distanceBack = distanceBack;
-      }
+    public static enum Shots {
+      FENDER(-2550, 1000, -24),
+      LAUNCHPAD(-5000, 5000, 0);
 
+      private final int frontRPM; private final int backRPM; private final int distanceBack;
+      Shots(int frontRPM, int backRPM, int distanceBack) { this.frontRPM = frontRPM; this.backRPM = backRPM; this.distanceBack = distanceBack; }
       public int getFrontRPM() { return frontRPM; }
       public int getBackRPM() { return backRPM; }
       public int getDistance() { return distanceBack; }
 
     }
-    // public static final int FENDER_SHOOT = 0;
-    // public static final int FENDER_HIGH_VELOCITY = -2550; // -3300
-    // public static final int FENDER_BACKROLLER_HIGH_VELOCITY = 1000;
-    // public static final double FENDER_BACK_UP_TO_SHOOT = -24;
-
-    // public static final int HIGH_SHOOT = 1;
-    // public static final int HIGH_HIGH_VELOCITY = -5000; // -3300
-    // public static final int HIGH_BACKROLLER_HIGH_VELOCITY = 5000;
-    // public static final double HIGH_BACK_UP_TO_SHOOT = 0;
 
     public static final double RPM_TOLERANCE = 30;
     public static final double P = 0.0002;
@@ -131,18 +114,17 @@ public final class Constants {
   }
 
   public final static class Pivot {
-     // fast pivot
+    // fast pivot
     public static final double P_0 = 0.8;
     public static final double I_0 = 0;
     public static final double D_0 = 0;
     public static final double F_0 = 0;
 
-    // slow pivot 
+    // slow pivot
     public static final double P_1 = 0.05;
     public static final double I_1 = 0;
     public static final double D_1 = 0;
     public static final double F_1 = 0;
-
 
     // turbo pivot
     public static final double P_2 = 1;

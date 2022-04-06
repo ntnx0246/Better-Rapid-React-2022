@@ -27,7 +27,6 @@ public class ShuffleBoard {
 
   public ShuffleBoard(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
     // CameraServer.startAutomaticCapture(0);
-
     oneBallAuto_command = new OneBallAuto(intake, shooter, driveTrain);
     twoBallAuto_command = new TwoBallAuto(intake, shooter, driveTrain, navX);
     // AUTO
@@ -43,8 +42,8 @@ public class ShuffleBoard {
 
     // manual RPM input
     if (Constants.Shooter.DEBUG_MODE) {
-      SmartDashboard.putNumber("Shooter RPM", shooterRPM);
-      SmartDashboard.putNumber("Back RPM", rollerRpm);
+      SmartDashboard.putNumber("Shooter Input RPM", shooterRPM);
+      SmartDashboard.putNumber("Back Input RPM", rollerRpm);
     }
     // TODO auto position 1,2,3
   }
@@ -78,10 +77,10 @@ public class ShuffleBoard {
   }
 
   public int getShoot() {
-    return (int) SmartDashboard.getNumber("Shooter RPM", 0);
+    return (int) SmartDashboard.getNumber("Shooter Input RPM", 0);
   }
 
   public int getRoller() {
-    return (int) SmartDashboard.getNumber("Back RPM", 0);
+    return (int) SmartDashboard.getNumber("Back Input RPM", 0);
   }
 }

@@ -71,8 +71,6 @@ public class RobotContainer {
     driveTrain.setSlowMode(false);
     rightBumper.whileHeld(new IntakeBalls(intake));
 
-    // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()));
-
     // temperary crap code for driver practice
     if (Constants.Shooter.DEBUG_MODE){
       leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
