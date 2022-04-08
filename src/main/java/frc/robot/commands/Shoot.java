@@ -101,15 +101,15 @@ public class Shoot extends CommandBase {
                 errorAngle = -(visionAngle - navX.getAngle());
             }
             // System.out.println("ERROR: " + errorAngle);
-            if(Constants.DEBUG){
+            if(Constants.Shooter.DEBUG_MODE){
                 System.out.println("HI THERE SHOOTER IS ON DEBUG");
             }
             if (Math.abs(errorAngle) < 1 || turned == true) {
                 turned = true;
                 System.out.println("SHOOTINGGGGGGGG");
-                // shooter.setVelocity(visionFrontRPM);
-                // shooter.setRollerVelocity(visionBackRPM);
-                // shootWhenReady(visionFrontRPM, visionBackRPM);
+                shooter.setVelocity(visionFrontRPM);
+                shooter.setRollerVelocity(visionBackRPM);
+                shootWhenReady(visionFrontRPM, visionBackRPM);
 
                 driveTrain.tankDrive(0, 0);
             } else {

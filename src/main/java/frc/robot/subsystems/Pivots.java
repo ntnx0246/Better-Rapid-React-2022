@@ -36,6 +36,8 @@ public class Pivots extends SubsystemBase {
     initPIDController(leftPivotController, rightPivotController, Constants.Pivot.FAST_PID);
     initPIDController(leftPivotController, rightPivotController, Constants.Pivot.SLOW_PID);
     initPIDController(leftPivotController, rightPivotController, Constants.Pivot.TURBO_PID);
+    initPIDController(leftPivotController, rightPivotController, Constants.Pivot.MODERATE_PID);
+
   } 
 
   private void initPIDController(SparkMaxPIDController controller1, SparkMaxPIDController controller2,PID PID) {

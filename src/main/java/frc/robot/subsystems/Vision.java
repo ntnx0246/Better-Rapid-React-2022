@@ -58,11 +58,11 @@ public class Vision extends SubsystemBase {
           // System.out.println("ANGLE"+angle);
         }
       } catch (Exception e) {
-        isConnected = false;
-        packetListenerThread.interrupt();
-        System.out.println("I AM MAKING IS CONNECTED FALSE");
-        SmartDashboard.putBoolean("Vision Serial Port", isConnected);
-        camPort.close();
+        // isConnected = false;
+        // packetListenerThread.interrupt();
+        // System.out.println("I AM MAKING IS CONNECTED FALSE");
+        // SmartDashboard.putBoolean("Vision Serial Port", isConnected);
+        // camPort.close();
       } 
       // finally {
       //   isConnected = false;
@@ -71,13 +71,7 @@ public class Vision extends SubsystemBase {
       //   SmartDashboard.putBoolean("Vision Serial Port", isConnected);
       //   camPort.close();
       // }
-    } else {
-      isConnected = false;
-      packetListenerThread.interrupt();
-      System.out.println("I AM MAKING IS CONNECTED FALSE FROM THE ESLE STATEMENT");
-      SmartDashboard.putBoolean("Vision Serial Port", isConnected);
-      camPort.close();
-    }
+    } 
   }
 
   public double getAngle() {

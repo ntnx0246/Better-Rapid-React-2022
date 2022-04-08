@@ -31,9 +31,10 @@ public final class Constants {
 
   public final static class Shooter {
     public static final double PUSH_SPEED = 1;
-    public static final boolean DEBUG_MODE = false;
-    public static final Shots FENDER = new Shots(-2550, 1000, -24);
-    public static final Shots LAUNCHPAD = new Shots(-5000, 5000, 0);
+    public static final boolean DEBUG_MODE = true;
+    public static final Shots FENDER = new Shots(-2700, 1000, -24);
+    public static final Shots FENDER_LOW = new Shots(-2000, 500, 0);
+    public static final Shots LAUNCHPAD = new Shots(-4000, 4000, 0);
     public static final double RPM_TOLERANCE = 30;
 
     public static final PID PID = new PID(0.0002, 0.000000005, 0, 0.000174);
@@ -62,7 +63,7 @@ public final class Constants {
     public static final double UP_SPEED = 0.5; // 0.3
     public static final double DOWN_SPEED = -0.3; // -0.3
     public static final double CALIBRATION_SPEED = -0.1; // -0.1
-    public static final double UP_ENCODER_RIGHT = 238000;
+    public static final double UP_ENCODER_RIGHT = 250000;
     public static final double UP_ENCODER_LEFT = 238000;
     public static final double CLIMB_TOLERANCE = 50;
 
@@ -73,8 +74,9 @@ public final class Constants {
 
   public final static class Pivot {
     public static final PID FAST_PID = new PID(0.8, 0, 0, 0, 0);
-    public static final PID SLOW_PID = new PID(0.05, 0, 0, 0, 1);
+    public static final PID SLOW_PID = new PID(0.04, 0, 0.01, 0, 1);
     public static final PID TURBO_PID = new PID(1, 1, 0, 1, 2);
+    public static final PID MODERATE_PID = new PID(0.3, 0, 0, 0, 3);
 
   }
 
@@ -87,7 +89,4 @@ public final class Constants {
   public enum Subsystems {
     Climber, DriveTrain, Intake, NavX, Pivots, Shooter, Vision
   }
-
-  public static final boolean DEBUG = false;
-
 }

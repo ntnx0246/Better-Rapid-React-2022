@@ -36,13 +36,13 @@ public class ThreeBallAuto extends SequentialCommandGroup {
             new IntakeBalls(intake).withTimeout(3)),
         new TurnToAngle(driveTrain, navX, 180).withTimeout(2),
         new DriveStraight(driveTrain, () -> 60).withTimeout(2),
-        new Shoot(intake, shooter, -3000, -1200).withTimeout(5),
+        new Shoot(intake, shooter, -3000, 1200).withTimeout(5),
         new TurnToAngle(driveTrain, navX, -100 * turn).withTimeout(2),
         new DriveStraight(driveTrain, () -> 100).withTimeout(4).alongWith(
             new IntakeBalls(intake).withTimeout(4)),
         new DriveStraight(driveTrain, () -> -50).withTimeout(2),
         new TurnToAngle(driveTrain, navX, 120*turn).withTimeout(2),
-        new Shoot(intake, shooter, -3000, -1200).withTimeout(5),
+        new Shoot(intake, shooter, -3000, 1200).withTimeout(5),
         new DriveStraight(driveTrain, () -> -100).withTimeout(3)
     );
   }

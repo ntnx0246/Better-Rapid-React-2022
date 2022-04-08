@@ -42,11 +42,12 @@ public class ShuffleBoard {
 
     // RPM
     shooterLocationChooser.setDefaultOption("Fender Shooting", Constants.Shooter.FENDER);
+    shooterLocationChooser.addOption("Low Fender Shooting", Constants.Shooter.FENDER_LOW);
     shooterLocationChooser.addOption("Launchpad Shooting", Constants.Shooter.LAUNCHPAD);
 
     SmartDashboard.putData("Shooter Location", shooterLocationChooser);
 
-    if (Constants.DEBUG) {
+    if (Constants.Shooter.DEBUG_MODE) {
       SmartDashboard.putNumber("Shooter Input RPM", shooterRPM);
       SmartDashboard.putNumber("Back Input RPM", rollerRpm);
     }
