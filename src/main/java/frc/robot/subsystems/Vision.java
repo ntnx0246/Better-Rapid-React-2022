@@ -48,16 +48,35 @@ public class Vision extends SubsystemBase {
 
   // @Override
   public void backgroundUpdate() {
-    try {
-      String data = camPort.readString();
-      String[] realData = data.split(";");
-      if (realData.length == 2) {
-        angle = Double.valueOf(realData[0]);
-        yPos = Double.valueOf(realData[1]);
-      }
-    } catch (Exception e) {
+    if(isConnected){
+      try{
+        String data = camPort.readString();
+        String[] realData = data.split(";");
+        if (realData.length == 2) {
+          angle = Double.valueOf(realData[0]);
+          yPos = Double.valueOf(realData[1]);
+          // System.out.println("ANGLE"+angle);
+        }
+      } catch (Exception e) {
+        isConnected = false;
+        packetListenerThread.interrupt();
+        System.out.println("I AM MAKING IS CONNECTED FALSE");
+        SmartDashboard.putBoolean("Vision Serial Port", isConnected);
+        camPort.close();
+      } 
+      // finally {
+      //   isConnected = false;
+      //   packetListenerThread.interrupt();
+      //   System.out.println("I AM FINALLY MAKING IS CONNECTED FALSE");
+      //   SmartDashboard.putBoolean("Vision Serial Port", isConnected);
+      //   camPort.close();
+      // }
+    } else {
       isConnected = false;
+      packetListenerThread.interrupt();
+      System.out.println("I AM MAKING IS CONNECTED FALSE FROM THE ESLE STATEMENT");
       SmartDashboard.putBoolean("Vision Serial Port", isConnected);
+      camPort.close();
     }
   }
 
@@ -66,17 +85,18 @@ public class Vision extends SubsystemBase {
   }
 
   public double getFrontRPM() {
-    return yPos;
+    return Math.pow(yPos,1.412)+2500;
   }
 
   public double getBackRPM() {
-    return yPos;
+    return Math.pow(yPos,1.51393)+970;
   }
 
   Thread packetListenerThread = new Thread(new Runnable() {
     public void run() {
-      while (!Thread.interrupted() || isConnected) {
+      while (!packetListenerThread.isInterrupted() && isConnected) {
         backgroundUpdate();
+        // packetListenerThread.wait();
       }
     }
   });

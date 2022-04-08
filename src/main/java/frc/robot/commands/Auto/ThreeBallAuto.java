@@ -12,11 +12,6 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.utils.Constants;
 
 public class ThreeBallAuto extends SequentialCommandGroup {
-  private Intake intake;
-  private Shooter shooter;
-  private DriveTrain driveTrain;
-  private NavX navX;
-  private Constants.ShuffleBoard.Auto direction;
   private double turn;
 
   public ThreeBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX,

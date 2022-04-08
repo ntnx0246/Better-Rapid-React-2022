@@ -36,7 +36,7 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final NavX navX = new NavX();
   private final Pivots pivots = new Pivots();
-  // private final Vision vision = new Vision();
+  private final Vision vision = new Vision();
 
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
   private final JoystickButton driveB = new JoystickButton(drivePad, 2);
@@ -52,7 +52,7 @@ public class RobotContainer {
   private final JoystickButton opB = new JoystickButton(opPad, 2);
   private final JoystickButton opX = new JoystickButton(opPad, 3);
   private final JoystickButton opY = new JoystickButton(opPad, 4);
-  // private final JoystickButton opLeftBumper = new JoystickButton(opPad, 5);
+  private final JoystickButton opLeftBumper = new JoystickButton(opPad, 5);
   private final JoystickButton opRightBumper = new JoystickButton(opPad, 6);
   // private final JoystickButton opBackButton = new JoystickButton(opPad, 7);
   // private final JoystickButton opStartButton = new JoystickButton(opPad, 8);
@@ -70,9 +70,11 @@ public class RobotContainer {
     rightBumper.whileHeld(new IntakeBalls(intake));
 
     if (Constants.Shooter.DEBUG_MODE){
-      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+      // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller(), vision, driveTrain, navX));
     } else {
-      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+      // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity(), vision, driveTrain, navX));
     }
 
     // driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
@@ -98,6 +100,13 @@ public class RobotContainer {
     opB.whileHeld(new PivotRelative(pivots, -10, Constants.Pivot.FAST_PID.s));
     // opB.whileHeld(new InstantCommand(() -> pivots.climbPivots(-0.2)));
     opRightBumper.whileHeld(new IntakeBalls(intake));
+    if (Constants.Shooter.DEBUG_MODE){
+      opLeftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+      // opLeftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller(), vision, driveTrain, navX));
+    } else {
+      opLeftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+      // opLeftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity(), vision, driveTrain, navX));
+    }
   }
 
   public Command getAutonomousCommand() {
