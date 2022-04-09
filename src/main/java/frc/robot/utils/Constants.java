@@ -31,8 +31,8 @@ public final class Constants {
 
   public final static class Shooter {
     public static final double PUSH_SPEED = 1;
-    public static final boolean DEBUG_MODE = true;
-    public static final Shots FENDER = new Shots(-2700, 1000, -24);
+    public static final boolean DEBUG_MODE = false;
+    public static final Shots FENDER = new Shots(-2650, 1000, -24);
     public static final Shots FENDER_LOW = new Shots(-2000, 500, 0);
     public static final Shots LAUNCHPAD = new Shots(-4000, 4000, 0);
     public static final double RPM_TOLERANCE = 30;
@@ -63,13 +63,13 @@ public final class Constants {
     public static final double UP_SPEED = 0.5; // 0.3
     public static final double DOWN_SPEED = -0.3; // -0.3
     public static final double CALIBRATION_SPEED = -0.1; // -0.1
-    public static final double UP_ENCODER_RIGHT = 250000;
+    public static final double UP_ENCODER_RIGHT = 238000;
     public static final double UP_ENCODER_LEFT = 238000;
     public static final double CLIMB_TOLERANCE = 50;
 
     public static final PID DOWN = new PID(0.008, 0.000005, 0.5, 0, 0);
     public static final PID UP = new PID(0.008, 0, 0, 0, 1);
-    public static final PID TURBO = new PID(0.2, 0, 0, 0, 2);
+    public static final PID TURBO = new PID(0.4, 0, 0, 0, 2);
   }
 
   public final static class Pivot {

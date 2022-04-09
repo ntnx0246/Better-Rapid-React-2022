@@ -13,7 +13,7 @@ public class OneBallAuto extends SequentialCommandGroup {
 
     addCommands(
         new DriveStraight(driveTrain, () -> -24).withTimeout(5),
-        new Shoot(intake, shooter, -2550, 1000).withTimeout(5),
+        new Shoot(intake, shooter, -2600, 1000).withTimeout(5),
         new DriveStraight(driveTrain, () -> -100).withTimeout(5));
   }
 }

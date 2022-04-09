@@ -2,6 +2,8 @@ package frc.robot.commands;
 
 import java.util.function.IntSupplier;
 
+import com.fasterxml.jackson.databind.ser.ResolvableSerializer;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
@@ -67,26 +69,45 @@ public class Shoot extends CommandBase {
         this.rollerVelocity = rollerVelocity;
     }
 
+    // AUTO WITH VISION
+    public Shoot(Intake intake, Shooter shooter, int shooterVelocity, int rollerVelocity, Vision vision, DriveTrain driveTrain, NavX navX) {
+        addRequirements(intake, shooter);
+        this.intake = intake;
+        this.shooter = shooter;
+        this.isAuto = true;
+        this.usingVision = true;
+        this.shooterVelocity = shooterVelocity;
+        this.rollerVelocity = rollerVelocity;
+        this.vision = vision;
+        this.navX = navX;
+        this.driveTrain = driveTrain;
+    }
+
     @Override
     public void initialize() {
-        if (isAuto) {
+        if (usingVision){
+            
+            visionFrontRPM = (int) vision.getFrontRPM();
+            visionBackRPM = (int) vision.getBackRPM();
+            visionAngle = vision.getAngle();
+            navX.reset();
+            if (usingVision){
+                visionFrontRPM = shooterVelocity;
+                visionBackRPM = rollerVelocity;
+            }
+
+        } else if (isAuto) {
             shooter.setVelocity(shooterVelocity);
             shooter.setRollerVelocity(rollerVelocity);
         } else if (!usingVision) {
             shooter.setVelocity(suppliedVelocity.getAsInt());
             shooter.setRollerVelocity(suppliedRollerVelocity.getAsInt());
         } else {
-            navX.reset();
+            System.out.println("SOMETHING WENT REALLY WRONG UR STUPIDLY SCREWED");
         }
         pulseCounter = 0;
         rpmCounter = 0;
-        turned = false;
-        if (usingVision){
-            visionFrontRPM = (int) vision.getFrontRPM();
-            visionBackRPM = (int) vision.getBackRPM();
-            visionAngle = vision.getAngle();
-        }
-        
+        turned = false;        
     }
 
     @Override
