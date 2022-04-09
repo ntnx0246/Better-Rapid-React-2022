@@ -55,7 +55,7 @@ public class Vision extends SubsystemBase {
         if (realData.length == 2) {
           angle = Double.valueOf(realData[0]);
           yPos = Double.valueOf(realData[1]);
-          // System.out.println("ANGLE"+angle);
+          System.out.println("ANGLE"+angle);
         }
       } catch (Exception e) {
         // isConnected = false;

@@ -17,7 +17,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
   DriveTrain driveTrain;
   NavX navX;
 
-  public TwoBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX, Vision vision) {
+  public TwoBallAuto(Intake intake, Shooter shooter) {
     addCommands(
         // new DriveStraight(driveTrain, () -> 90).withTimeout(4).alongWith(
         //     new IntakeBalls(intake)).withTimeout(4),
@@ -27,19 +27,14 @@ public class TwoBallAuto extends SequentialCommandGroup {
         // new Shoot(intake, shooter, -2550, 1000).withTimeout(5),
         // new DriveStraight(driveTrain, () -> -180).withTimeout(5)
         
-        new DriveStraight(driveTrain, () -> 45).withTimeout(3).alongWith(
-            new IntakeBalls(intake).withTimeout(3)),
-        new TurnToAngle(driveTrain, navX, 192).withTimeout(2),
-        // pos 3 blue 192  
-        new DriveStraight(driveTrain, () -> 30).withTimeout(2),
-        new Shoot(intake, shooter, -3000, 1200, vision, driveTrain, navX),
-
-        // new Shoot(intake, shooter, -2700, 1000).withTimeout(5),
-        new DriveStraight(driveTrain, () -> -100).withTimeout(3)
-
-
-        // new TurnToAngle(driveTrain, navX, 165).withTimeout(2),
-
+        // new DriveStraight(driveTrain, () -> 45).withTimeout(3).alongWith(
+        //     new IntakeBalls(intake).withTimeout(3)),
+        // new TurnToAngle(driveTrain, navX, 192).withTimeout(2),
+        // // pos 3 blue 192  
+        // new DriveStraight(driveTrain, () -> 30).withTimeout(2),
+        // new Shoot(intake, shooter, -2700, 1200).withTimeout(5),
+        // // // new Shoot(intake, shooter, -2700, 1000).withTimeout(5),
+        // new DriveStraight(driveTrain, () -> -100).withTimeout(3)
     );
   }
 }
