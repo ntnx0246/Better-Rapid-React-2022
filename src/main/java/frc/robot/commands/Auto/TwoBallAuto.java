@@ -31,7 +31,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
         new TurnToAngle(driveTrain, navX, 192).withTimeout(2),
         // pos 3 blue 192
         new DriveStraight(driveTrain, () -> 60).withTimeout(2),
-        new Shoot(intake, shooter, -2600, 1000).withTimeout(5),
+        new Shoot(intake, shooter, -2700, 1000).withTimeout(5),
         new DriveStraight(driveTrain, () -> -100).withTimeout(3)
     );
   }
