@@ -35,6 +35,8 @@ public final class Constants {
     public static final Shots FENDER = new Shots(-2650, 1000, -24);
     public static final Shots FENDER_LOW = new Shots(-2000, 500, 0);
     public static final Shots LAUNCHPAD = new Shots(-4000, 4000, 0);
+    // public static final Shots LAUNCHPAD = new Shots(-2650, 1000, -24);
+
     public static final double RPM_TOLERANCE = 30;
 
     public static final PID PID = new PID(0.0002, 0.000000005, 0, 0.000174);
