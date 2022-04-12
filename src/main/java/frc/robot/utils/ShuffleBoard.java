@@ -5,13 +5,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.Auto.OneBallAuto;
-import frc.robot.commands.Auto.ThreeBallAuto;
+import frc.robot.commands.Auto.FourBallAuto;
 import frc.robot.commands.Auto.TwoBallAuto;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Vision;
 
 public class ShuffleBoard {
   private final SendableChooser<Constants.ShuffleBoard.Auto> autoChoose = new SendableChooser<Constants.ShuffleBoard.Auto>();
@@ -25,7 +24,6 @@ public class ShuffleBoard {
   private Shooter shooter;
   private DriveTrain driveTrain;
   private NavX navX;
-  private Vision vision;
 
   public ShuffleBoard(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX) {
     this.intake = intake;
@@ -35,10 +33,10 @@ public class ShuffleBoard {
 
     // AUTO
     autoChoose.setDefaultOption("One Ball", Constants.ShuffleBoard.Auto.OneBall);
-    autoChoose.addOption("Two Ball", Constants.ShuffleBoard.Auto.TwoBall);
-    autoChoose.addOption("Three Ball 1", Constants.ShuffleBoard.Auto.ThreeBall_1);
-    autoChoose.addOption("Three Ball 2", Constants.ShuffleBoard.Auto.ThreeBall_2);
-    autoChoose.addOption("Three Ball 3", Constants.ShuffleBoard.Auto.ThreeBall_3);
+    autoChoose.addOption("Two Ball 1", Constants.ShuffleBoard.Auto.TwoBall_1);
+    autoChoose.addOption("Two Ball 2", Constants.ShuffleBoard.Auto.TwoBall_2);
+    autoChoose.addOption("Two Ball 3", Constants.ShuffleBoard.Auto.TwoBall_3);
+    autoChoose.addOption("Four Ball 2", Constants.ShuffleBoard.Auto.FourBall);
 
     SmartDashboard.putData("AUTO MODE", autoChoose);
 
@@ -60,14 +58,14 @@ public class ShuffleBoard {
     switch (autoChoose.getSelected()) {
       case OneBall:
         return new OneBallAuto(intake, shooter, driveTrain);
-      case TwoBall:
-        return new TwoBallAuto(intake, shooter);
-      case ThreeBall_1:
-        return new ThreeBallAuto(intake, shooter, driveTrain, navX, Constants.ShuffleBoard.Auto.ThreeBall_1);
-      case ThreeBall_2:
-        return new ThreeBallAuto(intake, shooter, driveTrain, navX, Constants.ShuffleBoard.Auto.ThreeBall_2);
-      case ThreeBall_3:
-        return new ThreeBallAuto(intake, shooter, driveTrain, navX, Constants.ShuffleBoard.Auto.ThreeBall_3);
+      case TwoBall_1:
+        return new TwoBallAuto(intake, shooter, 160);
+      case TwoBall_2:
+        return new TwoBallAuto(intake, shooter, -170);
+      case TwoBall_3:
+        return new TwoBallAuto(intake, shooter, 180);
+      case FourBall:
+        return new FourBallAuto(intake, shooter, driveTrain, navX);
       default:
         return new OneBallAuto(intake, shooter, driveTrain);
 

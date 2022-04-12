@@ -27,14 +27,15 @@ public class TurnToAngle extends CommandBase {
   @Override
   public void initialize() {
     navX.reset();
+    driveTrain.setAngle(goalAngle);
   }
 
   @Override
   public void execute() {
-    currentAngle = navX.getAngle();
-    double errorAngle = goalAngle - currentAngle;
-    double power = (errorAngle / goalAngle)*0.75;
-    driveTrain.tankDrive(power, -power);
+    // currentAngle = navX.getAngle();
+    // double errorAngle = goalAngle - currentAngle;
+    // double power = (errorAngle / goalAngle)*0.75;
+    // driveTrain.tankDrive(power, -power);
   }
 
   @Override
@@ -44,7 +45,7 @@ public class TurnToAngle extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    double errorAngle = goalAngle - currentAngle;
+    double errorAngle = goalAngle - navX.getAngle();
     return (errorAngle < Constants.DriveTrain.ANGLE_TOLERANCE);
   }
 

@@ -36,7 +36,7 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final NavX navX = new NavX();
   private final Pivots pivots = new Pivots();
-  // private final Vision vision = new Vision();
+  private final Vision vision = new Vision();
 
   private final JoystickButton driveA = new JoystickButton(drivePad, 1);
   private final JoystickButton driveB = new JoystickButton(drivePad, 2);
@@ -67,16 +67,16 @@ public class RobotContainer {
   public void configureButtonBindings() {
     // primary driver
     driveTrain.setSlowMode(true); 
-    // rightBumper.whileHeld(new IntakeBalls(intake));
+    rightBumper.whileHeld(new IntakeBalls(intake));
     rightBumper.whileHeld(new InstantCommand(driveTrain::trueSlowMode)).whenReleased(new InstantCommand(driveTrain::falseSlowMode));
 
     if (Constants.Shooter.DEBUG_MODE){
-      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
-      // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller(), vision, driveTrain, navX));
+      // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller(), vision, driveTrain, navX));
       // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()));
     } else {
-      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
-      // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity(), vision, driveTrain, navX));
+      // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
+      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity(), vision, driveTrain, navX));
       // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()));
     }
 

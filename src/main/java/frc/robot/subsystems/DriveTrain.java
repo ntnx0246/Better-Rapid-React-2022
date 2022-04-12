@@ -53,6 +53,10 @@ public class DriveTrain extends SubsystemBase {
     frontL.configMotionAcceleration(Constants.DriveTrain.ACCELERATION);
     frontR.configMotionCruiseVelocity(Constants.DriveTrain.CRUISE_VELOCITY);
     frontR.configMotionAcceleration(Constants.DriveTrain.ACCELERATION);
+    this.setLeftPID(Constants.DriveTrain.PID.s, Constants.DriveTrain.PID.p, Constants.DriveTrain.PID.i,
+        Constants.DriveTrain.PID.d);
+    this.setRightPID(Constants.DriveTrain.PID.s, Constants.DriveTrain.PID.p, Constants.DriveTrain.PID.i,
+        Constants.DriveTrain.PID.d);
   }
 
   public void arcadeDrive(double x, double y) {
@@ -107,11 +111,15 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getLeftEncoderCount() {
-    return frontL.getSensorCollection().getIntegratedSensorPosition();
+    // return frontL.getSensorCollection().getIntegratedSensorPosition();
+    return frontL.getSelectedSensorPosition();
+
   }
 
   public double getRightEncoderCount() {
-    return frontR.getSensorCollection().getIntegratedSensorPosition();
+    // return frontR.getSensorCollection().getIntegratedSensorPosition();
+    return frontR.getSelectedSensorPosition();
+
   }
 
   public double getNativeUnitsFromInches(double inches) {
@@ -122,6 +130,11 @@ public class DriveTrain extends SubsystemBase {
   public double getInchesFromNativeUnits(double native_units) {
     return native_units / Constants.DriveTrain.MOTOR_TO_WHEEL_REVOLUTION * (Math.PI * Constants.DriveTrain.DRIVE_WHEEL_DIAMETER_INCHES)
         / Constants.DriveTrain.SENSOR_UNITS_PER_ROTATION;
+  }
+
+  public double getNativeUnitsFromAngle(double degrees) {
+    return degrees * Constants.DriveTrain.TURN_CONSTANT;
+
   }
 
   public void resetEncoders() {
@@ -137,6 +150,14 @@ public class DriveTrain extends SubsystemBase {
   public void printInches() {
     System.out.println("Left Inches: " + getInchesFromNativeUnits(getLeftEncoderCount()));
     System.out.println("Right Inches: " + getInchesFromNativeUnits(getRightEncoderCount()));
+  }
+
+  public void setAngle(double degrees) {
+    System.out.println("LEFT WAS" + this.getLeftEncoderCount());
+    System.out.println("ADDDING LEFT TO " + (degrees * Constants.DriveTrain.TURN_CONSTANT));
+    System.out.println("SETTING TO " + (this.getLeftEncoderCount() + (degrees * Constants.DriveTrain.TURN_CONSTANT)));
+    frontL.set(ControlMode.Position, this.getLeftEncoderCount() + (degrees * Constants.DriveTrain.TURN_CONSTANT));
+    frontR.set(ControlMode.Position, this.getRightEncoderCount() - (degrees * Constants.DriveTrain.TURN_CONSTANT));
   }
 
   @Override

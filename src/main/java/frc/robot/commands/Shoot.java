@@ -2,8 +2,6 @@ package frc.robot.commands;
 
 import java.util.function.IntSupplier;
 
-import com.fasterxml.jackson.databind.ser.ResolvableSerializer;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.utils.Constants;
@@ -27,10 +25,10 @@ public class Shoot extends CommandBase {
     private IntSupplier suppliedRollerVelocity;
     private int pulseCounter;
     private int rpmCounter;
-    private boolean turned;
     private int visionFrontRPM;
     private int visionBackRPM;
     private double visionAngle;
+    private int turnCounter;
 
     // TELEOP VISION
     public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity,
@@ -90,11 +88,11 @@ public class Shoot extends CommandBase {
             visionFrontRPM = (int) vision.getFrontRPM();
             visionBackRPM = (int) vision.getBackRPM();
             visionAngle = vision.getAngle();
+            
             navX.reset();
-            if (usingVision){
-                visionFrontRPM = shooterVelocity;
-                visionBackRPM = rollerVelocity;
-            }
+            shooter.setVelocity(visionFrontRPM);
+            shooter.setRollerVelocity(visionBackRPM);
+            driveTrain.setAngle(visionAngle);
 
         } else if (isAuto) {
             shooter.setVelocity(shooterVelocity);
@@ -107,40 +105,21 @@ public class Shoot extends CommandBase {
         }
         pulseCounter = 0;
         rpmCounter = 0;
-        turned = false;        
+        turnCounter = 0;
     }
 
     @Override
     public void execute() {
         if (usingVision) {
-            
-            double errorAngle = 0;
+            double errorAngle = visionAngle - navX.getAngle();
             System.out.println("NAVX ANGLE: " + navX.getAngle());
-            if (visionAngle>0){
-                errorAngle = visionAngle - navX.getAngle();
-            } else {
-                errorAngle = -(visionAngle - navX.getAngle());
-            }
-            // System.out.println("ERROR: " + errorAngle);
-            if(Constants.Shooter.DEBUG_MODE){
-                System.out.println("HI THERE SHOOTER IS ON DEBUG");
-            }
-            if (Math.abs(errorAngle) < 1 || turned == true) {
-                turned = true;
-                System.out.println("SHOOTINGGGGGGGG");
-                shooter.setVelocity(visionFrontRPM);
-                shooter.setRollerVelocity(visionBackRPM);
+            if (turnCounter > 5 && Math.abs(errorAngle) < .5) {
                 shootWhenReady(visionFrontRPM, visionBackRPM);
-
-                driveTrain.tankDrive(0, 0);
-            } else {
-                double power = (errorAngle / visionAngle)*0.3;
-                // System.out.println("POWER SETTING DRIVETRAIN: " +power);
-                driveTrain.tankDrive(power, -power);
+            } else if (Math.abs(errorAngle) < .5) {
+                turnCounter ++;
+                visionAngle = vision.getAngle();
+                driveTrain.setAngle(visionAngle);
             }
-            // double power = (errorAngle / visionAngle) * 0.3;
-            // // System.out.println("POWER SETTING DRIVETRAIN: " + power);
-            // driveTrain.tankDrive(power, -power);
         } else {
             shootWhenReady(isAuto ? shooterVelocity : suppliedVelocity.getAsInt(),
                     isAuto ? rollerVelocity : suppliedRollerVelocity.getAsInt());

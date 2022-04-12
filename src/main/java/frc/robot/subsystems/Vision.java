@@ -75,15 +75,15 @@ public class Vision extends SubsystemBase {
   }
 
   public double getAngle() {
-    return angle;
+    return 30;
   }
 
   public double getFrontRPM() {
-    return Math.pow(yPos,1.412)+2500;
+    return Math.pow(200,1.412)+2500;
   }
 
   public double getBackRPM() {
-    return Math.pow(yPos,1.51393)+970;
+    return Math.pow(200,1.51393)+970;
   }
 
   Thread packetListenerThread = new Thread(new Runnable() {
