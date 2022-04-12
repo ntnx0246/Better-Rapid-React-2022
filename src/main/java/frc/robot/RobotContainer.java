@@ -72,11 +72,11 @@ public class RobotContainer {
 
     if (Constants.Shooter.DEBUG_MODE){
       // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
-      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller(), vision, driveTrain, navX));
-      // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()));
+      // leftBumper.whileHeld(new Shoot(intake, shooter, vision, driveTrain, navX));
+      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller()));
     } else {
       // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
-      leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity(), vision, driveTrain, navX));
+      leftBumper.whileHeld(new Shoot(intake, shooter, vision, driveTrain, navX));
       // leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity()));
     }
 

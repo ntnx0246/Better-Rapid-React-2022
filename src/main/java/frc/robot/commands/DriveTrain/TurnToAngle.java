@@ -13,7 +13,6 @@ public class TurnToAngle extends CommandBase {
   private final DriveTrain driveTrain;
   private final NavX navX;
   private double goalAngle;
-  private double currentAngle;
 
   /** Creates a new TurnToAngle. */
   public TurnToAngle(DriveTrain driveTrain, NavX navX, double goalAngle) {
@@ -21,7 +20,6 @@ public class TurnToAngle extends CommandBase {
     this.driveTrain = driveTrain;
     this.navX = navX;
     this.goalAngle = goalAngle;
-    this.currentAngle = 0.0;
   }
 
   @Override

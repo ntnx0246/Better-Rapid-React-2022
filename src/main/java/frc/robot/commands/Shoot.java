@@ -31,8 +31,7 @@ public class Shoot extends CommandBase {
     private int turnCounter;
 
     // TELEOP VISION
-    public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity,
-            Vision vision, DriveTrain driveTrain, NavX navX) {
+    public Shoot(Intake intake, Shooter shooter, Vision vision, DriveTrain driveTrain, NavX navX) {
         addRequirements(intake, shooter, vision, driveTrain);
         this.intake = intake;
         this.shooter = shooter;
@@ -41,8 +40,6 @@ public class Shoot extends CommandBase {
         this.usingVision = true;
         this.navX = navX;
         this.driveTrain = driveTrain;
-        this.suppliedVelocity = suppliedVelocity;
-        this.suppliedRollerVelocity = suppliedRollerVelocity;
     }
 
     // TELEOP
@@ -67,24 +64,9 @@ public class Shoot extends CommandBase {
         this.rollerVelocity = rollerVelocity;
     }
 
-    // AUTO WITH VISION
-    public Shoot(Intake intake, Shooter shooter, int shooterVelocity, int rollerVelocity, Vision vision, DriveTrain driveTrain, NavX navX) {
-        addRequirements(intake, shooter);
-        this.intake = intake;
-        this.shooter = shooter;
-        this.isAuto = true;
-        this.usingVision = true;
-        this.shooterVelocity = shooterVelocity;
-        this.rollerVelocity = rollerVelocity;
-        this.vision = vision;
-        this.navX = navX;
-        this.driveTrain = driveTrain;
-    }
-
     @Override
     public void initialize() {
-        if (usingVision){
-            
+        if (usingVision) {
             visionFrontRPM = (int) vision.getFrontRPM();
             visionBackRPM = (int) vision.getBackRPM();
             visionAngle = vision.getAngle();
@@ -93,6 +75,7 @@ public class Shoot extends CommandBase {
             shooter.setVelocity(visionFrontRPM);
             shooter.setRollerVelocity(visionBackRPM);
             driveTrain.setAngle(visionAngle);
+            turnCounter = 0;
 
         } else if (isAuto) {
             shooter.setVelocity(shooterVelocity);
@@ -105,7 +88,6 @@ public class Shoot extends CommandBase {
         }
         pulseCounter = 0;
         rpmCounter = 0;
-        turnCounter = 0;
     }
 
     @Override
