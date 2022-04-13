@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 // import edu.wpi.first.cscore.UsbCamera;
 // import edu.wpi.first.cscore.VideoMode;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import frc.robot.utils.ShuffleBoard;
@@ -12,6 +13,7 @@ public class Vision extends SubsystemBase {
   private double angle;
   private double yPos;
   private SerialPort camPort;
+  // private double number;
   // private UsbCamera visionCam;
 
   private boolean isConnected = false;
@@ -42,40 +44,33 @@ public class Vision extends SubsystemBase {
       isConnected = true;
       packetListenerThread.start();
     }
-
+    // SmartDashboard.putNumber("angle", number);
     SmartDashboard.putBoolean("Vision Serial Port", isConnected);
   }
 
   // @Override
   public void backgroundUpdate() {
-    if(isConnected){
-      try{
-        String data = camPort.readString();
-        String[] realData = data.split(";");
-        if (realData.length == 2) {
-          angle = Double.valueOf(realData[0]);
-          yPos = Double.valueOf(realData[1]);
-          System.out.println("ANGLE"+angle);
-        }
-      } catch (Exception e) {
-        // isConnected = false;
-        // packetListenerThread.interrupt();
-        // System.out.println("I AM MAKING IS CONNECTED FALSE");
-        // SmartDashboard.putBoolean("Vision Serial Port", isConnected);
-        // camPort.close();
-      } 
-      // finally {
-      //   isConnected = false;
-      //   packetListenerThread.interrupt();
-      //   System.out.println("I AM FINALLY MAKING IS CONNECTED FALSE");
-      //   SmartDashboard.putBoolean("Vision Serial Port", isConnected);
-      //   camPort.close();
-      // }
+    try{
+      String data = camPort.readString();
+      String[] realData = data.split(";");
+      if (realData.length == 2) {
+        angle = Double.valueOf(realData[0]);
+        yPos = Double.valueOf(realData[1]);
+        System.out.println("ANGLE"+angle);
+      }
+    } catch (Exception e) {
+      // isConnected = false;
+      // packetListenerThread.interrupt();
+      // System.out.println("I AM MAKING IS CONNECTED FALSE");
+      // SmartDashboard.putBoolean("Vision Serial Port", isConnected);
+      // camPort.close();
     } 
+    Timer.delay(0.005);
   }
 
   public double getAngle() {
-    return 30;
+    // return SmartDashboard.getNumber("angle", 10);
+    return angle;
   }
 
   public double getFrontRPM() {
@@ -92,6 +87,8 @@ public class Vision extends SubsystemBase {
         backgroundUpdate();
         // packetListenerThread.wait();
       }
+      SmartDashboard.putBoolean("Vision Serial Port", false);
+      System.out.println("AHHHHHHHHHHHH VISION IS DEAD MEAT U DID SOMETHING WRONG CUZ THE THINGY MABOBER DIED");
     }
   });
 }

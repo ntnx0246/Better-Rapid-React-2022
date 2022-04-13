@@ -156,8 +156,8 @@ public class DriveTrain extends SubsystemBase {
     System.out.println("LEFT WAS" + this.getLeftEncoderCount());
     System.out.println("ADDDING LEFT TO " + (degrees * Constants.DriveTrain.TURN_CONSTANT));
     System.out.println("SETTING TO " + (this.getLeftEncoderCount() + (degrees * Constants.DriveTrain.TURN_CONSTANT)));
-    frontL.set(ControlMode.Position, this.getLeftEncoderCount() + (degrees * Constants.DriveTrain.TURN_CONSTANT));
-    frontR.set(ControlMode.Position, this.getRightEncoderCount() - (degrees * Constants.DriveTrain.TURN_CONSTANT));
+    frontL.set(ControlMode.MotionMagic, this.getLeftEncoderCount() + (degrees * Constants.DriveTrain.TURN_CONSTANT));
+    frontR.set(ControlMode.MotionMagic, this.getRightEncoderCount() - (degrees * Constants.DriveTrain.TURN_CONSTANT));
   }
 
   @Override

@@ -59,11 +59,11 @@ public class ShuffleBoard {
       case OneBall:
         return new OneBallAuto(intake, shooter, driveTrain);
       case TwoBall_1:
-        return new TwoBallAuto(intake, shooter, 160);
+        return new TwoBallAuto(intake, shooter, driveTrain, navX, 160);
       case TwoBall_2:
-        return new TwoBallAuto(intake, shooter, -170);
+        return new TwoBallAuto(intake, shooter, driveTrain, navX, -170);
       case TwoBall_3:
-        return new TwoBallAuto(intake, shooter, 180);
+        return new TwoBallAuto(intake, shooter, driveTrain, navX, 180);
       case FourBall:
         return new FourBallAuto(intake, shooter, driveTrain, navX);
       default:

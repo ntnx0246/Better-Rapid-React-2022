@@ -16,7 +16,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
   DriveTrain driveTrain;
   NavX navX;
 
-  public TwoBallAuto(Intake intake, Shooter shooter, double angle) {
+  public TwoBallAuto(Intake intake, Shooter shooter, DriveTrain driveTrain, NavX navX, double angle) {
     addCommands(
         // new DriveStraight(driveTrain, () -> 90).withTimeout(4).alongWith(
         //     new IntakeBalls(intake)).withTimeout(4),
