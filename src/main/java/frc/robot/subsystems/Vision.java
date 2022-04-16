@@ -13,7 +13,7 @@ public class Vision extends SubsystemBase {
   private double angle;
   private double yPos;
   private SerialPort camPort;
-  // private double number;
+  private double number;
   // private UsbCamera visionCam;
 
   private boolean isConnected = false;
@@ -44,20 +44,22 @@ public class Vision extends SubsystemBase {
       isConnected = true;
       packetListenerThread.start();
     }
-    // SmartDashboard.putNumber("angle", number);
+    SmartDashboard.putNumber("angle", number);
     SmartDashboard.putBoolean("Vision Serial Port", isConnected);
   }
 
   // @Override
   public void backgroundUpdate() {
     try{
+      // System.out.println("RUNNING"+angle);
       String data = camPort.readString();
       String[] realData = data.split(";");
       if (realData.length == 2) {
         angle = Double.valueOf(realData[0]);
         yPos = Double.valueOf(realData[1]);
-        System.out.println("ANGLE"+angle);
+        // System.out.println("ANGLE"+angle);
       }
+      
     } catch (Exception e) {
       // isConnected = false;
       // packetListenerThread.interrupt();
@@ -65,12 +67,13 @@ public class Vision extends SubsystemBase {
       // SmartDashboard.putBoolean("Vision Serial Port", isConnected);
       // camPort.close();
     } 
-    Timer.delay(0.005);
+    // System.out.println("RUNNING"+angle);
+    Timer.delay(0.05);
   }
 
   public double getAngle() {
-    // return SmartDashboard.getNumber("angle", 10);
-    return angle;
+    return SmartDashboard.getNumber("angle", 10);
+    // return angle;
   }
 
   public double getFrontRPM() {
@@ -85,6 +88,7 @@ public class Vision extends SubsystemBase {
     public void run() {
       while (!packetListenerThread.isInterrupted() && isConnected) {
         backgroundUpdate();
+        // System.out.println("HI");
         // packetListenerThread.wait();
       }
       SmartDashboard.putBoolean("Vision Serial Port", false);

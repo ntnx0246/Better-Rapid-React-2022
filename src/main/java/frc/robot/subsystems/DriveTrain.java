@@ -5,8 +5,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
@@ -48,6 +50,15 @@ public class DriveTrain extends SubsystemBase {
     frontL.configPeakOutputReverse(-1);
     frontR.configPeakOutputForward(1);
     frontR.configPeakOutputReverse(-1);
+
+    SupplyCurrentLimitConfiguration currentLimit = new SupplyCurrentLimitConfiguration();
+    currentLimit.currentLimit = 40;
+    currentLimit.enable = true;
+    currentLimit.triggerThresholdCurrent = 40;
+    currentLimit.triggerThresholdTime = 2;
+    frontL.configSupplyCurrentLimit(currentLimit, 0);
+    frontR.configSupplyCurrentLimit(currentLimit, 0);
+
 
     frontL.configMotionCruiseVelocity(Constants.DriveTrain.CRUISE_VELOCITY);
     frontL.configMotionAcceleration(Constants.DriveTrain.ACCELERATION);

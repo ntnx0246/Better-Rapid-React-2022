@@ -74,7 +74,7 @@ public class Shoot extends CommandBase {
             navX.reset();
             // shooter.setVelocity(visionFrontRPM);
             // shooter.setRollerVelocity(visionBackRPM);
-            driveTrain.setAngle(visionAngle);
+            // driveTrain.setAngle(visionAngle);
             turnCounter = 0;
 
         } else if (isAuto) {
@@ -95,11 +95,26 @@ public class Shoot extends CommandBase {
         if (usingVision) {
             double errorAngle = visionAngle - navX.getAngle();
             System.out.println("NAVX ANGLE: " + navX.getAngle());
+            double constant = 0.01;
+            double force = 0.1;
+            if (visionAngle < 0){
+                driveTrain.tankDrive(-errorAngle/visionAngle*force-constant, errorAngle/visionAngle*force+constant);
+            } else {
+                driveTrain.tankDrive(errorAngle/visionAngle*force+constant, -errorAngle/visionAngle*force-constant);
+            }
+
             if (turnCounter > 5 && Math.abs(errorAngle) < .5) {
                 System.out.println("SHOOTING");
                 // shootWhenReady(visionFrontRPM, visionBackRPM);
+                driveTrain.tankDrive(0, 0);
             } else if (Math.abs(errorAngle) < .5) {
-                // turnCounter ++;
+                System.out.println("TURN COUNTER INCREASED TO:"+turnCounter);
+                System.out.println("ERROR ANGLE:"+errorAngle);
+                System.out.println("NAVX ANGLE:"+navX.getAngle());
+                System.out.println("VISION ANGLE:"+visionAngle);
+                turnCounter ++;
+                driveTrain.tankDrive(0, 0);
+
                 // visionAngle = vision.getAngle();
                 // driveTrain.setAngle(visionAngle);
             }
