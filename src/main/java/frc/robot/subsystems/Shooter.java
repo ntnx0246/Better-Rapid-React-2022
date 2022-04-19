@@ -5,8 +5,10 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.PID;
 
 public class Shooter extends SubsystemBase {
   private CANSparkMax left;
@@ -43,26 +45,32 @@ public class Shooter extends SubsystemBase {
     backLeftEncoder = backLeft.getEncoder();
     backRightEncoder = backRight.getEncoder();
 
-    leftPIDController.setP(Constants.Shooter.PID.p);
-    leftPIDController.setI(Constants.Shooter.PID.i);
-    leftPIDController.setD(Constants.Shooter.PID.d);
-    leftPIDController.setFF(Constants.Shooter.PID.f);
+    this.setPIDFront(Constants.Shooter.PID);
+    this.setPIDBack(Constants.Shooter.PID);
+  }
 
-    rightPIDController.setP(Constants.Shooter.PID.p);
-    rightPIDController.setI(Constants.Shooter.PID.i);
-    rightPIDController.setD(Constants.Shooter.PID.d);
-    rightPIDController.setFF(Constants.Shooter.PID.f);
-   
+  public void setPIDFront(PID pid){
+    leftPIDController.setP(pid.p);
+    leftPIDController.setI(pid.i);
+    leftPIDController.setD(pid.d);
+    leftPIDController.setFF(pid.f);
 
-    backLeftPIDController.setP(Constants.Shooter.PID_BACK.p);
-    backLeftPIDController.setI(Constants.Shooter.PID_BACK.i);
-    backLeftPIDController.setD(Constants.Shooter.PID_BACK.d);
-    backLeftPIDController.setFF(Constants.Shooter.PID_BACK.f);
+    rightPIDController.setP(pid.p);
+    rightPIDController.setI(pid.i);
+    rightPIDController.setD(pid.d);
+    rightPIDController.setFF(pid.f);
+  }
 
-    backRightPIDController.setP(Constants.Shooter.PID_BACK.p);
-    backRightPIDController.setI(Constants.Shooter.PID_BACK.i);
-    backRightPIDController.setD(Constants.Shooter.PID_BACK.d);
-    backRightPIDController.setFF(Constants.Shooter.PID_BACK.f);
+  public void setPIDBack(PID pid){
+    backRightPIDController.setP(pid.p);
+    backRightPIDController.setI(pid.i);
+    backRightPIDController.setD(pid.d);
+    backRightPIDController.setFF(pid.f);
+
+    backLeftPIDController.setP(pid.p);
+    backLeftPIDController.setI(pid.i);
+    backLeftPIDController.setD(pid.d);
+    backLeftPIDController.setFF(pid.f);
   }
 
   public void setSpeed(double speed) {

@@ -19,6 +19,8 @@ public class ShuffleBoard {
 
   private int shooterRPM = Constants.Shooter.FENDER.getFrontRPM();
   private int rollerRpm = Constants.Shooter.FENDER.getBackRPM();
+  private PID shooterPID = Constants.Shooter.PID;
+  private PID driveTrainPID = Constants.DriveTrain.PID;
 
   private Intake intake;
   private Shooter shooter;
@@ -50,6 +52,19 @@ public class ShuffleBoard {
     if (Constants.Shooter.DEBUG_MODE) {
       SmartDashboard.putNumber("Shooter Input RPM", shooterRPM);
       SmartDashboard.putNumber("Back Input RPM", rollerRpm);
+      SmartDashboard.putNumber("Shooter P", shooterPID.p);
+      SmartDashboard.putNumber("Shooter I", shooterPID.i);
+      SmartDashboard.putNumber("Shooter D", shooterPID.d);
+      SmartDashboard.putNumber("Shooter F", shooterPID.f);
+    }
+
+    if (Constants.DriveTrain.DEBUG) {
+      SmartDashboard.putNumber("DriveTrain P", driveTrainPID.p);
+      SmartDashboard.putNumber("DriveTrain P", driveTrainPID.p);
+      SmartDashboard.putNumber("DriveTrain I", driveTrainPID.i);
+      SmartDashboard.putNumber("DriveTrain D", driveTrainPID.d);
+      SmartDashboard.putNumber("DriveTrain F", driveTrainPID.f);
+
     }
 
   }
@@ -70,6 +85,24 @@ public class ShuffleBoard {
         return new OneBallAuto(intake, shooter, driveTrain);
 
     }
+  }
+
+  public PID getShooterPID() {
+    shooterPID.updatePID(
+        SmartDashboard.getNumber("Shooter P", shooterPID.p),
+        SmartDashboard.getNumber("Shooter I", shooterPID.i),
+        SmartDashboard.getNumber("Shooter D", shooterPID.d),
+        SmartDashboard.getNumber("Shooter F", shooterPID.f));
+    return shooterPID;
+  }
+
+  public PID getDriveTrainPID() {
+    driveTrainPID.updatePID(
+        SmartDashboard.getNumber("DriveTrain P", driveTrainPID.p),
+        SmartDashboard.getNumber("DriveTrain I", driveTrainPID.i),
+        SmartDashboard.getNumber("DriveTrain D", driveTrainPID.d),
+        SmartDashboard.getNumber("DriveTrain F", driveTrainPID.f));
+    return driveTrainPID;
   }
 
   public int getShooterVelocity() {

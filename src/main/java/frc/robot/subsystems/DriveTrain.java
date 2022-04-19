@@ -8,9 +8,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.PID;
 
 public class DriveTrain extends SubsystemBase {
   private boolean slowModeOn;
@@ -27,7 +27,7 @@ public class DriveTrain extends SubsystemBase {
     backR = new TalonFX(Constants.ID.DRIVETRAIN_BACK_RIGHT);
     backL = new TalonFX(Constants.ID.DRIVETRAIN_BACK_LEFT);
     slowModeOn = false;
-    climbing = false;
+    climbing = false; // false
 
     backL.follow(frontL);
     backR.follow(frontR);
@@ -64,10 +64,7 @@ public class DriveTrain extends SubsystemBase {
     frontL.configMotionAcceleration(Constants.DriveTrain.ACCELERATION);
     frontR.configMotionCruiseVelocity(Constants.DriveTrain.CRUISE_VELOCITY);
     frontR.configMotionAcceleration(Constants.DriveTrain.ACCELERATION);
-    this.setLeftPID(Constants.DriveTrain.PID.s, Constants.DriveTrain.PID.p, Constants.DriveTrain.PID.i,
-        Constants.DriveTrain.PID.d);
-    this.setRightPID(Constants.DriveTrain.PID.s, Constants.DriveTrain.PID.p, Constants.DriveTrain.PID.i,
-        Constants.DriveTrain.PID.d);
+    this.setPID(Constants.DriveTrain.PID);
   }
 
   public void arcadeDrive(double x, double y) {
@@ -181,15 +178,15 @@ public class DriveTrain extends SubsystemBase {
     frontR.set(ControlMode.MotionMagic, pos);
   }
 
-  public void setLeftPID(int slotID, double p, double i, double d) {
-    frontL.config_kP(slotID, p);
-    frontL.config_kI(slotID, i);
-    frontL.config_kD(slotID, d);
-  }
+  public void setPID(PID pid) {
+    frontL.config_kP(pid.s, pid.p);
+    frontL.config_kI(pid.s, pid.i);
+    frontL.config_kD(pid.s, pid.d);
+    frontL.config_kF(pid.s, pid.f);
 
-  public void setRightPID(int slotID, double p, double i, double d) {
-    frontR.config_kP(slotID, p);
-    frontR.config_kI(slotID, i);
-    frontR.config_kD(slotID, d);
+    frontR.config_kP(pid.s, pid.p);
+    frontR.config_kI(pid.s, pid.i);
+    frontR.config_kD(pid.s, pid.d);
+    frontR.config_kF(pid.s, pid.f);
   }
 }
