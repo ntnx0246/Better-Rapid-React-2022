@@ -34,6 +34,7 @@ public class Shoot extends CommandBase {
     private double initalizeEncoderLeft;
     private boolean driveTrainDebug = false;
     private boolean shooterDebug = false;
+    private boolean shooting;
 
     // TELEOP VISION
     public Shoot(Intake intake, Shooter shooter, Vision vision, DriveTrain driveTrain, NavX navX) {
@@ -65,7 +66,7 @@ public class Shoot extends CommandBase {
         this.shooter = shooter;
         this.isAuto = false;
         this.usingVision = false;
-        this.shooterDebug = false;
+        this.shooterDebug = true;
         this.suppliedVelocity = suppliedVelocity;
         this.suppliedRollerVelocity = suppliedRollerVelocity;
         this.shuffleBoard = shuffleBoard;
@@ -80,6 +81,8 @@ public class Shoot extends CommandBase {
         this.vision = vision;
         this.usingVision = true;
         this.driveTrainDebug = true;
+        this.shooterDebug = false;
+        System.out.println("DRIVETRIAN HAS BEEN SET");
         this.navX = navX;
         this.driveTrain = driveTrain;
     }
@@ -97,18 +100,19 @@ public class Shoot extends CommandBase {
 
     @Override
     public void initialize() {
-        if (shooterDebug){
-            shooter.setPIDFront(shuffleBoard.getShooterPID());
-        }
+        // if (shooterDebug){
+        //     shooter.setPIDFront(shuffleBoard.getShooterPID());
+        // }
         if (usingVision) {
-            visionFrontRPM = (int) vision.getFrontRPM();
-            visionBackRPM = (int) vision.getBackRPM();
+            shooting = false;
+            // visionFrontRPM = (int) vision.getFrontRPM();
+            // visionBackRPM = (int) vision.getBackRPM();
             visionAngle = vision.getAngle();
             
             navX.reset();
-            if (driveTrainDebug){
-                driveTrain.setPID(shuffleBoard.getDriveTrainPID());
-            }
+            // if (driveTrainDebug){
+            //     driveTrain.setPID(shuffleBoard.getDriveTrainPID());
+            // }
             // shooter.setVelocity(visionFrontRPM);
             // shooter.setRollerVelocity(visionBackRPM);
             // driveTrain.setAngle(visionAngle);
@@ -131,61 +135,68 @@ public class Shoot extends CommandBase {
     @Override
     public void execute() {
         if (usingVision) {
-            // nav X stuff
-            double errorAngle = visionAngle - navX.getAngle();
-            System.out.println("NAVX ANGLE: " + navX.getAngle());
-            double min = 0.01;
-            double max = 0.1;
-            int thresholdAngle = 1;
-            if (visionAngle < 0){
-                // driveTrain.tankDrive(-errorAngle/visionAngle*force-constant,
-                // errorAngle/visionAngle*force+constant);
-                if (errorAngle < thresholdAngle) {
-                    driveTrain.tankDrive(-((max - min) / thresholdAngle) * errorAngle - min,
-                            ((max - min) / thresholdAngle) * errorAngle + min);
-                } else {
-                    driveTrain.tankDrive(-max, max);
-                }
-            } else {
-                // driveTrain.tankDrive(errorAngle/visionAngle*force+constant,
-                // -errorAngle/visionAngle*force-constant);
-                if (errorAngle < thresholdAngle) {
-                    driveTrain.tankDrive(((max - min) / thresholdAngle) * errorAngle + min,
-                            -((max - min) / thresholdAngle) * errorAngle - min);
-                } else {
-                    driveTrain.tankDrive(max, -max);
-                }
-            }
-
-            // pid stuff
-            // System.out.println("ENCODER PERCENT CORRECT: " + (driveTrain.getLeftEncoderCount()
-                    // / (initalizeEncoderLeft + (visionAngle * Constants.DriveTrain.TURN_CONSTANT))));
-
-            // System.out.println("ENCODER VALUES OFF: " + ((initalizeEncoderLeft + (visionAngle * Constants.DriveTrain.TURN_CONSTANT))-driveTrain.getLeftEncoderCount()));
-
-            // check multiple times
-            if (turnCounter > 5 && Math.abs(errorAngle) < .5) {
+            double errorAngle = Math.abs(visionAngle - navX.getAngle());
+            if (shooting){
+                shootWhenReady(visionFrontRPM, visionBackRPM);
+            } else if (turnCounter > 5 && Math.abs(errorAngle) < 1) {
                 System.out.println("SHOOTING");
-                // shootWhenReady(visionFrontRPM, visionBackRPM);
+                visionFrontRPM = (int) vision.getFrontRPM();
+                visionBackRPM = (int) vision.getBackRPM();
+                System.out.println("THE VISIN FRONT RPM WILL BE: "+visionFrontRPM);
+                shooter.setVelocity(visionFrontRPM);
+                shooter.setRollerVelocity(visionBackRPM);
+                shooting = true;
                 driveTrain.tankDrive(0, 0);
-            } else if (Math.abs(errorAngle) < .5) {
-                System.out.println("TURN COUNTER INCREASED TO:"+turnCounter);
-                System.out.println("ERROR ANGLE:"+errorAngle);
-                System.out.println("NAVX ANGLE:"+navX.getAngle());
-                System.out.println("VISION ANGLE:"+visionAngle);
+            } else if (Math.abs(errorAngle) < 1) {
                 turnCounter ++;
 
                 driveTrain.tankDrive(0, 0);
 
                 // visionAngle = vision.getAngle();
                 // navX.reset();
+
                 // initalizeEncoderLeft = driveTrain.getLeftEncoderCount();
                 // driveTrain.setAngle(visionAngle);
+            } else {
+                System.out.println("NAVX ANGLE: " + navX.getAngle());
+                double point1 = 0.01;
+                double point2 = 0.1;
+                double point3 = 0.15;
+                double point4 = 0.3;
+                int angle1 = 3;
+                int angle2 = 15;
+                int angle3 = 50;
+                if ((visionAngle - navX.getAngle()) < 0){
+                    // driveTrain.tankDrive(-errorAngle/visionAngle*force-constant,
+                    // errorAngle/visionAngle*force+constant);
+                    if (errorAngle < angle1) {
+                        driveTrain.tankDrive(-((point2 - point1) / angle1) * errorAngle - point1,
+                                ((point2 - point1) / angle1) * errorAngle + point1);
+                    } else if (errorAngle < angle2){
+                        driveTrain.tankDrive(-((point3 - point2) / angle2) * errorAngle - point2,
+                                ((point3 - point2) / angle2) * errorAngle + point2);
+                    } else if (errorAngle < angle3){
+                        driveTrain.tankDrive(-((point4 - point3) / angle3) * errorAngle - point3,
+                                ((point4 - point3) / angle3) * errorAngle + point3);
+                    } else {
+                        driveTrain.tankDrive(-point4, point4);
+                    }
+                } else {
+                    if (errorAngle < angle1) {
+                        driveTrain.tankDrive(((point2 - point1) / angle1) * errorAngle + point1,
+                                -((point2 - point1) / angle1) * errorAngle - point1);
+                    } else if (errorAngle < angle2){
+                        driveTrain.tankDrive(((point3 - point2) / angle2) * errorAngle + point2,
+                                -((point3 - point2) / angle2) * errorAngle - point2);
+                    } else if (errorAngle < angle3){
+                        driveTrain.tankDrive(((point4 - point3) / angle3) * errorAngle + point3,
+                                -((point4 - point3) / angle3) * errorAngle - point3);
+                    } else {
+                        driveTrain.tankDrive(point4, -point4);
+                    }
+                }
             }
         } else {
-            SmartDashboard.putNumber("Front Shooter LEFT RPM IMPORTANTE", shooter.getLeftVelocity());
-            SmartDashboard.putNumber("Front Shooter RIGHT RPM IMPORTANTE", shooter.getRightVelocity());
-            SmartDashboard.putNumber("Back Shooter RPM IMPORTANTE", shooter.getBackLeftVelocity());
             shootWhenReady(isAuto ? shooterVelocity : suppliedVelocity.getAsInt(),
                     isAuto ? rollerVelocity : suppliedRollerVelocity.getAsInt());
         }
@@ -199,7 +210,7 @@ public class Shoot extends CommandBase {
         SmartDashboard.putNumber("Back Shooter RPM IMPORTANTE", shooter.getBackLeftVelocity());
         if (error <= Constants.Shooter.RPM_TOLERANCE && errorBack <= Constants.Shooter.RPM_TOLERANCE) {
             rpmCounter++;
-            System.out.println("RPM VALUE IS "+rpmCounter);
+            // System.out.println("RPM VALUE IS "+rpmCounter);
         }
         if (rpmCounter > 15) {
             if (pulseCounter < 10) {

@@ -83,7 +83,6 @@ public class RobotContainer {
     } else {
       leftBumper.whileHeld(new Shoot(intake, shooter, vision, driveTrain, navX));
     }
-
     // driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
     driveStartButton.whenPressed(new InstantCommand(driveTrain::climbingTrue));
 

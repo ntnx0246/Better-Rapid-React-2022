@@ -31,7 +31,7 @@ public final class Constants {
 
   public final static class Shooter {
     public static final double PUSH_SPEED = 1;
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
     public static final Shots FENDER = new Shots(-2650, 1000, -24);
     public static final Shots FENDER_LOW = new Shots(-2000, 500, 0);
     public static final Shots LAUNCHPAD = new Shots(-4000, 4000, 0);
@@ -39,7 +39,7 @@ public final class Constants {
 
     public static final double RPM_TOLERANCE = 30;
 
-    public static final PID PID = new PID(0.0002, 0.000000005, 0, 0.000174);
+    public static final PID PID = new PID(0.0002, 0.000000005, 0, 0.0001692);
     public static final PID PID_BACK = new PID(0.0002, 0.00000005, 0, 0.000174);
   }
 
@@ -61,7 +61,7 @@ public final class Constants {
     public static final double OPEN_LOOP_RAMP = .5;
     public static final double CLOSED_LOOP_RAMP = 0;
     public static final double ANGLE_TOLERANCE = .5;
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
   }
 
   public final static class Climber {

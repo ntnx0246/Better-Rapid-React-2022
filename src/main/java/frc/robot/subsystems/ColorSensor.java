@@ -47,9 +47,9 @@ public class ColorSensor extends SubsystemBase {
       colorMatcher.setConfidenceThreshold(.95);
       ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
       proximity = colorSensor.getProximity()*10/2047;
-      System.out.println("Red: " + detectedColor.red);
-      System.out.println("Green: " + detectedColor.green);
-      System.out.println("Blue: " + detectedColor.blue);
+      // System.out.println("Red: " + detectedColor.red);
+      // System.out.println("Green: " + detectedColor.green);
+      // System.out.println("Blue: " + detectedColor.blue);
       
       if (match.color == kBlueTarget) {
         colorString = "B";
