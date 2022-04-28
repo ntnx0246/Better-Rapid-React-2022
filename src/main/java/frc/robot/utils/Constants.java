@@ -39,7 +39,7 @@ public final class Constants {
 
     public static final double RPM_TOLERANCE = 30;
 
-    public static final PID PID = new PID(0.0002, 0.000000005, 0, 0.0001692);
+    public static final PID PID = new PID(0.0002, 0.000000005, 0, 0.000165);
     public static final PID PID_BACK = new PID(0.0002, 0.00000005, 0, 0.000174);
   }
 
