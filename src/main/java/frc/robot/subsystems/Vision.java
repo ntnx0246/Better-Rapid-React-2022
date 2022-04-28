@@ -82,7 +82,8 @@ public class Vision extends SubsystemBase {
   }
 
   public double getFrontRPM() {
-    return 5333/this.getInches()-3836.68;
+    // return 5333/this.getInches()-3836.68;
+    return 215685/yPos - 4472.31;
     // return Math.pow(200,1.412)+2500;
   }
 
