@@ -34,9 +34,6 @@ public class PivotRelative extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    // if (Math.abs(pivots.getRightPivotEncoder()-target)<0.05){
-    //   return true;
-    // }
     return false;
   }
 }

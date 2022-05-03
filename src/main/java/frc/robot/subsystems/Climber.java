@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -17,7 +13,6 @@ public class Climber extends SubsystemBase {
   public TalonFX leftMotor;
   public TalonFX rightMotor;
 
-  /** Creates a new Climber. */
   public Climber() {
     leftMotor = new TalonFX(Constants.ID.CLIMBER_LEFT);
     rightMotor = new TalonFX(Constants.ID.CLIMBER_RIGHT);

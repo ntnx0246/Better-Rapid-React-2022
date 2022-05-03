@@ -81,9 +81,6 @@ public class Calibration extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    // System.out.println("INTAKE: "+intakeDone);
-    // System.out.println("RIGHT CLIMBER: "+rightDone);
-    // System.out.println("LEFT CLIMBER: "+leftDone);
     return rightDone && leftDone && leftPivotDone && rightPivotDone && intakeDone;
   }
 

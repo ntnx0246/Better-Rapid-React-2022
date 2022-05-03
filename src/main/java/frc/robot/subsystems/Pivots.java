@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
@@ -14,7 +10,6 @@ import frc.robot.utils.Constants;
 import frc.robot.utils.PID;
 
 public class Pivots extends SubsystemBase {
-  /** Creates a new Pivots. */
   public CANSparkMax leftPivot;
   public CANSparkMax rightPivot;
   private RelativeEncoder leftPivotEncoder;
@@ -53,7 +48,6 @@ public class Pivots extends SubsystemBase {
 
   }
 
-  // 0 is fast, 1 is slow, 2 is turbo
   public void setPositionPivots(double position, int slot) {
     leftPivotController.setReference(position, CANSparkMax.ControlType.kPosition, slot);
     rightPivotController.setReference(position, CANSparkMax.ControlType.kPosition, slot);
@@ -106,6 +100,5 @@ public class Pivots extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

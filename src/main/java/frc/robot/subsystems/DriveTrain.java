@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -20,14 +16,13 @@ public class DriveTrain extends SubsystemBase {
   private TalonFX backR;
   private TalonFX backL;
 
-  /** Creates a new DriveTrain. */
   public DriveTrain() {
     frontR = new TalonFX(Constants.ID.DRIVETRAIN_FRONT_RIGHT);
     frontL = new TalonFX(Constants.ID.DRIVETRAIN_FRONT_LEFT);
     backR = new TalonFX(Constants.ID.DRIVETRAIN_BACK_RIGHT);
     backL = new TalonFX(Constants.ID.DRIVETRAIN_BACK_LEFT);
     slowModeOn = false;
-    climbing = false; // false
+    climbing = false; 
 
     backL.follow(frontL);
     backR.follow(frontR);
@@ -119,13 +114,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getLeftEncoderCount() {
-    // return frontL.getSensorCollection().getIntegratedSensorPosition();
     return frontL.getSelectedSensorPosition();
 
   }
 
   public double getRightEncoderCount() {
-    // return frontR.getSensorCollection().getIntegratedSensorPosition();
     return frontR.getSelectedSensorPosition();
 
   }
@@ -170,7 +163,6 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 
   public void setPosition(double pos) {

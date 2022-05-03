@@ -46,8 +46,7 @@ public class RobotContainer {
   private final JoystickButton driveY = new JoystickButton(drivePad, 4);
   private final JoystickButton leftBumper = new JoystickButton(drivePad, 5);
   private final JoystickButton rightBumper = new JoystickButton(drivePad, 6);
-  // private final JoystickButton driveBackButton = new
-  // JoystickButton(drivePad,7);
+  // private final JoystickButton driveBackButton = new JoystickButton(drivePad,7);
   private final JoystickButton driveStartButton = new JoystickButton(drivePad, 8);
 
   private final JoystickButton opA = new JoystickButton(opPad, 1);
@@ -72,13 +71,12 @@ public class RobotContainer {
     rightBumper.whileHeld(new IntakeBalls(intake));
     // rightBumper.whileHeld(new InstantCommand(driveTrain::trueSlowMode)).whenReleased(new InstantCommand(driveTrain::falseSlowMode));
 
-    // leftBumper.whileHeld(new InstantCommand(()->shooter.setVelocity(-100)));
     if (Constants.Shooter.DEBUG_MODE){
-      // leftBumper.whileHeld(new Shoot(intake, shooter, vision, driveTrain, navX));
       leftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShoot(), () -> shuffleBoard.getRoller(), shuffleBoard));
     } else {
       leftBumper.whileHeld(new Shoot(intake, shooter, vision, driveTrain, navX));
     }
+
     // driveStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
     driveStartButton.whenPressed(new InstantCommand(driveTrain::climbingTrue));
 
@@ -87,10 +85,6 @@ public class RobotContainer {
     driveA.whileHeld(new ConditionalCommand(new ClimbDown(climber), new InstantCommand(), driveTrain::getClimbing));
 
     driveB.whenPressed(new InstantCommand(driveTrain::toggleSlowMode));
-
-    // driveY.whileHeld(new ClimbUp(climber, 1));
-    // driveY.whenPressed(new InstantCommand(driveTrain::climbingTrue));
-    // driveA.whileHeld(new ClimbDown(climber));
   }
 
   public void configureOPButtonBindings(){
@@ -98,13 +92,11 @@ public class RobotContainer {
     opY.whileHeld(new ClimbUp(climber, Constants.Climber.UP.s)); // maybe add slow
     opA.whileHeld(new ClimbDown(climber));
     opX.whileHeld(new PivotRelative(pivots, 10, Constants.Pivot.FAST_PID.s));
-    // opX.whileHeld(new InstantCommand(() -> pivots.climbPivots(0.2)));
     opB.whileHeld(new PivotRelative(pivots, -10, Constants.Pivot.FAST_PID.s));
-    // opB.whileHeld(new InstantCommand(() -> pivots.climbPivots(-0.2)));
     opRightBumper.whileHeld(new IntakeBalls(intake));
     opStartButton.whenPressed(new Calibration(climber, pivots, intake, driveTrain));
     opLeftBumper.whileHeld(new Shoot(intake, shooter, () -> shuffleBoard.getShooterVelocity(), () -> shuffleBoard.getRollerVelocity(), shuffleBoard).beforeStarting(new WaitCommand(1)).alongWith(new DriveStraight(driveTrain, () -> shuffleBoard.getMoveBack())));
-    }
+  }
 
   public Command getAutonomousCommand() {
     return shuffleBoard.getAutonomousCommand();

@@ -101,28 +101,23 @@ public class Shoot extends CommandBase {
             double errorAngle = Math.abs(visionAngle - navX.getAngle());
             if (shooting){
                 shootWhenReady(visionFrontRPM, visionBackRPM);
-            } else if (turnCounter > 5 && Math.abs(errorAngle) < 1) {
-                System.out.println("SHOOTING");
+            } else if (turnCounter > 3 && Math.abs(errorAngle) < 1) {
                 visionFrontRPM = (int) vision.getFrontRPM();
                 visionBackRPM = (int) vision.getBackRPM();
-                System.out.println("THE VISIN FRONT RPM WILL BE: "+visionFrontRPM);
                 shooter.setVelocity(visionFrontRPM);
                 shooter.setRollerVelocity(visionBackRPM);
                 shooting = true;
                 driveTrain.tankDrive(0, 0);
             } else if (Math.abs(errorAngle) < 1) {
                 turnCounter ++;
-
+                visionAngle = vision.getAngle();
+                navX.reset();
                 driveTrain.tankDrive(0, 0);
 
             } else {
-                System.out.println("NAVX ANGLE: " + navX.getAngle());
                 double turnPower;
                 if (Math.abs(visionAngle)<=10 && Math.abs(visionAngle) >= 0){
-                    // turnPower = Math.pow(errorAngle, 0.606682)*0.0167387+0.0683411;
                     turnPower = Math.pow(errorAngle, 0.580667)*0.0148639+0.0752756;
-                    
-                    // turnPower = Math.pow(errorAngle,0.706689)*0.0152966+0.07;
                 }
                 else{
                     turnPower = Math.pow(errorAngle,0.706689)*0.0152966+0.0550678;
@@ -148,7 +143,6 @@ public class Shoot extends CommandBase {
         SmartDashboard.putNumber("Back Shooter RPM IMPORTANTE", shooter.getBackLeftVelocity());
         if (error <= Constants.Shooter.RPM_TOLERANCE && errorBack <= Constants.Shooter.RPM_TOLERANCE) {
             rpmCounter++;
-            // System.out.println("RPM VALUE IS "+rpmCounter);
         }
         if (rpmCounter > 15) {
             if (pulseCounter < 10) {

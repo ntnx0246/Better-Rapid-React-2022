@@ -30,10 +30,19 @@ public class TurnToAngle extends CommandBase {
 
   @Override
   public void execute() {
-    // currentAngle = navX.getAngle();
-    // double errorAngle = goalAngle - currentAngle;
-    // double power = (errorAngle / goalAngle)*0.75;
-    // driveTrain.tankDrive(power, -power);
+    double errorAngle = goalAngle - navX.getAngle();
+    double turnPower;
+    if (Math.abs(goalAngle)<=10 && Math.abs(goalAngle) >= 0){
+        turnPower = Math.pow(errorAngle, 0.580667)*0.0148639+0.0752756;
+    } else{
+        turnPower = Math.pow(errorAngle,0.706689)*0.0152966+0.0550678;
+    }
+    Math.min(turnPower, 0.3);
+    if ((goalAngle - navX.getAngle()) < 0){
+        driveTrain.tankDrive(-turnPower,turnPower);
+    } else {
+        driveTrain.tankDrive(turnPower, -turnPower);
+    }
   }
 
   @Override

@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-// import frc.robot.utils.ShuffleBoard;
-
 public class Vision extends SubsystemBase {
   private static final int BAUD = 9600;
   private double angle;
@@ -51,23 +49,22 @@ public class Vision extends SubsystemBase {
   // @Override
   public void backgroundUpdate() {
     try{
-      // System.out.println("RUNNING"+angle);
       String data = camPort.readString();
       String[] realData = data.split(";");
       if (realData.length == 2) {
         angle = Double.valueOf(realData[0]);
         yPos = Double.valueOf(realData[1]);
-        System.out.println("ANGLE"+angle);
+        System.out.println("VISION ANGLE: "+angle);
       }
       
     } catch (Exception e) {
+      // TODO roborio handles vision getting unplugged properly :)
       // isConnected = false;
       // packetListenerThread.interrupt();
       // System.out.println("I AM MAKING IS CONNECTED FALSE");
       // SmartDashboard.putBoolean("Vision Serial Port", isConnected);
       // camPort.close();
     } 
-    // System.out.println("RUNNING"+angle);
     Timer.delay(0.05);
   }
 
@@ -93,8 +90,6 @@ public class Vision extends SubsystemBase {
     public void run() {
       while (!packetListenerThread.isInterrupted() && isConnected) {
         backgroundUpdate();
-        // System.out.println("HI");
-        // packetListenerThread.wait();
       }
       SmartDashboard.putBoolean("Vision Serial Port", false);
       System.out.println("AHHHHHHHHHHHH VISION IS DEAD MEAT U DID SOMETHING WRONG CUZ THE THINGY MABOBER DIED");

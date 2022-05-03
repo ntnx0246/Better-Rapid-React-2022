@@ -34,7 +34,6 @@ public class ShuffleBoard {
     this.driveTrain = driveTrain;
     this.navX = navX;
 
-    // AUTO
     autoChoose.setDefaultOption("One Ball", Constants.ShuffleBoard.Auto.OneBall);
     autoChoose.addOption("Two Ball 1", Constants.ShuffleBoard.Auto.TwoBall_1);
     autoChoose.addOption("Two Ball 2", Constants.ShuffleBoard.Auto.TwoBall_2);
@@ -43,7 +42,6 @@ public class ShuffleBoard {
 
     SmartDashboard.putData("AUTO MODE", autoChoose);
 
-    // RPM
     shooterLocationChooser.setDefaultOption("Fender Shooting", Constants.Shooter.FENDER);
     shooterLocationChooser.addOption("Low Fender Shooting", Constants.Shooter.FENDER_LOW);
     shooterLocationChooser.addOption("Launchpad Shooting", Constants.Shooter.LAUNCHPAD);

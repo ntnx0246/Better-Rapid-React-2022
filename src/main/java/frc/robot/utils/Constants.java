@@ -36,10 +36,7 @@ public final class Constants {
     public static final Shots FENDER_LOW = new Shots(-2000, 500, 0);
     public static final Shots LAUNCHPAD = new Shots(-4000, 4000, 0);
     public static final Shots DUMP = new Shots(-100, 100, 0);
-    // public static final Shots LAUNCHPAD = new Shots(-2650, 1000, -24);
-
     public static final double RPM_TOLERANCE = 30;
-
     public static final PID PID = new PID(0.0002, 0.000000005, 0, 0.000165);
     public static final PID PID_BACK = new PID(0.0002, 0.00000005, 0, 0.000174);
   }
@@ -54,8 +51,6 @@ public final class Constants {
     public static final int SENSOR_UNITS_PER_ROTATION = 2048;
     public static final double TURN_CONSTANT = 240;
     public static final int DRIVE_WHEEL_DIAMETER_INCHES = 6;
-    // public static final PID PID = new PID(0.1, 0.0004, 0.1, 0, 0); // good for
-    // overall stuff
     public static final PID PID = new PID(0.1, 0.01, 0.05, 0.05, 0);
     public static final int CRUISE_VELOCITY = 7000; // max is around 21500
     public static final int ACCELERATION = 3500;
