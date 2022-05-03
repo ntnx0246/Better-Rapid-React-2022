@@ -30,6 +30,7 @@ public class ColorSensor extends SubsystemBase {
       
     private String colorString;
     private double proximity;
+    private int threshold = 30;
   
     public ColorSensor() {
       colorMatcher.addColorMatch(kBlueTarget);
@@ -37,7 +38,7 @@ public class ColorSensor extends SubsystemBase {
       colorMatcher.addColorMatch(kRedTarget);
       //colorMatcher.addColorMatch(kYellowTarget); 
       colorString = "";
-      colorThread.start();
+      // colorThread.start();
     }
   
     public void backgroundUpdate() {
@@ -45,7 +46,8 @@ public class ColorSensor extends SubsystemBase {
   
       Color detectedColor = colorSensor.getColor();
       colorMatcher.setConfidenceThreshold(.95);
-      ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
+      ColorMatchResult match = colorMatcher.matchColor(detectedColor);
+      // ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
       proximity = colorSensor.getProximity()*10/2047;
       // System.out.println("Red: " + detectedColor.red);
       // System.out.println("Green: " + detectedColor.green);

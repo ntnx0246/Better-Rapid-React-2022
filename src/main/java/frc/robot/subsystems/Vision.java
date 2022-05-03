@@ -57,7 +57,7 @@ public class Vision extends SubsystemBase {
       if (realData.length == 2) {
         angle = Double.valueOf(realData[0]);
         yPos = Double.valueOf(realData[1]);
-        // System.out.println("ANGLE"+angle);
+        System.out.println("ANGLE"+angle);
       }
       
     } catch (Exception e) {
@@ -82,14 +82,11 @@ public class Vision extends SubsystemBase {
   }
 
   public double getFrontRPM() {
-    // return 5333/this.getInches()-3836.68;
-    return 215685/yPos - 4472.31;
-    // return Math.pow(200,1.412)+2500;
+    return 215685/yPos - 4550;
   }
 
   public double getBackRPM() {
-    return -2666/this.getInches()+1928.03;
-    // return Math.pow(200,1.51393)+970;
+    return -107843/yPos + 2275;
   }
 
   Thread packetListenerThread = new Thread(new Runnable() {

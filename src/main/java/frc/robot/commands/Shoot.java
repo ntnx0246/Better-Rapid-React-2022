@@ -31,8 +31,6 @@ public class Shoot extends CommandBase {
     private int visionBackRPM;
     private double visionAngle;
     private int turnCounter;
-    private double initalizeEncoderLeft;
-    private boolean driveTrainDebug = false;
     private boolean shooterDebug = false;
     private boolean shooting;
 
@@ -48,17 +46,6 @@ public class Shoot extends CommandBase {
         this.driveTrain = driveTrain;
     }
 
-    // TELEOP
-    public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity) {
-        addRequirements(intake, shooter);
-        this.intake = intake;
-        this.shooter = shooter;
-        this.isAuto = false;
-        this.usingVision = false;
-        this.suppliedVelocity = suppliedVelocity;
-        this.suppliedRollerVelocity = suppliedRollerVelocity;
-    }
-
     // TELEOP DEBUG MODE
     public Shoot(Intake intake, Shooter shooter, IntSupplier suppliedVelocity, IntSupplier suppliedRollerVelocity, ShuffleBoard shuffleBoard) {
         addRequirements(intake, shooter);
@@ -71,22 +58,7 @@ public class Shoot extends CommandBase {
         this.suppliedRollerVelocity = suppliedRollerVelocity;
         this.shuffleBoard = shuffleBoard;
     }
-
-    // TELEOP VISION DEBUG
-    public Shoot(Intake intake, Shooter shooter, Vision vision, DriveTrain driveTrain, NavX navX, ShuffleBoard shuffleBoard) {
-        addRequirements(intake, shooter, vision, driveTrain);
-        this.intake = intake;
-        this.shooter = shooter;
-        this.isAuto = false;
-        this.vision = vision;
-        this.usingVision = true;
-        this.driveTrainDebug = true;
-        this.shooterDebug = false;
-        System.out.println("DRIVETRIAN HAS BEEN SET");
-        this.navX = navX;
-        this.driveTrain = driveTrain;
-    }
-
+    
     // AUTO
     public Shoot(Intake intake, Shooter shooter, int shooterVelocity, int rollerVelocity) {
         addRequirements(intake, shooter);
@@ -105,18 +77,9 @@ public class Shoot extends CommandBase {
         }
         if (usingVision) {
             shooting = false;
-            // visionFrontRPM = (int) vision.getFrontRPM();
-            // visionBackRPM = (int) vision.getBackRPM();
             visionAngle = vision.getAngle();
             
             navX.reset();
-            // if (driveTrainDebug){
-            //     driveTrain.setPID(shuffleBoard.getDriveTrainPID());
-            // }
-            // shooter.setVelocity(visionFrontRPM);
-            // shooter.setRollerVelocity(visionBackRPM);
-            // driveTrain.setAngle(visionAngle);
-            initalizeEncoderLeft = driveTrain.getLeftEncoderCount();
             turnCounter = 0;
 
         } else if (isAuto) {
@@ -137,14 +100,14 @@ public class Shoot extends CommandBase {
         if (usingVision) {
             double errorAngle = Math.abs(visionAngle - navX.getAngle());
             if (shooting){
-                shootWhenReady(visionFrontRPM, visionBackRPM);
+                // shootWhenReady(visionFrontRPM, visionBackRPM);
             } else if (turnCounter > 5 && Math.abs(errorAngle) < 1) {
                 System.out.println("SHOOTING");
                 visionFrontRPM = (int) vision.getFrontRPM();
                 visionBackRPM = (int) vision.getBackRPM();
                 System.out.println("THE VISIN FRONT RPM WILL BE: "+visionFrontRPM);
-                shooter.setVelocity(visionFrontRPM);
-                shooter.setRollerVelocity(visionBackRPM);
+                // shooter.setVelocity(visionFrontRPM);
+                // shooter.setRollerVelocity(visionBackRPM);
                 shooting = true;
                 driveTrain.tankDrive(0, 0);
             } else if (Math.abs(errorAngle) < 1) {
@@ -152,48 +115,23 @@ public class Shoot extends CommandBase {
 
                 driveTrain.tankDrive(0, 0);
 
-                // visionAngle = vision.getAngle();
-                // navX.reset();
-
-                // initalizeEncoderLeft = driveTrain.getLeftEncoderCount();
-                // driveTrain.setAngle(visionAngle);
             } else {
                 System.out.println("NAVX ANGLE: " + navX.getAngle());
-                double point1 = 0.01;
-                double point2 = 0.1;
-                double point3 = 0.15;
-                double point4 = 0.3;
-                int angle1 = 3;
-                int angle2 = 15;
-                int angle3 = 50;
+                double turnPower;
+                if (Math.abs(visionAngle)<=10 && Math.abs(visionAngle) >= 0){
+                    // turnPower = Math.pow(errorAngle, 0.606682)*0.0167387+0.0683411;
+                    turnPower = Math.pow(errorAngle, 0.580667)*0.0148639+0.0752756;
+                    
+                    // turnPower = Math.pow(errorAngle,0.706689)*0.0152966+0.07;
+                }
+                else{
+                    turnPower = Math.pow(errorAngle,0.706689)*0.0152966+0.0550678;
+                }
+                Math.min(turnPower, 0.3);
                 if ((visionAngle - navX.getAngle()) < 0){
-                    // driveTrain.tankDrive(-errorAngle/visionAngle*force-constant,
-                    // errorAngle/visionAngle*force+constant);
-                    if (errorAngle < angle1) {
-                        driveTrain.tankDrive(-((point2 - point1) / angle1) * errorAngle - point1,
-                                ((point2 - point1) / angle1) * errorAngle + point1);
-                    } else if (errorAngle < angle2){
-                        driveTrain.tankDrive(-((point3 - point2) / angle2) * errorAngle - point2,
-                                ((point3 - point2) / angle2) * errorAngle + point2);
-                    } else if (errorAngle < angle3){
-                        driveTrain.tankDrive(-((point4 - point3) / angle3) * errorAngle - point3,
-                                ((point4 - point3) / angle3) * errorAngle + point3);
-                    } else {
-                        driveTrain.tankDrive(-point4, point4);
-                    }
+                    driveTrain.tankDrive(-turnPower,turnPower);
                 } else {
-                    if (errorAngle < angle1) {
-                        driveTrain.tankDrive(((point2 - point1) / angle1) * errorAngle + point1,
-                                -((point2 - point1) / angle1) * errorAngle - point1);
-                    } else if (errorAngle < angle2){
-                        driveTrain.tankDrive(((point3 - point2) / angle2) * errorAngle + point2,
-                                -((point3 - point2) / angle2) * errorAngle - point2);
-                    } else if (errorAngle < angle3){
-                        driveTrain.tankDrive(((point4 - point3) / angle3) * errorAngle + point3,
-                                -((point4 - point3) / angle3) * errorAngle - point3);
-                    } else {
-                        driveTrain.tankDrive(point4, -point4);
-                    }
+                    driveTrain.tankDrive(turnPower, -turnPower);
                 }
             }
         } else {
@@ -234,6 +172,7 @@ public class Shoot extends CommandBase {
     public void end(boolean interrupted) {
         intake.stop();
         shooter.stop();
+        driveTrain.stop();
     }
 
     @Override
