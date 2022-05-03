@@ -66,6 +66,11 @@ public class Intake extends SubsystemBase {
     raisingMotorEncoder.setPosition(0);
   }
 
+  public void ejectThroughIntake(int count){
+    intakeTopMotor(-Constants.Intake.TOP_SPEED);
+    intakeBottomMotor(-Constants.Intake.BOTTOM_SPEED);
+  }
+
   public void stop() {
     topMotor.set(0);
     bottomMotor.set(0);

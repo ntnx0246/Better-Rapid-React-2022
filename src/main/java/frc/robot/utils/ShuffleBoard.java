@@ -1,5 +1,7 @@
 package frc.robot.utils;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -127,5 +129,10 @@ public class ShuffleBoard {
 
   public boolean getDebugMode() {
     return SmartDashboard.getBoolean("Debug Mode", false);
+  }
+
+  public static int getTeamAlliance() {
+    return (int) NetworkTableInstance.getDefault().getTable("FMSInfo").getEntry("key").getDouble(-1);
+    // -1 no team found 0 red 1 blue
   }
 }
