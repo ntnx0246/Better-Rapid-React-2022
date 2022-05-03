@@ -57,7 +57,7 @@ public class Vision extends SubsystemBase {
       if (realData.length == 2) {
         angle = Double.valueOf(realData[0]);
         yPos = Double.valueOf(realData[1]);
-        System.out.println("ANGLE"+angle);
+        // System.out.println("ANGLE"+angle);
       }
       
     } catch (Exception e) {
@@ -78,7 +78,7 @@ public class Vision extends SubsystemBase {
 
   public double getInches(){
     System.out.println("IT IS THIS MANY INCHES AWAY: "+(8.92-3) / Math.tan((22.5+(yPos/240*45))*Math.PI/180));
-    return (8.92-3) / Math.tan((22.5+(yPos/240*45))*Math.PI/180);
+    return (8.92-2.625) / Math.tan((37+(yPos/240*45))*Math.PI/180);
   }
 
   public double getFrontRPM() {

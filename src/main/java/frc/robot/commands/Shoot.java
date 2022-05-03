@@ -100,9 +100,9 @@ public class Shoot extends CommandBase {
 
     @Override
     public void initialize() {
-        // if (shooterDebug){
-        //     shooter.setPIDFront(shuffleBoard.getShooterPID());
-        // }
+        if (shooterDebug){
+            shooter.setPIDFront(shuffleBoard.getShooterPID());
+        }
         if (usingVision) {
             shooting = false;
             // visionFrontRPM = (int) vision.getFrontRPM();
