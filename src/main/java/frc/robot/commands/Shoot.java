@@ -100,14 +100,14 @@ public class Shoot extends CommandBase {
         if (usingVision) {
             double errorAngle = Math.abs(visionAngle - navX.getAngle());
             if (shooting){
-                // shootWhenReady(visionFrontRPM, visionBackRPM);
+                shootWhenReady(visionFrontRPM, visionBackRPM);
             } else if (turnCounter > 5 && Math.abs(errorAngle) < 1) {
                 System.out.println("SHOOTING");
                 visionFrontRPM = (int) vision.getFrontRPM();
                 visionBackRPM = (int) vision.getBackRPM();
                 System.out.println("THE VISIN FRONT RPM WILL BE: "+visionFrontRPM);
-                // shooter.setVelocity(visionFrontRPM);
-                // shooter.setRollerVelocity(visionBackRPM);
+                shooter.setVelocity(visionFrontRPM);
+                shooter.setRollerVelocity(visionBackRPM);
                 shooting = true;
                 driveTrain.tankDrive(0, 0);
             } else if (Math.abs(errorAngle) < 1) {
