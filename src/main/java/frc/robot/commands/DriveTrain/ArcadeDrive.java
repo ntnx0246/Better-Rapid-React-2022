@@ -7,7 +7,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.utils.LogitechGamingPad;
 
 public class ArcadeDrive extends CommandBase {
-  DriveTrain driveTrain;
+  DriveTrain driveTrain = new DriveTrain();
   LogitechGamingPad drivePad;
 
   public ArcadeDrive(DriveTrain driveTrain, LogitechGamingPad drivePad) {
